@@ -1,5 +1,5 @@
 package com.example.mini.dao;
 
-public interface LoginService {
+public interface GiftListService {
 
 }

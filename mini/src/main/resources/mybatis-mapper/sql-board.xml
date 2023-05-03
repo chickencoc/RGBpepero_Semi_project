@@ -4,5 +4,7 @@
 	
 <mapper namespace="com.example.mini.mapper.MainMapper">
 
+	<select id="">
+	</select>
 
 </mapper>

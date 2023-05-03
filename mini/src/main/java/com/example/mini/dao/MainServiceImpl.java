@@ -1,5 +1,5 @@
 package com.example.mini.dao;
 
-public class MainServiceImpl {
+public class MainServiceImpl implements MainService {
 
 }

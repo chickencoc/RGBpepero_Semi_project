@@ -9,6 +9,6 @@ import com.example.mini.dao.LoginService;
 public class LoginController {
 
 	@Autowired
-	LoginService loginService; 
+	LoginService loginService;  
 	
 }

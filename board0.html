@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/Base_rgbPepero.css">
+    <link rel="stylesheet" href="../css/header.css">
+    <title>게시판 기본 페이지</title>
+    <style>
+        /* style START */
+        .banner{
+            height: 400px;
+            background-color: #555;
+            background-repeat: no-repeat;
+        }
+        .banner .btn button{
+            margin-top: 300px;
+            margin-left: 580px ;
+        }
+        .textbox .txt{
+            position: absolute;
+            text-align: center;
+            font-size: 2em;
+            margin-top: 150px;
+            margin-left: 375px;
+        }
+        .boardbox{
+            width: 1200px;
+        }
+        .boardbox .txt1{
+            margin-top: 50px;
+            font-size: 2em;
+        }
+        .boardcat{
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-column-gap: 60px;
+        }
+        .board_category_items{
+            background: #999;
+            margin: 20px auto;
+            width: 360px;
+            height: 275px;
+            border-radius: 10%;
+
+        }
+        .board_category_items div{
+            text-align: center;
+        }
+        .innerbox{
+            display: grid;
+            height: 10px;
+            grid-template-rows: 1fr 1fr;
+        }
+        .innerbox .detailtxt{
+            margin-top: 80px;
+        }
+        .fakeLink{
+            font-size: 3em;
+        }
+        /* style END */
+    </style>
+</head>
+<body>
+    <!-- header 필요 없는 페이지 에서는 header END까지만 지우면 됩니다. -->
+    <header id="header">
+        <!-- <div class="loginbox">
+                <ul>
+                    <li><a href="#">로그인</a></li>
+                    <li><a href="#">회원가입</a></li>
+                    <li><a href="#">고객센터</a></li>
+                </ul>
+        </div> -->
+        <div class="loginbox">
+            <ul>
+                <li><a href="#">{{name}}님 축하합니다</a></li>
+                <li><a href="#">마이페이지</a></li>
+                <li><a href="#">로그아웃</a></li>
+                <li><a href="#">고객센터</a></li>
+            </ul>
+        </div>
+        <div class="logobox">
+            <div id="logo"><img src="../image/logo_Marrimo.png"></div>
+        </div>
+    </header>
+    <!-- header END -->
+    <!-- wrap START -->
+    <div id="wrapper">
+        <div class="bannerbox">
+            <div class="banner">
+                <div class="textbox">
+                    <p class="txt">Frequently Asked Questions</p>
+                </div>
+            </div>
+        </div>
+        <div class="boardbox">
+            <div class="boardcat">
+                <div class="board_category_items" id="inquery">
+                    <div class="innerbox">
+                        <div class="detailtxt">
+                            <div class="fakeLink">문의하기</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="board_category_items" id="anounce">
+                    <div class="innerbox">
+                        <div class="detailtxt">
+                            <div class="fakeLink">공지사항</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="board_category_items" id="faq">
+                    <div class="innerbox">
+                        <div class="detailtxt">
+                            <div class="fakeLink">FAQ</div>
+                        </div>
+                    </div>
+                </div>
+                
+                
+                
+            </div>
+        </div>
+
+    </div>
+    <!-- wrap END -->
+    <!-- footer END -->
+    <footer id="footer">&lt;footer&gt;</footer>
+</body>
+</html>

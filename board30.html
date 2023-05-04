@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/Base_rgbPepero.css">
+    <link rel="stylesheet" href="../css/header.css">
+    <title>FAQ</title>
+    <style>
+        /* style START */
+        .banner{
+            height: 400px;
+            background-color: #555;
+            background-repeat: no-repeat;
+        }
+        .banner .btn button{
+            margin-top: 300px;
+            margin-left: 580px ;
+        }
+        .textbox .txt{
+            position: absolute;
+            text-align: center;
+            font-size: 2em;
+            margin-top: 150px;
+            margin-left: 375px;
+        }
+        .boardbox{
+            width: 1200px;
+        }
+        .boardbox .txt1{
+            margin-top: 50px;
+            font-size: 2em;
+        }
+        .boardcat{
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-column-gap: 60px;
+        }
+        .items{
+            background: #999;
+            margin: 20px auto;
+            width: 360px;
+            height: 275px;
+            border-radius: 10%;
+
+        }
+        .items div{
+            text-align: center;
+        }
+        .innerbox{
+            display: grid;
+            height: 10px;
+            grid-template-rows: 1fr 1fr;
+        }
+        .innerbox .detailtxt{
+            margin-top: 80px;
+        }
+        .fakeLink{
+            font-size: 3em;
+        }
+        .line{
+            margin-top: 20px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid black;
+        }
+        #boardname{
+            font-size: 3em;
+            margin-bottom: 50px;
+        }
+        .boardmenu{
+            width: 300px;
+            margin: 41px;
+            padding-left: 180px;
+            padding-right: 180px;
+            padding-top:20px;
+            padding-bottom:20px;
+        }
+        #menu{
+            margin-top: 20px;
+            font-size: 2em;
+        }
+        .board_list {width:100%; border-top:2px solid #252525; border-bottom:1px solid #ccc; margin:15px 0; border-collapse: collapse;}
+        .board_list thead th:first-child {background-image:none;}
+        .board_list thead th {border-bottom:1px solid #ccc; padding:13px 0; color:#3b3a3a; text-align: center; vertical-align:middle;}
+        .board_list tbody td {border-top:1px solid #ccc; padding:13px 0; text-align:center; vertical-align:middle;}
+        .board_list tbody tr:first-child td {border:none;}
+        .board_list tbody td {width: 50px;}
+        .board_list tbody td:nth-child(3) {width: 800px;}
+        .board_list tbody tr:nth-child(odd) td {background: #999;}
+        .board_list tbody tr:nth-child(odd):hover td {background: lightgreen;}
+        .board_list tbody tr:hover{background:lightgreen;}
+        .board_list tbody td.title {text-align:left; padding-left:20px;}
+        .board_list tbody td a {display:inline-block}
+        .pagecontroll {text-align: center;}
+        /* style END */
+    </style>
+</head>
+<body>
+    <!-- header 필요 없는 페이지 에서는 header END까지만 지우면 됩니다. -->
+    <header id="header">
+        <!-- <div class="loginbox">
+                <ul>
+                    <li><a href="#">로그인</a></li>
+                    <li><a href="#">회원가입</a></li>
+                    <li><a href="#">고객센터</a></li>
+                </ul>
+        </div> -->
+        <div class="loginbox">
+            <ul>
+                <li><a href="#">{{name}}님 축하합니다</a></li>
+                <li><a href="#">마이페이지</a></li>
+                <li><a href="#">로그아웃</a></li>
+                <li><a href="#">고객센터</a></li>
+            </ul>
+        </div>
+        <div class="logobox">
+            <div id="logo"><img src="../image/logo_Marrimo.png"></div>
+        </div>
+    </header>
+    <!-- header END -->
+    <!-- wrap START -->
+    <div id="wrapper">
+        <div class="bannerbox">
+            <div class="banner">
+                <div class="textbox">
+                    <p class="txt">Frequently Asked Questions</p>
+                </div>
+            </div>
+        </div>
+        <div id="menu">
+            <span id="announce" class="boardmenu" onclick="location.href='#'">공지사항</span>
+            <span id="inquery" class="boardmenu" onclick="location.href='#'">문의하기</span>
+            <div class="line"></div>
+        </div>
+        <div class="boardbox">
+            <div id="boardname">자주하는 질문</div>
+            <select>
+                <option>상품관련</option>
+                <option>계정관련</option>
+                <option>배송관련</option>
+            </select>
+        </div>
+        <div class="table_list">
+            <table class="board_list">
+                <thead>
+                    <tr>
+                        <th>번호</th>
+                        <th></th>
+                        <th>글 제목</th>
+                        <th>작성자</th>
+                        <th>조회</th>
+                        <th>시간</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{index + 1}}</td>
+                        <td>아이콘</td>
+                        <td>{{item.title}}</td>
+                        <td>{{item.name}}</td>
+                        <td>{{item.cnt}}</td>
+                        <td>{{item.cdatetime}}</td>
+                    </tr>
+                    <tr>
+                        <td>{{index + 1}}</td>
+                        <td>아이콘</td>
+                        <td>{{item.title}}</td>
+                        <td>{{item.name}}</td>
+                        <td>{{item.cnt}}</td>
+                        <td>{{item.cdatetime}}</td>
+                    </tr>
+                    <tr>
+                        <td>{{index + 1}}</td>
+                        <td>아이콘</td>
+                        <td>{{item.title}}</td>
+                        <td>{{item.name}}</td>
+                        <td>{{item.cnt}}</td>
+                        <td>{{item.cdatetime}}</td>
+                    </tr>
+                    <tr>
+                        <td>{{index + 1}}</td>
+                        <td>아이콘</td>
+                        <td>{{item.title}}</td>
+                        <td>{{item.name}}</td>
+                        <td>{{item.cnt}}</td>
+                        <td>{{item.cdatetime}}</td>
+                    </tr>
+                    <tr>
+                        <td>{{index + 1}}</td>
+                        <td>아이콘</td>
+                        <td>{{item.title}}</td>
+                        <td>{{item.name}}</td>
+                        <td>{{item.cnt}}</td>
+                        <td>{{item.cdatetime}}</td>
+                    </tr>
+                    <tr>
+                        <td>{{index + 1}}</td>
+                        <td>아이콘</td>
+                        <td>{{item.title}}</td>
+                        <td>{{item.name}}</td>
+                        <td>{{item.cnt}}</td>
+                        <td>{{item.cdatetime}}</td>
+                    </tr>
+                    <tr>
+                        <td>{{index + 1}}</td>
+                        <td>아이콘</td>
+                        <td>{{item.title}}</td>
+                        <td>{{item.name}}</td>
+                        <td>{{item.cnt}}</td>
+                        <td>{{item.cdatetime}}</td>
+                    </tr>
+                    <tr>
+                        <td>{{index + 1}}</td>
+                        <td>아이콘</td>
+                        <td>{{item.title}}</td>
+                        <td>{{item.name}}</td>
+                        <td>{{item.cnt}}</td>
+                        <td>{{item.cdatetime}}</td>
+                    </tr>
+                    <tr>
+                        <td>{{index + 1}}</td>
+                        <td>아이콘</td>
+                        <td>{{item.title}}</td>
+                        <td>{{item.name}}</td>
+                        <td>{{item.cnt}}</td>
+                        <td>{{item.cdatetime}}</td>
+                    </tr>
+                    <tr>
+                        <td>{{index + 1}}</td>
+                        <td>아이콘</td>
+                        <td>{{item.title}}</td>
+                        <td>{{item.name}}</td>
+                        <td>{{item.cnt}}</td>
+                        <td>{{item.cdatetime}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="pagecontroll">
+            < 1 2 3 >
+        </div>
+    </div>
+    <!-- wrap END -->
+    <!-- footer END -->
+    <footer id="footer">&lt;footer&gt;</footer>
+</body>
+</html>

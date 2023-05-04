@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/Base_rgbPepero.css">
+    <link rel="stylesheet" href="../css/header.css">
+    <title>게시글 페이지</title>
+    <style>
+        /* style START */
+        #boName{
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+        #newtextbox button{
+            float: right;
+        }   
+
+        #newboardbox #board_title{
+            font-size: 2em;
+            width: 900px;
+            margin-right: 30px;
+            margin-bottom: 20px;
+        }
+        #board_info_line{
+            margin-left: 20px;
+            height: 40px;
+        }
+        #board_info_cat{
+            border-right: 1px solid #999;
+        }
+        #board_info_line span{
+            padding-right: 10px;
+            margin-right: 10px;
+        }
+        #board_info_line2{
+            background: #999;
+            height: 40px;
+        }
+        #board_info_content{
+            border: 1px solid black;
+            margin-top: 20px;
+            height: 300px;
+        }
+        
+
+        /* style END */
+    </style>
+</head>
+<body>
+    <!-- header 필요 없는 페이지 에서는 header END까지만 지우면 됩니다. -->
+    <header id="header">
+        <!-- <div class="loginbox">
+                <ul>
+                    <li><a href="#">로그인</a></li>
+                    <li><a href="#">회원가입</a></li>
+                    <li><a href="#">고객센터</a></li>
+                </ul>
+        </div> -->
+        <div class="loginbox">
+            <ul>
+                <li><a href="#">{{name}}님 축하합니다</a></li>
+                <li><a href="#">마이페이지</a></li>
+                <li><a href="#">로그아웃</a></li>
+                <li><a href="#">고객센터</a></li>
+            </ul>
+        </div>
+        <div class="logobox">
+            <div id="logo"><img src="../image/logo_Marrimo.png"></div>
+        </div>
+    </header>
+    <!-- header END -->
+    <!-- wrap START -->
+    <div id="wrapper">
+        <div id="boardhead">
+            <div id="boName">{{boardName}}</div>
+        </div>
+        <div id="newboardbox">
+           <div id="board_title">{{title}}</div>
+           <div id="board_info_line"><span id="board_info_cat">{{board_category}}</span><span>{{cdatetime}}</span></div>
+           <div id="board_info_line2"><span>{{name}}</span><span>{{cnt}}</span></div>
+           <div id="board_info_content">{{content}}</div>
+        </div>
+        <div id="newreplybox">
+           <div id="board_title">{{title}}</div>
+           <div id="board_info_line"><span>{{cdatetime}} 작성됨</span></div>
+           <div id="board_info_line2"><span>{{name}}</span><span>{{cnt}}</span></div>
+           <div id="board_info_content">{{content}}</div>
+        </div>
+    </div>
+    <!-- wrap END -->
+    <!-- footer END -->
+    <footer id="footer">&lt;footer&gt;</footer>
+</body>
+</html>

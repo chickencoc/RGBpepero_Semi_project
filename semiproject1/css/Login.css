@@ -1,0 +1,53 @@
+.container{
+    margin: auto;
+    width: 90%;
+    min-height: 100vh;
+}
+.loginBox{
+	width:50%;
+	border: solid 1px black;
+	border-radius:10px;
+	padding:10px;
+	margin:auto;
+	margin-top: 50px;
+}
+.loginLogo{
+	text-align:center;
+	margin:5%;
+}
+.loginInfo{
+	text-align:center;
+	margin:20px;
+	border:1px solid black;
+}
+.loginBtnBox{
+	text-align:center;
+	margin: 50px;
+}
+.loginImg{
+	width:5%;
+	margin-top: 3%;
+}
+.loginInfo .loginCancelBtn{
+	height:48px;
+	width:12.5%;
+	font-size:1.5em;
+	border-radius:50%;
+	margin-left:5%;
+}
+.loginList{
+	text-align:center;
+	font-size:1.0em;
+}
+.loginBtnBox .loginBtn{
+	width:400px;
+	height:50px;
+	font-size:1.3em;
+}
+.loginInfo .loginText{
+	width:70%;
+	height:50px;
+	font-size:1.5em;
+	border: 0px;
+	padding:5%;
+}

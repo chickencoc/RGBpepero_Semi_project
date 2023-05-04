@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/Base_rgbPepero.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/Registry.css">
+    <title>회원가입 페이지</title>
+    <style>
+        /* style START */
+
+
+
+        /* style END */
+    </style>
+</head>
+<body>
+    <!-- wrap START -->
+    <div id="wrapper">
+        <div id="app">
+            <div class="container">
+            <div class="registryLogo"><a href=""><img src="/image/logo_Marrimo.png"><div></a>
+                <div class="registryBox">
+                    <div class="registryQ">
+                        <p class="registryQList">아이디*</p>
+                        <p class="registryQList">비밀번호*</p>
+                        <p class="registryQList">비밀번호 확인*</p>
+                        <p class="registryQList">이름*</p>
+                        <p class="registryQList">성별*</p>
+                        <p class="registryQList">전화번호*</p>
+                        <p class="registryQList">주소*</p>
+                        <p class="registryQList">　</p>
+                        <p class="registryQList">이메일*</p>
+                        <p class="registryQList">생년월일*</p>
+                        <p class="registryQList">결혼예정일</p>
+                        <p class="registryQList">계좌번호*</p>
+                    </div>
+                    <div class="registryA">
+                        <div>
+                            <div class="registryAList"><input type="text" class="registryId"><button class="checkBtn"> 중복검사</button></div>
+                            <div class="registryNote idCheck"></div>
+                            <div class="registryAList"><input type="password" class="registryPwd">
+                                 <div class="registryNote pwdCheck">8글자 이상, 영어 대, 소문자, 특수문자가 모두 포함되어야 합니다.</div>
+                             </div>                      
+                            <div class="registryAList">
+                                <input type="password" class="registryPwd"><div class="registryNote pwd2Check">비밀번호가 일치하지 않습니다.</div>
+                            </div>       
+                            <div class="registryAList"><input type="text" class="registryName"> 배우자 이름 <input type="text" class="registryName"> </div>
+                            <div class="registryAList"><input type="radio" class="registryGender" name="gender"> 남자 <input type="radio" class="registryGender" name="gender"> 여자</div>
+                            <div class="registryAList"><input type="text" class="registryPhone"> - <input type="text" class="registryPhone"> - <input type="text" class="registryPhone"></div>
+                            <div class="registryAList"><input type="text" class="registryAddr" disabled> <button class="checkBtn">우편번호 검색</button></div>
+                            <div class="registryAList"><input type="text" class="registryAddr" placeholder="상세 주소 입력"></div>
+                            <div class="registryAList"><input type="email" class="registryEmail"> @ <input type="text" class="registryEmail">
+                                <select>
+                                    <option value="">직접 입력</option>
+                                    <option value="naver">naver.com</option>
+                                    <option value="daum">daum.net</option>
+                                    <option value="gmail">gmail.com</option>
+                                </select>
+                            </div>
+                            <div class="registryAList">
+                                <select id="birthdayYear"></select> 년 
+                                <select id="birthdayMonth"></select> 월
+                                <select id="birthdayDay"></select> 일
+                            </div>
+                            <div class="registryAList">
+                                <select id="weddingYear"></select> 년
+                                <select id="weddingMonth"></select> 월
+                                <select id="weddingDay"></select> 일
+                            </div>
+                            <div class="registryAList">
+                                <select>
+                                    <option value="">::선택::</option>
+                                    <option value="1">신한은행</option>
+                                    <option value="2">기업은행</option>
+                                    <option value="3">국민은행</option>
+                                    <option value="4">농협은행</option>
+                                    <option value="5">카카오뱅크</option>
+                                    <option value="6">우리은행</option>
+                                </select>
+                                <input type="text" placeholder=" - 없이 입력">
+                            </div>
+                            <div class="btnBox"><button class="registryBtn">확인</button><button class="registryBtn">취소</button></div>
+                        </div>    		
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- wrap END -->
+    <!-- footer END -->
+    <footer id="footer">&lt;footer&gt;</footer>
+</body>
+</html>
+<script type="text/javascript">
+    //날짜 select 박스로 가져오기 위한 함수
+    var birthdayYear = document.getElementById('birthdayYear');
+    var birthdayMonth = document.getElementById('birthdayMonth');
+    var birthdayDay = document.getElementById('birthdayDay');
+    
+    // 현재 년도를 가져옴
+    var currentYear = new Date().getFullYear();
+    
+    // 년도 option 태그 생성
+    for (var i = 1900; i <= currentYear; i++) {
+      var option = document.createElement('option');
+      option.value = i;
+      option.text = i;
+      birthdayYear.appendChild(option);
+    }
+    
+    // 월 option 태그 생성
+    for (var i = 1; i <= 12; i++) {
+      var option = document.createElement('option');
+      option.value = i;
+      option.text = i;
+      birthdayMonth.appendChild(option);
+    }
+    
+    // 일 option 태그 생성
+    function updateDays() {
+      // 선택한 월과 년도를 가져옴
+      var month = birthdayMonth.value;
+      var year = birthdayYear.value;
+    
+      // 선택한 월의 마지막 날짜를 구함
+      var lastDay = new Date(year, month, 0).getDate();
+    
+      // 일 option 태그 초기화
+      birthdayDay.innerHTML = '';
+    
+      // 일 option 태그 생성
+      for (var i = 1; i <= lastDay; i++) {
+        var option = document.createElement('option');
+        option.value = i;
+        option.text = i;
+        birthdayDay.appendChild(option);
+      }
+    }
+    
+    // 월 선택 시 일 option 태그 업데이트
+    birthdayMonth.addEventListener('change', updateDays);
+    
+    // 년도 선택 시 일 option 태그 업데이트
+    birthdayYear.addEventListener('change', updateDays);
+    
+    // 현재 날짜로 생년월일 select 요소 초기화
+    var currentMonth = new Date().getMonth() + 1;
+    var currentDay = new Date().getDate();
+    birthdayYear.value = currentYear;
+    birthdayMonth.value = currentMonth;
+    updateDays();
+    birthdayDay.value = currentDay;
+    
+    var weddingYear = document.getElementById("weddingYear");
+    var weddingMonth = document.getElementById("weddingMonth");
+    var weddingDay = document.getElementById("weddingDay");
+    
+    var date = new Date();
+    var currentYear2 = date.getFullYear();
+    var currentMonth2 = date.getMonth() + 1;
+    var currentDay2 = date.getDate();
+    
+    for (var i = currentYear2; i <= currentYear2 + 10; i++) {
+        var option = document.createElement("option");
+        option.value = i;
+        option.text = i;
+        weddingYear.appendChild(option);
+    }
+    
+    for (var i = 1; i <= 12; i++) {
+        var option = document.createElement("option");
+        option.value = i;
+        option.text = i;
+        weddingMonth.appendChild(option);
+    }
+    
+    var daysInMonth = new Date(weddingYear.value, weddingMonth.value, 0).getDate();
+    for (var i = 1; i <= daysInMonth; i++) {
+        var option = document.createElement("option");
+        option.value = i;
+        option.text = i;
+        weddingDay.appendChild(option);
+    }
+    
+    weddingYear.addEventListener("change", function() {
+        var daysInMonth = new Date(weddingYear.value, weddingMonth.value, 0).getDate();
+        while (weddingDay.options.length > 0) {
+            weddingDay.options.remove(0);
+        }
+        for (var i = 1; i <= daysInMonth; i++) {
+            var option = document.createElement("option");
+            option.value = i;
+            option.text = i;
+            weddingDay.appendChild(option);
+        }
+    });
+    
+    weddingMonth.addEventListener("change", function() {
+        var daysInMonth = new Date(weddingYear.value, weddingMonth.value, 0).getDate();
+        while (weddingDay.options.length > 0) {
+            weddingDay.options.remove(0);
+        }
+        for (var i = 1; i <= daysInMonth; i++) {
+            var option = document.createElement("option");
+            option.value = i;
+            option.text = i;
+            weddingDay.appendChild(option);
+        }
+    });
+</script>

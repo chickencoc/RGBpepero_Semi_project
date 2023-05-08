@@ -1,0 +1,107 @@
+.container{
+    margin: auto;
+    width: 800px;
+
+	position:relative; 
+}
+.registryLogo{
+	text-align:center;
+    margin-top:7.5%;
+}
+.container .registryBox{
+	position:absoulte;
+    width:100%;
+    height:1200px;
+	margin:auto;
+    padding:5%;
+    left:10%;
+    top:25%;
+    text-align:left;
+}
+.checkBtn{
+    width:25%;
+    margin-left: 5%;
+    height:33px;
+}
+.registryBox .registryQ{
+    position:absolute;
+    width: 25%;
+    border: 1px solid gray;
+    border-right:0px;
+    left:5%;
+    top:10%;
+    padding:3%;
+    height: 80%;
+    text-align: right;
+    font-size: 1.25em;
+}
+.registryBox .registryA{
+    position: absolute;
+    width:60%;
+    border: 1px solid black;
+    right:10%;
+    padding: 3%;
+    height:80%;
+    top:10%;
+    font-size: 1.2em;
+}
+.registryBox .registryQ .registryQList{
+	width:100%;
+	height:70px;
+}
+.registryBox .registryA .registryAList{
+    width:100%;
+	height:70px;
+}
+.registryNote{
+	font-size:0.5em;
+	margin:0px;
+}
+.registryId{
+    width:60%;
+}
+.registryPwd{
+    width:60%;
+}
+.registryBox .registryA .registryAList .registryName{
+	width:30%;
+    margin-right:20px;
+}
+.registryBox .registryA .registryAList .registryName2{
+	width:30%;
+    margin-right:20px;
+    margin-left:20px;
+}
+.registryBox .registryA .registryAList .registryPhone{
+	width:30%;
+}
+.registryBox .registryA .registryAList .registryEmail{
+	width:25%;
+}
+.registryEmailAddr{
+    width:35%;
+}
+.registryGender{
+    margin-right:50px;
+}
+.registryBox .btnBox{
+	text-align: center;
+    position:absolute;
+    bottom:5%;
+    width:100%;
+}
+.registryBox .registryBtn{
+	position:absoulte;
+	margin: 10%;
+    width:20%;
+    height:30px;
+}
+.registryAddrDetail{
+    width:90%;
+}
+.registryEmailSelect{
+    width:25%;
+}
+.registryAccount{
+    width:65%;
+}

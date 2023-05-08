@@ -1,0 +1,126 @@
+.container {width: 1000px; margin: 0 auto; margin-top: 30px;}
+
+.pay_title {font-size: 28px; margin: 20px;}
+
+.info_box, .pay_box {border-left: none; border-right: none; border-bottom: none; padding-bottom: 15px;}
+.info_box_name_legend {width: 100px; }
+.info_box_name_h {text-align: center; }
+
+.pay_btn_box {width: 80%; margin: 30px auto; text-align: center;}
+.pay_btn {width: 90%; padding: 9px 0;}
+.pay_info_box {float: left; width: 75%; height: 250px; padding-top: 15px;}
+
+.pay_total_price_box {float: left; width: 25%; height: 250px; border-left: 1px solid black; padding-top: 120px;}
+.pay_total_price_box_detail {border-bottom: 1px solid black; padding-bottom: 10px; margin: 0 10px; margin-bottom: 10px;}
+.pay_total_price_box_detail p {display: inline-block;}
+.pay_total_price_box_detail > div {width: 100%; display: flex; justify-content: space-around; padding: 0 10px;}
+.pay_total_price_box_name_h {margin-left: 15px;}
+.pay_total_price_box h4:nth-child(3) {margin-left: 50px;}
+
+.info_box_goods_table {width: 90%; border-collapse: collapse;}
+.info_box_goods_table th {border-bottom: 0px solid #555; padding: 10px 0;}
+/* .info_box_goods_table th:last-child, td:last-child {background-color: #999;} */
+.info_box_goods_table td {border-bottom: 0px solid #555; padding: 10px 0;}
+.info_box_goods_table_checkbox {width: 33px;}
+.info_box_goods_table_text {width: 45%; font-size:0.8em}
+.info_box_goods_img {background-color: #c7c7c7; width: 100px; height: 100px; vertical-align: middle;}
+.info_box_goods_table_img{width:20%; text-align: center;}
+.info_box_good_table_cnt_price{width:40%;}
+.payer_info_box, .ship_info_box {width: 75%; margin: 20px auto;
+    /* border: 1px solid black; */
+    border-radius: 4px; padding: 15px 0;}
+:is(.payer_info_box_text, .ship_info_box_text) p {display: inline-block; line-height: 2.6;}
+:is(.payer_info_box_text, .ship_info_box_text) p:first-child {width: 200px; margin-left: 40px;}
+.ship_info_box_text:last-child p:first-child {width: 200px; display: block;}
+.ship_info_box_text:last-child input {margin-left: 144px;}
+.ship_info_box_text input {width: 70%;}
+
+.pay_info_box_btns {text-align: center; margin-top: 25px;}
+.pay_info_box_btns label {margin: 0 13px;}
+.toCoupleMessage{
+    width:80%;
+    margin-left: 10%;
+    height:70px;
+    padding:1%;
+}
+.tableTitle{
+    text-align: center;
+    font-weight: bold;
+}
+.tableContent{
+    text-align: center;
+}
+.tableCheckbox{
+    width:2%;
+}
+.deliveryCheckBtn{
+    width: 30%;
+    height:40px;
+    border:1px solid #ccc;
+    border-radius: 10px;
+}
+.deliveryTitle{
+    text-align: center;
+    width:50%;
+}
+.deliveryTable{
+    width:90%;
+    height:150px;
+}
+.delivery_info{
+    text-align: center;
+}
+.deliveryContent{
+    text-align: center;
+}
+.deliveryReceiveBox{
+    margin:20px;
+    width:70%;
+    border:1px solid #555;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+.deliveryReceiveTable{
+    width:90%;
+    margin: auto;
+    padding:20px;
+}
+.deliveryReceiveTitle{
+    width:20%;
+    height:50px;
+    font-weight: bold;
+}
+.receive_box{
+    display: flex;
+    justify-content: center;
+}
+.orderInfoBox{
+    margin:20px;
+    width:50%;
+    border:1px solid #555;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height:100%;
+}
+.orderInfoTable{
+    width:90%;
+    margin: auto;
+    padding:20px;
+    text-align: center;
+}
+.orderInfoTitle{
+    width:50%;
+    height:50px;
+    font-weight: bold;
+}
+.purchaseBtnBox{
+    text-align: center;
+}
+.purchaseBtn{
+    width:17%;
+    height: 30px;
+    margin: 30px;
+}

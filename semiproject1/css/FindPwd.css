@@ -1,0 +1,66 @@
+.container{
+    margin: auto;
+    width: 800px;
+    min-height: 100vh;
+}
+.findPageLogo{
+	text-align:center;
+	margin: 50px;
+}
+.findPwdBox{
+	margin: auto;
+	width:450px;
+	border: 1px solid black;
+	border-radius:10px;
+	padding:20px;
+}
+.findPwdBox .findPwdMent{
+	font-size:1.5em;
+	margin:10px;
+	font-weight:bold;
+}
+.findPwdBox .findPwdList .findPwdQ{
+	width:30%;
+	display:inline-block;
+	margin:2.5%;
+	font-size:0.8em;
+
+}
+.findPwdTextBox{
+	width:60%;
+	font-size:1em;
+	margin:10px;
+	border-radius: 10px;
+	padding:7px;
+	height:45px;
+	border: 1px solid #ccc;
+	
+}
+.findPwdBtn{
+	font-size:0.8em;
+	margin:2%;
+	border:1px solid #ccc;
+	height:40px;
+	width:25%;
+}
+.findPwdNotice{
+	text-align:center;
+	color:red;
+
+}
+.findPwdCheck{
+	text-align:center;
+}
+.findPwdCheckBtn{
+	width:20%;
+	border-radius:20px;
+}
+.findPwdTextBoxAfter{
+	width:90%;
+	font-size:1em;
+	margin:10px;
+	border-radius: 10px;
+	padding:7px;
+	height:45px;
+	border: 1px solid #ccc;
+}

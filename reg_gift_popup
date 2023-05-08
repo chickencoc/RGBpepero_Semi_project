@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/semiproject1/css/Base_rgbPepero.css">
+    <link rel="stylesheet" href="/semiproject1/css/header.css">
+    <link rel="stylesheet" href="/semiproject1/css/reg_options_popup.css">
+    <link rel="stylesheet" href="/semiproject1/css/grid.css">
+    <title>reg_gift_popup</title>
+    <style>
+        /* style START */
+
+
+
+        /* style END */
+    </style>
+</head>
+<body>
+    <!-- header 필요 없는 페이지 에서는 header END까지만 지우면 됩니다. -->
+    
+    <!-- wrap START -->
+    <div id="wrapper">
+        <div class="container">
+            <div class="reg_options_popup" style="height: 550px;">
+                <div><img src="/semiproject1/image/fi-sr-cross.png" id="reg_gift_popup_close" @click=""></div>
+                <div class="reg_options_popup_image">
+                </div>
+                <div class="reg_options_popup_info">
+                    <div id="reg_options_popup_name">상품 이름</div>
+                    <div id="reg_options_popup_price">상품 가격</div>
+                    <div>수량<input type="text" size="1" value="1" id="reg_options_popup_stock_number"></div>
+                </div>
+                <div class="reg_options_popup_memo">
+                    <div><img src="/semiproject1/image/fi-ss-heart.png" style="position: relative; top: 8px; margin-right: 5px;">선물 하실 때 참고하세요</div>
+                    <input type="text" id="reg_options_popup_memo_txt">
+                </div>
+                <button class="reg_gift_popup_btn">선물하기</button>
+            </div>
+        </div>
+    </div>
+    <div id="wrapper">
+        <div class="container">
+            <div class="reg_options_popup" style="height: 550px;">
+                <div><img src="/semiproject1/image/fi-sr-cross.png" id="reg_gift_popup_close" @click=""></div>
+                <div class="reg_options_popup_image">
+                </div>
+                <div class="reg_options_popup_info">
+                    <div id="reg_options_popup_name">상품 이름</div>
+                    <div id="reg_options_popup_price">상품 가격</div>
+                    <div class="percentage" v-if="" style="position: relative; right: 115px; top: 20px;">
+                        <progress id="progress" value="30" max="100"></progress>
+                        <span>{30}%</span>                        
+                    </div>
+                </div>
+                <div class="reg_options_popup_memo">
+                    <div><img src="/semiproject1/image/fi-ss-heart.png" style="position: relative; top: 8px; margin-right: 5px;">선물 하실 때 참고하세요</div>
+                    <input type="text" id="reg_options_popup_memo_txt">
+                </div>
+                <button class="reg_gift_popup_btn">선물하기</button>
+            </div>
+        </div>
+    </div>
+    <!-- wrap END -->
+   
+</body>
+</html>

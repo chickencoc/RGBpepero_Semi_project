@@ -42,26 +42,27 @@
     <!-- header END -->
     <!-- wrap START -->
     <div id="wrapper">
-        <div class="content">
-        <main>
-            <div class="container">
+        <div class="regi_content">
+        <main class="regi_main">
+            <div class="regi_container">
                 
                 <span id="regi_user">{{신랑}} & {{신부}}의 레지스트리</span>
-                <div class="regi_url">
-                    <h6>당신의 레지스트리 주소</h6>
-                    <span id="url">
+                <div class="regi_your_url">
+                    <h6 style="text-align: center;">당신의 레지스트리 주소</h6>
+                    <span id="regi_url">
                         www.zola.com/registry/twocats
-                        <a href="#"><img src="/semiproject1/image/fi-ss-upload.png" id="icon"></a>
+                        <a href="#"><img src="/semiproject1/image/fi-ss-upload.png" id="regi_icon"></a>
+                        <span style="font-size: 9px;">주소복사</span>
                     </span>
                 </div>
             </div>           
-            <div class="container">                
-                <div class="back_image">
+            <div class="regi_container">                
+                <div class="regi_back_image">
                     <button @click="">배경사진 수정</button>                    
                 </div>    
-                <a href="#" id="profile"></a>                       
+                <a href="#" id="regi_profile"></a>                       
             </div>
-            <div class="container">
+            <div class="regi_container">
                 <div class="regi_select">
                     <select style="width: 80px;">
                         <option>등록순</option>
@@ -69,85 +70,85 @@
                     </select>
                 </div>
                 
-                <div class="add_gifts"> <!--마우스오버 백그라운드 컬러 변경효과넣기-->
-                    <a href="#"><img src="/semiproject1/image/fi-sr-plus.png" id="icon"></a>
+                <div class="regi_add_gifts">
+                    <a href="#"><img src="/semiproject1/image/fi-sr-plus.png" id="regi_icon"></a>
                     <div>선물 추가하기</div>
                 </div>
-                <div class="registry">                                       
+                <div class="myinfo_registry">                                       
                     <div class="regi_items">
-                        <div id="wanted"> <!--배지-->
-                        <img src="/semiproject1/image/loundry.jpg" class="items_image">
+                        <div id="regi_wanted_badge"> <!--배지-->
+                        <img src="/semiproject1/image/loundry.jpg" class="regi_items_image">
                         </div> 
-                        <!-- <div id="wanted" v-else="">
+                        <!-- <div id="regi_wanted_badge" v-else="">
                             <img src="/semiproject1/image/loundry.jpg" class="items-image">
                         </div> -->                 
-                        <p class="pro_name">{{그랑데 세탁기}}</p>
-                        <p class="pro_price">{{1,000,000}} 원</p>
-                        <div class="items_options">
-                            <span id="stock_text">수량</span>
-                            <input type="text" id="stock_number" value="1" size="1" readonly>
-                            <button id="optionBtn" @click="">옵션설정</button>
-                            <a href="#" id="delete" @click="">삭제하기</a>
+                        <p class="regi_regi_pro_name">{{그랑데 세탁기}}</p>
+                        <p class="regi_pro_price">{{1,000,000}} 원</p>
+                        <div class="regi_items_options">
+                            <span id="regi_stock_text">수량</span>
+                            <input type="text" id="regi_stock_number" value="1" size="1" readonly>
+                            <button id="regi_optionBtn" @click="">옵션설정</button>
+                            <a href="#" id="regi_delete" @click="">삭제하기</a>
                         </div>
                     </div>
                     <!--일반-->
                     <div class="regi_items">
-                        <img src="/semiproject1/image/loundry.jpg" class="items_image">                   
-                        <p class="pro_name">{{그랑데 세탁기}}</p>
-                        <p class="pro_price">{{1,000,000}} 원</p>
-                        <div class="items_options">
-                            <span id="stock_text">수량</span>
-                            <input type="text" id="stock_number" value="1" size="1" readonly>
-                            <button id="optionBtn" @click="">옵션설정</button>
-                            <a href="#" id="delete" @click="">삭제하기</a>
+                        <img src="/semiproject1/image/loundry.jpg" class="regi_items_image">                   
+                        <p class="regi_pro_name">{{그랑데 세탁기}}</p>
+                        <p class="regi_pro_price">{{1,000,000}} 원</p>
+                        <div class="regi_items_options">
+                            <span id="regi_stock_text">수량</span>
+                            <input type="text" id="regi_stock_number" value="1" size="1" readonly>
+                            <button id="regi_optionBtn" @click="">옵션설정</button>
+                            <a href="#" id="regi_delete" @click="">삭제하기</a>
                         </div>
                     </div>
                     <!--펀딩퍼센트-->
                     <div class="regi_items">
-                        <img src="/semiproject1/image/loundry.jpg" class="items_image">                   
-                        <p class="pro_name">{{그랑데 세탁기}}</p>
-                        <p class="pro_price">{{1,000,000}} 원</p>
-                        <div class="percentage" v-if="">
-                            <progress id="progress" value="30" max="100"></progress>
+                        <img src="/semiproject1/image/loundry.jpg" class="regi_items_image">                   
+                        <p class="regi_pro_name">{{그랑데 세탁기}}</p>
+                        <p class="regi_pro_price">{{1,000,000}} 원</p>
+                        <div class="regi_percentage" v-if="">
+                            <progress id="regi_progress" value="30" max="100"></progress>
                             <span>{value}%</span>                        
                         </div>
-                        <div class="items_options">    
-                            <span id="stock_text" >수량</span>
-                            <input type="text" id="stock_number" value="1" size="1" readonly>                     
-                            <button id="optionBtn" @click="">옵션설정</button>
-                            <a href="#" id="delete" @click="">삭제하기</a>
+                        <div class="regi_items_options">    
+                            <span id="regi_stock_text" >수량</span>
+                            <input type="text" id="regi_stock_number" value="1" size="1" readonly>                     
+                            <button id="regi_optionBtn" @click="">옵션설정</button>
+                            <a href="#" id="regi_delete" @click="">삭제하기</a>
                         </div>
                     </div>
                     <!--받은선물인 경우-->
                     <div class="regi_items">
-                        <img src="/semiproject1/image/loundry.jpg" class="items_image">                   
-                        <p class="pro_name">{{그랑데 세탁기}}</p>
-                        <p class="pro_price">{{1,000,000}} 원</p>
-                        <div class="items_options">
-                            <button id="orderInfoBtn" @click="">주문상세보기</button>
-                            <button id="reviewBtn" @click="">리뷰작성</button>
+                        <img src="/semiproject1/image/loundry.jpg" class="regi_items_image">                   
+                        <p class="regi_pro_name">{{그랑데 세탁기}}</p>
+                        <p class="regi_pro_price">{{1,000,000}} 원</p>
+                        <div class="regi_items_options">
+                            <button id="regi_orderInfoBtn" @click="">주문상세보기</button>
+                            <button id="regi_reviewBtn" @click="">리뷰작성</button>
                         </div>
                     </div>
                     <div class="regi_items">
-                        <img src="/semiproject1/image/loundry.jpg" class="items_image">                   
-                        <p class="pro_name">{{그랑데 세탁기}}</p>
-                        <p class="pro_price">{{1,000,000}} 원</p>
-                        <div class="items_options">
-                            <span id="stock_text">수량</span>
-                            <input type="text" id="stock_number" value="1" size="1" readonly>
-                            <button id="optionBtn" @click="">옵션설정</button>
-                            <a href="#" id="delete" @click="">삭제하기</a>
+                        <img src="/semiproject1/image/loundry.jpg" class="regi_items_image">                   
+                        <p class="regi_pro_name">{{그랑데 세탁기}}</p>
+                        <p class="regi_pro_price">{{1,000,000}} 원</p>
+                        <div class="regi_items_options">
+                            <span id="regi_stock_text">수량</span>
+                            <input type="text" id="regi_stock_number" value="1" size="1" readonly>
+                            <button id="regi_optionBtn" @click="">옵션설정</button>
+                            <a href="#" id="regi_delete" @click="">삭제하기</a>
                         </div>
                     </div>
                     <div class="regi_items">
-                        <img src="/semiproject1/image/loundry.jpg" class="items_image">                   
-                        <p class="pro_name">{{그랑데 세탁기}}</p>
-                        <p class="pro_price">{{1,000,000}} 원</p>
-                        <div class="items_options">
-                            <span id="stock_text">수량</span>
-                            <input type="text" id="stock_number" value="1" size="1" readonly>
-                            <button id="optionBtn" @click="">옵션설정</button>
-                            <a href="#" id="delete" @click="">삭제하기</a>
+                        <img src="/semiproject1/image/loundry.jpg" class="regi_items_image">                   
+                        <p class="regi_pro_name">{{그랑데 세탁기}}</p>
+                        <p class="regi_pro_price">{{1,000,000}} 원</p>
+                        <div class="regi_items_options">
+                            <span id="regi_stock_text">수량</span>
+                            <input type="text" id="regi_stock_number" value="1" size="1" readonly>
+                            <button id="regi_optionBtn" @click="">옵션설정</button>
+                            <a href="#" id="regi_delete" @click="">삭제하기</a>
                         </div>
                     </div>
                 </div>

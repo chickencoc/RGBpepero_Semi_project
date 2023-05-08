@@ -1,21 +1,20 @@
 
-.content{
+.regi_content{
     display: grid;
     grid-gap: 5px;  
     grid-template-columns: 10% 80% 10%;
 }
-.container{
+.regi_container{
     display: grid;
     place-items: center;
             
 }
-main{
+.regi_main{
     grid-column-start: 2;
     width: 1000px;
 }     
-.regi-url{
-    display: grid;
-    
+.regi_your_url{
+    display: grid; 
     justify-items: center;
     align-items: center;
     width: 800px;
@@ -26,16 +25,16 @@ main{
     padding: 10px;
 }
 
-.back_image{   
+.regi_back_image{   
     box-shadow: 0 3px 5px rgba(0, 0, 0, .1);
     background-image: url(/semiproject1/image/loundry.jpg);
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
-    width: 1000px;
+    width: 970px;
     height: 300px;
 }
-.registry{  
+.myinfo_registry{  
     width: 100%;
     height: auto;
     display: grid;
@@ -46,17 +45,20 @@ main{
 }
 .regi_select{  
     position: relative;
-    left: 450px;
+    left: 430px;
 }
-.add_gifts{
+.regi_add_gifts{
     display: flex;
     flex-direction: column;
     align-items: center;
     border:1px dashed black;
     width: 1000px;
     margin: 10px;
-    padding: 10px;
-    
+    padding: 10px;   
+}
+.regi_add_gifts:hover{
+    background-color: black;
+    color: white;
 }
 
 .regi_items{
@@ -65,23 +67,29 @@ main{
     box-shadow: 0 2px 5px rgba(0, 0, 0, .1);
     margin: 10px;
 }
-.items_image{
+.regi_items_image{
     position: relative;   
     width: 250px;
     height: 170px;
 }
-.pro_name{
+.regi_pro_name{
     text-align: center;
 }
-.pro_price{
+.regi_pro_price{
     text-align: center;
     margin: 10px;
 }
-.items_options{
+.regi_items_options{
     display: grid;    
     justify-items: center;
     align-items: center;
     grid-template-columns: 1fr 1fr;
+    width: 100%;
+    margin-top: 10px;    
+}
+.regi_items_options_taken{  
+    text-align: center;
+    margin-top: 30px;  
     grid-template-rows: 1fr 1fr;
     width: 100%;  
     padding: 5px;  
@@ -91,29 +99,29 @@ main{
     font-size: 30px;
     margin: 10px;
 }
-#stock_text{
+#regi_stock_text{
     grid-column-start: 1;
     grid-row-start: 1;
     margin-top: 10px;
     margin-right: 10px;
 }
-#stock_number{
+#regi_stock_number{
     grid-column-start: 1;
     grid-row-start: 2;
     text-align: center;
+    height: 25px;
     margin-top: 10px;
     margin-right: 10px;
 }
-#optionBtn{
-    grid-column-start: 2;   
-    
+#regi_optionBtn{
+    grid-column-start: 2;      
     width: 100px;
     height: 30px;
     font-size: 15px;   
     margin-top: 10px;
 }
 
-#delete{
+#regi_delete{
     grid-column-start: 2;
     grid-row-start: 2;
     font-size: 12px;
@@ -121,25 +129,34 @@ main{
     margin-top: 10px;
     
 }
-#icon{
+#regi_taken_gift{
+    width: 100px;
+    height: 40px;
+
+}
+#regi_icon{
     width: 20px;
     height: 20px;
 }
-#orderInfoBtn{
+#regi_orderInfoBtn{
     width: 100px;
     margin-top: 20px;
     grid-row-start: 2;
 }
-#reviewBtn{
+#regi_reviewBtn{
     width: 100px;
     margin-top: 20px;
     grid-row-start: 2;
 }
-#url{
+#regi_giveBtn{
+    width: 100px;
+    height: 40px;
+}
+#regi_url{
     font-size: 20px;
     margin: 10px;
 }
-#profile{
+#regi_profile{
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
     width: 80px;
     height: 80px;
@@ -151,13 +168,13 @@ main{
     background-position: center;
     background-size: cover;
 }
-#wanted{
+#regi_wanted_badge{
     position: relative;
     display: inline-block;
     overflow: hidden; /* 불필요한 부분 가리기 */
     padding: 1px;
 }
-#wanted:after {
+#regi_wanted_badge:after {
     content: "";
     position: absolute;
     z-index: 1;
@@ -176,21 +193,21 @@ main{
     transform: rotate(-35deg); 
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
   }
-.percentage{
+.regi_percentage{
     display: flex;
     justify-content: center;
 }
-#progress{
+#regi_progress{
     appearance: none;   
 }
-#progress::-webkit-progress-bar {
+#regi_progress::-webkit-progress-bar {
     background:white;
     box-shadow:  0 1px 3px rgba(0, 0, 0, 0.3);
     border-radius:10px; 
     height: 10px;
     margin-top: 8px;
 }
-#progress::-webkit-progress-value {
+#regi_progress::-webkit-progress-value {
     border-radius:10px;
     background: #FFD4D4;
 }

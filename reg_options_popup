@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/semiproject1/css/Base_rgbPepero.css">
+    <link rel="stylesheet" href="/semiproject1/css/header.css">
+    <link rel="stylesheet" href="/semiproject1/css/reg_options_popup.css">
+    <title>reg_options_popup</title>
+    <style>
+        /* style START */
+
+
+
+        /* style END */
+    </style>
+</head>
+<body>
+    <!-- header 필요 없는 페이지 에서는 header END까지만 지우면 됩니다. -->
+    
+    <!-- wrap START -->
+    <div id="wrapper">
+        <div class="container">
+            <div class="reg_options_popup">
+                <div><img src="/semiproject1/image/fi-sr-cross.png" id="reg_option_popup_close" @click=""></div>
+                <div class="reg_options_popup_image">
+                </div>
+                <div class="reg_options_popup_info">
+                    <div id="reg_options_popup_name">상품 이름</div>
+                    <div id="reg_options_popup_price">상품 가격</div>
+                    <div>수량<input type="text" size="1" value="1" id="reg_options_popup_stock_number"></div>
+                </div>
+                <ul class="reg_options_popup_checkbox">
+                    <li id="reg_options_popup_checkbox">상품 표시 옵션</li>
+                    <li id="reg_options_popup_checkbox"><input type="checkbox" name="choice" > "정말 필요한 물건" 표시</li>                 
+                    <li id="reg_options_popup_checkbox"><input type="checkbox" name="choice" > "그룹선물(펀딩)"로 변경하기</li>
+                </ul>
+                <div class="reg_options_popup_memo">
+                    <div><img src="/semiproject1/image/fi-ss-heart.png" style="position: relative; top: 8px; margin-right: 5px;">선물할 친구들이 참고할 정보를 기재해주세요</div>
+                    <input type="text" id="reg_options_popup_memo_txt">
+                </div>
+                <button class="reg_options_popup_btn">저장하기</button>
+            </div>
+        </div>
+    </div>
+    <!-- wrap END -->
+   
+</body>
+</html>

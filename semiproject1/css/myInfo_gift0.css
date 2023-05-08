@@ -1,0 +1,176 @@
+.container{
+    margin: auto;
+    border: 1px solid black;
+    width: 1150px;
+    height: 1150px;
+    text-align: center;
+}
+.box{
+    margin-top: 100px;
+}
+.box1{
+    margin-left: 20px;
+}
+.scroll{
+    margin: 10px;
+}
+.searchList{
+    margin-top: 30px;
+}
+.btn{
+    margin: 10px;
+}
+.profileImg{
+    float: left;
+    position: absolute;
+    margin-left: 10px;
+}
+.gift{
+    display: inline-block;
+    margin: 30px;
+}
+.product{
+    width: 100px;
+    margin: 30px;
+}
+.giftList{
+    line-height: 30px;
+}
+/* a{
+    text-decoration-line:none;
+    color: black;
+} */
+.list1{
+    position: relative;
+    top: 12px;
+    left: 5px;
+    margin: 2px;
+    width: 30px;
+    height: 30px;
+}
+.arrow{
+    margin-top: 15px;
+    margin-left: 10px;
+}
+.arrow1{
+    margin-right: 15px;
+    width: 30px;
+    height: 30px;
+}
+.arrow2{
+    margin-left: 15px;
+    width: 30px;
+    height: 30px;
+}
+.number{
+    position: relative;
+    bottom: 10px;
+}
+.btn2{
+margin: 20px;
+}
+.profileImg1{
+    float: left;
+    position: absolute;
+    margin-left: 10px;
+    margin-top: 100px;
+}
+#scroll1{
+    margin: 10px;
+}
+.gift1{
+    margin: 20px;
+}
+.product1{
+    width: 100px;
+    margin: 30px;
+}
+.giftList1{  
+    line-height: 30px;
+    display: inline-block;
+    position: relative;
+    bottom: 60px;
+}
+.text{
+    margin-top: 15px;
+    margin-right: 100px;
+}
+.fundingImg{
+    position: relative;
+    top: 2px;
+    width: 30px;
+    height: 30px;
+}
+.fundingImg1{
+    position: relative;
+    left: 50px;
+    width: 30px;
+    height: 30px;
+}
+.check{
+    position: relative;
+    right: 60px;
+}
+.check1{
+    position: relative;
+    margin: 20px;
+    left: 380px;
+}
+.gname{
+    margin: 100px;
+    position: relative;
+    right: 110px;
+    bottom: 20px;
+}
+.gname1{
+    
+    position: relative;
+    right: 90px;
+    bottom: 20px;
+}
+.text1{
+    margin-top: 15px;
+    margin-right: 180px;
+}
+.text2{
+    position: relative;
+    left: 15px;
+}
+.content{
+    position: relative;
+    right: 140px;
+    top: 20px;
+}
+.check2{
+    position: relative;
+    left: 70px;
+}
+.check3{
+    position: relative;
+    left: 100px;
+}
+.check4{
+    position: relative;
+    left: 110px;
+}
+.checkbox{
+    position: relative;
+    bottom: 95px;
+    left: 10px;
+}
+.line{
+margin-right: -10px;
+margin-left: 110px;
+}
+.line1{
+margin-right: -10px;
+margin-left: 110px;
+}
+img{
+width: 150px;
+height: 150px;
+background-color: gray;
+}
+.listStyle1{
+    display: none;
+}

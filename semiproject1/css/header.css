@@ -41,3 +41,16 @@
 .logobox {
     text-align: center;
 }
+.list > a:not(:last-child):after {
+    content: '';
+    display: inline-block;
+    width: 2px;
+    height: 15px;
+    background: #999;
+    position: relative;
+    top: 2px;
+    margin-left: 13px;
+   }
+   .list > a {
+    margin: 0 5px;
+   }

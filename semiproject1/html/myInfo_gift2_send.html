@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/Base_rgbPepero.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/myInfo_gift2_send.css">
+    <title>답례품 구매 페이지</title>
+
+</head>
+<body>
+    <!-- header 필요 없는 페이지 에서는 header END까지만 지우면 됩니다. -->
+        <div class="loginbox">
+            <ul>
+                <li><a href="#">{{name}}님 축하합니다</a></li>
+                <li><a href="#">마이페이지</a></li>
+                <li><a href="#">로그아웃</a></li>
+                <li><a href="#">고객센터</a></li>
+            </ul>
+        </div>
+        <div class="logobox">
+            <div id="logo"><img src="/image/logo_Marrimo.png"></div>
+        </div>
+    <!-- header END -->
+    <!-- wrap START -->
+    <div class="container"> <!-- 전체 묶음 -->
+        <div id="wrapper">
+            <div class="list">
+                <a href="">회원정보</a>
+                <a href="">나의 레지스트리</a>
+                <a href="">받은 선물 목록</a>
+                <a href="">보낸답례품</a>
+                <a href="">캘린더</a>
+            </div>
+            <div class="returnGift">답례품</div>
+            <div class="productList">    
+                <img class="productMain" src="/img/defuser.jpg" alt="디퓨저 메인">
+                    <fieldset class="orderList">
+                        <div class="orderList1">상품이름 : </div>
+                        <div class="orderList1">상품가격 : </div>
+                        <div class="orderList1">주문수량 :
+                            <select name="order" id="order">
+                                <option value="number">수량</option> 
+                            </select>
+                        </div>
+                    </fieldset>
+            </div>    
+                <div class="productThumbnail">
+                    <img class="product1" src="/img/defuser1.jpg" alt="디퓨저 메인">
+                    <img class="product2" src="/img/defuser2.jpg" alt="디퓨저 메인">
+                    <img class="product3" src="/img/defuser3.jpg" alt="디퓨저 메인">
+                </div>
+                <fieldset class="personList">
+                    <div class="person">받는 사람</div>
+                    <textarea></textarea>
+                </fieldset>
+            
+        </div>
+    </div>
+    <!-- wrap END -->
+    <!-- footer END -->
+    <footer id="footer">&lt;footer&gt;</footer>
+</body>
+</html>

@@ -1,0 +1,61 @@
+.container{
+    margin: auto;
+    border: 1px solid black;
+    width: 1100px;
+    height: 1150px;
+    text-align: center;
+    margin-top: 80px;
+}
+img{
+    width: 150px;
+    height: 150px;
+    background-color: gray;
+}
+.returnGift{
+    margin-top: 100px;
+    margin-bottom: 70px;
+    font-weight: bold;
+    font-size: 32px;
+}
+.productThumbnail{
+    margin: 50px;
+    float: left;
+}   
+.productMain{
+    float: left;
+    width: 300px;
+    height: 300px;
+    margin-left: 150px;
+}
+.product2{
+    margin-left: 30px;
+    margin-right: 30px;
+}
+.productList{
+    float: left;
+}
+.orderList{
+    float: right;
+    margin-left: 200px;;
+    line-height: 50px;
+    width: 350px;
+    text-align: left;
+}
+.orderList1{
+    margin-left: 10px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+#order{
+    width: 200px;
+    margin-left: 30px;
+}
+.personList{
+    width: 350px;
+    height: 100px;
+    float: right;
+    margin-right: 57px;
+}
+.person{
+    float: left;
+}

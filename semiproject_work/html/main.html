@@ -1,0 +1,234 @@
+<!DOCTYPE htm.menu_cat_itemsl>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/js/jquery.js"></script>
+    <link rel="stylesheet" href="../css/Base_rgbPepero.css">
+    <title>main</title>
+    <style>
+        /* style START */
+
+        .banner { min-width: 1240px; width: 100%; height: 750px; background-color: #555; background-repeat: no-repeat; display: flex; justify-content: center; align-items: center;}
+        .banner { background-image: url(/image/banner1.jpg); transition: all 0.6s;}
+        .banner .textbox { width: 1050px; text-align: center; line-height: 1.7; position: relative; top: -53px; }
+        .banner .textbox > * { text-shadow: 0px 0px 4px white; }
+        .banner .textbox .bannertxt_main { font-family: 'Raleway', sans-serif; font-weight: 400; font-size: 50px; color: black; letter-spacing: 0.03em; }
+        .banner .textbox .bannertxt_main > span { font-weight: 600; font-size: 50px; color: black;}
+        .banner .textbox .bannertxt_sub { font-family: 'Hahmlet', serif;  font-weight: 500; font-size: 25px; color: black; letter-spacing: 0.03em; }
+        
+        /* banner "let's go" button */
+        .banner .textbox .banner_btnbox { margin-top: 70px;}
+        .custom_btn { width: 125px; height: 40px; padding: 4px 25px; border: 2px solid #000; font-weight: 500; background: transparent; cursor: pointer; transition: all 0.3s ease; position: relative; display: inline-block; border-radius: 4px; } 
+        .banner .textbox .banner_btn { background: #000; color: #fff; z-index: 1; } 
+        .banner .textbox .banner_btn:after { position: absolute; content: ""; width: 0; height: 100%; top: 0; right: 0; z-index: -1; background: #e0e5ec; transition: all 0.3s ease; border-radius: 3px; } 
+        .banner .textbox .banner_btn:hover { color: #000; } 
+        .banner .textbox .banner_btn:hover:after { left: 0; width: 100%; } 
+        .banner .textbox .banner_btn:active { top: 2px; } 
+        
+        /* 페이지 소개 contents box  */
+        #wrapper {max-width: none; min-width: 1240px; padding: 0 15px;}
+        .detailbox { width: 100%;  margin-top: 85px; display: flex;}
+
+        /* 페이지 소개 category */
+        .pageListBox { width: 15%; border-top: 1px solid black; border-bottom: 1px solid black; }
+        .pageList { min-height: 600px; height: calc(100vh - 200px); position: sticky; top: 170px; display: flex; justify-content: center; padding-top: 30px;}
+        .pageList > .pageList_ul { width: 75%;}
+        .pageList > .pageList_ul > li { padding-top: 24px; padding-bottom: 12px; border-bottom: 2px solid #555; font-weight: 400;}
+        .pageList > .pageList_ul > li::before { content: ''; background-color: #555; border-radius: 50%; display: inline-block; position: relative; width: 4px; height: 4px; top: -4px; margin-right: 6px; left: 0; transition: left 0.5s; }
+        .pageList > .pageList_ul > li:hover { font-weight: 600;}
+        .pageList > .pageList_ul > li:hover::before { left: -7px;}
+        
+        .pageList > .pageList_qna { position: absolute; bottom: 70px;}
+        @media (max-height: 800px) { .pageList { top: 20px; } }
+
+        /* 페이지 소개 contents */
+        .pageDetail { width: 85%; padding: 1px 0; border-top: 1px solid black; border-bottom: 1px solid black;} 
+        .menu_cat_items { width: 100%; height: 500px; margin: 0 auto; display: table; background-color: #555; opacity: 0; transition: all 0.5s;}
+        .menu_cat_items > div {display: table-cell; vertical-align: middle;}
+        .menu_cat_items .pageDetail_imgbox { width: 40%;}
+        .menu_cat_items .pageDetail_imgbox img { width: 350px; height: 400px; background-color: white; border-radius: 20px; }
+        .menu_cat_items :is(.pageDetail_imgbox, .pageDetail_textbox) { text-align: center; height: 100%; }
+        .menu_cat_items .pageDetail_text { display: inline-block;}
+        .menu_cat_items .pageDetail_text h4 { color: white; font-size: 30px; font-weight: 600; width: 498px; word-break: keep-all; text-align: right;}
+        .menu_cat_items .pageDetail_text a { float: right; color: white; font-size: 21px; margin-top: 100px; letter-spacing: 0.1em; }
+        .pageDetail_link { transition: all 0.3s;}
+        .pageDetail_link:hover {cursor: pointer; transform: scale(1.1); text-shadow: 0 5px 6px black;} 
+
+        .textbox > .imgDown { transform: translateY(142px) scale(1.5); filter: drop-shadow(0 0 3px #000);}
+        /* toggle용 class */
+        .imgDownMove { transition: all 1.4s ease-in-out; transform: translateY(200px) !important; opacity: 0; }
+
+
+        /* style END */
+    </style>
+</head>
+<body>
+    <!-- header 필요 없는 페이지 에서는 header END까지만 지우면 됩니다. -->
+    <header id="header">
+        <div class="loginbox">
+                <ul>
+                    <li><a href="#">로그인</a></li>
+                    <li><a href="#">회원가입</a></li>
+                    <li><a href="#">고객센터</a></li>
+                </ul>
+        </div>
+        <!-- <div class="loginbox">
+            <ul>
+                <li><a href="#">{{name}}님 축하합니다</a></li>
+                <li><a href="#">마이페이지</a></li>
+                <li><a href="#">로그아웃</a></li>
+                <li><a href="#">고객센터</a></li>
+            </ul>
+        </div> -->
+        <div class="logobox">
+            <div id="logo"><img src="../image/logo_Marrimo.png"></div>
+        </div>
+    </header>
+    <!-- header END -->
+    <!-- wrap START -->
+    <div class="banner">
+        <div class="textbox">
+            <h6 class="bannertxt_main">For all the <span id="spanTxt">celebrations</span> along the way</h6>
+            <h4 class="bannertxt_sub">당신의 새로운 삶을 이곳에서 시작하세요</h4>
+            <div class="banner_btnbox">
+                <button class="custom_btn banner_btn">Let`s Go</button>
+            </div>
+            <img class="imgDown" src="/image/caret-down.png" alt="go down">
+        </div>
+    </div>
+    <div id="wrapper">
+        <div class="detailbox">
+            <div class="pageDetail">
+                <div class="menu_cat_items" id="product" name="product">
+                    <div class="pageDetail_imgbox">
+                        <img src="/image/registry.jpg">
+                    </div>
+                    <div class="pageDetail_textbox">
+                        <div class="pageDetail_text">
+                            <h4>당신의 레지스트리를 행복으로 채우세요</h4>
+                            <a class="pageDetail_link">PRODUCT >></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="menu_cat_items" id="trip" name="trip">
+                    <div class="pageDetail_imgbox">
+                        <img src="../../Images/logo_Marrimo.png">
+                    </div>
+                    <div class="pageDetail_textbox">
+                        <div class="pageDetail_text">
+                            <h4>사랑하는 사람과 함께하는 여행</h4>
+                            <a class="pageDetail_link">TRIP >></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="menu_cat_items" id="card" name="card">
+                    <div class="pageDetail_imgbox">
+                        <img src="../../Images/logo_Marrimo.png">
+                    </div>
+                    <div class="pageDetail_textbox">
+                        <div class="pageDetail_text">
+                            <h4>감사한 마음을 정성어린 카드로 전달하세요</h4>
+                            <a class="pageDetail_link">CARD >></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="menu_cat_items" id="venue" name="venue">
+                    <div class="pageDetail_imgbox">
+                        <img src="../../Images/logo_Marrimo.png">
+                    </div>
+                    <div class="pageDetail_textbox">
+                        <div class="pageDetail_text">
+                            <h4>이쁜만큼 기분도 두배</h4>
+                            <a class="pageDetail_link">VENUE >></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="menu_cat_items" id="represent" name="represent">
+                    <div class="pageDetail_imgbox">
+                        <img src="../../Images/logo_Marrimo.png">
+                    </div>
+                    <div class="pageDetail_textbox">
+                        <div class="pageDetail_text">
+                            <h4>고마운 상대에게 특별한 마음을 전하세요</h4>
+                            <a class="pageDetail_link">RETURN PRESENT >></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="menu_cat_items" id="calender" name="calender">
+                    <div class="pageDetail_imgbox">
+                        <img src="../../Images/logo_Marrimo.png">
+                    </div>
+                    <div class="pageDetail_textbox">
+                        <div class="pageDetail_text">
+                            <h4>당신의 친구와 일정을 공유하세요</h4>
+                            <a class="pageDetail_link">CALENDER >></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pageListBox">
+                <div class="pageList">
+                    <ul class="pageList_ul">
+                        <li><a href="#product">Product</a></li>
+                        <li><a href="#trip">Trip</a></li>
+                        <li><a href="#card">Card</a></li>
+                        <li><a href="#venue">Venue</a></li>
+                        <li><a href="#represent">Return Present</a></li>
+                        <li><a href="#calender">Calender</a></li>
+                    </ul>
+                    <ul class="pageList_qna">
+                        <li><h5>도움이 필요 하신가요??</h5></li>
+                        <li><a href="#">문의하기</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- wrap END -->
+    <!-- footer END -->
+    <footer id="footer">
+        <ul class="footer_ul">
+            <li><img src="/image/logo_Marrimo.png"></li>
+            <li><a href="#">고객센터</a></li>
+            <li><a href="#">자주하는 질문</a></li>
+            <li><a href="#">혼수 상품</a></li>
+            <li><a href="#">답례품</a></li>
+            <li><a href="#">감사카드</a></li>
+            <li><a href="#">웨딩홀</a></li>
+        </ul>
+    </footer>
+</body>
+</html>
+<script>
+    // 영역의 0.7만큼 보이면 opacity 1로 변경
+    let observer = new IntersectionObserver((e) => {
+        e.forEach((items) => {
+            if(items.isIntersecting) {
+                items.target.style.opacity = 1;
+                items.isIntersecting && observer.unobserve(items.target);
+            }
+        });
+    }, {
+        threshold : 0.6
+    });
+    let pageDetail = document.querySelectorAll('div.menu_cat_items');
+    pageDetail.forEach((items) => {
+        observer.observe(items);
+    });
+
+    // imgDown 움직임 표현
+    let imgDown = document.getElementsByClassName('imgDown')[0];
+    setInterval (function() {
+        imgDown.classList.toggle('imgDownMove');
+    }, 2000);
+
+    // let spanTxt = document.getElementById('spanTxt');
+    // const spanTxtlist = ['celebrations', 'to-dos', 'big decisions', 'happy tears', 'days']
+
+
+    console.log(document.documentElement.outerHeight);
+
+</script>

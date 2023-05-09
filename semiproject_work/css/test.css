@@ -1,0 +1,13 @@
+.container { display: grid; background-color: #D9D9D9; grid-template-rows: 260px; min-width: 1240px; width: 100%; } 
+.footbox { display: flex; justify-content: center; } 
+.footbox .logo { font-size: 3em; } 
+.footbox .addr { margin-top: 20px; } 
+.footbox li { list-style: none; text-align: center; margin-bottom: 10px; } 
+.footbox li .headli { font-size: 2em; } 
+.footbox a { text-decoration-line: none; color: black; } 
+.box { margin-top: 20px; width: 100%; min-width: 413px; margin-bottom: 20px; } 
+#box1 { text-align: center; border-right: 1px solid black; } #box1 .logo { margin-top: 50px; } 
+#box2 { border-right: 1px solid black; } 
+
+
+.footer_ul > li:not(:is(:first-child, :last-child)):after { content: ''; background: rgba(255, 255, 255, 0.1); position: relative; width: 2px; height: 14px; display: inline-block; top: 2px; } 

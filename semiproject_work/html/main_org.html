@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/Base_rgbPepero.css">
+    <link rel="stylesheet" href="../css/header.css">
+    <title>main</title>
+    <style>
+        /* style START */
+
+        .banner { width: 100%; height: 600px; background-color: #555; background-repeat: no-repeat; display: flex; justify-content: center; align-items: center; }
+        .banner .textbox { text-align: center; line-height: 1.7;}
+        .banner .textbox .bannertxt_main { font-family: 'Raleway', sans-serif; font-weight: 300; font-size: 50px; color: whitesmoke; letter-spacing: 0.03em;}
+        .banner .textbox .bannertxt_main > span { font-weight: 600; font-size: 50px; color: whitesmoke;}
+        .banner .textbox .bannertxt_sub { font-family: 'Raleway', sans-serif;  font-weight: 300; font-size: 25px; color: whitesmoke; letter-spacing: 0.03em; }
+        .banner .textbox .banner_btn { margin-top: 43px; width: 160px; height: 45px; font-weight: 500; color: black ; border-radius: 20px; border: 1px solid black; background-color: whitesmoke; }
+        
+
+        .detailbox { width: 1200px; } 
+        .detailbox .detailtxt1 { margin-top: 50px; font-size: 2em; } 
+        .pageDetail { display: grid; grid-template-columns: 1fr 1fr; grid-column-gap: 50px; } 
+
+        .menu_cat_items { background: #999; display: grid; grid-template-columns: 1fr 1fr; margin: 20px auto; width: 575px; height: 300px; border-radius: 3px;}
+        .menu_cat_items img { margin-top: 60px; margin-left: 30px; width: 250px; height: 180px; }
+        .menu_cat_items div { text-align: center; } 
+        .innerbox { display: grid; height: 10px; grid-template-rows: 1fr 1fr; } 
+        .innerbox .detailtxt { margin-top: 100px; } 
+        .tripinfo { margin-top: 20px; float: left; } 
+        .fakeLink { margin-top: 40px; } 
+
+        /* style END */
+    </style>
+</head>
+<body>
+    <!-- header 필요 없는 페이지 에서는 header END까지만 지우면 됩니다. -->
+    <header id="header">
+        <!-- <div class="loginbox">
+                <ul>
+                    <li><a href="#">로그인</a></li>
+                    <li><a href="#">회원가입</a></li>
+                    <li><a href="#">고객센터</a></li>
+                </ul>
+        </div> -->
+        <div class="loginbox">
+            <ul>
+                <li><a href="#">{{name}}님 축하합니다</a></li>
+                <li><a href="#">마이페이지</a></li>
+                <li><a href="#">로그아웃</a></li>
+                <li><a href="#">고객센터</a></li>
+            </ul>
+        </div>
+        <div class="logobox">
+            <div id="logo"><img src="../image/logo_Marrimo.png"></div>
+        </div>
+    </header>
+    <!-- header END -->
+    <!-- wrap START -->
+    <div class="banner">
+        <div class="textbox">
+            <h6 class="bannertxt_main">For all the <span>celebration</span> salong the way</h6>
+            <h4 class="bannertxt_sub">Your wedding starts here</h4>
+            <div class="banner_btnbox">
+                <button class="banner_btn btn1">Let`s Go</button>
+            </div>
+        </div>
+    </div>
+    <div id="wrapper">
+        <div class="detailbox">
+            <div class="detailtxt1">페이지 별 상세보기</div>
+            <div class="pageDetail">
+                <div class="menu_cat_items" id="product">
+                    <div><img src="../../Images/jo-jung.gif"></div>
+                    <div class="innerbox">
+                        <div class="detailtxt">
+                            <div>당신의 레지스트리를</div>
+                            <div>행복으로 채우세요.</div>
+                            <div class="fakeLink">PRODUCT >></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="menu_cat_items" id="trip">
+                    <div>
+                        <img src="../../Images/logo_Marrimo.png">
+                    </div>
+                    <div class="innerbox">
+                        <div class="triptxt">
+                            <div class="tripinfo">타이드 어웨이</div>
+                            <div class="detailtxt">
+                                <div>사랑하는 사람과</div>
+                                <div>함께 하는 여행</div>
+                            </div>
+                            <div class="fakeLink">Trip >></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="menu_cat_items" id="card">
+                    <img src="../../Images/logo_Marrimo.png">
+                    <div class="innerbox">
+                        <div class="detailtxt">
+                            <div>감사한 마음을</div>
+                            <div>정성어린 카드로</div>
+                            <div>전달하세요</div>
+                            <div class="fakeLink">CART >></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="menu_cat_items" id="venue">
+                    <img src="../../Images/logo_Marrimo.png">
+                    <div class="innerbox">
+                        <div class="detailtxt">이쁜 만큼 기분도 두배</div>
+                        <div class="fakeLink">Venue >></div>
+                    </div>
+                </div>
+                <div class="menu_cat_items" id="represent">
+                    <img src="../../Images/logo_Marrimo.png">
+                    <div class="innerbox">
+                        <div class="detailtxt">
+                            <div>고마운 상대에게</div>
+                            <div>특별한 마음을 전하세요</div>
+                        </div>
+                        <div class="fakeLink">RETURN PRESENT >></div>
+                    </div>
+                </div>
+                <div class="menu_cat_items" id="calender">
+                    <img src="../../Images/logo_Marrimo.png">
+                    <div class="innerbox">
+                        <div class="detailtxt">
+                            <div>당신의 친구와</div>
+                            <div>일정을 공유하세요</div>
+                            <div class="fakeLink">CALENDER >></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- wrap END -->
+    <!-- footer END -->
+    <footer id="footer">&lt;footer&gt;</footer>
+</body>
+</html>

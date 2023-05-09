@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div { height: 500px; border: 2px solid black;  margin-left: 100px; margin-top: 600px; font-size: xx-large; font-weight: bold;}
+        div { transition: all 0.5s; opacity: 0;}
+    </style>
+</head>
+
+<body>
+    
+    <div> Document </div>
+    <div> Document </div>
+    <div> Document </div>
+    <div> Document </div>
+    <div> Document </div>
+    <div> Document </div>
+
+</body>
+</html>
+<script>
+    let observer = new IntersectionObserver((e) => {
+        e.forEach((items) => {
+            if(items.isIntersecting) {
+                items.target.style.opacity = 1;
+                entry.isIntersecting && observer.unobserve(items.target);
+            }
+        });
+    }, {
+        threshold : 0.5
+    });
+
+    let pageDetail = document.querySelectorAll('div');
+    pageDetail.forEach((divs) => {
+        observer.observe(divs);
+    });
+    
+</script>

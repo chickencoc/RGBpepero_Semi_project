@@ -54,17 +54,17 @@
 }
 .arrow1{
     margin-right: 15px;
-    width: 30px;
-    height: 30px;
+    width: 20px;
+    height: 20px;
 }
 .arrow2{
     margin-left: 15px;
-    width: 30px;
-    height: 30px;
+    width: 20px;
+    height: 20px;
 }
 .number{
     position: relative;
-    bottom: 10px;
+    bottom: 5px;
 }
 .btn2{
 margin: 20px;

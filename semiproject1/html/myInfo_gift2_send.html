@@ -25,8 +25,8 @@
         </div>
     <!-- header END -->
     <!-- wrap START -->
-    <div class="container"> <!-- 전체 묶음 -->
-        <div id="wrapper">
+    <div id="wrapper">
+        <div class="container"> <!-- 전체 묶음 -->       
             <div class="list">
                 <a href="">회원정보</a>
                 <a href="">나의 레지스트리</a>
@@ -35,9 +35,16 @@
                 <a href="">캘린더</a>
             </div>
             <div class="returnGift">답례품</div>
-            <div class="productList">    
-                <img class="productMain" src="/img/defuser.jpg" alt="디퓨저 메인">
-                    <fieldset class="orderList">
+            <div class="productList"> 
+                    <div class="orderList_img">
+                        <img class="productMain" src="/img/defuser.jpg" alt="디퓨저 메인">
+                        <div class="productThumbnail">
+                            <img class="product1" src="/img/defuser1.jpg" alt="디퓨저 메인">
+                            <img class="product2" src="/img/defuser2.jpg" alt="디퓨저 메인">
+                            <img class="product3" src="/img/defuser3.jpg" alt="디퓨저 메인">
+                        </div>
+                    </div>              
+                    <div class="orderList_detail">
                         <div class="orderList1">상품이름 : </div>
                         <div class="orderList1">상품가격 : </div>
                         <div class="orderList1">주문수량 :
@@ -45,18 +52,18 @@
                                 <option value="number">수량</option> 
                             </select>
                         </div>
-                    </fieldset>
-            </div>    
-                <div class="productThumbnail">
-                    <img class="product1" src="/img/defuser1.jpg" alt="디퓨저 메인">
-                    <img class="product2" src="/img/defuser2.jpg" alt="디퓨저 메인">
-                    <img class="product3" src="/img/defuser3.jpg" alt="디퓨저 메인">
-                </div>
-                <fieldset class="personList">
+                    </div>  
+                <div class="personList">
                     <div class="person">받는 사람</div>
-                    <textarea></textarea>
-                </fieldset>
-            
+                    <div class="person1"></div>
+                </div>
+                    <div class="productList1">
+                        <hr class="line">                      
+                        <div class="text">제품 상세 설명</div>
+                        <hr class="line1">
+                    </div>
+                    <button class="btn">선물하기</button>   
+            </div>
         </div>
     </div>
     <!-- wrap END -->

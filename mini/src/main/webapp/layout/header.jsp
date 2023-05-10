@@ -12,7 +12,7 @@
 </head>
 
 <body>
-	<div id="app">
+	<div id="appHeader">
 	    <div id="header">
 	        <div class="loginbox" v-if="session == ''">
 	            <ul>
@@ -38,7 +38,7 @@
 </html>
 <script type="text/javascript">
 var app = new Vue({ 
-    el: '#app',
+    el: '#appHeader',
     data: {
 		session : '',
 		name : '빨간빼빼로'

@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+    <script src="https://unpkg.com/vuejs-paginate@latest"></script>
+	<script src="https://unpkg.com/vuejs-paginate@0.9.0"></script>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,39 +20,40 @@
 </head>
 <body>
     <!-- header 필요 없는 페이지 에서는 header END까지만 지우면 됩니다. -->
-    <header id="header">
-        <!-- <div class="loginbox">
-                <ul>
-                    <li><a href="#">로그인</a></li>
-                    <li><a href="#">회원가입</a></li>
-                    <li><a href="#">고객센터</a></li>
-                </ul>
-        </div> -->
+    <div id="header">
+
         <div class="loginbox">
+            <ul>
+                <li><a href="#">로그인</a></li>
+                <li><a href="#">회원가입</a></li>
+                <li><a href="#">고객센터</a></li>
+            </ul>
+        </div>
+        <!-- <div class="loginbox">
             <ul>
                 <li><a href="#">{{name}}님 축하합니다</a></li>
                 <li><a href="#">마이페이지</a></li>
                 <li><a href="#">로그아웃</a></li>
                 <li><a href="#">고객센터</a></li>
             </ul>
-        </div>
+        </div> -->
         <div class="logobox">
             <div id="logo"><img src="/image/logo_Marrimo.png"></div>
         </div>
-    </header>
+    </div>
     <!-- header END -->
     <!-- wrap START -->
     <div id="wrapper">
         <div class="container">
-            <div class="prodListWord">
-                <span><b>침실</b></span> | 
-                <span><a href="">거실</a></span> | 
-                <span><a href="">드레스룸</a></span> | 
-                <span><a href="">주방</a></span> | 
-                <span><a href="">가전제품</a></span> | 
-                <span><a href="">욕실</a></span> | 
-                <span><a href="">식장</a></span> | 
-                <span><a href="">여행</a></span>
+            <div class="prodCategoryList">
+                <a href=""><b>침실</b></a>
+                <a href="">거실</a>
+                <a href="">드레스룸</a>
+                <a href="">주방</a>
+                <a href="">가전제품</a>
+                <a href="">욕실</a> 
+                <a href="">식장</a> 
+                <a href="">여행</a>
             </div>
             <div class="prod0Banner">
                 <img src="/image/prod0Banner.jpg" id="bannerImg">
@@ -60,8 +63,9 @@
                 </div>
             </div>
             <div class="searchBox">
-                <input type="text" placeholder="상품명을 입력해주세요" class="searchBar">
-                <button class="prodBtn">검색</button><button class="prodBtn cancelBtn">취소</button>
+               
+                <input type="text" placeholder="상품명을 입력해주세요" class="searchBar serach">
+                <button class="prodBtn searchM">검색</button><button class="prodBtn cancelBtn searchR">초기화</button>
             </div>
             <div class="prodSelectBox">
                 <select id="prodArray">
@@ -73,12 +77,14 @@
             </div>
             <div class="prodListBox">
                 <div class="prodList">
-                    <div class="prodBox">
-                        <img src="/image/prod0.jpg" class="prod0Img">
-                        <div class="prodName">{{p_name}}</div>
-                        <div class="prodPrice">{{p_price}}원</div>
-                        <div class="prodLike">좋아요 : <img src="/image/Like.png" class="prodLikeImg"></div>
-                    </div>
+                    <a href="">
+                        <div class="prodBox">
+                            <img src="/image/prod0.jpg" class="prod0Img">
+                            <div class="prodName">{{p_name}}</div>
+                            <div class="prodPrice">{{p_price}}원</div>
+                            <div class="prodLike">좋아요 : <img src="/image/Like.png" class="prodLikeImg"></div>
+                        </div>
+                    </a>
                     <div class="prodBox">
                         <img src="/image/prod0.jpg" class="prod0Img">
                         <div class="prodName">{{p_name}}</div>
@@ -113,11 +119,51 @@
             </div> 
             <div class="pageList">
                 <input type="number" class="pageListNum" min="1"> <a href="">페이지로 이동</a>
+                
             </div>
+            <template>
+                <paginate
+                  :page-count="pageCount"
+                  :page-range="3"
+                  :margin-pages="2"
+                  :click-handler="fnSearch"
+                  :prev-text="'<'"
+                  :next-text="'>'"
+                  :container-class="'pagination'"
+                  :page-class="'page-item'">
+                </paginate>
+              </template>
         </div>
     </div>
     <!-- wrap END -->
     <!-- footer END -->
-    <footer id="footer">&lt;footer&gt;</footer>
+    <div id="footer">
+        <ul class="footer_ul">
+            <li><img src="/image/logo_Marrimo.png"></li>
+            <li><a href="#">고객센터</a></li>
+            <li><a href="#">자주하는 질문</a></li>
+            <li><a href="#">혼수 상품</a></li>
+            <li><a href="#">답례품</a></li>
+            <li><a href="#">감사카드</a></li>
+            <li><a href="#">웨딩홀</a></li>
+        </ul>
+    </div>
 </body>
 </html>
+<script type="text/javascript">
+    Vue.component('paginate', VuejsPaginate)
+    var app = new Vue({ 
+        el: '#app',
+        data: {
+            selectPage: 1,
+            pageCount: 1,
+            cnt : 0
+        }   
+        , methods: {
+        
+        }   
+        , created: function () {
+            var self = this;
+        }
+    });
+</script>

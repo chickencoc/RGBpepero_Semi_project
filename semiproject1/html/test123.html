@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+          margin: 0;
+          height: 5000px;
+        }
+      </style>
+</head>
+<body onscroll="changeGradient()">
+    
+</body>
+</html>
+<script>
+const body = document.querySelector('body');
+const gradient = ['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet'];
+const totalHeight = document.body.scrollHeight - window.innerHeight;
+
+window.addEventListener('scroll', function() {
+  const scrollHeight = window.pageYOffset;
+  const percentage = (scrollHeight / totalHeight) * 100;
+  const index = Math.floor((gradient.length / 100) * percentage);
+  body.style.background = `linear-gradient(to bottom right, ${gradient[index]}, ${gradient[index + 1]})`;
+});
+
+</script>

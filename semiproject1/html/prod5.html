@@ -18,39 +18,40 @@
 </head>
 <body>
     <!-- header 필요 없는 페이지 에서는 header END까지만 지우면 됩니다. -->
-    <header id="header">
-        <!-- <div class="loginbox">
-                <ul>
-                    <li><a href="#">로그인</a></li>
-                    <li><a href="#">회원가입</a></li>
-                    <li><a href="#">고객센터</a></li>
-                </ul>
-        </div> -->
+    <div id="header">
+
         <div class="loginbox">
+            <ul>
+                <li><a href="#">로그인</a></li>
+                <li><a href="#">회원가입</a></li>
+                <li><a href="#">고객센터</a></li>
+            </ul>
+        </div>
+        <!-- <div class="loginbox">
             <ul>
                 <li><a href="#">{{name}}님 축하합니다</a></li>
                 <li><a href="#">마이페이지</a></li>
                 <li><a href="#">로그아웃</a></li>
                 <li><a href="#">고객센터</a></li>
             </ul>
-        </div>
+        </div> -->
         <div class="logobox">
             <div id="logo"><img src="/image/logo_Marrimo.png"></div>
         </div>
-    </header>
+    </div>
     <!-- header END -->
     <!-- wrap START -->
     <div id="wrapper">
         <div class="container">
-            <div class="prodListWord">
-                <span><a href="">침실</a></span> | 
-                <span><a href="">거실</a></span> | 
-                <span><b>드레스룸</b></span> | 
-                <span><a href="">주방</a></span> | 
-                <span><a href="">가전제품</a></span> | 
-                <span><a href="">욕실</a></span> | 
-                <span><a href="">식장</a></span> | 
-                <span><a href="">여행</a></span>
+            <div class="prodCategoryList">
+                <a href="">침실</a>
+                <a href="">거실</a>
+                <a href=""><b>드레스룸</b></a>
+                <a href="">주방</a>
+                <a href="">가전제품</a>
+                <a href="">욕실</a> 
+                <a href="">식장</a> 
+                <a href="">여행</a>
             </div>
             <div class="prod1Banner">
                 <img src="/image/prod5Banner.jpg" id="bannerImg">
@@ -60,8 +61,8 @@
                 </div>
             </div>
             <div class="searchBox">
-                <input type="text" placeholder="상품명을 입력해주세요" class="searchBar">
-                <button class="prodBtn">검색</button><button class="prodBtn cancelBtn">취소</button>
+                <input type="text" placeholder="상품명을 입력해주세요" class="searchBar serach">
+                <button class="prodBtn searchM">검색</button><button class="prodBtn cancelBtn searchR">초기화</button>
             </div>
             <div class="prodSelectBox">
                 <select id="prodArray">
@@ -73,12 +74,14 @@
             </div>
             <div class="prodListBox">
                 <div class="prodList">
+                    <a href="">
                     <div class="prodBox">
                         <img src="/image/prod5.jpg" class="prod1Img">
                         <div class="prodName">{{p_name}}</div>
                         <div class="prodPrice">{{p_price}}원</div>
                         <div class="prodLike">좋아요 : <img src="/image/Like.png" class="prodLikeImg"></div>
                     </div>
+                    </a>
                     <div class="prodBox">
                         <img src="/image/prod5.jpg" class="prod1Img">
                         <div class="prodName">{{p_name}}</div>
@@ -118,6 +121,16 @@
     </div>
     <!-- wrap END -->
     <!-- footer END -->
-    <footer id="footer">&lt;footer&gt;</footer>
+    <div id="footer">
+        <ul class="footer_ul">
+            <li><img src="/image/logo_Marrimo.png"></li>
+            <li><a href="#">고객센터</a></li>
+            <li><a href="#">자주하는 질문</a></li>
+            <li><a href="#">혼수 상품</a></li>
+            <li><a href="#">답례품</a></li>
+            <li><a href="#">감사카드</a></li>
+            <li><a href="#">웨딩홀</a></li>
+        </ul>
+    </div>
 </body>
 </html>

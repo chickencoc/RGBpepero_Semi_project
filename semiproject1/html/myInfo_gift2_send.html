@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <script src="https://unpkg.com/vuejs-paginate@latest"></script>
+	<script src="https://unpkg.com/vuejs-paginate@0.9.0"></script>
+    <script src="js/vue.js"></script>
+    <script src="js/jquery.js"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/Base_rgbPepero.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/myInfo_gift2_send.css">
+    <title>보낸 답례품</title>
+    <style>
+        /* style START */
+
+
+
+        /* style END */
+    </style>
+</head>
+<body>
+    <!-- header 필요 없는 페이지 에서는 header END까지만 지우면 됩니다. -->
+    <div id="header">
+
+        <div class="loginbox">
+            <ul>
+                <li><a href="#">로그인</a></li>
+                <li><a href="#">회원가입</a></li>
+                <li><a href="#">고객센터</a></li>
+            </ul>
+        </div>
+        <!-- <div class="loginbox">
+            <ul>
+                <li><a href="#">{{name}}님 축하합니다</a></li>
+                <li><a href="#">마이페이지</a></li>
+                <li><a href="#">로그아웃</a></li>
+                <li><a href="#">고객센터</a></li>
+            </ul>
+        </div> -->
+        <div class="logobox">
+            <div id="logo"><img src="/image/logo_Marrimo.png"></div>
+        </div>
+    </div>
+    <!-- header END -->
+    <!-- wrap START -->
+    <div id="wrapper">
+        <div class="container" id="app">
+            <div class="return_gift_list_menu">
+                <a href="">회원정보</a>
+                <a href="">나의 레지스트리</a>
+                <a href="">받은 선물 목록</a>
+                <a href=""><strong>보낸답례품</strong></a>
+                <a href="">캘린더</a>
+            </div>
+            <div class="returnSearchBox">
+                <input type="text" placeholder="이름" class="returnSearchBar search">
+                <button class="returnSearchBtn searchM">검색</button>
+                <button class="returnSearchBtn searchR">초기화</button>
+            </div>
+            <fieldset class="returnProdTableBox">
+                <legend class="returnProdTableTitle">보낸 답례품 목록</legend>
+                <table class="returnProdTable">
+                    <tr>
+                        <th colspan="2">제품</th>
+                        <th>받은 사람</th>
+                        <th>수량</th>
+                        <th>보낸 날짜</th>
+                        <th>금액</th>
+                    </tr>
+                    <tr>
+                        <td rowspan="2" class="returnProdImgBox">
+                            <img src="/image/prod1.jpg" class="returnProdImg">
+                        </td>
+                        <td class="returnProdNameBox">p_name</td>
+                        <td class="returnGuestNameBox" rowspan="2">
+                            <div class="returnGuestNameBox2">
+                                
+                                <div @click.prevent="fnShowGuest()">
+                                    <a href="" v-if="guestFlg">더 보기▼</a>
+                                    <a href="" v-if="!guestFlg">접기▲</a>
+                                </div>
+                                <p>g_name</p>
+                                <div v-if="!guestFlg">
+                                    <p>g_name</p>
+                                    <p>g_name</p>
+                                    <p>g_name</p>
+                                    <p>g_name</p>
+                                    <p>g_name</p>
+                                    <p>g_name</p>
+                                    <p>g_name</p>
+                                    <p>g_name</p>
+                                    <p>g_name</p>
+                                    <p>g_name</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td  rowspan="2" class="returnProdCntBox">1개</td>
+                        <td  rowspan="2" class="returnProdDateBox">cdatetime</td>
+                        <td  rowspan="2" class="returnProdPriceBox">price</td>
+                    </tr>
+                    
+                </table>
+            </fieldset>
+            <template>
+                <paginate
+                  :page-count="pageCount"
+                  :page-range="3"
+                  :margin-pages="2"
+                  :click-handler="fnSearch"
+                  :prev-text="'<'"
+                  :next-text="'>'"
+                  :container-class="'pagination'"
+                  :page-class="'page-item'">
+                </paginate>
+              </template>
+        </div>
+    </div>
+    <!-- wrap END -->
+    <!-- footer END -->
+    <div id="footer">
+        <ul class="footer_ul">
+            <li><img src="/image/logo_Marrimo.png"></li>
+            <li><a href="#">고객센터</a></li>
+            <li><a href="#">자주하는 질문</a></li>
+            <li><a href="#">혼수 상품</a></li>
+            <li><a href="#">답례품</a></li>
+            <li><a href="#">감사카드</a></li>
+            <li><a href="#">웨딩홀</a></li>
+        </ul>
+</div>
+</body>
+</html>
+<script type="text/javascript">
+Vue.component('paginate', VuejsPaginate)
+    var app = new Vue({ 
+        el: '#app',
+        data: {
+            guestFlg : true,
+            selectPage: 1,
+            pageCount: 1,
+            cnt : 0
+        }   
+        , methods: {
+            fnShowGuest : function(){
+                var self = this;
+                self.guestFlg=!self.guestFlg
+            }
+            ,fnSearch : function(){
+
+            }
+        }   
+        , created: function () {
+            var self = this;
+        }
+    });
+    </script>

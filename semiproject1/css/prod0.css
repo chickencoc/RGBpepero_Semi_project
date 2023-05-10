@@ -2,6 +2,9 @@
 #wrapper{
     height:1300px;
 }
+img{
+    background-color: #999;
+}
 .prodListWord{
     text-align: center;
     font-size: 1.5em;
@@ -11,6 +14,7 @@
     margin:auto;
     width:1000px;
     height:1300px;
+    text-align: center;
 }
 .prod0Banner{
     width:100%;
@@ -50,13 +54,11 @@
     height:80%;
 }
 .prodBtn{
-    background-color: #999;
+
     width:10%;
     height:80%;
 }
-.cancelBtn{
-    background-color: #555;
-}
+
 .prodSelectBox{
     text-align: right;
     margin:2%;
@@ -111,4 +113,48 @@
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 10px;
     height: 500px;
+}
+.prodCategoryList > a:not(:last-child):after {
+    content: '';
+    display: inline-block;
+    width: 2px;
+    height: 15px;
+    background: #999;
+    position: relative;
+    top: 2px;
+    margin-left: 13px;
+   }
+.prodCategoryList > a {
+    margin: 0 5px;
+   }
+   .pagination {
+    margin:24px;
+    display: inline-flex; 
+}
+ul {
+    text-align: center;
+}
+.pagination li {
+    min-width:32px;
+    padding:2px 6px;
+    text-align:center;
+    margin:0 3px;
+    border-radius: 6px;
+    border:1px solid #eee;
+    color:#666;
+    display : inline;
+}
+.pagination li:hover {
+    background: #E4DBD6;
+}
+.page-item a {
+    color:#666;
+    text-decoration: none;
+}
+.pagination li.active {
+    background-color : #E7AA8D;
+    color:#fff;
+}
+.pagination li.active a {
+    color:#fff;
 }

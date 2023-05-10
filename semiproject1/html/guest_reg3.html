@@ -16,13 +16,14 @@
     </style>
 </head><body>
     <!-- header 필요 없는 페이지 에서는 header END까지만 지우면 됩니다. -->
-    <header id="header">
+    <div id="header">
+
         <div class="loginbox">
-                <ul>
-                    <li><a href="#">로그인</a></li>
-                    <li><a href="#">회원가입</a></li>
-                    <li><a href="#">고객센터</a></li>
-                </ul>
+            <ul>
+                <li><a href="#">로그인</a></li>
+                <li><a href="#">회원가입</a></li>
+                <li><a href="#">고객센터</a></li>
+            </ul>
         </div>
         <!-- <div class="loginbox">
             <ul>
@@ -35,7 +36,7 @@
         <div class="logobox">
             <div id="logo"><img src="/image/logo_Marrimo.png"></div>
         </div>
-    </header>
+    </div>
     <!-- header END -->
     <!-- wrap START -->
     <div id="wrapper">
@@ -51,42 +52,48 @@
                         <tr>
                             <td class="info_box_goods_table_img" rowspan="6"><img class="info_box_goods_img"></td>
                             <td class="info_box_goods_table_text fundLists">상품 이름</td>
-                            <td class="info_box_goods_table_cnt_price fundListA">{{p_name}}</td>
+                            <td class="info_box_goods_table_cnt_price fundListA" colspan="2">{{p_name}}</td>
                         </tr>
                         <tr>
                             <td class="fundLists">상품 가격</td>
-                            <td class="fundListA">{{p_price}}</td>
+                            <td class="fundListA" colspan="2">{{p_price}}</td>
                         </tr>
                         <tr>
                             <td class="fundLists">남은 금액</td>
-                            <td class="fundListA"></td>
+                            <td class="fundListA" colspan="2">{{p_price-fputprice}}</td>
                         </tr>
                         <tr>
                             <td class="fundLists">원하는 결제 금액</td>
-                            <td class="fundListA">
-                                <input type="text" placeholder="금액 입력"> 원
+                            <td class="fundListA" colspan="2">
+                                <input type="text" placeholder="금액 입력" class="text1"> 원
                             </td>
                         </tr>
                         <tr>
                             <td class="fundLists">금액설정</td>
-                            <td class="fundListA">
+                            <td class="fundListA" colspan="2">
                                 <div>
-                                    <button class="fundPutMoneyBtn" id="10000btn" onclick="fnFundGuage()">+10,000원</button>
-                                    <button class="fundPutMoneyBtn">+50,000원</button>
-                                    <button class="fundPutMoneyBtn">+100,000원</button>
+                                    <button class="fundPutMoneyBtn btn1" id="10000btn" onclick="fnFundGuage()">+10,000원</button>
+                                    <button class="fundPutMoneyBtn btn1">+50,000원</button>
+                                    <button class="fundPutMoneyBtn btn1">+100,000원</button>
                                 </div>
                                 <div>
-                                    <button class="fundPutMoneyBtn">+10%</button>
-                                    <button class="fundPutMoneyBtn">+25%</button>
-                                    <button class="fundPutMoneyBtn">+50%</button>
-                                    <button class="fundPutMoneyBtn">ALL</button>
+                                    <button class="fundPutMoneyBtn btn1">+10%</button>
+                                    <button class="fundPutMoneyBtn btn1">+25%</button>
+                                    <button class="fundPutMoneyBtn btn1">+50%</button>
+                                    <button class="fundPutMoneyBtn btn1">ALL</button>
                                 </div>
                             </td>
                         </tr>
                         <tr>
                             <td class="fundLists">현재 진행도</td>
                             <td class="fundListA">
-                                <progress value="30" max="100" id="fundGuage"></progress>
+                                <div>
+                                    <progress value="30" max="100" id="fundGuageBefore"></progress>
+                                    <progress value="0" max="100" id="fundGuageAfter"></progress>
+                                </div>
+                            </td>
+                            <td class="fundGuagePerBox">
+                                <p class="fundGuagePer">{{%}} + {{%}}</p>
                             </td>
                         </tr>
                     </table>
@@ -108,32 +115,11 @@
                             <p>주소</p>
                             <p>{{address}}</p>
                         </div>
-                    </div>
-                </fieldset>
-                <fieldset class="info_box ship_info">
-                    <legend class="info_box_name_legend">
-                        <h4 class="info_box_name_h">배송지 정보</h4>
-                    </legend>
-                    <div class="ship_info_box">
-                        <div class="ship_info_box_text">
-                            <p>수령인</p>
-                            <p>{{name}}</p>
-                        </div>
-                        <div class="ship_info_box_text">
-                            <p>전화번호</p>
-                            <p>{{phone}}</p>
-                        </div>
-                        <div class="ship_info_box_text">
-                            <p>배송 주소</p>
-                            <p>{{address}}</p>
-                        </div>
-                        <div class="ship_info_box_text">
-                            <p>배송 메모</p>
-                            <input type="text">
-                        </div>
-                        <div class="ship_info_box_text">
+                        <div class="payer_info_box_text">
                             <p>신랑, 신부에게 전할 메세지</p>
-                            <input type="text" value="{{text}}">
+                        </div>
+                        <div>
+                            <textarea placeholder="메세지 입력" class="toCoupleMessage"></textarea>
                         </div>
                     </div>
                 </fieldset>
@@ -165,7 +151,7 @@
                     </div>
                 </fieldset>
                 <div class="pay_btn_box">
-                    <button class="pay_btn" type="button" @click="">결제 하기</button>
+                    <button class="pay_btn btn1" type="button" @click="">결제 하기</button>
                 </div>
             </div>
         </div>
@@ -173,26 +159,24 @@
     </div>
     <!-- wrap END -->
     <!-- footer END -->
-    <footer id="footer">&lt;footer&gt;</footer>
+    <div id="footer">
+        <ul class="footer_ul">
+            <li><img src="/image/logo_Marrimo.png"></li>
+            <li><a href="#">고객센터</a></li>
+            <li><a href="#">자주하는 질문</a></li>
+            <li><a href="#">혼수 상품</a></li>
+            <li><a href="#">답례품</a></li>
+            <li><a href="#">감사카드</a></li>
+            <li><a href="#">웨딩홀</a></li>
+        </ul>
+</div>
 </body>
 </html>
 <script>
-   function fnFundGuage() {
-  var progress = document.getElementById("fundGuage");
-  var value = parseInt(progress.value) + 10; // 10씩 증가시킴
-  if (value <= 30) {
-    progress.style.backgroundColor = "blue"; // 30까지 파란색
-  } else {
-    progress.style.backgroundColor = "green"; // 31~70까지 초록색
-  }
-  if (value >= 100) {
-    value = 100;
-  }
-  progress.value = value;
+
+function fnFundGuage() {
+    var Guage = document.getElementById("fundGuageAfter");
+    fundGuageAfter.value = 70;
+    
 }
-
-
-
-
-
 </script>

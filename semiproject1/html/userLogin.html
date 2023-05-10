@@ -22,22 +22,23 @@
     <div id="wrapper">
         <div id="app">
             <div class="container">
-                <div class="loginBox">
-                    <div class="loginLogo"><img src="/image/logo_Marrimo.png" class="logo"></div>
-                    <div class="loginInfo">
-                        <img src="/image/Group.png" class="loginImg"><input type="text" class="loginText" placeholder="아이디">
-                        <button class="loginCancelBtn">X</button>
-                    </div>
-                    <div class="loginInfo">
-                        <img src="/image/Group.png" class="loginImg"><input type="password" class="loginText" placeholder="비밀번호">
-                        <button class="loginCancelBtn">X</button>
+                <div class="loginLogo"><img src="/image/logo_Marrimo.png" class="logo"></div>
+                <fieldset class="loginBox">
+                    <legend class="loginTitle">Login</legend>
+                    <div class="loginTextBox">
+                        <div class="loginInfo loginTextId">
+                            <img src="/image/Group.png" class="loginImg"><input type="text" class="loginText" placeholder="아이디">
+                        </div>
+                        <div class="loginInfo loginTextPwd">
+                            <img src="/image/Lock.png" class="loginImg"><input type="password" class="loginText" placeholder="비밀번호">
+                        </div>
                     </div>
                     <div class="loginBtnBox">
-                        <button class="loginBtn">로그인</button>
+                        <button class="loginBtn btn1">로그인</button>
                     </div>
-                    <div class="loginList">
-                        <a href="">아이디 찾기</a> | <a href="">비밀번호 찾기</a> | <a href="">회원가입</a>
-                    </div>
+                </fieldset>
+                <div class="loginCategoryList">
+                    <a href="">아이디 찾기</a><a href="">비밀번호 찾기</a><a href="">회원가입</a>
                 </div>
             </div>
         </div>    

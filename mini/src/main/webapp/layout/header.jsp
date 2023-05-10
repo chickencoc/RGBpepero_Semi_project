@@ -40,7 +40,7 @@
 </body>
 </html>
 <script type="text/javascript">
-var app = new Vue({ 
+var appHeader = new Vue({ 
     el: '#appHeader',
     data: {
 		session : '',

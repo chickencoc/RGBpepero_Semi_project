@@ -1,0 +1,82 @@
+.fund_regist_container{
+    display: grid;
+    grid-template-areas: 
+    "a"
+    "b"
+    "c"
+    ;
+    grid-template-rows: 10% 80% 10%;
+    width: 500px;
+    height: 580px;   
+    place-items: center;
+}
+.fund_regist_header{
+    grid-area: a;
+}
+#fund_regist_header_icon{
+    width: 15px;
+    height: 15px;
+    position: relative;
+    left: 300px;
+}
+.fund_regist_mainBox{
+    border: 1px solid black;
+}
+.fund_regist_main{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-area: b;
+    width: 480px;
+    height: 200px;
+    place-items: center;
+}
+#fund_regist_main_img{
+    width: 200px;
+    height: 150px;
+}
+
+#fund_regist_main_info_name{
+    font-weight: bold;
+    font-size: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+#fund_regist_main_info_price{
+    margin-top: 20px;
+}
+.fund_regist_main_memo{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#fund_regist_main_memo_title{
+    position: relative;
+    right: 150px;
+}
+.fund_regist_main_memo input{
+    width: 400px;
+    height: 80px;
+    margin: 10px 0px;
+}
+
+#fund_regist_main_button{
+    width: 80px;
+    height: 30px;
+    font-size: 12px;
+    padding: 0;
+    position: relative;
+    left: 200px;
+    top: 50px;
+}
+.fund_regist_footer{
+    grid-area: c;
+    display: flex;
+    font-size: 12px;
+    align-items: center;
+}
+div span{
+    margin: 0 10px;
+}
+#fund_regist_footer_logo{
+    width: 80px;
+}

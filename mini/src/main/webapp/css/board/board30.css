@@ -1,0 +1,23 @@
+		.banner{height: 400px;background-color: #555;background-repeat: no-repeat;}
+        .banner .btn button{margin-top: 300px;margin-left: 580px ;}
+        .textbox .txt{position: absolute;text-align: center;font-size: 2em; margin-top: 150px;margin-left: 375px; }
+        .boardbox{width: 1200px;}
+        .boardbox .txt1{margin-top: 50px;font-size: 2em;}
+        .boardcat{display: grid;grid-template-columns: 1fr 1fr 1fr; grid-column-gap: 60px;}
+        .line{margin-top: 20px; margin-bottom: 20px;border-bottom: 1px solid black;}
+        #boardname{font-size: 3em;margin-bottom: 50px;}
+        .boardmenu{width: 300px;margin: 41px;padding-left: 180px;padding-right: 180px;padding-top:20px;padding-bottom:20px;}
+        #menu{margin-top: 20px;font-size: 2em;}
+        .board_list {width:100%; border-top:2px solid #252525; border-bottom:1px solid #ccc; margin:15px 0; border-collapse: collapse;}
+        .board_list thead th:first-child {background-image:none;}
+        .board_list thead th {border-bottom:1px solid #ccc; padding:13px 0; color:#3b3a3a; text-align: center; vertical-align:middle;}
+        .board_list tbody td {border-top:1px solid #ccc; padding:13px 0; text-align:center; vertical-align:middle;}
+        .board_list tbody tr:first-child td {border:none;}
+        .board_list tbody td {width: 50px;}
+        .board_list tbody td:nth-child(3) {width: 800px;}
+        .board_list tbody tr:nth-child(odd) td {background: #999;}
+        .board_list tbody tr:nth-child(odd):hover td {background: lightgreen;}
+        .board_list tbody tr:hover{background:lightgreen;}
+        .board_list tbody td.title {text-align:left; padding-left:20px;}
+        .board_list tbody td a {display:inline-block}
+        .pagecontroll {text-align: center;}

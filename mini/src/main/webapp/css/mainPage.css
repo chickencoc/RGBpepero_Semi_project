@@ -1,0 +1,56 @@
+.banner { min-width: 1240px; width: 100%; height: 750px; background-color: #555; background-repeat: no-repeat; display: flex; justify-content: center; align-items: center;}
+.banner { background-image: url(/image/banner1.jpg); transition: all 0.6s;}
+.banner .textbox { width: 1050px; text-align: center; line-height: 1.7; position: relative; top: -53px; }
+.banner .textbox > * { text-shadow: 0px 0px 4px white; }
+.banner .textbox .bannertxt_main { font-family: 'Raleway', sans-serif; font-weight: 400; font-size: 50px; color: black; letter-spacing: 0.03em; }
+.banner .textbox .bannertxt_main > span { font-weight: 600; font-size: 50px; color: black;}
+.banner .textbox .bannertxt_sub { font-family: 'Hahmlet', serif;  font-weight: 500; font-size: 25px; color: black; letter-spacing: 0.03em; }
+
+/* banner "let's go" button */
+.banner .textbox .banner_btnbox { margin-top: 70px;}
+.custom_btn { width: 125px; height: 40px; padding: 4px 25px; border: 2px solid #000; font-weight: 500; background: transparent; cursor: pointer; transition: all 0.3s ease; position: relative; display: inline-block; border-radius: 4px; } 
+.banner .textbox .banner_btn { background: #000; color: #fff; z-index: 1; } 
+.banner .textbox .banner_btn:after { position: absolute; content: ""; width: 0; height: 100%; top: 0; right: 0; z-index: -1; background: #e0e5ec; transition: all 0.3s ease; border-radius: 3px; } 
+.banner .textbox .banner_btn:hover { color: #000; } 
+.banner .textbox .banner_btn:hover:after { left: 0; width: 100%; } 
+.banner .textbox .banner_btn:active { top: 2px; } 
+
+/* 페이지 소개 contents box  */
+.detailbox { width: 100%;  margin-top: 85px; display: flex;}
+
+/* 페이지 소개 category */
+.pageListBox { width: 15%; border-top: 1px solid black; border-bottom: 1px solid black; }
+.pageList { min-height: 600px; height: calc(100vh - 200px); position: sticky; top: 170px; display: flex; justify-content: center; padding-top: 30px;}
+.pageList > .pageList_ul { width: 75%;}
+.pageList > .pageList_ul > li { padding-top: 24px; padding-bottom: 12px; border-bottom: 2px solid #555; font-weight: 400;}
+.pageList > .pageList_ul > li::before { content: ''; background-color: #555; border-radius: 50%; display: inline-block; position: relative; width: 4px; height: 4px; top: -4px; margin-right: 6px; left: 0; transition: left 0.5s; }
+.pageList > .pageList_ul > li:hover { font-weight: 600;}
+.pageList > .pageList_ul > li:hover::before { left: -7px;}
+
+.pageList > .pageList_qna { position: absolute; bottom: 70px;}
+@media (max-height: 800px) { .pageList { top: 20px; } }
+
+/* 페이지 소개 contents */
+.pageDetail { width: 85%; padding: 1px 0; border-top: 1px solid black; border-bottom: 1px solid black;} 
+.menu_cat_items { width: 100%; height: 500px; margin: 0 auto; display: table; background-color: #555; opacity: 0; transition: all 0.3s;}
+.menu_cat_items > div {display: table-cell; vertical-align: middle;}
+.menu_cat_items .pageDetail_imgbox { width: 40%;}
+.menu_cat_items .pageDetail_imgbox img { width: 350px; height: 400px; background-color: white; border-radius: 20px; border: 2px solid black; object-fit: cover;}
+.menu_cat_items :is(.pageDetail_imgbox, .pageDetail_textbox) { text-align: center; height: 100%; }
+.menu_cat_items .pageDetail_text { display: inline-block;}
+.menu_cat_items .pageDetail_text h4 { color: white; font-size: 30px; font-weight: 600; width: 498px; word-break: keep-all; text-align: right;}
+.menu_cat_items .pageDetail_text a { float: right; color: white; font-size: 21px; margin-top: 100px; letter-spacing: 0.1em; }
+.pageDetail_link { transition: all 0.3s;}
+.pageDetail_link:hover {cursor: pointer; transform: scale(1.1); text-shadow: 0 5px 6px black;} 
+
+.pageDetail #product { background-color: #a2bcb9;}
+.pageDetail #trip { background-color: #b78766;}
+.pageDetail #card { background-color: #c78a79;}
+.pageDetail #venue { background-color: #38574d;}
+.pageDetail #represent { background-color: #bb9c72;}
+.pageDetail #calender { background-color: #7362a5;}
+
+/* carrot-down */
+.textbox > .imgDown { transform: translateY(142px) scale(1.5); filter: drop-shadow(0 0 3px #000);}
+/* toggle class */
+.imgDownMove { transition: all 1.4s ease-in-out; transform: translateY(200px) !important; opacity: 0; }

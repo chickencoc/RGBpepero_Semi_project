@@ -4,93 +4,177 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../js/jquery.js"></script>
+    <script src="../js/vue.js"></script>
     <link rel="stylesheet" href="../css/Base_rgbPepero.css">
     <link rel="stylesheet" href="../css/header.css">
-    <title>게시글 페이지</title>
+    <title>작성 페이지</title>
     <style>
         /* style START */
         #boName{
             font-size: 3em;
             margin-bottom: 20px;
         }
-        #newtextbox button{
+        #board_cat{
             float: right;
+        }
+        #newtextbox{
+            margin-top: 50px;
         }   
+        #newtextbox #btn_add{
+            margin-top: 20px;
+            float: right;
+        }  
 
-        #newboardbox #board_title{
-            font-size: 2em;
-            width: 900px;
-            margin-right: 30px;
+        #newtextbox #title{
+            width: 1000px;
+            margin-right: 20px;
             margin-bottom: 20px;
         }
-        #board_info_line{
-            margin-left: 20px;
-            height: 40px;
-        }
-        #board_info_cat{
-            border-right: 1px solid #999;
-        }
-        #board_info_line span{
-            padding-right: 10px;
-            margin-right: 10px;
-        }
-        #board_info_line2{
-            background: #999;
-            height: 40px;
-        }
-        #board_info_content{
-            border: 1px solid black;
-            margin-top: 20px;
-            height: 300px;
-        }
         
+        .ck-editor__editable { height: 600px; }
 
         /* style END */
     </style>
 </head>
 <body>
-    <!-- header 필요 없는 페이지 에서는 header END까지만 지우면 됩니다. -->
-    <header id="header">
-        <!-- <div class="loginbox">
+    <div id="app">
+        <!-- header 필요 없는 페이지 에서는 header END까지만 지우면 됩니다. -->
+        <header id="header">
+            <!-- <div class="loginbox">
+                    <ul>
+                        <li><a href="#">로그인</a></li>
+                        <li><a href="#">회원가입</a></li>
+                        <li><a href="#">고객센터</a></li>
+                    </ul>
+            </div> -->
+            <div class="loginbox">
                 <ul>
-                    <li><a href="#">로그인</a></li>
-                    <li><a href="#">회원가입</a></li>
+                    <li><a href="#">{{name}}님 축하합니다</a></li>
+                    <li><a href="#">마이페이지</a></li>
+                    <li><a href="#">로그아웃</a></li>
                     <li><a href="#">고객센터</a></li>
                 </ul>
-        </div> -->
-        <div class="loginbox">
-            <ul>
-                <li><a href="#">{{name}}님 축하합니다</a></li>
-                <li><a href="#">마이페이지</a></li>
-                <li><a href="#">로그아웃</a></li>
+            </div>
+            <div class="logobox">
+                <div id="logo"><img src="../image/logo_Marrimo.png"></div>
+            </div>
+        </header>
+        <!-- header END -->
+        <!-- wrap START -->
+        <div id="wrapper">
+            <div id="boardhead">
+                <div id="boName">{{boardName}}</div>
+                <div>{{boardName}} :: 기존 글 수정하기</div>
+            </div>
+            <div id="newtextbox">
+                <input type="text" id="title" placeholder="제목을 입력해 주세요.">
+                <select id="board_cat">
+                    <option hidden>카테고리를 선택해주세요.</option>
+                    <option>ㅁㄴㅇㄹ</option>
+                    <option>ㅁㄴㅇㄹ</option>
+                    <option>ㅁㄴㅇㄹ</option>
+                    <option>ㅁㄴㅇㄹ</option>
+                </select>
+                <textarea name="content" id="editor" v-model="content"></textarea>
+                <button id="btn_edit" onclick="test()">작성 완료</button>
+            </div>
+        </div>
+        <!-- wrap END -->
+        <!-- footer END -->
+        <div id="footer">
+            <ul class="footer_ul">
+                <li><img src="../image/logo_Marrimo.png"></li>
                 <li><a href="#">고객센터</a></li>
+                <li><a href="#">자주하는 질문</a></li>
+                <li><a href="#">혼수 상품</a></li>
+                <li><a href="#">답례품</a></li>
+                <li><a href="#">감사카드</a></li>
+                <li><a href="#">웨딩홀</a></li>
             </ul>
         </div>
-        <div class="logobox">
-            <div id="logo"><img src="../image/logo_Marrimo.png"></div>
-        </div>
-    </header>
-    <!-- header END -->
-    <!-- wrap START -->
-    <div id="wrapper">
-        <div id="boardhead">
-            <div id="boName">{{boardName}}</div>
-        </div>
-        <div id="newboardbox">
-           <div id="board_title">{{title}}</div>
-           <div id="board_info_line"><span id="board_info_cat">{{board_category}}</span><span>{{cdatetime}}</span></div>
-           <div id="board_info_line2"><span>{{name}}</span><span>{{cnt}}</span></div>
-           <div id="board_info_content">{{content}}</div>
-        </div>
-        <div id="newreplybox">
-           <div id="board_title">{{title}}</div>
-           <div id="board_info_line"><span>{{cdatetime}} 작성됨</span></div>
-           <div id="board_info_line2"><span>{{name}}</span><span>{{cnt}}</span></div>
-           <div id="board_info_content">{{content}}</div>
-        </div>
     </div>
-    <!-- wrap END -->
-    <!-- footer END -->
-    <footer id="footer">&lt;footer&gt;</footer>
 </body>
+<script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/ckeditor.js"></script>
+<script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/translations/ko.js"></script>
+<script>
+    ClassicEditor.create( document.querySelector( '#editor' ),{
+    removePlugins: [ 'Heading' ],
+    removePlugins: [ 'Table' ],
+    language: "ko"
+  } )
+  .then( newEditor => {
+     editor = newEditor;
+    console.log( 'Editor was initialized', editor );
+  } )
+  .catch( error => {
+    console.error( error );
+  } )
+  ;
+  function test(){
+    var test1 = editor.getData();
+    console.log(test1);
+    alert(test1);
+  }
+</script>
+<script type="text/javascript">
+    import CKEditor from '@ckeditor/ckeditor5-vue';
+	import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+    var app = new Vue({ 
+        el: '#app',
+        data: {
+            info : {},
+			list : [],
+			boardNo : "${map.boardNo}"
+            , name : ""
+            , boardName : ""
+            , title : ""
+            , board_category : ""
+            , cdatetime : ""
+            , cnt: ""
+            , content : ""
+        }   
+        , methods: {
+            fnGetInfo : function(){
+                var self = this;
+                var nparmap = {};
+                $.ajax({
+                    url:"/read.dox",
+                    dataType:"json",	
+                    type : "POST", 
+                    data : nparmap,
+                    success : function(data) {
+                        location.href = "boardlist.do";
+                    }
+                }); 
+            },
+            fnBoardEdit : function(){
+                var self = this;
+                var nparmap = {boardNo : self.boardNo ,content : self.content};
+                $.ajax({
+                    url:"/edit.dox",
+                    dataType:"json",	
+                    type : "POST", 
+                    data : nparmap,
+                    success : function(data) {
+                        console.log(data)
+		                self.info = data.info;
+	                	console.log(self.info);
+                    }
+                }); 
+            },
+            fnEdit : function(){
+                var self = this;
+                content = self.content;
+                console.log(content);
+                
+            }
+        }   
+        , created: function () {
+            CKEDITOR.replace('content');
+            var self = this;
+            self.fnGetInfo();
+        }
+    });
+    </script>
 </html>

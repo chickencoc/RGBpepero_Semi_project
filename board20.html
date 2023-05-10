@@ -61,7 +61,8 @@
         /* style END */
     </style>
 </head>
-<body>
+<body>    
+<div id="app">
     <!-- header 필요 없는 페이지 에서는 header END까지만 지우면 됩니다. -->
     <header id="header">
         <!-- <div class="loginbox">
@@ -140,6 +141,46 @@
     </div>
     <!-- wrap END -->
     <!-- footer END -->
-    <footer id="footer">&lt;footer&gt;</footer>
-</body>
+    <div id="footer">
+        <ul class="footer_ul">
+            <li><img src="../image/logo_Marrimo.png"></li>
+            <li><a href="#">고객센터</a></li>
+            <li><a href="#">자주하는 질문</a></li>
+            <li><a href="#">혼수 상품</a></li>
+            <li><a href="#">답례품</a></li>
+            <li><a href="#">감사카드</a></li>
+            <li><a href="#">웨딩홀</a></li>
+        </ul>
+    </div>
+</div>
+</div>
+<script type="text/javascript">
+    var app = new Vue({ 
+        el: '#app',
+        data: {
+            list : [],
+            checkList : []
+        }   
+        , methods: {
+            fnGetList : function(){
+                var self = this;
+                var nparmap = {};
+                $.ajax({
+                    url:"/bbs/list.dox",
+                    dataType:"json",	
+                    type : "POST", 
+                    data : nparmap,
+                    success : function(data) { 
+                        console.log(data);
+                    }
+                }); 
+            } 
+        }   
+        , created: function () {
+            var self = this;
+     
+    
+        }
+    });
+    </script>
 </html>

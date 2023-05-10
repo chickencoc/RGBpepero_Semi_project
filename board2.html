@@ -8,38 +8,58 @@
     <script src="../js/vue.js"></script>
     <link rel="stylesheet" href="../css/Base_rgbPepero.css">
     <link rel="stylesheet" href="../css/header.css">
-    <title>작성 페이지</title>
+    <title>게시글 페이지</title>
     <style>
         /* style START */
         #boName{
             font-size: 3em;
             margin-bottom: 20px;
         }
-        #board_cat{
-            float: right;
-        }
-        #newtextbox{
-            margin-top: 50px;
-        }   
-        #newtextbox #btn_add{
-            margin-top: 20px;
-            float: right;
-        }  
-
-        #newtextbox #title{
-            width: 1000px;
-            margin-right: 20px;
+        #newboardbox #board_title{
+            font-size: 2em;
+            width: 900px;
+            margin-right: 30px;
             margin-bottom: 20px;
         }
+        #board_info_line{
+            margin-left: 20px;
+            height: 40px;
+        }
+        #board_info_cat{
+            border-right: 1px solid #555;
+        }
+        #board_info_line span{
+            padding-right: 10px;
+            margin-right: 10px;
+        }
+        #board_info_line2{
+            background: #999;
+            height: 40px;
+        }
+        #board_info_content{
+            border: 1px solid black;
+            margin-top: 20px;
+            height: 300px;
+        }
+        #reply_head{
+            margin-top: 20px;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #999;
+        }
+        #reply_head .board_btn{
+            font-size: 1em;
+            float: right;
+            margin: 5px;
+        }
         
-        .ck-editor__editable { height: 600px; }
 
         /* style END */
     </style>
 </head>
 <body>
     <div id="app">
-        <!-- header 필요 없는 페이지 에서는 header END까지만 지우면 됩니다. -->
+    <!-- header 필요 없는 페이지 에서는 header END까지만 지우면 됩니다. -->
         <header id="header">
             <!-- <div class="loginbox">
                     <ul>
@@ -65,19 +85,24 @@
         <div id="wrapper">
             <div id="boardhead">
                 <div id="boName">{{boardName}}</div>
-                <div>{{boardName}} :: 새 글 작성하기</div>
             </div>
-            <div id="newtextbox">
-                <input type="text" id="title" placeholder="제목을 입력해 주세요.">
-                <select id="board_cat">
-                    <option hidden>카테고리를 선택해주세요.</option>
-                    <option>ㅁㄴㅇㄹ</option>
-                    <option>ㅁㄴㅇㄹ</option>
-                    <option>ㅁㄴㅇㄹ</option>
-                    <option>ㅁㄴㅇㄹ</option>
-                </select>
-                <textarea name="text" id="editor"></textarea>
-                <button id="btn_add">작성 완료</button>
+            <div id="newboardbox">
+            <div id="board_title">{{title}}</div>
+            <div id="board_info_line"><span id="board_info_cat">{{board_category}}</span><span>{{cdatetime}}</span></div>
+            <div id="board_info_line2"><span>{{name}}</span><span>{{cnt}}</span></div>
+            <div id="board_info_content">{{content}}</div>
+            </div>
+            <div></div>
+            <div id="newreplybox" v-if="content != ''">
+                <div id="reply_head">질문사항 답변<button class="board_btn" id="btn_del">삭제</button><button class="board_btn" id="btn_edit">수정</button></div>
+                <div id="board_info_line">{{name}}</div>
+                <div id="board_info_line"><span>{{cdatetime}} 작성됨</span></div>
+                
+                <div id="board_info_content">{{content}}</div>
+            </div>
+            <div id="newreplybox" v-if="content == ''">
+                <div id="reply_head">질문사항 답변<button class="board_btn" id="btn_del">삭제</button><button class="board_btn" id="btn_edit">수정</button></div>
+                <div>아직 답변이 작성되지 않았습니다.</div>
             </div>
         </div>
         <!-- wrap END -->
@@ -95,23 +120,13 @@
         </div>
     </div>
 </body>
-<script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/ckeditor.js"></script>
-<script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/translations/ko.js"></script>
-<script>
-  ClassicEditor.create( document.getElementById( 'editor' ),{
-    removePlugins: [ 'Heading' ],
-    removePlugins: [ 'Table' ],
-    language: "ko"
-  } );
-</script>
+</html>
 <script type="text/javascript">
     var app = new Vue({ 
         el: '#app',
         data: {
-            list : [],
-			checkList : {},
-			title : "",
             name : ""
+            , boardName : ""
             , title : ""
             , board_category : ""
             , cdatetime : ""
@@ -119,9 +134,9 @@
             , content : ""
         }   
         , methods: {
-            fnAddBoard : function(){
+            fnGetInfo : function(){
                 var self = this;
-                var nparmap = {title : self.title, content : self.content};
+                var nparmap = {};
                 $.ajax({
                     url:"/mypage.dox",
                     dataType:"json",	
@@ -135,7 +150,7 @@
         }   
         , created: function () {
             var self = this;
+            self.fnGetInfo();
         }
     });
     </script>
-</html>

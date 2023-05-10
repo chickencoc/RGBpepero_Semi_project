@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>뷰 기초 익히기</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+  {{ nextYear('안녕') }}
+ 
+  <input v-bind:type="type" v-bind:value="inputData">
+  <a :href="getLink('카신코지')" >코지코더</a>
+  <button v-on:click="alert()">click Me</button>
+  <button v-on:click="add()">plus</button>
+  <button v-on:click="minus()">minus</button>
+  {{ year }}
+  <form v-on:submit.keyup.enter="submit()">
+    <input type="text"><br>
+    <button type="submit">submit</button>
+  </form>
+</div>
+</body>
+</html>
+ <script>
+    new Vue({
+      el:'#app',
+      data : {
+          person :{ 
+          name : '홍찰찰',
+          age : 34
+        },
+        inputData:'hello',
+        type:'number',
+        link:'https://www.naver.com',
+        year: 2018
+
+      },
+      methods:{
+        nextYear : function(greeting){
+          return greeting + '! ' + this.person.name + '은 내년에 ' + (this.person.age + 1) + '살'
+        },
+        otherMethods : function(){
+          this.nextYear();
+        },
+        getLink:function(channel){
+          return this.link + channel;
+        },
+        alert:function(){
+          return alert('카신코지');
+        },
+        add:function(){
+          return this.year++;
+        },
+        minus:function() {
+          return this.year--;
+        },
+        submit:function(){
+          alert('submitted');
+          console.log('hello');
+        }
+      }
+    })
+ </script>

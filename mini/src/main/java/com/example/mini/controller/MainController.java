@@ -9,15 +9,9 @@ public class MainController {
 
 	
 	@RequestMapping("/main.do") 
-    public String mainPage(Model model) throws Exception{
+    public String insert(Model model) throws Exception{
 
         return "/main";
-    }
-	
-	@RequestMapping("/login.do") 
-    public String userLogin(Model model) throws Exception{
-
-        return "/userLogin";
     }
 	
 	

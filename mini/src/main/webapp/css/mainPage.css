@@ -7,8 +7,8 @@
 .banner .textbox .bannertxt_sub { font-family: 'Hahmlet', serif;  font-weight: 500; font-size: 25px; color: black; letter-spacing: 0.03em; }
 
 /* banner "let's go" button */
-.banner .textbox .banner_btnbox { margin-top: 70px; cursor: pointer;}
-.custom_btn { width: 125px; height: 40px; padding: 4px 25px; border: 2px solid #000; font-weight: 500; background: transparent; transition: all 0.3s ease; position: relative; display: inline-block; border-radius: 4px; } 
+.banner .textbox .banner_btnbox { margin-top: 70px;}
+.custom_btn { width: 125px; height: 40px; padding: 4px 25px; border: 2px solid #000; font-weight: 500; background: transparent; cursor: pointer; transition: all 0.3s ease; position: relative; display: inline-block; border-radius: 4px; } 
 .banner .textbox .banner_btn { background: #000; color: #fff; z-index: 1; } 
 .banner .textbox .banner_btn:after { position: absolute; content: ""; width: 0; height: 100%; top: 0; right: 0; z-index: -1; background: #e0e5ec; transition: all 0.3s ease; border-radius: 3px; } 
 .banner .textbox .banner_btn:hover { color: #000; } 

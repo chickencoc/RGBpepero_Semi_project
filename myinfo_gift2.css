@@ -1,0 +1,138 @@
+p{
+    margin-bottom: 10px;
+}
+.return_gift_content{
+    display: grid;
+    grid-gap: 5px;  
+    grid-template-columns: 10% 80% 10%;
+    width:1240px;
+}
+.return_gift_container{
+    display: grid;
+    place-items: center;
+    grid-column-start: 2;
+}
+.return_gift_main{
+    grid-column-start: 2;    
+} 
+.return_gift_container{
+    display: grid;
+    justify-content: center;
+    width: 1000px;
+}
+.return_gift_list_menu{
+    display: flex;
+    justify-content: center;
+    width:1240px;
+}
+.return_gift_list_menu > a:not(:last-child):after {
+    content: '';
+    display: inline-block;
+    width: 2px;
+    height: 15px;
+    background: #999;
+    position: relative;
+    top: 2px;
+    margin-left: 13px;
+    
+}
+.return_gift_list_menu > a {
+    margin: 0 5px;   
+}
+
+.return_gift_banner{
+    width:1000px;
+    height: 300px;
+    background-image: url(/semiproject1/image/wijdan-mq-H5yiRXDUkto-unsplash.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    text-align: center;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, .1);
+}
+.return_gift_banner_txt{
+    position: relative;
+    top: 130px;
+    font-size: 25px;
+    color: white;
+    text-shadow:1px 1px 1px #999;
+}
+.return_gift_select{
+    align-items: center;
+    position: relative;
+    left: 450px;
+}
+.return_gift_select_bar{
+    width: 100px;
+}
+#return_gift_menu_txt{
+    width: 100px;
+    font-size: 30px;
+    text-align: center;
+    margin: 20px;
+}
+.return_gift_search{
+    display: flex;
+    align-items: center;
+    position: relative;
+    right: 300px;
+    margin-top: 20px;
+}
+#return_gift_input_txt{
+    width: 250px;
+}
+#return_gift_searchBtn{
+    width: 60px;
+    height: 30px;
+}
+#return_gift_resetBtn{
+    width: 60px;
+    height: 30px;
+}
+.return_gift_listbox{
+    display: grid;
+    grid-gap: 5px;
+    grid-template-columns: repeat(3, 1fr);   
+}
+.return_gift_list_item{
+    width: 300px;
+    height: 400px;   
+    box-shadow: 0 2px 5px rgba(0, 0, 0, .1);
+    margin: 10px;
+    display: grid;
+    justify-items: center;
+    align-items: center;
+}
+.return_gift_list_item_image{   
+    display: block;
+    width: 280px;
+    height: 240px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, .1);
+    background-color: lightpink; /*크기 확인용*/
+}
+.return_gift_list_item_info{
+    width: 270px;
+    height: 100px;
+    display: grid;
+}
+.return_gift_list_item_name{
+    font-size: 14px;
+}
+.return_gift_list_item_price{
+    font-size: 12px;
+    font-weight: bold;
+    margin-top: 5px;
+}
+.return_gift_list_item_explain{
+    font-size: 10px;
+    color: #999;
+    margin-top: 5px;
+}
+.return_gift_pagechange{
+    text-align: center;
+    margin: 20px;
+}
+#return_gift_pagechange_icon{
+    width: 10px;
+    height: 10px;
+}

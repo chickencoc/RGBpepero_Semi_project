@@ -15,7 +15,7 @@
     <div class="banner">
         <div class="textbox">
             <h6 class="bannertxt_main">For all the <span id="spanTxt">celebrations</span> along the way</h6>
-            <h4 class="bannertxt_sub">당신의 새로운 삶을 이곳에서 시작하세요</h4>
+            <h4 class="bannertxt_sub">당신의 행복한 결혼을 이곳에서 시작하세요</h4>
             <div class="banner_btnbox">
                 <button class="custom_btn banner_btn">Let`s Go</button>
             </div>

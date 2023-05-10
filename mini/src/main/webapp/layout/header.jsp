@@ -8,7 +8,10 @@
 	<script src="js/jquery.js"></script>
 	<script src="js/vue.js"></script>
 	<link rel="stylesheet" href="css/Base_rgbPepero.css">
-	<title>footer</title>
+	<title></title>
+	<style>
+		.loginbox > a:hover {cursor: pointer;}
+	</style>
 </head>
 
 <body>
@@ -16,7 +19,7 @@
 	    <div id="header">
 	        <div class="loginbox" v-if="session == ''">
 	            <ul>
-	                <li><a href="#">로그인</a></li>
+	                <li><a herf="#" @click="toLogin()">로그인</a></li>
 	                <li><a href="#">회원가입</a></li>
 	                <li><a href="#">고객센터</a></li>
 	            </ul>
@@ -30,7 +33,7 @@
 	            </ul>
 	        </div>
 	        <div class="logobox">
-	            <div id="logo"><img src="/image/logo_Marrimo.png"></div>
+	            <div id="logo" @click="toMain()"><img src="/image/logo_Marrimo.png"></div>
 	        </div>
 	    </div>
     </div>
@@ -45,6 +48,12 @@ var app = new Vue({
 
     }   
     , methods: {
+    	toLogin : function() {
+        	location.href="login.do";
+    	},
+    	toMain : function() {
+        	location.href="main.do";
+    	}
 
     }   
     , created: function () {

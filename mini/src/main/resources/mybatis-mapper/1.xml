@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.test1.mapper.LoginMapper">	
+	<select id="selectLogin" parameterType="hashmap" resultType="com.example.test1.model.User">
+		SELECT 
+		    ID,
+		    NAME,
+		    NICKNAME,
+		    ADDRESS,
+		    GENDER,
+		    AGE,
+		    BIRTH,
+		    EMAIL,
+		    POINT,
+		    AUTHYN,
+		    STATUS
+		FROM T_USER
+		WHERE ID = #{id} AND PASSWORD = #{pwd}
+	</select> <!-- ID = id로 받고 PASSWORD는 pwd로 받겠다.  -->
+	<select id="selectUserCnt" parameterType="hashmap" resultType="int"> <!-- resultType 을 int로 받는다. -->
+		SELECT COUNT(*) AS CNT
+		FROM T_USER
+		WHERE ID = #{id}
+	</select>
+	
+	<insert id="insertUser" parameterType="hashmap">
+		INSERT INTO T_USER
+			(ID, PASSWORD, NAME, NICKNAME, AGE, GENDER, ADDRESS)
+		VALUES <!-- 맵으로 받기 때문에 #{}로 가져온다. jsp에서 정의한 이름으로 가져와야 함. -->
+			(#{id}, #{pwd}, #{name}, #{nickname}, #{age}, #{gender}, #{address})
+	</insert>
+	
+	<update id="updateMyPage" parameterType="hashmap">
+		UPDATE T_USER
+		SET
+			NAME = #{name},
+			NICKNAME = #{nickname},
+			AGE = #{age},
+			GENDER = #{gender},
+			ADDRESS = #{address}
+		WHERE ID = #{id}
+	</update>
+	
+	<select id="selectMyPage" parameterType="hashmap"  resultType="com.example.test1.model.User">
+		SELECT 
+		    ID,
+		    NAME,
+		    NICKNAME,
+		    ADDRESS,
+		    GENDER,
+		    AGE,
+		    BIRTH,
+		    EMAIL,
+		    POINT,
+		    AUTHYN,
+		    STATUS
+		FROM T_USER
+		WHERE ID = #{id}	
+	</select>
+</mapper>

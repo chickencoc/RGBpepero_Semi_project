@@ -10,7 +10,7 @@
 	<link rel="stylesheet" href="css/Base_rgbPepero.css">
 	<title></title>
 	<style>
-		.loginbox > a:hover {cursor: pointer;}
+		.loginbox > a:hover {cursor: pointer;} 
 	</style>
 </head>
 

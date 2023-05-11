@@ -102,7 +102,7 @@
                 <a href="">식장</a>
                 <a href=""><strong>여행</strong></a>
             </div>
-            <div class="travelBanner"><img src="../image/sunsetSea.jpg" id="travelBanner2"></div>
+            <div class="travelBanner"><img src="/image/sunsetSea.jpg" id="travelBanner2"></div>
             <div id="explane">
                 <h1>보라카이</h1>
             </div>
@@ -112,7 +112,7 @@
                 <h1>에메랄드빛 투명한 바다로 유명한 휴양지다.</h1>
             </div>
             <div id="picture1">
-                <img src="../image/beach2.jpg" id="boracay">
+                <img src="/image/beach2.jpg" id="boracay">
             </div>
             <hr>
             <div id="api">

@@ -26,21 +26,21 @@
                 <div class="board_category_items" id="inquery">
                     <div class="innerbox">
                         <div class="detailtxt">
-                            <div class="fakeLink"><span data-tooltip="문의 게시판으로 이동합니다!">문의하기</span></div>
+                            <div class="fakeLink"  @click="fnInquery"><span data-tooltip="문의 게시판으로 이동합니다!">문의하기</span></div>
                         </div>
                     </div>
                 </div>
                 <div class="board_category_items" id="anounce">
                     <div class="innerbox">
                         <div class="detailtxt">
-                            <div class="fakeLink"><span data-tooltip="공지 게시판으로 이동합니다!">공지사항</span></div>
+                            <div class="fakeLink"  @click="fnAnounce"><span data-tooltip="공지 게시판으로 이동합니다!">공지사항</span></div>
                         </div>
                     </div>
                 </div>
                 <div class="board_category_items" id="faq">
                     <div class="innerbox">
                         <div class="detailtxt">
-                            <div class="fakeLink"><span data-tooltip="자주 묻는 질문 게시판으로 이동합니다!">FAQ</span></div>
+                            <div class="fakeLink"  @click="fnFaq"><span data-tooltip="자주 묻는 질문 게시판으로 이동합니다!">FAQ</span></div>
                         </div>
                     </div>
                 </div>
@@ -62,6 +62,15 @@ var app = new Vue({
 
     }   
     , methods: {
+    	fnInquery : function(){
+    		location.href = "/inquery.do";
+    	}, 
+    	fnFaq : function(){
+    		location.href = "/board30.do";
+    	},
+    	fnAnounce : function(){
+    		location.href = "/notice.do";
+    	}
 
     }   
     , created: function () {

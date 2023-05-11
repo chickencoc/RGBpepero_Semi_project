@@ -10,7 +10,7 @@
 	<link rel="stylesheet" href="/css/prod4_sub0.css">
 	<title>상품 정보</title>
 </head>
-<body>
+<body> 
     <!-- wrap START -->
     <div id="wrapper">
         <div class="list">

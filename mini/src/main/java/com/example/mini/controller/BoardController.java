@@ -27,7 +27,7 @@ public class BoardController {
         String url = null;
         String path="c:\\img";
         try {
- 
+  
             //String uploadpath = request.getServletContext().getRealPath(path);
             String uploadpath = path;
             String originFilename = multi.getOriginalFilename();

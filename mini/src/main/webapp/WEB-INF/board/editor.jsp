@@ -4,7 +4,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<%-- <jsp:include page="/layout/header.jsp"></jsp:include> --%>
+	<jsp:include page="/layout/header.jsp"></jsp:include>
 	<link rel="stylesheet" href="css/Base_rgbPepero.css">
 	<!-- 1. vue2editor 에디터 cdn -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.3/vue.min.js"></script>
@@ -17,7 +17,7 @@
 	<div id="app">
 		<div class="container">
 			<h2>게시판 등록</h2>
-			<table class="board_detail">
+			<table class="board_detail"style="margin:auto;">
 				<colgroup>
 					<col width="10%"/>
 					<col width="*"/>
@@ -36,7 +36,7 @@
 				</tr>
 				<tr>
 					<td colspan="2">
-					  <vue-editor v-model="content">test</vue-editor> <!-- 2. 화면 에디터 추가 -->
+					  <vue-editor v-model="content" style="width:1000px; height:600px">test</vue-editor> <!-- 2. 화면 에디터 추가 -->
 					</td>
 				</tr>
 			</table>

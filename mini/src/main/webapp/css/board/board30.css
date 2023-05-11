@@ -7,7 +7,7 @@
         .line{margin-top: 20px; margin-bottom: 20px;border-bottom: 1px solid black;}
         #boardname{font-size: 3em;margin-bottom: 50px;}
         .boardmenu{width: 300px;margin: 41px;padding-left: 180px;padding-right: 180px;padding-top:20px;padding-bottom:20px;}
-        #menu{margin-top: 20px;font-size: 2em;}
+        #menu{width:1200px; margin-top: 20px;font-size: 2em;}
         .board_list {width:100%; border-top:2px solid #252525; border-bottom:1px solid #ccc; margin:15px 0; border-collapse: collapse;}
         .board_list thead th:first-child {background-image:none;}
         .board_list thead th {border-bottom:1px solid #ccc; padding:13px 0; color:#3b3a3a; text-align: center; vertical-align:middle;}

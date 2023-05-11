@@ -10,7 +10,7 @@
 	<link rel="stylesheet" href="/css/board/board4.css">
 	<title>작성 페이지</title>
 </head>
-<body>
+<body> 
     <div id="app">
         <!-- wrap START -->
         <div id="wrapper">

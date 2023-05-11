@@ -10,7 +10,7 @@
 	<link rel="stylesheet" href="/css/board/board2.css">
 	<title>게시글 페이지</title>
 </head>
-<body>
+<body> 
     <div id="app">
         <!-- wrap START -->
         <div id="wrapper">

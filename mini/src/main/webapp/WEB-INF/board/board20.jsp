@@ -15,8 +15,8 @@
     <!-- wrap START -->
     <div id="wrapper">
         <div id="menu">
-            <span id="announce" class="boardmenu" onclick="location.href='#'">공지사항</span>
-            <span id="faq" class="boardmenu" onclick="location.href='#'">자주하는 질문</span>
+            <span id="announce" class="boardmenu"  @click="fnAnounce">공지사항</span>
+            <span id="faq" class="boardmenu" @click="fnFaq">자주하는 질문</span>
             <div class="line"></div>
         </div>
         <div class="boardbox">
@@ -26,32 +26,16 @@
             <table class="board_list">
                 <thead>
                     <tr>
-                        <th>번호</th>
-                        <th></th>
-                        <th>글 제목</th>
-                        <th>작성자</th>
-                        <th>조회</th>
-                        <th>시간</th>
+                        <th scope="col">번호</th>
+                        <th scope="col"></th>
+                        <th scope="col">글 제목</th>
+                        <th scope="col">작성자</th>
+                        <th scope="col">조회</th>
+                        <th scope="col">시간</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>{{index + 1}}</td>
-                        <td>아이콘</td>
-                        <td>{{item.title}}</td>
-                        <td>{{item.name}}</td>
-                        <td>{{item.cnt}}</td>
-                        <td>{{item.cdatetime}}</td>
-                    </tr>
-                    <tr>
-                        <td>{{index + 1}}</td>
-                        <td>아이콘</td>
-                        <td>{{item.title}}</td>
-                        <td>{{item.name}}</td>
-                        <td>{{item.cnt}}</td>
-                        <td>{{item.cdatetime}}</td>
-                    </tr>
-                    <tr>
+                    <tr v-for="(item, index) in list" >
                         <td>{{index + 1}}</td>
                         <td>아이콘</td>
                         <td>{{item.title}}</td>
@@ -87,10 +71,18 @@
                     type : "POST", 
                     data : nparmap,
                     success : function(data) { 
+
+                    	self.list = data.list;
                         console.log(data);
                     }
                 }); 
-            } 
+            }, 
+        	fnFaq : function(){
+        		location.href = "/board30.do";
+        	},
+        	fnAnounce : function(){
+        		location.href = "/notice.do";
+        	} 
         }   
         , created: function () {
             var self = this;

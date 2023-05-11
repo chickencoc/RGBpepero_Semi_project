@@ -90,6 +90,7 @@
     </style>
 </head>
 <body>
+<div id="app">
     <div id="wrapper">
         <div class="container">
             <div class="product_category_list">

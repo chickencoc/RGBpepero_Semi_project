@@ -172,6 +172,7 @@
     </style>
 </head>
 <body>
+<div id="app">
     <div id="wrapper">
         <div class="container">
             <div class="product_category_list" >               
@@ -276,6 +277,7 @@
             </div>
         </div>
     </div>
+   </div> 
 </body>
 </html>
 <jsp:include page="/layout/footer.jsp"></jsp:include>

@@ -94,6 +94,7 @@
     </style>
 </head>
 <body>
+<div id="app">
     <div id="wrapper">
         <div class="container">
             <h1>식장정보 관리</h1>
@@ -129,6 +130,7 @@
             </div>
         </div>
     </div>
+  </div> 
 </body>
 </html>
 <jsp:include page="/layout/footer.jsp"></jsp:include>

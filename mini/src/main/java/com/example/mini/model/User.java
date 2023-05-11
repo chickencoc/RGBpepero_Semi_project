@@ -9,7 +9,9 @@ public class User {
 	private String uName;
 	private String partner;
 	private String gender;
-	private String uAddress;
+	private String uAddrno;
+	private String uAddr1;
+	private String uAddr2;
 	private String uPhone;
 	private String uEmail;
 	private String uBirth;
@@ -49,12 +51,6 @@ public class User {
 	}
 	public void setGender(String gender) {
 		this.gender = gender;
-	}
-	public String getuAddress() {
-		return uAddress;
-	}
-	public void setuAddress(String uAddress) {
-		this.uAddress = uAddress;
 	}
 	public String getuPhone() {
 		return uPhone;
@@ -109,6 +105,24 @@ public class User {
 	}
 	public void setBankaccount(String bankaccount) {
 		this.bankaccount = bankaccount;
+	}
+	public String getuAddrno() {
+		return uAddrno;
+	}
+	public void setuAddrno(String uAddrno) {
+		this.uAddrno = uAddrno;
+	}
+	public String getuAddr1() {
+		return uAddr1;
+	}
+	public void setuAddr1(String uAddr1) {
+		this.uAddr1 = uAddr1;
+	}
+	public String getuAddr2() {
+		return uAddr2;
+	}
+	public void setuAddr2(String uAddr2) {
+		this.uAddr2 = uAddr2;
 	}
 
 }

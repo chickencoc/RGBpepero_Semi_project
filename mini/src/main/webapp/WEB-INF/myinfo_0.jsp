@@ -140,6 +140,7 @@
     </style>
 </head>
 <body>
+  <div id="app">
     <div id="wrapper">
         <div class="container">
             <div class="product_category_list">
@@ -150,7 +151,7 @@
               <a href="">캘린더</a>
             </div>
             <fieldset>
-              <img src="/image/profile.png" id="profile">
+              <img src="/image/profile1.PNG" id="profile">
               <div id="information">
                 <div id="idline">
                   아이디<span  id="id">test123</span>
@@ -189,11 +190,12 @@
                   <span id="bank">국민</span>
                   <span id ="bankNumber">299-5555-55555</span>
                 </div>
-                <button id="btn">수정완료</button>
+                <button id="btn" @click="fnMoveModify">수정하기</button>
               </div>
             </fieldset>
           </div>
     </div>
+  </div> 
 </body>
 </html>
 <jsp:include page="/layout/footer.jsp"></jsp:include>
@@ -204,7 +206,11 @@ var app = new Vue({
 
     }   
     , methods: {
-
+    	var self = this;
+    	fnMoveModify : function(){
+    		location.href="/informationmodify.do";
+    	}
+     
     }   
     , created: function () {
     	var self = this;

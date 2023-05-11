@@ -5,9 +5,6 @@
     text-align: center;
 }
 
-.box1{
-    margin-left: 20px;
-}
 .scroll{
     margin: 10px;
 }
@@ -26,7 +23,7 @@
     display: grid;
     grid-template-columns: 100px;
     position: relative;
-    top: 250px;
+    top: 150px;
     left: 30px;
 }
 
@@ -56,6 +53,14 @@
     top: 35px;
     right: 70px;
 }
+.searchImg1{
+	position: relative;
+	bottom:25px;
+}
+.searchImg2{
+	position: relative;
+	bottom:20px;
+}
 .giftList{
     line-height: 30px;
 }
@@ -63,12 +68,16 @@
     line-height: 30px;
     position: relative;
     bottom: 90px;
-    left: 400px;
+    left: 350px;
 }
 
 .list{
     position: relative;
     bottom: 100px;
+}
+.list_1{
+    position: relative;
+    bottom: 95px;
 }
 .list1{
     position: relative;
@@ -116,10 +125,20 @@ margin: 20px;
 .id1{
     position: relative;
     left: 25px;
+    top: 5px;
 }
 .text{
     margin-top: 15px;
     margin-right: 100px;
+}
+.text1{
+	position: relative;
+	top:25px;
+
+}
+.text2{
+    position: relative;
+    left: 200px;
 }
 .fundingImg{
     position: relative;
@@ -138,15 +157,10 @@ margin: 20px;
     right: 110px;
     bottom: 20px;
 }
-.gname1{
-    
+.gname1{ 
     position: relative;
     bottom: 20px;
-}
-
-.text2{
-    position: relative;
-    left: 150px;
+    left:50px;
 }
 .content{
     position: relative;
@@ -208,7 +222,6 @@ margin: 20px;
 img{
 width: 150px;
 height: 150px;
-background-color: gray;
 }
 .page{
     display: grid;
@@ -225,7 +238,4 @@ background-color: gray;
     top: 150px;
     left: 350px;
     row-gap: 20px;
-}
-.listStyle2{
-    display: none;
 }

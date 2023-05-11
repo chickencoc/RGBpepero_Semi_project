@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.mini.mapper.UserMapper">	
+	<select id="selectLogin" parameterType="hashmap" resultType="com.example.mini.model.User">
+		SELECT 
+		    USERID,
+		    U_NAME,
+		    PARTNER,
+		    GENDER,
+		    U_ADDRESS,
+		    U_PHONE,
+		    U_EMAIL,
+		    BIRTH,
+		    WEDDINGDAY,
+		    CDATETIME,
+		    UDATETIME,
+		    STATUS,
+		    BANK,
+		    BANKACCOUNT
+		FROM mini_db2.T1_USER
+		WHERE USERID = #{userId} AND PASSWORD = #{pwd}
+	</select>
+	
+	<select id="selectUserCnt" parameterType="hashmap" resultType="int"> <!-- resultType 을 int로 받는다. -->
+		SELECT COUNT(*) AS CNT
+		FROM mini_db2.T1_USER
+		WHERE USERID = #{userId}
+	</select>
+	
+	<insert id="insertUser" parameterType="hashmap">
+		INSERT INTO T_USER
+			(USERID, PASSWORD, U_NAME, PARTNER, GENDER, U_ADDRESS, U_PHONE, 
+			U_EMAIL, BIRTH, WEDDINGDAY, CDATETIME, UDATETIME, SATATUS, BANK, BANKACCOUNT)
+		VALUES <!-- 맵으로 받기 때문에 #{}로 가져온다. jsp에서 정의한 이름으로 가져와야 함. -->
+			(#{userId}, #{pwd}, #{uName}, #{partner}, #{gender}, #{address}, #{phoneNumber},
+			#{emailAddr}, #{birthday}, #{weddingday}, SYSDATE, '', 'U', #{bank}, #{bankaccount} )
+	</insert>
+	
+</mapper>

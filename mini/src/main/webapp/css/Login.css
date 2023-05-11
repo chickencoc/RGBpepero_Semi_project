@@ -1,6 +1,6 @@
 .container{
     margin: auto;
-    width: 90%;
+    width: 700px;
     min-height: 100vh;
 	text-align: center;
 }
@@ -14,7 +14,7 @@
 }
 .loginLogo{
 	text-align:center;
-	margin:5%;
+	margin:50px;
 }
 .loginTitleBox{
 	text-align: center;

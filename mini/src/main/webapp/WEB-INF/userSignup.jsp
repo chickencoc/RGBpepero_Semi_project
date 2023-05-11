@@ -3,9 +3,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<jsp:include page="/layout/header.jsp"></jsp:include>
 <script src="js/jquery.js"></script>
 <script src="js/vue.js"></script>
 <link rel="stylesheet" href="/css/Base_rgbPepero.css">
@@ -18,7 +18,7 @@
 		<div id="wrapper">
 			<div class="container">
 				<div class="registryLogo">
-					<a href=""><img src="/image/logo_Marrimo.png">
+					<a href="http://localhost:8080/main.do"><img src="/image/logo_Marrimo.png">
 				</div>
 				</a>
 				<fieldset class="registryBox">
@@ -41,8 +41,8 @@
 					<div class="registryA">
 						<div class="registryAList">
 							<input type="text" class="registryId text1" v-model="id"
-								@keyup="fnShow">
-							<button class="checkBtn btn1">중복검사</button>
+								@keyup="fnShow" id="idBox">
+							<button class="checkBtn btn1" @click="fnIdCheck">중복검사</button>
 							<div class="registryNote idCheck" id="idNotice">영어와 숫자 포함
 								8~20 글자</div>
 						</div>
@@ -141,11 +141,11 @@
 								<option value="5">카카오뱅크</option>
 								<option value="6">우리은행</option>
 							</select> <input type="text" class="registryAccount text1"
-								placeholder=" - 없이 입력" v-model="account">
+								placeholder=" - 없이 입력" v-model="bankaccount">
 						</div>
 						<div class="btnBox">
 							<button class="registryBtn btn1" @click="fnRegist">확인</button>
-							<button class="registryBtn btn1">취소</button>
+							<a href="#" @click="fnMain"><button class="registryBtn btn1">취소</button></a>
 						</div>
 					</div>
 				</fieldset>
@@ -170,7 +170,7 @@
 	    	email :'',
 	    	email2 :'',
 	    	addrDetail :'',
-	    	account : '',
+	    	bankaccount : '',
 	        bank :'',
 	        gender: 'M',
 	        selectedEmailDomain: '',
@@ -182,7 +182,7 @@
 	        weddingDay: '',
 	        postcode : '',
 	        addr : '',
-	        
+	        registFlg : false
 	    },
 	    computed: {
 	        isEmailAddrEditable() {
@@ -237,7 +237,16 @@
 	            return this.phone1 + this.phone2 + this.phone3;
 	        },
 	        address: function() {
-	            return this.addr + this.addrDetail
+	            return this.addr + this.addrDetail;
+	        },
+	        emailAddr: function(){
+	        	return this.email + this.email2;
+	        },
+	        birthday: function(){
+	        	return this.birthYear + this.birthMonth + this.birthDay;
+	        },
+	        weddingday : function(){
+	        	return this.weddingYear + this.weddingMonth + this.weddingDay;
 	        }
 
 	  },
@@ -259,64 +268,73 @@
 	    	fnRegist : function(){
 	            let getNumberCheck = /[0-9]/;
 	            let getNameCheck = /^[가-힣|a-z|A-Z]/;
+	            let getPwdCheck = /^(?=.*[!@#$%^&*])(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]).{8,20}$/;
+	            
 	    		var self = this;
-					if(self.id == ''){
-	                    alert("아이디를 입력해주세요.")
-	                } else if(self.pwd == ''||self.pwdCheck==''){
-	                    alert("비밀번호를 입력해주세요.")
-	                } else if(self.name==''){
-	                    alert("이름을 입력해주세요.")
-	                } else if(self.phone1==''||self.phone2==''||self.phone3==''){
-	                    alert("연락처를 입력해주세요.")
-	                } else if(self.addr==''||self.addrDetail){
-	                    alert("주소를 입력해주세요.")
-	                } else if(self.email==''||self.email2){
-	                    alert("이메일을 입력해주세요.")
-	                } else if(self.birthYear==''||self.birthMonth==''||self.birthDay==''){
-	                    alert("생일을 입력해주세요.")
-	                } else if(self.account==''||self.bank==''){
-	                    alert("계좌번호를 입력해주세요.")
-	                } else if(!getNameCheck.test(self.name)){
-	                        alert("이름이 정확하지 않습니다.")
-	                    }else if(!getNumberCheck.test(self.phone1)||!getNumberCheck.test(self.phone2)||!getNumberCheck.test(self.phone3)){
-						alert("전화번호는 숫자만 입력 가능합니다.");
-					    }else if(!getNumberCheck.test(self.account)){
-	                    alert("계좌번호는 숫자만 입력 가능합니다.")
-	                    }
-
-					// } else{
-			    	// 		var nparmap = {id : self.id, 
-					//     			pwd : self.pwd, 
-					//     			name : self.name, 
-					//     			nickname : self.nickname,
-					//     			age : self.age,
-					//     			gender : self.gender,
-					//     			address : self.address};	
-					// 		  	$.ajax({
-					// 				url : "/regist.dox",
-					// 				dataType : "json",
-					// 				type : "POST",
-					// 				data : nparmap,
-					// 				success : function(data) {
-										
-					// 					console.log(data);
-					// 					alert("회원가입 완료");
-					// 					self.id='';
-					// 					self.pwd='';
-					// 					self.pwd2='';
-					// 					self.name='';
-					// 					self.age='';
-					// 					self.gender='';
-					// 					self.address='';
-					// 					self.nickname='';
-										
-					// 					self.check=true;
-					// 	        	   	$("#idBox").css("pointer-events", "auto");
-					// 	    			$("#idBox").css("opacity", "1.0");
-					// 					}
-					// 				});
-	                // }
-					}
+	    		if(!registFlg){
+	    			alert("아이디 중복체크를 완료해주세요")
+	    		} else if(self.id == ''){
+	                alert("아이디를 입력해주세요.")
+	            } else if(self.pwd == ''||self.pwdCheck==''){
+	                alert("비밀번호를 입력해주세요.")
+	            } else if(self.name==''){
+	                alert("이름을 입력해주세요.")
+	            } else if(self.phone1==''||self.phone2==''||self.phone3==''){
+	                alert("연락처를 입력해주세요.")
+	            } else if(self.addr==''||self.addrDetail){
+	                alert("주소를 입력해주세요.")
+	            } else if(self.email==''||self.email2){
+	                alert("이메일을 입력해주세요.")
+	            } else if(self.birthYear==''||self.birthMonth==''||self.birthDay==''){
+	                alert("생일을 입력해주세요.")
+	            } else if(self.bankaccount==''||self.bank==''){
+	                alert("계좌번호를 입력해주세요.")
+	            } else if(!getNameCheck.test(self.name)){
+	                    alert("이름이 정확하지 않습니다.");
+	                    self.name='';
+	            } else if(!getNumberCheck.test(self.phone1)||!getNumberCheck.test(self.phone2)||!getNumberCheck.test(self.phone3)){
+					alert("전화번호는 숫자만 입력 가능합니다.");
+					self.phone1='';
+					self.phone2='';
+					self.phone3='';
+				} else if(!getNumberCheck.test(self.bankaccount)){
+	                alert("계좌번호는 숫자만 입력 가능합니다.");
+	                self.bankaccount = '';
+	            } else if(!getPwdCheck.test(self.pwd)){
+	                alert("비밀번호의 형식이 올바르지 않습니다.")
+	                self.pwd='';
+	                self.pwdCheck='';
+	           	} else if(self.pwd != self.pwdCheck){
+	           		alert("비밀번호가 일치하지 않습니다.")
+	           		self.pwd='';
+	                self.pwdCheck='';
+	           	} else {
+	           		var nparmap = {
+			            userId : self.id, 
+						pwd : self.pwd, 
+						uName : self.name, 
+						partner : self.partner,
+						phoneNumber : self.phoneNumber,
+						gender : self.gender,
+						address : self.address,
+						emailAddr : self.emailAddr,
+						birthday : self.birthday,
+						weddingday : self.weddingday,
+						bank : self.bank,
+						bankaccount : self.bankaccount};	
+					$.ajax({
+						url : "/userSignup.dox",
+						dataType : "json",
+						type : "POST",
+						data : nparmap,
+						success : function(data) {
+							console.log(data);
+							alert("회원가입이 완료되었습니다.")
+							location.href="main.do" 
+						}
+					 });
+	            }
+			}
 			,fnShow : function(){
 				var self = this;
 				let getIdCheck = /^[a-zA-z0-9]{8,20}$/;			
@@ -346,8 +364,37 @@
 	            } else {
 	                this.email2 = this.selectedEmailDomain;
 	            }
-	        },
-	        fnAddr : function(){
+	        }
+	        ,fnIdCheck : function () {
+				var self = this;
+				let getIdCheck = /^[a-zA-z0-9]{8,20}$/;	
+				var nparmap = { userId: self.id };
+				$.ajax({
+					url: "/idCheck.dox",
+					dataType: "json",
+					type: "POST",
+					data: nparmap,
+					success: function(cnt) {
+					    console.log(cnt);
+				        if(!getIdCheck.test(self.id)){
+			             	alert("올바른 형태의 아이디가 아닙니다.");
+			             	self.id='';
+			            } 
+				        else if(cnt == 0){
+				        	alert("사용할 수 있는 아이디입니다.")
+				        	self.check=false;
+				        	$("#idBox").css("pointer-events", "none");
+				    		$("#idBox").css("opacity", "0.5");
+				    		self.registFlg = true;
+				    	} 
+			            else{
+				        	 alert("사용할 수 없는 아이디입니다.");
+				        	 self.id='';
+				    	}	
+					}
+				});
+	        }
+	        ,fnAddr : function(){
 	            var self = this;
 	            new daum.Postcode({
 	                oncomplete: function(data) {
@@ -373,6 +420,11 @@
 	                }
 	            }).open();
 	        }
+	        ,fnMain : function(){
+	        	var self= this;
+	        	location.href="/main.do"
+	        }
+	        
 	    }
 
 	    , created: function () {

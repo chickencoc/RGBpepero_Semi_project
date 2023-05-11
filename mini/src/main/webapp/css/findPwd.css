@@ -1,4 +1,7 @@
-
+.container{
+	margin:auto;
+	width:900px;
+}
 .findPageLogo{
 	text-align:center;
 	margin: 50px;

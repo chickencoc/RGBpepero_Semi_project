@@ -10,11 +10,7 @@
 	<link rel="stylesheet" href="css/Base_rgbPepero.css">
 	<title></title>
 	<style>
-<<<<<<< HEAD
 		.loginbox > a:hover {cursor: pointer;} 
-=======
-		.loginbox > a:hover {cursor: pointer;}
->>>>>>> branch 'main' of https://github.com/chickencoc/RGBpepero_Semi_project.git
 	</style>
 </head>
 

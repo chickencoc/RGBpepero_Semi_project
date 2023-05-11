@@ -7,9 +7,8 @@
 <script src="js/vue.js"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<jsp:include page="/layout/header.jsp"></jsp:include>
 <link rel="stylesheet" href="/css/Base_rgbPepero.css">
-<link rel="stylesheet" href="/css/FindPwd.css">
+<link rel="stylesheet" href="/css/findPwd.css">
 <title>첫번째 페이지</title>
 </head>
 
@@ -17,7 +16,9 @@
 	<div id="app">
 		<div class="container">
 			<div class="findPageLogo">
-				<img src="/image/logo_Marrimo.png">
+				<a href="http://localhost:8080/main.do">
+                	<img src="/image/logo_Marrimo.png" class="logo">
+                </a>
 			</div>
 			<fieldset class="findPwdBox" v-if="pwdFlg">
 				<legend class="findPwdMent">비밀번호 찾기</legend>

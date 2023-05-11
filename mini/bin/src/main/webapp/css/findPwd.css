@@ -1,0 +1,102 @@
+.container{
+	margin:auto;
+	width:900px;
+}
+.findPageLogo{
+	text-align:center;
+	margin: 50px;
+}
+.findPwdBox{
+	margin: auto;
+	width:800px;
+	box-shadow: 0px 0px 5px 0px #555;
+	border-radius:10px;
+	padding:20px;
+	height:500px;
+	position:relative;
+}
+.findPwdMent{
+	font-size:2.0em;
+	margin:10px;
+	font-weight:bold;
+	background-color: white;
+}
+.findPwdBox .findPwdList .findPwdQ{
+	width:30%;
+	display:inline-block;
+	margin:2.5%;
+	font-size:0.8em;
+}
+.findPwdTextBox{
+	width:60%;
+	margin:10px;
+	padding:7px;
+	
+}
+.findPwdBtn{
+	height:35px;
+	width:25%;
+}
+.findPwdNotice{
+	color:red;
+	position: absolute;
+	left:30%;
+	bottom: 25%;
+
+}
+.findPwdCheck{
+	text-align:center;
+	bottom:10%;
+	position: absolute;
+	width:100%;
+}
+.findPwdCheckBtn{
+	width:25%;
+}
+.findPwdTextBoxAfter{
+	width:90%;
+	margin:10px;
+	padding:7px;
+	height:45px;
+}
+.findPwdBtnBox{
+	height:100px;
+
+}
+.findPwd1{
+	position:absolute;
+	left:10%;
+	width:9%;
+	border-right:1px solid #ccc;
+	text-align: right;
+	padding-right:10px;
+}
+.findPwd2{
+	position: absolute;
+	right:1%;
+	width:79%;
+}
+.findPwdList{
+	height:70px;
+	line-height: 70px;
+}
+.findPwdEmailBox{
+	width:20%;
+	margin:10px;
+}
+.findPwdEmailSelect{
+	margin:3px;
+}
+.findPwdBox2{
+	margin: auto;
+	width:800px;
+	box-shadow: 0px 0px 5px 0px #555;
+	border-radius:10px;
+	padding:20px;
+	height:400px;
+	position:relative;
+}
+.findPwdNote{
+	font-size:0.7em;
+	margin-left:10px;
+}

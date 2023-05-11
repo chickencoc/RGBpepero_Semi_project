@@ -118,7 +118,7 @@
                 <a href="">식장</a>
                 <a href=""><strong>여행</strong></a>
                 </div>
-            <div class="travelBanner"><img src="../image/travelBanner.jpg" id="travelBanner2"></div>
+            <div class="travelBanner"><img src="/image/travelBanner.jpg" id="travelBanner2"></div>
             <div id="tripText">여행지 추천</div>
             <div id="radioAndSelect">
                 <span id="out_Travel"><input type="radio" name="tripKind"> 해외 </span>
@@ -132,34 +132,34 @@
                 <div id="search_Box" class="travel_Box">
                     <div>떠나고싶은 여행지</div>
                     <input id="search" type="text" placeholder="여행지 검색">
-                    <div id="readingGlass"><img src="../image/search.PNG" id="img1"></div>
+                    <div id="readingGlass"><img src="/image/search.PNG" id="img1"></div>
                 </div>
                 <div class="travel_Box">
                     <div>
-                       <img src="../image/beach1.jpg" id="boracay">
+                       <img src="/image/beach1.jpg" id="boracay">
                     </div>
                     보라카이
                 </div>
                 <div class="travel_Box">
                    <div>
-                    <img src="../image/osaka1.jpg" id="osaka">
+                    <img src="/image/osaka1.jpg" id="osaka">
                    </div>
                     오사카
                 </div>
                 <div class="travel_Box">
                    <div>
-                    <img src="../image/prague2.jpg" id="prague">
+                    <img src="/image/prague2.jpg" id="prague">
                    </div>
                     프라하
                 </div>
                 <div class="travel_Box">
                    <div>
-                    <img src="../image/hamburg1.jpg" id="hamburg">
+                    <img src="/image/hamburg1.jpg" id="hamburg">
                    </div>
                     함부르크
                 </div>
                 <div class="travel_Box">
-                   <div><img src="../image/santorini1.jpg" id="santorini"></div>
+                   <div><img src="/image/santorini1.jpg" id="santorini"></div>
                     산토리니
                 </div>
             </div>

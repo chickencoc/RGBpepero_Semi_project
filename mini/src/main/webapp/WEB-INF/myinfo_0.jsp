@@ -150,7 +150,7 @@
               <a href="">캘린더</a>
             </div>
             <fieldset>
-              <img src="../image/profile.PNG" id="profile">
+              <img src="/image/profile.png" id="profile">
               <div id="information">
                 <div id="idline">
                   아이디<span  id="id">test123</span>

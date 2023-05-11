@@ -61,7 +61,7 @@
 						<div class="registryAList">
 							<input type="text" class="registryName text1" v-model="name">
 							배우자 이름 <input type="text" class="registryName2 text1"
-								v-model="name2">
+								v-model="partner">
 						</div>
 						<div class="registryAList">
 							<label class="registryGender"> <input type="radio"
@@ -71,19 +71,18 @@
 							</label>
 						</div>
 						<div class="registryAList">
-							<input type="text" class="registryPhone text1" v-model="phone1">
-							- <input type="text" class="registryPhone text1" v-model="phone2">
-							- <input type="text" class="registryPhone text1" v-model="phone3">
+							<input type="text" class="registryPhone text1" v-model="phone1" maxlength='3'>
+							- <input type="text" class="registryPhone text1" v-model="phone2" maxlength='4'>
+							- <input type="text" class="registryPhone text1" v-model="phone3" maxlength='4'>
 						</div>
 						<div class="registryAList">
-							<input type="text" class="registryAddr text1" disabled
+							<input type="text" class="registryAddr text1" readonly
 								id="postcode" placeholder="우편번호" v-model="postcode">
 							<button class="checkBtn btn1" @click="fnAddr">우편번호 검색</button>
 						</div>
 						<div class="registryAList">
 							<input type="text" class="registryAddrDetail text1"
-								placeholder="주소" disabled id="address" v-model="addr">
-
+								placeholder="주소" id="address" v-model="addr" readonly>
 						</div>
 						<div class="registryAList">
 							<input type="text" class="registryAddrDetail text1"
@@ -163,7 +162,7 @@
 	    	pwd : '',
 	    	pwdCheck: '',
 	    	name: '',
-	    	name2 : '',
+	    	partner : '',
 	    	phone1 :'',
 	    	phone2 :'',
 	    	phone3 :'',
@@ -234,19 +233,16 @@
 	            return weddingDays
 	        },
 	        phoneNumber: function() {
-	            return this.phone1 + this.phone2 + this.phone3;
-	        },
-	        address: function() {
-	            return this.addr + this.addrDetail;
+	            return this.phone1+this.phone2+this.phone3;
 	        },
 	        emailAddr: function(){
-	        	return this.email + this.email2;
+	        	return this.email+'@'+this.email2;
 	        },
 	        birthday: function(){
-	        	return this.birthYear + this.birthMonth + this.birthDay;
+	        	return this.birthYear+'-'+this.birthMonth+'-'+this.birthDay;
 	        },
 	        weddingday : function(){
-	        	return this.weddingYear + this.weddingMonth + this.weddingDay;
+	        	return this.weddingYear+'-'+this.weddingMonth+'-'+this.weddingDay;
 	        }
 
 	  },
@@ -262,7 +258,9 @@
 	    },
 	    weddingYear(){
 	        this.weddingDay=''
-	    }
+	    },
+	    
+	   
 	  }   
 	, methods: { 	
 	    	fnRegist : function(){
@@ -271,7 +269,7 @@
 	            let getPwdCheck = /^(?=.*[!@#$%^&*])(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]).{8,20}$/;
 	            
 	    		var self = this;
-	    		if(!registFlg){
+	    		if(!self.registFlg){
 	    			alert("아이디 중복체크를 완료해주세요")
 	    		} else if(self.id == ''){
 	                alert("아이디를 입력해주세요.")
@@ -281,9 +279,9 @@
 	                alert("이름을 입력해주세요.")
 	            } else if(self.phone1==''||self.phone2==''||self.phone3==''){
 	                alert("연락처를 입력해주세요.")
-	            } else if(self.addr==''||self.addrDetail){
+	            } else if(self.addr==''||self.addrDetail==''){
 	                alert("주소를 입력해주세요.")
-	            } else if(self.email==''||self.email2){
+	            } else if(self.email==''||self.email2==''){
 	                alert("이메일을 입력해주세요.")
 	            } else if(self.birthYear==''||self.birthMonth==''||self.birthDay==''){
 	                alert("생일을 입력해주세요.")
@@ -316,7 +314,9 @@
 						partner : self.partner,
 						phoneNumber : self.phoneNumber,
 						gender : self.gender,
-						address : self.address,
+						addrNo : self.postcode,
+						addr1 : self.addr,
+						addr2 : self.addrDetail,
 						emailAddr : self.emailAddr,
 						birthday : self.birthday,
 						weddingday : self.weddingday,
@@ -413,7 +413,7 @@
 	                    }
 	                    // 우편번호와 주소 정보를 해당 필드에 넣는다.
 	                    self.postcode = data.zonecode; // Vue 인스턴스의 데이터 변경
-	                    self.address = address; // Vue 인스턴스의 데이터 변경
+	                    self.addr = address; // Vue 인스턴스의 데이터 변경
 	                    self.addrDetail = ''; 
 	                    // 커서를 상세주소 필드로 이동한다.
 	                    document.getElementById("detailAddress").focus();

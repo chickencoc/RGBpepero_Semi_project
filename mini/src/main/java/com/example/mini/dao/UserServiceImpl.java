@@ -1,5 +1,6 @@
 package com.example.mini.dao;
 
+import java.io.Console;
 import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +47,42 @@ public class UserServiceImpl implements UserService{
 		// TODO Auto-generated method stub
 		userMapper.insertUser(map);
 		
+	}
+	@Override
+	public HashMap<String, Object> selectFindId(HashMap<String, Object> map) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		User user = userMapper.selectFindId(map); 
+		if(user != null) { 
+			resultMap.put("user", user);
+			resultMap.put("result", "success");
+		} else {
+			resultMap.put("result", "fail");
+		}
+		User findId = userMapper.selectFindId(map);
+		resultMap.put("info", findId);
+		
+		return resultMap;
+	}
+	@Override
+	public HashMap<String, Object> selectFindPwd(HashMap<String, Object> map) {
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		User user = userMapper.selectFindPwd(map); 
+		if(user != null) { 
+			resultMap.put("user", user);
+			resultMap.put("result", "success");
+		} else {
+			resultMap.put("result", "fail");
+		}
+		User findPwd = userMapper.selectFindPwd(map);
+		resultMap.put("info", findPwd);
+		
+		return resultMap;
+	}
+	@Override
+	public void editPwd(HashMap<String, Object> map) {
+		// TODO Auto-generated method stub
+		userMapper.updatePwd(map);
 	}
 
 }

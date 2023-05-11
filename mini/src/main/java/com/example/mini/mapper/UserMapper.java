@@ -13,5 +13,11 @@ public interface UserMapper {
 	int selectUserCnt(HashMap<String, Object> map); //중복체크
 	
 	void insertUser(HashMap<String, Object> map); //회원가입
+	
+	User selectFindId(HashMap<String, Object> map);//아이디 찾기
+	
+	User selectFindPwd(HashMap<String, Object> map);//비밀번호 찾기
+	
+	void updatePwd(HashMap<String, Object> map);//비밀번호 변경
 
 }

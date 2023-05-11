@@ -29,10 +29,10 @@
                </div>
                <div class="findIdListA">
                    <div class="findIdList">
-                       <input type="text" class="findIdTextBox text1" placeholder="이름 입력">
+                       <input type="text" class="findIdTextBox text1" placeholder="이름 입력" v-model="name">
                    </div>
                    <div class="findIdList">
-                       <input type="text" class="findIdEmailBox text1"  placeholder="이메일 입력">@
+                       <input type="text" class="findIdEmailBox text1"  placeholder="이메일 입력" v-model="email">@
                        <input type="text" class="findIdEmailBox text1" id="emailAddr" v-model="email2" :disabled="!isEmailAddrEditable">
                        <select class="findIdEmailSelect text1" id="emailSelect"  v-model="selectedEmailDomain" v-on:change="fnEmailSelectChanged">
                            <option value="">직접 입력</option>
@@ -40,15 +40,15 @@
                            <option value="daum.net">daum.net</option>
                            <option value="gmail.com">gmail.com</option>
                        </select>
-                       <button class="findIdBtn btn1" @click="fnNotice"> 인증번호 받기</button>
+                       <button class="findIdBtn btn1" @click="fnNameCheck"> 인증번호 받기</button>
                    </div>
                    <div class="findIdList">
                        <input type="text" class="findIdTextBox text1" placeholder="인증번호 6자리 입력">
-                       <button class="findIdBtn btn1"> 인증번호 확인</button>
+                       <button class="findIdBtn btn1" @click=fnCode> 인증번호 확인</button>
                    </div>
                </div>
                <div class="findIdNotice" v-if="noticeFlg">이메일로 보내드린 인증번호를 확인해주세요.</div>
-               <div class="findIdCheck"><button class="findIdCheckBtn findIdBtn btn1">확인</button></div>		
+               <div class="findIdCheck"><button class="findIdCheckBtn findIdBtn btn1" @click="fnFindId">아이디 찾기</button></div>		
            	</fieldset>
         </div>
 	</div>
@@ -62,11 +62,17 @@ var app = new Vue({
         noticeFlg: false,
         selectedEmailDomain: '',
         email : '',
-        email2 : ''
+        email2 : '',
+        name:'',
+        checkFlg : false,
+        sessionId : "${sessionId}"
     },
     computed: {
         isEmailAddrEditable() {
         return this.selectedEmailDomain === '';
+        },
+        emailAddr: function(){
+        	return this.email+'@'+this.email2;
         }
     }   
     , methods: {
@@ -83,6 +89,42 @@ var app = new Vue({
     	}
         ,fnMain : function(){
         	location.href="main.do"
+        }
+        ,fnNameCheck : function(){
+        	var self= this;
+        	var nparmap = {uName : self.name, emailAddr : self.emailAddr};
+        	console.log(nparmap)
+        	$.ajax({
+    			url : "/userFindId.dox",
+    			dataType : "json",
+    			type : "POST",
+    			data : nparmap,
+    			success : function(data) {
+    				console.log(data)
+    				if(data.result == 'success'){
+    					alert("인증번호가 발송되었습니다.")
+    				}else{
+    					alert("이름과 이메일이 일치하지 않습니다.")
+    					self.name='';
+    					self.email='';
+    					self.email2='';
+    					}
+    				
+    				}
+    			});
+        }
+        ,fnFindId : function(){
+        	var self = this;
+        	if(!self.checkFlg){
+        		alert("인증을 완료해주십시오.")
+        	} else{
+        		alert("당신의 아이디는 '"+self.sessionId+"' 입니다.")
+        		location.href = "userLogin.do"
+        	}
+        }
+        ,fnCode : function(){
+        	var self = this;
+        	self.checkFlg = true;
         }
        
     }   

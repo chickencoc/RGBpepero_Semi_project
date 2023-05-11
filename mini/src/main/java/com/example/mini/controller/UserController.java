@@ -53,10 +53,12 @@ public class UserController {
 		String id = (String) session.getAttribute("sessionId");
 		String name = (String) session.getAttribute("sessionName");
 		String status = (String) session.getAttribute("sessionStatus");
+		String email = (String) session.getAttribute("ssesionEmail");
 		
 		session.removeAttribute(id);
 		session.removeAttribute(name);
 		session.removeAttribute(status);
+		session.removeAttribute(email);
 		session.invalidate();
 		return "/userLogin"; 
     }
@@ -80,10 +82,29 @@ public class UserController {
 	}
 	
 	@RequestMapping("/userFindId.do") 
-    public String findId(Model model) throws Exception{
+	public String findId(HttpServletRequest request, Model model, @RequestParam HashMap<String, Object> map) throws Exception{
+		request.setAttribute("map", map);
 
         return "/userFind1";
     }
+	@RequestMapping(value = "/userFindId.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String selectFindId(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		resultMap = userService.selectFindId(map);
+		String result = (String)resultMap.get("result"); //String으로 강제형변환(다운캐스팅)
+		if(result.equals("success")) {
+			User user = (User) resultMap.get("user");
+			
+			session.setAttribute("sessionId", user.getUserid());
+			session.setAttribute("sessionName", user.getuName());
+			session.setAttribute("sessionStatus", user.getStatus());
+			session.setAttribute("sessionEmail", user.getuEmail());
+		}
+
+		return new Gson().toJson(resultMap);
+	}
+	
 	
 	@RequestMapping("/userFindPwd.do") 
     public String findPwd(Model model) throws Exception{
@@ -91,5 +112,30 @@ public class UserController {
         return "/userFind2";
     }
 	
+	@RequestMapping(value = "/userFindPwd.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String selectFindPwd(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		resultMap = userService.selectFindId(map);
+		String result = (String)resultMap.get("result"); //String으로 강제형변환(다운캐스팅)
+		if(result.equals("success")) {
+			User user = (User) resultMap.get("user");
+			
+			session.setAttribute("sessionId", user.getUserid());
+			session.setAttribute("sessionName", user.getuName());
+			session.setAttribute("sessionStatus", user.getStatus());
+			session.setAttribute("sessionEmail", user.getuEmail());
+		}
+
+		return new Gson().toJson(resultMap);
+	}
 	
+	@RequestMapping(value = "editPwd.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String edit(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		userService.editPwd(map);
+		resultMap.put("result", "success");
+		return new Gson().toJson(resultMap);
+	}
 }

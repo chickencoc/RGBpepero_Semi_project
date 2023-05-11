@@ -32,13 +32,13 @@
                         <tr>
                             <td class="tableCheckbox"  rowspan="2"><input type="checkbox"></td>
                             <td class="info_box_goods_table_img tableContent" rowspan="2"><img class="info_box_goods_img"></td>
-                            <td class="info_box_goods_table_text">{{p_name}}</td>
-                            <td class="info_box_goods_table_cnt_price tableContent" rowspan="2">{{1개}}</td>
-                            <td rowspan="2" class="tableContent">{{p_price}}</td>
-                            <td rowspan="2" class="tableContent">{{status}}</td>
+                            <td class="info_box_goods_table_text">p_name</td>
+                            <td class="info_box_goods_table_cnt_price tableContent" rowspan="2">1개</td>
+                            <td rowspan="2" class="tableContent">p_price</td>
+                            <td rowspan="2" class="tableContent">status</td>
                         </tr>
                         <tr>
-                            <td class="info_box_goods_table_text">{{p_content}}</td>
+                            <td class="info_box_goods_table_text">p_content</td>
                         </tr>
                     </table>
                 </fieldset>
@@ -49,7 +49,7 @@
                     <table class="deliveryTable">
                         <tr>
                             <td class="deliveryTitle">송장 번호</td>
-                            <td class="deliveryContent">{{deliveryno}}</td>
+                            <td class="deliveryContent">deliveryno</td>
                         </tr>
                         <tr>
                             <td class="deliveryTitle">배송 업체</td>
@@ -72,19 +72,19 @@
                             <table class="deliveryReceiveTable">
                                 <tr>
                                     <td class="deliveryReceiveTitle">수령인</td>
-                                    <td>{{userid}}</td>
+                                    <td>userid</td>
                                 </tr>
                                 <tr>
                                     <td class="deliveryReceiveTitle">연락처</td>
-                                    <td>{{phone}}</td>
+                                    <td>phone</td>
                                 </tr>
                                 <tr>
                                     <td class="deliveryReceiveTitle">배송지 주소</td>
-                                    <td>{{addr}}</td>
+                                    <td>addr</td>
                                 </tr>
                                 <tr>
                                     <td class="deliveryReceiveTitle">배송 메모</td>
-                                    <td>{{d_message}}</td>
+                                    <td>d_message</td>
                                 </tr>
                             </table>
                         </div>
@@ -97,19 +97,19 @@
                         <table class="orderInfoTable">
                             <tr>
                                 <td class="orderInfoTitle">결제방법</td>
-                                <td>{{o_purchase}}</td>
+                                <td>o_purchase</td>
                             </tr>
                             <tr>
                                 <td class="orderInfoTitle">상품금액</td>
-                                <td>{{price}}</td>
+                                <td>price</td>
                             </tr>
                             <tr>
                                 <td class="orderInfoTitle">배송비</td>
-                                <td>{{d_price}}</td>
+                                <td>d_price</td>
                             </tr>
                             <tr>
                                 <td class="orderInfoTitle">총 금액</td>
-                                <td>{{price}}</td>
+                                <td>price</td>
                             </tr>
                         </table>
                     </div>

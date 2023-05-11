@@ -136,6 +136,7 @@
     </style>
 </head>
 <body>
+<div id="app">
     <div id="wrapper">
         <div class="container">
             <div class="product_category_list">
@@ -146,7 +147,7 @@
               <a href="">캘린더</a>
             </div>
             <fieldset>
-              <img src="/image/profile.png" id="profile">
+              <img src="/image/profile1.PNG" id="profile">
               <div id="information">
                 <div id="idline">
                   아이디<span>test123</span>
@@ -197,7 +198,7 @@
                   </select>
                   <input type ="text" id ="bankNumber" placeholder="299-123456-444455">
                 </div>
-                <button id="btn">수정완료</button>
+                <button id="btn" @click="fnMoveMain">수정완료</button>
               </div>
             </fieldset>
           </div>
@@ -214,6 +215,9 @@ var app = new Vue({
 
     }   
     , methods: {
+    	fnMoveMain : function(){
+    		location.href="/main.do";
+    	}
 
     }   
     , created: function () {

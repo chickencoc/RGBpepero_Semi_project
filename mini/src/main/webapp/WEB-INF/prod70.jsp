@@ -96,6 +96,7 @@
     </style>
 </head>
 <body>
+  <div id="app">	
     <div id="wrapper">
         <div class="container">
             <div class="review_Title">리뷰작성</div>
@@ -128,6 +129,7 @@
             </div>
         </div>
     </div>
+   </div> 
 </body>
 </html>
 <jsp:include page="/layout/footer.jsp"></jsp:include>

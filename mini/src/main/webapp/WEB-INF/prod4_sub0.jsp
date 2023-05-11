@@ -12,6 +12,7 @@
 </head>
 <body> 
     <!-- wrap START -->
+ <div id="app"> 
     <div id="wrapper">
         <div class="list">
             <a href="">침실</a>
@@ -83,6 +84,8 @@
             </div>
         </div>
     </div>
+  </div>  
+ </div> 
     <!-- wrap END -->
 </body>
 <jsp:include page="/layout/footer.jsp"></jsp:include>

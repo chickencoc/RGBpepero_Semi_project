@@ -28,10 +28,11 @@
             </div>
             <div class="boardbox">
                 <div id="boardname">자주하는 질문</div>
-                <select>
-                    <option>상품관련</option>
-                    <option>계정관련</option>
-                    <option>배송관련</option>
+                <select v-model="selectItem">
+                    <option value="">:: 전체 ::</option>
+                    <option value="P">상품관련</option>
+                    <option value="A">계정관련</option>
+                    <option value="D">배송관련</option>
                 </select>
             </div>
             <div class="table_list">
@@ -47,15 +48,18 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="(item, index) in list" >
-                            <td>{{index + 1}}</td>
-                            <td>아이콘</td>
-                            <td>{{item.title}}</td>
-                            <td>{{item.name}}</td>
-                            <td>{{item.cnt}}</td>
-                            <td>{{item.cdatetime}}</td>
-                        </tr>
-                    </tbody>
+                        <tr  v-for="(item, index) in list"  @click="fnView(item.boardNo)">
+                        <td>{{index + 1}}</td>
+                        <template>
+	                        <td v-if="item.replyYn == 'Y'">아이콘</td>
+	                        <td v-else></td>
+                        </template>
+                        <td>{{item.title}}</td>
+                        <td>{{item.name}}</td>
+                        <td>{{item.viewCnt}}</td>
+                        <td>{{item.cdatetime}}</td>
+                    </tr>
+                </tbody>
                 </table>
             </div>
             <div class="pagecontroll">
@@ -72,19 +76,28 @@
         data: {
             list : [],
             checkList : []
+    		, boardKind : "3"
+    		, selectItem : ""
     	
-        }   
+        }
+    	,watch : {
+    		selectItem :function(){
+    			var self = this;
+    			self.fnGetList();
+    		}
+    	}
         , methods: {
             fnGetList : function(){
                 var self = this;
-                var nparmap = {};
+                var nparmap = {boardKind : self.boardKind ,keywordType : self.selectItem};
                 $.ajax({
                     url:"/board/list.dox",
                     dataType:"json",	
                     type : "POST", 
                     data : nparmap,
                     success : function(data) { 
-                    	self.list = data.list;
+                    	self.list = data.board;
+                    	
                         console.log(data);
                     }
                 }); 
@@ -94,11 +107,44 @@
         	},
         	fnAnounce : function(){
         		location.href = "/notice.do";
-        	} 
+        	}
+        	, pageChange : function(url, param) {
+	    		var target = "_self";
+	    		if(param == undefined){
+	    		//	this.linkCall(url);
+	    			return;
+	    		}
+	    		var form = document.createElement("form"); 
+	    		form.name = "dataform";
+	    		form.action = url;
+	    		form.method = "post";
+	    		form.target = target;
+	    		for(var name in param){
+					var item = name;
+					var val = "";
+					if(param[name] instanceof Object){
+						val = JSON.stringify(param[name]);
+					} else {
+						val = param[name];
+					}
+					var input = document.createElement("input");
+		    		input.type = "hidden";
+		    		input.name = item;
+		    		input.value = val;
+		    		form.insertBefore(input, null);
+				}
+	    		document.body.appendChild(form);
+	    		form.submit();
+	    		document.body.removeChild(form);
+	    	}
+			, fnView : function(boardNo){
+	    		var self = this;
+	    		self.pageChange("./readBoard.do", {boardNo : boardNo});
+	    	}
         }   
         , created: function () {
             var self = this;
-     
+            self.fnGetList();
     
         }
     });

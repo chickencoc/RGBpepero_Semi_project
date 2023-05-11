@@ -1,8 +1,9 @@
 		#boName{font-size: 3em;margin-bottom: 20px;}
         #newtextbox{margin-top: 50px;}   
         #newtextbox #btn_add{margin-top: 20px;float: right;}  
-        #newtextbox #title{width: 1000px;margin-right: 20px;margin-bottom: 20px;}
+        #newtextbox #title{width: 1000px;margin:20px;}
         .ck-editor__editable { height: 600px; }
         #editor{width:1300px;height: 600px;}
-        #btn_box{float:right;}
+        #btn_box{position: relative;left: 1125px;}
+        #file_line{height:60px;}
  

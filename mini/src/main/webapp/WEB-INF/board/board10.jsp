@@ -36,12 +36,15 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr  v-for="(item, index) in list" >
+                    <tr  v-for="(item, index) in list"  @click="fnView(item.boardNo)">
                         <td>{{index + 1}}</td>
-                        <td>아이콘</td>
+                        <template>
+	                        <td v-if="item.replyYn == 'Y'">아이콘</td>
+	                        <td v-else></td>
+                        </template>
                         <td>{{item.title}}</td>
                         <td>{{item.name}}</td>
-                        <td>{{item.cnt}}</td>
+                        <td>{{item.viewCnt}}</td>
                         <td>{{item.cdatetime}}</td>
                     </tr>
                 </tbody>
@@ -61,6 +64,7 @@
         data: {
             list : [],
             checkList : []
+    		, boardKind : "1"
         }   
         , methods: {
         	fnInquery : function(){
@@ -71,22 +75,55 @@
         	},
             fnGetList : function(){
                 var self = this;
-                var nparmap = {};
+                var nparmap = {boardKind : self.boardKind};
                 $.ajax({
                     url:"/board/list.dox",
                     dataType:"json",	
                     type : "POST", 
                     data : nparmap,
                     success : function(data) { 
-                    	self.list = data.list;
+                    	self.list = data.board;
                         console.log(data);
                     }
                 }); 
-            } 
+            }
+        	, pageChange : function(url, param) {
+	    		var target = "_self";
+	    		if(param == undefined){
+	    		//	this.linkCall(url);
+	    			return;
+	    		}
+	    		var form = document.createElement("form"); 
+	    		form.name = "dataform";
+	    		form.action = url;
+	    		form.method = "post";
+	    		form.target = target;
+	    		for(var name in param){
+					var item = name;
+					var val = "";
+					if(param[name] instanceof Object){
+						val = JSON.stringify(param[name]);
+					} else {
+						val = param[name];
+					}
+					var input = document.createElement("input");
+		    		input.type = "hidden";
+		    		input.name = item;
+		    		input.value = val;
+		    		form.insertBefore(input, null);
+				}
+	    		document.body.appendChild(form);
+	    		form.submit();
+	    		document.body.removeChild(form);
+	    	}
+			, fnView : function(boardNo){
+	    		var self = this;
+	    		self.pageChange("./readBoard.do", {boardNo : boardNo});
+	    	}
         }   
         , created: function () {
             var self = this;
-     
+     		self.fnGetList();
     
         }
     });

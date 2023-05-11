@@ -29,15 +29,6 @@
 					<tr>
 						<td style="text-align : center;" >제목</td>
 						<td><input type="text" id="title" name="title" v-model="title" placeholder="제목을 입력해 주세요."></td>
-						
-					</tr>
-					<tr>
-						<td style="text-align : center;" >첨부파일</td>
-						<td>
-							<div>
-							    <input type="file" id="file1" name="file1" > 
-							</div>
-						</td>
 						<td>
 							<select class="board_cat">
 			                    <option hidden>카테고리 선택</option>
@@ -48,6 +39,14 @@
 	                		</select>
 	                	</td>
 					</tr>
+					<tr id="file_line">
+						<td style="text-align : center;" >첨부파일</td>
+						<td>
+							<div>
+							    <input type="file" id="file1" name="file1" > 
+							</div>
+						</td>
+					</tr>
 					<tr>
 						<td colspan="3">
 						  <vue-editor id="editor" v-model="content">test</vue-editor> <!-- 2. 화면 에디터 추가 -->
@@ -55,8 +54,8 @@
 					</tr>
 				</table>
 				<div id="btn_box">
-					<button @click="" class="btn">목록으로</button>
-					<button @click="fnAddBbs()" class="btn">저장</button>
+					<button @click="fnGoList()" class="btn">목록으로</button>
+					<button @click="fnAddBoard()" class="btn">저장</button>
 				</div>
             </div>
         </div>
@@ -75,16 +74,17 @@ var app = new Vue({
 		checkList : [],
 		title : "",
 		content : "",
+		boardName : ""
     }   
     // 4. 컴포넌트 추가
     , components: {VueEditor}
     , methods: {
-    	fnAddBbs : function(){
+    	fnAddBoard : function(){
             var self = this;
             var nparmap = {title : self.title, content : self.content};
             console.log( self.content );
             /* $.ajax({
-                url:"/bbs/add.dox",
+                url:"/board/add.dox",
                 dataType:"json",	
                 type : "POST", 
                 data : nparmap,

@@ -3,8 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script src="js/jquery.js"></script>
-<script src="js/vue.js"></script>
+<jsp:include page="/layout/headerLogo.jsp"></jsp:include>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,9 +15,6 @@
 <body>
 	<div id="app">
 		<div class="container">
-			<div class="findPageLogo">
-				<img src="/image/logo_Marrimo.png">
-			</div>
 			<div class="guestRegistBanner">
 				<img src="/image/return.jpg" id="guestRegistBannerImg">
 				<div class="guestRegistBannerText">

@@ -41,7 +41,7 @@ public class GuestRegController {
 		return new Gson().toJson(resultMap);
 	}
 	
-	@RequestMapping("/guestNomal.do")
+	@RequestMapping("/guestNormal.do")
     public String payNormal(HttpServletRequest request, Model model) throws Exception{
 		request.setAttribute("gname", sessGuest.getAttribute("name"));
 		request.setAttribute("phone", sessGuest.getAttribute("phone"));
@@ -57,10 +57,15 @@ public class GuestRegController {
         return "/guest_reg3";
     }
 	
-	@RequestMapping(value = "/guest/get.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@RequestMapping(value = "/guest/order.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String guestInput(HttpServletRequest request, Model model, @RequestParam HashMap<String, Object> map) throws Exception {
 		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		map.put("gname", sessGuest.getAttribute("name"));
+		map.put("gphone", sessGuest.getAttribute("phone"));
+		map.put("gpostcode", sessGuest.getAttribute("postcode"));
+		map.put("gaddress", sessGuest.getAttribute("address"));
+		map.put("gaddrDetail", sessGuest.getAttribute("addrDetail"));
 		
 
 		return new Gson().toJson(resultMap);

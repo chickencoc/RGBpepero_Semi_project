@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<jsp:include page="/layout/header.jsp"></jsp:include>
+<jsp:include page="/layout/headerLogo.jsp"></jsp:include>
 <link rel="stylesheet" href="/css/Base_rgbPepero.css">
 <link rel="stylesheet" href="/css/guest_reg3.css">
 <title>펀딩 결제</title>

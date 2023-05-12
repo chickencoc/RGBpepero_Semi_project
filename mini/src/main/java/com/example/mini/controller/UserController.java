@@ -22,8 +22,10 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
+	
 	@Autowired
-	HttpSession session; //주석
+	HttpSession session;
+	
 	@RequestMapping("/userSignup.do") 
 	public String regist(HttpServletRequest request, Model model, @RequestParam HashMap<String, Object> map) throws Exception{
 		request.setAttribute("map", map);
@@ -138,4 +140,12 @@ public class UserController {
 		resultMap.put("result", "success");
 		return new Gson().toJson(resultMap);
 	}
+	
+	
+	
+	
+	
+	
+	
+	
 }

@@ -7,7 +7,7 @@
 <script src="js/vue.js"></script>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<jsp:include page="/layout/header.jsp"></jsp:include>
+	<jsp:include page="/layout/headerLogo.jsp"></jsp:include>
 	<link rel="stylesheet" href="/css/Base_rgbPepero.css">
 	<link rel="stylesheet" href="/css/Registry.css">
 	<link rel="stylesheet" href="/css/reg_options_popup.css">
@@ -15,10 +15,9 @@
 </head>
 
 <body>
-    <div id="app">
-		<div class="container">
+    <div id="app">		
             <div class="reg_options_popup" style="height: 550px;">
-                <div><img src="/semiproject1/image/fi-sr-cross.png" id="reg_gift_popup_close" @click=""></div>
+                <div><img src="/image/fi-sr-cross.png" id="reg_gift_popup_close" @click=""></div>
                 <div class="reg_options_popup_image">
                 </div>
                 <div class="reg_options_popup_info">
@@ -27,17 +26,12 @@
                     <div>수량<input type="text" size="1" value="1" id="reg_options_popup_stock_number"></div>
                 </div>
                 <div class="reg_options_popup_memo">
-                    <div><img src="/semiproject1/image/fi-ss-heart.png" style="position: relative; top: 8px; margin-right: 5px;">선물 하실 때 참고하세요</div>
+                    <div><img src="/image/fi-ss-heart.png" style="position: relative; top: 8px; margin-right: 5px;">선물 하실 때 참고하세요</div>
                     <input type="text" id="reg_options_popup_memo_txt">
                 </div>
                 <button class="reg_gift_popup_btn">선물하기</button>
             </div>
-        </div>
-    </div>
-    <div id="wrapper">
-        <div class="container">
-            <div class="reg_options_popup" style="height: 550px;">
-                <div><img src="/semiproject1/image/fi-sr-cross.png" id="reg_gift_popup_close" @click=""></div>
+            <div class="reg_options_popup" style="height: 550px;">               
                 <div class="reg_options_popup_image">
                 </div>
                 <div class="reg_options_popup_info">
@@ -49,12 +43,11 @@
                     </div>
                 </div>
                 <div class="reg_options_popup_memo">
-                    <div><img src="/semiproject1/image/fi-ss-heart.png" style="position: relative; top: 8px; margin-right: 5px;">선물 하실 때 참고하세요</div>
+                    <div><img src="/image/fi-ss-heart.png" style="position: relative; top: 8px; margin-right: 5px;">선물 하실 때 참고하세요</div>
                     <input type="text" id="reg_options_popup_memo_txt">
                 </div>
-                <button class="reg_gift_popup_btn">선물하기</button>
-            </div>
-        </div>
+                <button class="reg_gift_popup_btn" @click="fnBuyGift">선물하기</button>
+            </div>      
     </div>
 </body>
 </html>
@@ -66,7 +59,9 @@ var app = new Vue({
 
     }   
     , methods: {
-
+    	fnBuyGift : function(){
+    		location.href = "" //비회원정보입력페이지로 이동.
+    	}
     }   
     , created: function () {
     	var self = this;

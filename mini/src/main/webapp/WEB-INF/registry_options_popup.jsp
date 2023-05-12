@@ -6,18 +6,15 @@
 <script src="js/jquery.js"></script>
 <script src="js/vue.js"></script>
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<jsp:include page="/layout/header.jsp"></jsp:include>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">	
 	<link rel="stylesheet" href="/css/Base_rgbPepero.css">
 	<link rel="stylesheet" href="/css/Registry.css">
 	<link rel="stylesheet" href="/css/reg_options_popup.css">
 	<title>회원용 레지스트리 옵션 팝업</title>
 </head>
 <body>
-    <div id="app">
-		<div class="container">
-            <div class="reg_options_popup">
-                <div><img src="/semiproject1/image/fi-sr-cross.png" id="reg_option_popup_close" @click=""></div>
+    <div id="app">	
+            <div class="reg_options_popup">               
                 <div class="reg_options_popup_image">
                 </div>
                 <div class="reg_options_popup_info">
@@ -31,24 +28,26 @@
                     <li id="reg_options_popup_checkbox"><input type="checkbox" name="choice" > "그룹선물(펀딩)"로 변경하기</li>
                 </ul>
                 <div class="reg_options_popup_memo">
-                    <div><img src="/semiproject1/image/fi-ss-heart.png" style="position: relative; top: 8px; margin-right: 5px;">선물할 친구들이 참고할 정보를 기재해주세요</div>
+                    <div><img src="/image/fi-ss-heart.png" style="position: relative; top: 8px; margin-right: 5px;">선물할 친구들이 참고할 정보를 기재해주세요</div>
                     <input type="text" id="reg_options_popup_memo_txt">
                 </div>
-                <button class="reg_options_popup_btn">저장하기</button>
-            </div>
-        </div>
+                <button class="reg_options_popup_btn" @click="fnOptionInput">저장하기</button>
+            </div>       
     </div>
 </body>
 </html>
-<jsp:include page="/layout/footer.jsp"></jsp:include>
 <script type="text/javascript">
 var app = new Vue({ 
     el: '#app',
     data: {
-
+		
     }   
     , methods: {
-
+    	
+    	fnOptionInput : function(){
+    		alert("저장되었습니다.");
+    		window.close();
+    	}
     }   
     , created: function () {
     	var self = this;

@@ -25,14 +25,19 @@
     padding: 10px;
 }
 
-.regi_back_image{   
-    box-shadow: 0 3px 5px rgba(0, 0, 0, .1);
-    background-image: url(/image/couple_background.jpg);
-    background-position: bottom;
-    background-size: cover;
-    background-repeat: no-repeat;
-    width: 970px;
+.regi_back_image_box{   
+	display: grid;
+}
+#regi_back_image{
+	width: 970px;
     height: 350px;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, .1);
+}
+#regi_back_image_button{
+	width: 140px;
+	position: relative;
+	top: 30px;
+	left: 10px;
 }
 .myinfo_registry{  
     width: 100%;
@@ -89,10 +94,10 @@
 }
 .regi_items_options_taken{  
     text-align: center;
-    margin-top: 30px;  
-    grid-template-rows: 1fr 1fr;
     width: 100%;  
     padding: 5px;  
+    position: relative;
+    top: 40px;
 }
 
 #regi_user{
@@ -170,7 +175,6 @@
 }
 #regi_wanted_badge{
     position: relative;
-    display: inline-block;
     overflow: hidden; /* 불필요한 부분 가리기 */
     padding: 1px;
 }
@@ -178,8 +182,8 @@
     content: "";
     position: absolute;
     z-index: 1;
-    width: 130px;
-    height: 30px;
+    width: 150px;
+    height: 18px;
     background: white;
     content: "갖고싶은선물";  /* 보여주는 텍스트 */
     text-align: center;
@@ -189,13 +193,15 @@
     font-weight: bold;
     padding: 5px 10px;
     left: -30px;
-    top: 10px;
+    top: 20px;
     transform: rotate(-35deg); 
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
   }
 .regi_percentage{
     display: flex;
     justify-content: center;
+    position: relative;
+    top: 20px;
 }
 #regi_progress{
     appearance: none;   

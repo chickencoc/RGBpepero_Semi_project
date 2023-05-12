@@ -1,0 +1,86 @@
+body{
+    width: 500px;
+    height: 600px;
+}
+span{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.regist_img_main{
+    display: grid;
+    justify-items: center;
+    grid-template-areas: 
+    "header"
+    "main"
+    "footer"
+    ;
+}
+.regist_img_title{
+    color: black;
+    font-size: 20px;
+    margin: 20px;
+}
+.regist_img_mainbox{
+    width: 400px;
+    height: 200px;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+.regist_img_searchbox, .regist_img_buttonbox{
+    text-align: center;
+    margin: 20px;
+}
+#regist_button{
+    width: 80px;
+    height: 40px;
+    background-color: white;
+    color: black;
+    margin-top: 50px;
+}
+.regist_img_searchbox .regist_img_uploadname{
+    display: inline-block;
+    height: 40px;
+    padding: 0 10px;
+    vertical-align: middle;
+    border: 1px solid #dddddd;
+    width: 250px;
+    color: #999999;
+}
+.regist_img_searchbox label {
+    display: inline-block;
+    padding: 6px 12px;
+    color: #fff;
+    vertical-align: middle;
+    background-color: #999999;
+    cursor: pointer;
+    height: 40px;
+    margin-left: 10px;
+}
+.regist_img_searchbox input[type="file"] {
+    position: absolute;
+    width: 0;
+    height: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 0;
+}
+#return_page{
+    position: relative;
+    left: 150px;
+    bottom: 50px;
+    font-size: 12px;
+    float: right;
+    color: black;
+}
+#regist_popup_footer{
+    font-size: 13px;
+    align-items: center;
+}
+.regist_popup_footer_main{
+    display: flex;
+    align-items: center;
+    margin-top: 120px;
+}
+#regist_popup_logo{
+    width: 80px;
+}

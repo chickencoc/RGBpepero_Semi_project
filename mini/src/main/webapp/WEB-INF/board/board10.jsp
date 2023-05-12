@@ -8,6 +8,7 @@
 	<jsp:include page="/layout/header.jsp"></jsp:include>
 	<link rel="stylesheet" href="/css/Base_rgbPepero.css">
 	<link rel="stylesheet" href="/css/board/board10.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 	<title>공지사항</title>
 </head>
 <body>
@@ -39,8 +40,8 @@
                     <tr  v-for="(item, index) in list"  @click="fnView(item.boardNo)">
                         <td>{{index + 1}}</td>
                         <template>
-	                        <td v-if="item.replyYn == 'Y'">아이콘</td>
-	                        <td v-else></td>
+	                        <td v-if="item.replyYn == 'Y'"><span><img src="/image/qa_icon2.gif"></span></td>
+	                        <td v-else><span><img src="/image/qa_icon1.gif"></span></td>
                         </template>
                         <td>{{item.title}}</td>
                         <td>{{item.name}}</td>
@@ -49,6 +50,10 @@
                     </tr>
                 </tbody>
             </table>
+            <div id="btn_box" v-if="">
+				<button @click="fnAdd()" class="btn" style="float:right;" v-if="AccountStatus == 'S'">새 글 작성</button>
+			</div>
+        </div>
         </div>
         <div class="pagecontroll">
             < 1 2 3 >
@@ -65,6 +70,8 @@
             list : [],
             checkList : []
     		, boardKind : "1"
+        	, userId : "${sessionId}"
+            , AccountStatus : "${sessionStatus}"
         }   
         , methods: {
         	fnInquery : function(){
@@ -119,6 +126,10 @@
 			, fnView : function(boardNo){
 	    		var self = this;
 	    		self.pageChange("./readBoard.do", {boardNo : boardNo});
+	    	}
+        	, fnAdd : function(boardKind){
+	    		var self = this;
+	    		self.pageChange("./board3.do", {boardKind : self.boardKind});
 	    	}
         }   
         , created: function () {

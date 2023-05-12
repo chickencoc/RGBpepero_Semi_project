@@ -36,23 +36,23 @@
                 </select>
             </div>
             <div class="table_list">
-                <table class="board_list">
-                    <thead>
-                        <tr>
-                            <th scope="col">번호</th>
-                            <th scope="col"></th>
-                            <th scope="col">글 제목</th>
-                            <th scope="col">작성자</th>
-                            <th scope="col">조회</th>
-                            <th scope="col">시간</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr  v-for="(item, index) in list"  @click="fnView(item.boardNo)">
+            <table class="board_list">
+                <thead>
+                    <tr>
+                        <th scope="col">번호</th>
+                        <th scope="col"></th>
+                        <th scope="col">글 제목</th>
+                        <th scope="col">작성자</th>
+                        <th scope="col">조회</th>
+                        <th scope="col">시간</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr  v-for="(item, index) in list"  @click="fnView(item.boardNo)">
                         <td>{{index + 1}}</td>
                         <template>
-	                        <td v-if="item.replyYn == 'Y'">아이콘</td>
-	                        <td v-else></td>
+	                        <td v-if="item.replyYn == 'Y'"><span><img src="/image/qa_icon2.gif"></span></td>
+	                        <td v-else><span><img src="/image/qa_icon1.gif"></span></td>
                         </template>
                         <td>{{item.title}}</td>
                         <td>{{item.name}}</td>
@@ -60,11 +60,15 @@
                         <td>{{item.cdatetime}}</td>
                     </tr>
                 </tbody>
-                </table>
-            </div>
-            <div class="pagecontroll">
-                < 1 2 3 >
-            </div>
+            </table>
+            <div id="btn_box">
+				<button @click="fnAdd()" class="btn" style="float:right;" v-if="AccountStatus == 'S'">새 글 작성</button>
+			</div>
+        </div>
+        </div>
+        <div class="pagecontroll">
+            < 1 2 3 >
+        </div>
         </div>
         <!-- wrap END -->
     </div>
@@ -78,6 +82,8 @@
             checkList : []
     		, boardKind : "3"
     		, selectItem : ""
+        	, userId : "${sessionId}"
+            , AccountStatus : "${sessionStatus}"
     	
         }
     	,watch : {
@@ -140,6 +146,10 @@
 			, fnView : function(boardNo){
 	    		var self = this;
 	    		self.pageChange("./readBoard.do", {boardNo : boardNo});
+	    	}
+        	, fnAdd : function(boardKind){
+	    		var self = this;
+	    		self.pageChange("./board3.do", {boardKind : self.boardKind});
 	    	}
         }   
         , created: function () {

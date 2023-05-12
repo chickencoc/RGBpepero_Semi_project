@@ -6,6 +6,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<jsp:include page="/layout/header.jsp"></jsp:include>
+	<script src="https://unpkg.com/vue2-editor@2.3.11/dist/index.js"></script>
 	<link rel="stylesheet" href="/css/Base_rgbPepero.css">
 	<link rel="stylesheet" href="/css/board/board2.css">
 	<title>게시글 페이지</title>
@@ -21,20 +22,23 @@
             <div id="board_title">{{info.title}}</div>
             <div id="board_info_line"><span id="board_info_cat">{{boardName}}</span><span>{{info.name}}</span><span>조회수 : {{info.viewCnt}}</span></div>
             <div id="board_info_line2"><span>{{info.cdatetime}} 작성됨</span><span v-if="info.udatetime!=null">{{info.udatetime}} 수정됨</span></div>
-            <div id="board_info_content">{{info.content}}</div>
+            <div id="board_info_content" v-html="content"></div>
             </div>
             <div></div>
             <template>
             <div id="newreplybox" v-if="info.replyYn == 'Y'">
-                <div id="reply_head">질문사항 답변<button class="board_btn" id="btn_del">삭제</button><button class="board_btn" id="btn_edit">수정</button></div>
+                <div id="reply_head">질문사항 답변<button class="board_btn" id="btn_del">삭제</button><button class="board_btn" id="btn_edit">수정</button><button v-if="AccountStatus == 'S' && info.replyYn == 'Y'" class="board_btn" id="btn_reply">답변 수정</button></div>
                 <div id="board_info_line">{{reply.name}}</div>
                 <div id="board_info_line"><span>{{reply.cdatetime}} 작성됨</span></div>
-                
                 <div id="board_info_content">{{reply.content}}</div>
             </div>
-            <div id="newreplybox" v-if="info.replyYn == 'N' && info.boardKind == '3'">
-                <div id="reply_head">질문사항 답변<button class="board_btn" id="btn_del">삭제</button><button class="board_btn" id="btn_edit">수정</button></div>
-                <div>아직 답변이 작성되지 않았습니다.</div>
+            <div id="newreplybox" v-if="info.replyYn == 'N' && info.boardKind == '2'">
+                <div id="reply_head">질문사항 답변<button class="board_btn" id="btn_del">삭제</button><button class="board_btn" id="btn_edit">수정</button><button v-if="AccountStatus == 'S'" class="board_btn" id="btn_reply">답변</button></div>
+                <div v-if="AccountStatus != 'S'">아직 답변이 작성되지 않았습니다.</div>
+            </div>
+            <div id="newreplybox" v-if="info.replyYn == 'N' && info.boardKind == '2' && AccountStatus == 'S'">
+            	<input type="text" id="title" name="title" v-model="replyTitle" placeholder="제목을 입력해 주세요.">
+            	<vue-editor id="editor" v-model="replyContent">test</vue-editor>
             </div>
             </template>
         </div>
@@ -44,6 +48,8 @@
 </html>
 <jsp:include page="/layout/footer.jsp"></jsp:include>
 <script type="text/javascript">
+Vue.use(Vue2Editor);
+const VueEditor = Vue2Editor.VueEditor;
     var app = new Vue({ 
         el: '#app',
         data: {
@@ -52,8 +58,12 @@
            , boardName : ""
            , boardNo : "${map.boardNo}"
      	   , sessionId : "${sessionId}"
-     	   , sessionStatus : "${sessionStatus}"
-        }   
+     	   , AccountStatus : "${sessionStatus}"
+     	   , replyTitle : ""
+     	   , replyContent : ""
+     	   , content : ""
+        }
+    	, components: {VueEditor}
         , methods: {
             fnGetInfo : function(){
                 var self = this;
@@ -77,10 +87,45 @@
                         else{
                         	self.boardName = "Error!";
                         }
+                        self.content = self.info.content;
                         
                     }
                 }); 
             }
+        
+        , fnAddBoard : function(){
+            var self = this;
+            var nparmap = {title : self.title, content : self.content};
+            console.log( self.content );
+            /* $.ajax({
+                url:"/board/add.dox",
+                dataType:"json",	
+                type : "POST", 
+                data : nparmap,
+                success : function(data) { 
+                	alert("저장되었습니다.");
+                	location.href="bbs.do";
+                }
+            });  */
+        } 
+    	// 파일 업로드
+	    , upload : function(){
+			var form = new FormData();
+	        form.append( "file1", $("#file1")[0].files[0] );
+	        
+	         $.ajax({
+	             url : "/upload.do"
+	           , type : "POST"
+	           , processData : false
+	           , contentType : false
+	           , data : form
+	           , success:function(response) { 
+	        	   
+	           }
+	           
+	       });
+		},
+        
         }   
         , created: function () {
             var self = this;

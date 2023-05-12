@@ -21,7 +21,10 @@
 		WHERE BOARDKIND = #{boardKind} AND DELYN = 'N'
 		<if test="keywordType != '' and keywordType != null">
 				AND KEYWORDTYPE = #{keywordType}
-			</if>
+		</if>
+		<if test='boardKind == 2 and AccountStatus != "S"'>
+				AND U.USERID = #{userId}
+		</if>
 		ORDER BY CDATETIME DESC
 	</select>
 	<select id="readBoard" parameterType="hashmap" resultType="com.example.mini.model.Board">
@@ -32,6 +35,7 @@
 	    	U_NAME AS NAME,
 	    	CONTENT,
 	    	VIEWCNT,
+	    	REPLYYN,
 	    	BOARDKIND,
 	    	B.CDATETIME AS CDATETIME,
 	    	B.UDATETIME AS UDATETIME
@@ -39,32 +43,20 @@
 		INNER JOIN mini_db2.T1_USER U ON B.USERID = U.USERID
 		WHERE BOARDNO = #{boardNo}
 	</select>
-<!-- 	<select id="selectLogin" parameterType="hashmap" resultType="com.example.mini.model.User">
-		SELECT 
-		    USERID,
-		    U_NAME,
-		    PARTNER,
-		    GENDER,
-		    U_ADDRESS,
-		    U_PHONE,
-		    U_EMAIL,
-		    BIRTH,
-		    WEDDINGDAY,
-		    CDATETIME,
-		    UDATETIME,
-		    STATUS,
-		    BANK,
-		    BANKACCOUNT
-		FROM mini_db2.T1_USER
-		WHERE USERID = #{userId} AND PASSWORD = #{pwd}
-	</select>
-	
-	<select id="selectUserCnt" parameterType="hashmap" resultType="int"> resultType 을 int로 받는다.
-		SELECT COUNT(*) AS CNT
-		FROM mini_db2.T1_USER
-		WHERE USERID = #{userId}
-	</select> -->
-	
+	<update id="updateViewCnt" parameterType="hashmap">
+		UPDATE mini_db2.T1_BOARD
+		SET
+			VIEWCNT = VIEWCNT+1
+		WHERE BOARDNO = #{boardNo}	
+	</update>
+	<insert id="insertBoard">
+	INSERT INTO mini_db2.T1_BOARD
+	VALUE (NULL, #{boardKind},#{keywordType},#{userId}, NOW(), NULL,#{title},#{content},0,'N','N')
+	</insert>
+	<insert id="insertBoardImg">
+	INSERT INTO mini_db2.T1_BRDIMG
+	VALUE (NULL, #{boardNo},#{replyNo},#{imgSrc},#{imgName}, #{orgName}, #{imgType})
+	</insert>
 	<!-- <insert id="insertUser" parameterType="hashmap">
 		INSERT INTO T_USER
 			(USERID, PASSWORD, U_NAME, PARTNER, GENDER, U_ADDRESS, U_PHONE, 

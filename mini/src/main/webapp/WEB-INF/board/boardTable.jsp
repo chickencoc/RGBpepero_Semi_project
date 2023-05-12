@@ -5,25 +5,25 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<jsp:include page="/layout/header.jsp"></jsp:include>
 	<link rel="stylesheet" href="/css/Base_rgbPepero.css">
-	<link rel="stylesheet" href="/css/board/board20.css">
-	<title>문의 게시판</title>
+	<link rel="stylesheet" href="/css/board/board30.css">
+	<title>BoardTable</title>
 </head>
-<body>    
-<div id="app">
-    <!-- wrap START -->
-    <div id="wrapper">
-        <div id="menu">
-            <span id="announce" class="boardmenu"  @click="fnAnounce">공지사항</span>
-            <span id="faq" class="boardmenu" @click="fnFaq">자주하는 질문</span>
-            <div class="line"></div>
-        </div>
-         <div class="boardbox">
-            <div id="boardname">문의하기</div>
-        </div>
-        <div class="table_list">
-            <table class="board_list">
+<body>
+    <div id="app">
+        <!-- wrap START -->
+        <div id="wrapper">
+            <div class="boardbox">
+                <div id="boardname">{{boardName}}</div>
+                <select v-model="selectItem" v-if="boardKind == 3">
+                    <option value="">:: 전체 ::</option>
+                    <option value="P">상품관련</option>
+                    <option value="A">계정관련</option>
+                    <option value="D">배송관련</option>
+                </select>
+            </div>
+            <div class="table_list">            
+                <table class="board_list">
                 <thead>
                     <tr>
                         <th scope="col">번호</th>
@@ -48,41 +48,38 @@
                     </tr>
                 </tbody>
             </table>
-            <div id="btn_box">
-				<button @click="fnAdd()" class="btn" style="float:right;" v-if=" userId != '' && AccountStatus != 'S'">문의하기</button>
-			</div>
+            </div>
+            <div class="pagecontroll">
+                < 1 2 3 >
+            </div>
+            <!-- <div id="btn_box">
+					<button @click="fnAdd()" class="btn">새 글 작성</button>
+		</div> -->
         </div>
-        </div>
-        <div class="pagecontroll">
-            < 1 2 3 >
-        </div>
-        
+        <!-- wrap END -->
     </div>
-    <!-- wrap END -->
-</div>
 </body>
 <jsp:include page="/layout/footer.jsp"></jsp:include>
 <script type="text/javascript">
     var app = new Vue({ 
         el: '#app',
         data: {
-        	list : [],
+            list : [],
             checkList : []
-    		, boardKind : "2"
-    		, userId : "${sessionId}"
-    		, AccountStatus : "${sessionStatus}"
-        }   
+    		, /* boardKind : "3" */
+    		, selectItem : ""
+    	
+        }
+    	,watch : {
+    		selectItem :function(){
+    			var self = this;
+    			self.fnGetList();
+    		}
+    	}
         , methods: {
-        	fnFaq : function(){
-        		location.href = "/board30.do";
-        	},
-        	fnAnounce : function(){
-        		location.href = "/notice.do";
-        	}
-        	,
             fnGetList : function(){
                 var self = this;
-                var nparmap = {boardKind : self.boardKind, userId : self.userId, AccountStatus : self.AccountStatus};
+                var nparmap = {boardKind : self.boardKind ,keywordType : self.selectItem};
                 $.ajax({
                     url:"/board/list.dox",
                     dataType:"json",	
@@ -90,10 +87,17 @@
                     data : nparmap,
                     success : function(data) { 
                     	self.list = data.board;
+                    	
                         console.log(data);
                     }
                 }); 
-            }
+            }, 
+            fnInquery : function(){
+        		location.href = "/inquery.do";
+        	},
+        	fnAnounce : function(){
+        		location.href = "/notice.do";
+        	}
         	, pageChange : function(url, param) {
 	    		var target = "_self";
 	    		if(param == undefined){
@@ -123,18 +127,36 @@
 	    		form.submit();
 	    		document.body.removeChild(form);
 	    	}
-        	, fnView : function(boardNo){
+			, fnView : function(boardNo){
 	    		var self = this;
 	    		self.pageChange("./readBoard.do", {boardNo : boardNo});
 	    	}
         	, fnAdd : function(boardKind){
 	    		var self = this;
 	    		self.pageChange("./board3.do", {boardKind : self.boardKind});
-	    	} 
+	    	}/* ,
+        	fnReadBoard: function(){
+            	var self = this;
+            	
+    	        if(self.boardKind == '1'){
+    	        	self.boardName = "공지사항";
+    	        }else if(self.boardKind == '2'){
+    	        	self.boardName = "문의하기";
+    	        }else if(self.boardKind == '3'){
+    	        	self.boardName = "자주하는 질문";
+    	        }
+    	        else{
+    	        	self.boardName = "Error!";
+    	        }
+    	        console.log(self.boardKind);
+    	        console.log(self.boardName);
+            } */
         }   
         , created: function () {
-            var self = this;
+            var self = this;/* 
+            self.ReadBoard(); */
             self.fnGetList();
+    
         }
     });
     </script>

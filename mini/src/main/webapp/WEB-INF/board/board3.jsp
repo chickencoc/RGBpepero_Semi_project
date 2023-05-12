@@ -30,7 +30,7 @@
 						<td style="text-align : center;" >제목</td>
 						<td><input type="text" id="title" name="title" v-model="title" placeholder="제목을 입력해 주세요."></td>
 						<td>
-							<select class="board_cat">
+							<select class="board_cat" v-if="boardKind == 3">
 			                    <option hidden>카테고리 선택</option>
 			                    <option>ㅁㄴㅇㄹ</option>
 			                    <option>ㅁㄴㅇㄹ</option>
@@ -49,7 +49,7 @@
 					</tr>
 					<tr>
 						<td colspan="3">
-						  <vue-editor id="editor" v-model="content">test</vue-editor> <!-- 2. 화면 에디터 추가 -->
+						  <vue-editor id="editor" v-model="content"></vue-editor> <!-- 2. 화면 에디터 추가 -->
 						</td>
 					</tr>
 				</table>
@@ -74,25 +74,29 @@ var app = new Vue({
 		checkList : [],
 		title : "",
 		content : "",
-		boardName : ""
+		boardName : "",
+		boardKind :"${map.boardKind}"
+    	, userId : "${sessionId}"
+        , AccountStatus : "${sessionStatus}"
+		
     }   
     // 4. 컴포넌트 추가
     , components: {VueEditor}
     , methods: {
     	fnAddBoard : function(){
             var self = this;
-            var nparmap = {title : self.title, content : self.content};
+            var nparmap = { boardKind : self.boardKind ,title : self.title, content : self.content, userId : self.userId, keywordType : self.keywordType};
             console.log( self.content );
-            /* $.ajax({
+             $.ajax({
                 url:"/board/add.dox",
                 dataType:"json",	
                 type : "POST", 
                 data : nparmap,
                 success : function(data) { 
                 	alert("저장되었습니다.");
-                	location.href="bbs.do";
+                	self.fnGoList();
                 }
-            });  */
+            });  
         } 
     	// 파일 업로드
 	    , upload : function(){
@@ -111,22 +115,40 @@ var app = new Vue({
 	           
 	       });
 		},
-		fnGetList : function(){
-            var self = this;
-            var nparmap = {};
-            $.ajax({
-                url:"/list.dox",
-                dataType:"json",	
-                type : "POST", 
-                data : nparmap,
-                success : function(data) {                                       
-	                /* self.list = data.list; */
-                }
-            }); 
-        }  	
+        fnReadBoard: function(){
+        	var self = this;
+        	
+	        if(self.boardKind == '1'){
+	        	self.boardName = "공지사항";
+	        }else if(self.boardKind == '2'){
+	        	self.boardName = "문의하기";
+	        }else if(self.boardKind == '3'){
+	        	self.boardName = "자주하는 질문";
+	        }
+	        else{
+	        	self.boardName = "Error!";
+	        }
+	        console.log(self.boardKind);
+	        console.log(self.boardName);
+        },
+        fnGoList(){
+        	var self= this;
+        	
+        	if(self.boardKind == '1'){
+        		location.href = "/notice.do";
+	        }else if(self.boardKind == '2'){
+	        	location.href = "/inquery.do";
+	        }else if(self.boardKind == '3'){
+	        	location.href = "/board30.do";
+	        }
+	        else{
+	        	location.href = "/main.do";
+	        }
+        }
     }   
     , created: function () {
     	var self = this;
+    	self.fnReadBoard();
 	}
 });
 </script>

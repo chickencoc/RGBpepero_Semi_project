@@ -11,4 +11,7 @@ public interface BoardService {
 	
 //	게시글 하나 조회
 	Board searchBoard(HashMap<String, Object> map) throws Exception;
+	
+//	게시글 추가
+	void addBoard(HashMap<String, Object> map) throws Exception;
 }

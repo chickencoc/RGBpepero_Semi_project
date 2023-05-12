@@ -91,6 +91,8 @@ public class BoardController {
         
         return fileName;
     }
+    
+//    메인
     @RequestMapping("/boardMain.do") 
     public String boardMain(Model model) throws Exception{
 		return "/board/board0";
@@ -101,6 +103,13 @@ public class BoardController {
 		return "/board/board10";
 	}
 
+//  문의사항 게시판
+	  @RequestMapping("/inquery.do") 
+	  public String boardInquery(Model model) throws Exception{
+			return "/board/board20";
+		}
+
+//    게시판 목록 띄우기
     @RequestMapping(value = "/board/list.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String searchBoardList(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
@@ -108,7 +117,15 @@ public class BoardController {
 		resultMap = boardService.searchBoardList(map);
 		return new Gson().toJson(resultMap);
 	}
-    
+
+//  게시판 글 하나 읽기 맵핑
+  @RequestMapping("/readBoard.do") 
+  public String boardRead(HttpServletRequest request, Model model,@RequestParam HashMap<String, Object> map) throws Exception{
+  	request.setAttribute("map", map);
+		return "/board/board2";
+	}
+  
+//    게시판 글 하나 읽기 기능
     @RequestMapping(value = "/board/read.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String searchBoard(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
@@ -119,21 +136,28 @@ public class BoardController {
 		return new Gson().toJson(resultMap);
 	}
     
-    
-//    
-    @RequestMapping("/readBoard.do") 
-    public String boardRead(HttpServletRequest request, Model model,@RequestParam HashMap<String, Object> map) throws Exception{
-    	request.setAttribute("map", map);
-		return "/board/board2";
-	}
-    @RequestMapping("/inquery.do") 
-    public String boardInquery(Model model) throws Exception{
-		return "/board/board20";
-	}
+    //작성 페이지
     @RequestMapping("/board3.do") 
-    public String board3(Model model) throws Exception{
-		return "/board/board3";
+    public String board3(HttpServletRequest request,Model model, @RequestParam HashMap<String, Object> map) throws Exception{
+    	request.setAttribute("map", map);
+    	return "/board/board3";
 	}
+  @RequestMapping(value = "/board/add.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String insertBbs(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+//		map.put("userId", session.getAttribute("sessionId"));
+		boardService.addBoard(map);
+		resultMap.put("result", "success");
+		return new Gson().toJson(resultMap);
+	}
+    
+    
+    @RequestMapping("/boardTable.do") 
+    public String boardTable(Model model) throws Exception{
+		return "/board/boardTable";
+	}
+    
     @RequestMapping("/board30.do") 
     public String board30(Model model) throws Exception{
 		return "/board/board30";

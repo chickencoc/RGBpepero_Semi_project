@@ -17,7 +17,7 @@
 <body>
 	<div id="appHeader">
 	    <div id="header">
-	        <div class="loginbox" v-if="session == ''">
+	        <div class="loginbox" v-if="sessionId == ''">
 	            <ul>
 	                <li><a herf="#" @click="toLogin()">로그인</a></li>
 	                <li><a href="#">회원가입</a></li>
@@ -26,7 +26,7 @@
 	        </div>
 	        <div class="loginbox" v-else>
 	            <ul>
-	                <li><a href="#"><span style="font-weight: 400;">{{name}}</span>님 축하합니다</a></li>
+	                <li><a href="#"><span style="font-weight: 400;">{{sessionName}}</span>님 축하합니다</a></li>
 	                <li><a href="#">마이페이지</a></li>
 	                <li><a href="#">로그아웃</a></li>
 	                <li><a href="#">고객센터</a></li>
@@ -43,17 +43,22 @@
 var appHeader = new Vue({ 
     el: '#appHeader',
     data: {
-		session : '',
-		name : '빨간빼빼로'
+		sessionId : "${sessionId}",
+		sessionName : "${sessionName}",
+		sessionStatus : "${sessionStatus}"
 
     }   
     , methods: {
     	toLogin : function() {
         	location.href="login.do";
     	},
+    	toLogout : function() {
+        	location.href="login.do";
+    	},
     	toMain : function() {
         	location.href="main.do";
-    	}
+    	},
+    	
 
     }   
     , created: function () {

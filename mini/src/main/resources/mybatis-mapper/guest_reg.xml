@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.test1.mapper.GuestRegMapper">
+	
+	
+	<select id="selectGuestInfo" parameterType="hashmap" resultType="com.example.mini.model.Guest">
+		SELECT *
+		FROM mini_db2.T1_GUEST;
+	</select>
+	
+	<insert id="insertBbs" parameterType="hashmap">
+		INSERT INTO mini_db2.T1_GUEST
+		VALUES
+			(10, #{userid}, CONCAT(#{phone1}, #{phone2}, #{phone3}), #{postcode}, #{address}, #{addrDetail}, #{gname}, 10)
+	</insert>
+
+	
+</mapper>

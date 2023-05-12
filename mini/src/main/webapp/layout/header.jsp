@@ -17,7 +17,7 @@
 	        <div class="loginbox" v-if="sessionId == ''">
 	            <ul>
 	                <li><a href="#" @click="toLogin()">로그인</a></li>
-	                <li><a href="#">회원가입</a></li>
+	                <li><a href="#" @click="toSignup()">회원가입</a></li>
 	                <li><a href="#" @click="toBoard()">고객센터</a></li>
 	            </ul>
 	        </div>

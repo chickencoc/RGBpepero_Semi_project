@@ -4,23 +4,18 @@
 <html>
 <head>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="js/jquery.js"></script>
-<script src="js/vue.js"></script>
-<link rel="stylesheet" href="/css/Base_rgbPepero.css">
-<link rel="stylesheet" href="/css/Registry.css">
-<title>회원가입 페이지</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<jsp:include page="/layout/headerLogo.jsp"></jsp:include>
+	<link rel="stylesheet" href="/css/Base_rgbPepero.css">
+	<link rel="stylesheet" href="/css/Registry.css">
+	<title>회원가입 페이지</title>
 </head>
 
 <body>
 	<div id="app">
 		<div id="wrapper">
 			<div class="container">
-				<div class="registryLogo">
-					<a href="http://localhost:8080/main.do"><img src="/image/logo_Marrimo.png">
-				</div>
-				</a>
 				<fieldset class="registryBox">
 					<legend class="registTitle">회원가입</legend>
 					<div class="registryQ">

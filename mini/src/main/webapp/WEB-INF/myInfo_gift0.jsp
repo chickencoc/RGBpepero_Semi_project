@@ -45,11 +45,13 @@
                         </div>
                         <div class="searchImg1">
                             <input class="searchList" type="text" value="검색">
-                                    <button class="btn" @click="searchBtn">검색</button>
+                                    <button class="btn">검색</button>
                                     <button class="btn1">초기화</button>
                                 <select name="" class="scroll">
                                     <option value="price">가격순</option>
                                     <option value="newest">최신순</option>
+                                    <option value="funding">펀딩</option>
+                                    <option value="productGift">상품 선물</option>
                                 </select>
                                 <span class="list2">
                                 	<a href="javascript:;" id="category1"><img class="list1" @click="fnChangeView" src="/image/list1.PNG" alt=""></a>
@@ -61,18 +63,18 @@
                             <div class="gift">
                                 <img class="product" src="/image/cup.jpg" alt=""> <!-- 받은 상품 이미지-->
                                     <div class="giftList">    
-                                        <div>제품명:컵1</div>
-                                        <div>선물해준 사람:A</div>
-                                        <div>받은 날짜:XXXX-XX-XX</div>
-                                        <div>펀딩:10,000원</div>
+                                        <div>제품명:유리컵</div>
+                                        <div>선물해준 사람:하도영</div>
+                                        <div>받은 날짜:2023-04-11</div>
+                                        <div>상품 선물</div>
                                     </div>
                             </div>
                             <div class="gift">
                                 <img class="product" src="/image/cup1.jpg" alt=""> <!-- 받은 상품 이미지-->
                                     <div class="giftList">     
-                                        <div>제품명:컵2</div>
-                                        <div>선물해준 사람:b</div>
-                                        <div>받은 날짜:XXXX-XX-XX</div>
+                                        <div>제품명:구슬컵</div>
+                                        <div>선물해준 사람:최혜정</div>
+                                        <div>받은 날짜:2023-05-05</div>
                                         <div>펀딩:20,000원</div>
                                     </div>
                             </div>
@@ -80,36 +82,36 @@
                                 <img class="product" src="/image/knife.jpg" alt=""> <!-- 받은 상품 이미지-->
                                     <div class="giftList"> 
                                         <div>제품명:칼</div>
-                                        <div>선물해준 사람:c</div>
-                                        <div>받은 날짜:XXXX-XX-XX</div>
-                                        <div>펀딩:30,000원</div>
+                                        <div>선물해준 사람:박연진</div>
+                                        <div>받은 날짜:2023-05-02</div>
+                                        <div>상품 선물</div>
                                     </div>
                             </div>
                             <div class="gift">
-                                <img class="product" src="/image/kichin set.jpg" alt=""> <!-- 받은 상품 이미지-->
+                                <img class="product" src="/image/kichin_set.jpg" alt=""> <!-- 받은 상품 이미지-->
                                     <div class="giftList">
-                                        <div>제품명:수저 세트</div>
-                                        <div>선물해준 사람:d</div>
-                                        <div>받은 날짜:XXXX-XX-XX</div>
+                                        <div>제품명:주방 세트</div>
+                                        <div>선물해준 사람:전재준</div>
+                                        <div>받은 날짜:2023-01-28</div>
                                         <div>펀딩:40,000원</div>
                                     </div>    
                             </div>
                             <div class="gift">
-                                <img class="product" src="/image/dish drying rack.jpg" alt=""> <!-- 받은 상품 이미지-->
+                                <img class="product" src="/image/dish_drying_rack.jpg" alt=""> <!-- 받은 상품 이미지-->
                                     <div class="giftList"> 
-                                        <div>제품명:식기 건조대</div>
-                                        <div>선물해준 사람:e</div>
-                                        <div>받은 날짜:XXXX-XX-XX</div>
-                                        <div>펀딩:50,000원</div>
+                                        <div>제품명:식기건조대</div>
+                                        <div>선물해준 사람:이사라</div>
+                                        <div>받은 날짜:2023-01-10</div>
+                                        <div>상품 선물</div>
                                     </div>
                             </div>
                             <div class="gift">
                                 <img class="product" src="/image/spoon.jpg" alt=""> <!-- 받은 상품 이미지-->
                                     <div class="giftList"> 
                                         <div>제품명:수저통</div>
-                                        <div>선물해준 사람:f</div>
-                                        <div>받은 날짜:XXXX-XX-XX</div>
-                                        <div>펀딩:60,000원</div>
+                                        <div>선물해준 사람:문동은</div>
+                                        <div>받은 날짜:2023-03-20</div>
+                                        <div>상품 선물</div>
                                     </div> 
                             </div>
                         </div>
@@ -172,8 +174,8 @@
                                             <span class="text2">
                                                 <span><img class="fundingImg1" src="/image/funding.PNG" alt=""></span>
                                                 <span class="check5">1개</span>
-                                                <span class="check6">2023.06.20</span>
-                                                <span class="check7">58,000원</span>
+                                                <span class="check6">2023.04.11</span>
+                                                <span class="check7">35,000원</span>
                                             </span>    
                                                 <div class="content">이 컵은 아기자기하고 신혼부부들이 많이 사용합니다.</div>
                                             </div>
@@ -189,10 +191,10 @@
                                             <span class="text2">    
                                                 <span><img class="fundingImg1" src="/image/funding.PNG" alt=""></span>
                                                 <span class="check5">1개</span>
-                                                <span class="check6">2023.06.20</span>
-                                                <span class="check7">58,000원</span>
+                                                <span class="check6">2023.05.05</span>
+                                                <span class="check7">20,000원</span>
                                             </span>    
-                                                <div class="content">이 컵은 아기자기하고 신혼부부들이 많이 사용합니다.</div>
+                                                <div class="content">귀여운 디자인으로 기분까지 상큼</div>
                                             </div>
                                 <hr class="line1">
                             </div>
@@ -205,10 +207,10 @@
                                             <span class="text2">    
                                                 <span><img class="fundingImg1" src="/image/funding.PNG" alt=""></span>
                                                 <span class="check5">1개</span>
-                                                <span class="check6">2023.06.20</span>
-                                                <span class="check7">58,000원</span>
+                                                <span class="check6">2023.05.02</span>
+                                                <span class="check7">47,000원</span>
                                             </span>    
-                                                <div class="content">이 컵은 아기자기하고 신혼부부들이 많이 사용합니다.</div>
+                                                <div class="content">어떤 재료든 싹둑!싹둑!썰어버려 싹~싹!</div>
                                             </div>
                                 <hr class="line1">    
                             </div>
@@ -222,10 +224,10 @@
                                             <span class="text2">
                                                 <span><img class="fundingImg1" src="/image/funding.PNG" alt=""></span>    
                                                 <span class="check5">1개</span>
-                                                <span class="check6">2023.06.20</span>
-                                                <span class="check7">58,000원</span>
+                                                <span class="check6">2023.01.28</span>
+                                                <span class="check7">40,000원</span>
                                             </span>    
-                                                <div class="content">이 컵은 아기자기하고 신혼부부들이 많이 사용합니다.</div>
+                                                <div class="content">주부라면 필요한 필수 용품!</div>
                                             </div>
                                 <hr class="line1">            
                             </div>
@@ -238,10 +240,10 @@
                                             <span class="text2">    
                                                 <span><img class="fundingImg1" src="/image/funding.PNG" alt=""></span>
                                                 <span class="check5">1개</span>
-                                                <span class="check6">2023.06.20</span>
-                                                <span class="check7">58,000원</span>
+                                                <span class="check6">2023.01.10</span>
+                                                <span class="check7">78,000원</span>
                                             </span>    
-                                                <div class="content">이 컵은 아기자기하고 신혼부부들이 많이 사용합니다.</div>
+                                                <div class="content">물기가 잘 빠져서 사람들이 세탁기로 오해해요</div>
                                             </div>
                                 <hr class="line1">
                             </div>
@@ -254,10 +256,10 @@
                                             <span class="text2">    
                                                 <span><img class="fundingImg1" src="/image/funding.PNG" alt=""></span>
                                                 <span class="check5">1개</span>
-                                                <span class="check6">2023.06.20</span>
-                                                <span class="check7">58,000원</span>
+                                                <span class="check6">2023.03.20</span>
+                                                <span class="check7">12,000원</span>
                                             </span>    
-                                                <div class="content">이 컵은 아기자기하고 신혼부부들이 많이 사용합니다.</div>
+                                                <div class="content">고급스러운 디자인에 남편이 비상금 통으로 사용하고 싶어해요</div>
                                             </div>
                                 <hr class="line1">
                             </div>

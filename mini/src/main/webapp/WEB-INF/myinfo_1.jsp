@@ -105,11 +105,11 @@
     margin-left: 57px;
    }
    #addresses #address1{
-    margin-left: 87px;
+    margin-left: 91px;
+     width: 350px;
    }
    #addresses #address2{
     margin-left: 121px;
-    width: 300px;
    }
    #addresses #address3{
     margin-left: 121px;
@@ -117,15 +117,11 @@
    #mail #email1{
     margin-left: 72.5px;
    }
-   #birth #birthYear{
-    margin-left: 57.5px; width: 70px; margin-right: 10px;
-   }
-   #birth #birthMonth{
-    width: 70px; margin-right: 10px;
-   }
    #birth #birthDay{
-    width: 70px; margin-right: 10px;
-   }
+    margin-left: 57.5px; 
+    margin-right: 10px;
+   	}
+ 
    #bankInfo select{
     width: 60px;
     margin-left: 57.5px;
@@ -150,55 +146,48 @@
               <img src="/image/profile1.PNG" id="profile">
               <div id="information">
                 <div id="idline">
-                  아이디<span>test123</span>
+                  아이디<span>{{userId}}</span>
                 </div>
                 <div id="pwline">
-                  <label>비밀번호 <input type="password" id ="pw" placeholder="***"></label>
+                  <label>비밀번호 <input type="password" id ="pw" v-model ="password"></label>
                 </div>
                 <div id="pwline2">
-                  <label>비밀번호 확인 <input type="password" id ="pw2" placeholder="***"></label>
+                  <label>비밀번호 확인 <input type="password" id ="pw2"></label>
                 </div>
                 <div id="nameAndPartner">
-                  <label>이름 <input type="text" id ="name" placeholder="홍길동"></label>
-                  <label>배우자명 <input type="text" id ="partner" placeholder="홍찰찰"></label>
+                  <label>이름 <input type="text" id ="name" v-model="uName"></label>
+                  <label>배우자명 <input type="text" id ="partner" v-model="partner"></label>
                 </div> 
                 <div id="gender">
-                  <label>성별<input type="radio" id="male" value="M" name="gender" checked>남자</label>
+                  <label>성별<input type="radio" id="male" value="M" name="gender">남자</label>
                   <label><input type="radio" id="female" value="F" name="gender">여자</label>
                 </div>
                 <div id="phoneNumber">
-                  <label>전화번호 <input type="tel" id = "phone"  placeholder="010-****-****"></label>
+                  <label>전화번호 <input type="tel" id = "phone" v-model="uPhone"></label>
                 </div>
-                <div id="addresses">
-                  <label>
-                    주소 <input type="text" id = "address1" placeholder="사랑시">
-                  </label>
-                    <a id="post">우편번호</a>
-                  <label><input type="text" id = "address2" placeholder="고백구 행복동"></label>
-                  <label><input type="text" id = "address3" placeholder="**아파트 301호"></label>
+                <div id="addresses">           
+                  <label>주소<input type="text" id = "address1" v-model="uAddr1"></label>
+                  <label><input type="text" id = "address2" v-model="uAddr2"></label>
                 </div>
                 <div id="mail">
-                  <label>이메일 <input type="email" id="email1" placeholder="***@naver.com"></label>
+                  <label>이메일 <input type="email" id="email1" v-model="uEmail"></label>
                 </div>
                 <div id="birth">
                   생년월일
-                  <input type="number" id="birthYear"placeholder="1999">년
-                  <input type="number" id="birthMonth" placeholder="09">월        
-                  <input type="number" id="birthDay" placeholder="09">일        
+                  <input type="text" id="birthDay" v-model="birth"> 
                 </div>
                 <div id="bankInfo">
                   계좌정보 
                   <select id ="bank">
-                    <option>국민</option>
-                    <option>우리</option>
-                    <option>신한</option>
-                    <option>기업</option>
-                    <option>농협</option>
-                    <option>하나</option>
+                    <option value="1">국민</option>
+                    <option value="2">신한</option>
+                    <option value="3">우리</option>
+                   	<option value="4">농협</option>
+                    <option value="5">기업</option>
                   </select>
-                  <input type ="text" id ="bankNumber" placeholder="299-123456-444455">
+                  <input type ="text" id ="bankNumber" v-model="bankaccount">
                 </div>
-                <button id="btn" @click="fnMoveMain">수정완료</button>
+                <button id="btn" @click="fnUserInformationModify">수정완료</button>
               </div>
             </fieldset>
           </div>
@@ -212,17 +201,75 @@
 var app = new Vue({ 
     el: '#app',
     data: {
-
+    	userId : "${sessionId}",
+    	password : "",
+    	uName : "",
+    	partner : "",
+    	gender : "",
+    	uPhone : "",
+    	uAddr1 : "",
+    	uAddr2 : "",
+    	uEmail : "",
+    	birth : "",
+    	bank : "",
+    	bankaccount : "",
+    	list : []
+    	
     }   
     , methods: {
     	fnMoveMain : function(){
+    		alert("성공적으로 수정되었습니다!");
     		location.href="/main.do";
-    	}
+    	},
+    	fnUserInformationBefore : function(){
+    		var self = this;
+            var nparmap = {userId : self.userId}; 
+            $.ajax({
+                url:"/informationmodify.dox",
+                dataType:"json",	
+                type : "POST", 
+                data : nparmap,
+                success : function(data) {             
+             		console.log(data);
+             		self.list = data.list;
+             		console.log(self.list);
+             		self.uName = self.list.uName;
+             		self.partner = self.list.partner;
+             		self.password = self.password;
+             		self.gender = self.list.gender;
+             		self.uPhone = self.list.uPhone;
+             		self.uAddr1 = self.list.uAddr1;
+             		self.uAddr2 = self.list.uAddr2;
+             		self.uEmail = self.list.uEmail;
+             		self.birth = self.list.birth;
+             		self.bank = self.list.bank;
+             		self.bankaccount = self.list.bankaccount;
+    				}
+    			})
+    		}
+    	},
+    	
+    	fnUserInformationModify : function(){
+    		var self = this;
+            var nparmap = {userId : self.userId, password : self.password, uName : self.uName,
+            			   partner : self.partner,gender : self.gender, uPhone : self.uPhone,
+                		   uAddr1 : self.uAddr1, uAddr2 : self.uAddr2, uEmail : self.uEmail,
+                		   birth : self.birth, bank : self.bank, bankaccount : self.bankaccount}; 
+            $.ajax({
+                url:"/information/edit.dox",
+                dataType:"json",	
+                type : "POST", 
+                data : nparmap,
+                success : function(data) {             
+                	location.href="/information.do";
+    				}
+    			})
+    		}
 
-    }   
+    	
     , created: function () {
     	var self = this;
-
+		self.fnUserInformationBefore();
 	}
 });
 </script>

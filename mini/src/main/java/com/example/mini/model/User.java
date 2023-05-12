@@ -14,7 +14,7 @@ public class User {
 	private String uAddr2;
 	private String uPhone;
 	private String uEmail;
-	private String uBirth;
+	private String birth;
 	private String weddingday;
 	private String cdatetime;
 	private String udatetime;
@@ -64,11 +64,11 @@ public class User {
 	public void setuEmail(String uEmail) {
 		this.uEmail = uEmail;
 	}
-	public String getuBirth() {
-		return uBirth;
+	public String getBirth() {
+		return birth;
 	}
-	public void setuBirth(String uBirth) {
-		this.uBirth = uBirth;
+	public void setBirth(String birth) {
+		this.birth = birth;
 	}
 	public String getWeddingday() {
 		return weddingday;

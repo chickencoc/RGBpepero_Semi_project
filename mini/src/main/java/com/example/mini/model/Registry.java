@@ -10,7 +10,7 @@ public class Registry {
 	private String rUdatetime;
 	private String rOption;
 	private String rContent;
-	private String userid;
+	private String userId;
 	private String fundYn;
 	public String getRegistryNo() {
 		return registryNo;
@@ -66,11 +66,11 @@ public class Registry {
 	public void setrContent(String rContent) {
 		this.rContent = rContent;
 	}
-	public String getUserid() {
-		return userid;
+	public String getUserId() {
+		return userId;
 	}
-	public void setUserid(String userid) {
-		this.userid = userid;
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 	public String getFundYn() {
 		return fundYn;

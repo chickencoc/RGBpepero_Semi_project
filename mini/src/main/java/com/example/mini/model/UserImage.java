@@ -2,53 +2,54 @@ package com.example.mini.model;
 
 public class UserImage {
 	private String srcimgNo;
-	private String userid;
-	private String imgsrc;
-	private String imgname;
-	private String orgname;
-	private String imgtype;
-	private String imguestype;
+	private String userId;
+	private String imgSrc;
+	private String imgName;
+	private String orgName;
+	private String imgType;
+	private String imgUestype;
 	public String getSrcimgNo() {
 		return srcimgNo;
 	}
 	public void setSrcimgNo(String srcimgNo) {
 		this.srcimgNo = srcimgNo;
 	}
-	public String getUserid() {
-		return userid;
+	public String getUserId() {
+		return userId;
 	}
-	public void setUserid(String userid) {
-		this.userid = userid;
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
-	public String getImgsrc() {
-		return imgsrc;
+	public String getImgSrc() {
+		return imgSrc;
 	}
-	public void setImgsrc(String imgsrc) {
-		this.imgsrc = imgsrc;
+	public void setImgSrc(String imgSrc) {
+		this.imgSrc = imgSrc;
 	}
-	public String getImgname() {
-		return imgname;
+	public String getImgName() {
+		return imgName;
 	}
-	public void setImgname(String imgname) {
-		this.imgname = imgname;
+	public void setImgName(String imgName) {
+		this.imgName = imgName;
 	}
-	public String getOrgname() {
-		return orgname;
+	public String getOrgName() {
+		return orgName;
 	}
-	public void setOrgname(String orgname) {
-		this.orgname = orgname;
+	public void setOrgName(String orgName) {
+		this.orgName = orgName;
 	}
-	public String getImgtype() {
-		return imgtype;
+	public String getImgType() {
+		return imgType;
 	}
-	public void setImgtype(String imgtype) {
-		this.imgtype = imgtype;
+	public void setImgType(String imgType) {
+		this.imgType = imgType;
 	}
-	public String getImguestype() {
-		return imguestype;
+	public String getImgUestype() {
+		return imgUestype;
 	}
-	public void setImguestype(String imguestype) {
-		this.imguestype = imguestype;
+	public void setImgUestype(String imgUestype) {
+		this.imgUestype = imgUestype;
 	}
+	
 	
 }

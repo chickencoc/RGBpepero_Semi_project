@@ -25,7 +25,7 @@
                         </div>
                     </div>
                     <div class="loginBtnBox">
-                        <button class="loginBtn btn1" @click="fnLogin()">로그인</button>
+                        <button class="loginBtn btn1" @click="fnLogin()" @keyup.enter="fnLogin()">로그인</button>
                     </div>
                 </fieldset>
                 <div class="loginCategoryList">

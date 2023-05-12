@@ -7,7 +7,7 @@ public class Delivery {
 	private String dStatus;
 	private String dDate;
 	private String dArrived;
-	private String orderNo;
+
 	public String getDeliveryNo() {
 		return deliveryNo;
 	}
@@ -44,10 +44,5 @@ public class Delivery {
 	public void setdArrived(String dArrived) {
 		this.dArrived = dArrived;
 	}
-	public String getOrderNo() {
-		return orderNo;
-	}
-	public void setOrderNo(String orderNo) {
-		this.orderNo = orderNo;
-	}
+
 }

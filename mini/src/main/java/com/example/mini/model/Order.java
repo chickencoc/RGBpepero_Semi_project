@@ -4,6 +4,8 @@ public class Order {
 	private String orderNo;
 	private String guestNo;
 	private String userId;
+	private String uName;
+	private String uPhone;
 	private String productNo;
 	private String oCdatetime;
 	private String oCnt;
@@ -15,6 +17,24 @@ public class Order {
 	private String oPurchase;
 	private String price;
 	private String oDeposit;
+	private String deliveryNo;
+	private String dPrice;
+	private String dMessage;
+	private String dStatus;
+	private String dDate;
+	private String dArrived;
+	private String pPrice;
+	private String pContent;
+	private String pName;
+	private String srcimgNo;
+	private String imgsrc;
+	private String imgname;
+	private String orgname;
+	private String imgtype;
+	private String kind;
+	private String code;
+	private String name;
+	
 	public String getOrderNo() {
 		return orderNo;
 	}
@@ -98,5 +118,119 @@ public class Order {
 	}
 	public void setoDeposit(String oDeposit) {
 		this.oDeposit = oDeposit;
+	}
+	public String getuName() {
+		return uName;
+	}
+	public void setuName(String uName) {
+		this.uName = uName;
+	}
+	public String getuPhone() {
+		return uPhone;
+	}
+	public void setuPhone(String uPhone) {
+		this.uPhone = uPhone;
+	}
+	public String getDeliveryNo() {
+		return deliveryNo;
+	}
+	public void setDeliveryNo(String deliveryNo) {
+		this.deliveryNo = deliveryNo;
+	}
+	public String getdPrice() {
+		return dPrice;
+	}
+	public void setdPrice(String dPrice) {
+		this.dPrice = dPrice;
+	}
+	public String getdMessage() {
+		return dMessage;
+	}
+	public void setdMessage(String dMessage) {
+		this.dMessage = dMessage;
+	}
+	public String getdStatus() {
+		return dStatus;
+	}
+	public void setdStatus(String dStatus) {
+		this.dStatus = dStatus;
+	}
+	public String getdDate() {
+		return dDate;
+	}
+	public void setdDate(String dDate) {
+		this.dDate = dDate;
+	}
+	public String getdArrived() {
+		return dArrived;
+	}
+	public void setdArrived(String dArrived) {
+		this.dArrived = dArrived;
+	}
+	public String getpPrice() {
+		return pPrice;
+	}
+	public void setpPrice(String pPrice) {
+		this.pPrice = pPrice;
+	}
+	public String getpContent() {
+		return pContent;
+	}
+	public void setpContent(String pContent) {
+		this.pContent = pContent;
+	}
+	public String getpName() {
+		return pName;
+	}
+	public void setpName(String pName) {
+		this.pName = pName;
+	}
+	public String getSrcimgNo() {
+		return srcimgNo;
+	}
+	public void setSrcimgNo(String srcimgNo) {
+		this.srcimgNo = srcimgNo;
+	}
+	public String getImgsrc() {
+		return imgsrc;
+	}
+	public void setImgsrc(String imgsrc) {
+		this.imgsrc = imgsrc;
+	}
+	public String getImgname() {
+		return imgname;
+	}
+	public void setImgname(String imgname) {
+		this.imgname = imgname;
+	}
+	public String getOrgname() {
+		return orgname;
+	}
+	public void setOrgname(String orgname) {
+		this.orgname = orgname;
+	}
+	public String getImgtype() {
+		return imgtype;
+	}
+	public void setImgtype(String imgtype) {
+		this.imgtype = imgtype;
+	}
+	public String getKind() {
+		return kind;
+	}
+	public void setKind(String kind) {
+		this.kind = kind;
+	}
+	public String getCode() {
+		return code;
+	}
+	public void setCode(String code) {
+		this.code = code;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
 	}
 }

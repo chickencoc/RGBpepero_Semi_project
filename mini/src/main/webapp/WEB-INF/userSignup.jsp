@@ -127,14 +127,11 @@
 						</div>
 						<div class="registryAList">
 							<select v-model="bank">
-								<option value="">::선택::</option>
-								<option value="1">신한은행</option>
-								<option value="2">기업은행</option>
-								<option value="3">국민은행</option>
-								<option value="4">농협은행</option>
-								<option value="5">카카오뱅크</option>
-								<option value="6">우리은행</option>
-							</select> <input type="text" class="registryAccount text1"
+								<option value="A">국민은행</option>
+								<option value="B">신한은행</option>
+								<option value="C">우리은행</option>
+								<option value="D">농협은행</option>
+								<option value="E">기업은행</option>							</select> <input type="text" class="registryAccount text1"
 								placeholder=" - 없이 입력" v-model="bankaccount">
 						</div>
 						<div class="btnBox">

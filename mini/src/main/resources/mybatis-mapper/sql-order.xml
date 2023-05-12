@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.mini.mapper.OrderMapper">	
+	<select id="selectProdOrder" parameterType="hashmap" resultType="com.example.mini.model.Order">
+		SELECT O.ORDERNO,
+			G.G_PHONE,
+			G.USERID,
+			U_NAME,
+			U_PHONE,
+			P.PRODUCTNO,
+			P_CONTENT,
+			P_PRICE,
+			P_NAME,
+            PI.SRCIMGNO,
+            PI.IMGSRC,
+            PI.IMGNAME,
+            PI.ORGNAME,
+            PI.IMGTYPE,
+			O_CDATETIME,
+			O_CNT,
+			O_ADDRNO,
+			O_ADDR1,
+			O_ADDR2,
+			O_PHONE,
+			O_MESSAGE,
+			O_PURCHASE,
+			PRICE,
+			O_DEPOSIT,
+			D_PRICE,
+			D_MESSAGE,
+			D.DELIVERYNO,
+			D_STATUS,
+            C.NAME,
+            C2.NAME
+		FROM mini_db2.T1_ORDER O
+			LEFT JOIN mini_db2.T1_GUEST G ON G.G_PHONE = O.G_PHONE
+			LEFT OUTER JOIN mini_db2.T1_DELIVERY D ON D.DELIVERYNO = O.DELIVERYNO
+			LEFT OUTER JOIN mini_db2.T1_USER U ON U.USERID =  G.USERID
+			INNER JOIN mini_db2.T1_PRODUCT P ON P.PRODUCTNO = O.PRODUCTNO
+			LEFT JOIN mini_db2.T1_PDIMAGE PI ON PI.PRODUCTNO = PI.PRODUCTNO
+			LEFT JOIN mini_db2.T1_CODE C ON C.CODE = O_PURCHASE AND C.KIND = 'PAYMENT'
+			LEFT JOIN mini_db2.T1_CODE C2 ON C2.CODE = D_STATUS AND C2.KIND = 'SHIPPING'
+		WHERE (O.G_PHONE IS NULL OR G.G_PHONE IS NOT NULL)
+			AND (O.USERID IS NULL OR U.USERID IS NOT NULL)
+		    AND G.USERID = #{userId} 
+		    AND D.DELIVERYNO = 1
+	<!-- 	    AND O.ORDERNO = #{orderNo} -->
+		
+	</select>
+	
+<!-- 	<select id="selectUserCnt" parameterType="hashmap" resultType="int">
+		SELECT COUNT(*) AS CNT
+		FROM mini_db2.T1_USER
+		WHERE USERID = #{userId}
+	</select>
+	
+	<insert id="insertUser" parameterType="hashmap">
+		INSERT INTO T1_USER
+			(USERID, PASSWORD, U_NAME, PARTNER, GENDER, U_ADDRNO, U_ADDR1, U_ADDR2, U_PHONE, 
+			U_EMAIL, BIRTH, WEDDINGDAY, CDATETIME, UDATETIME, STATUS, BANK, BANKACCOUNT)
+		VALUES 
+			(#{userId}, #{pwd}, #{uName}, #{partner}, #{gender}, #{addrNo}, #{addr1}, #{addr2}, #{phoneNumber},
+			#{emailAddr}, #{birthday}, #{weddingday}, NOW(), NULL, 'U', #{bank}, #{bankaccount} )
+	</insert>
+	<select id="selectFindId" parameterType="hashmap" resultType="com.example.mini.model.User">
+		SELECT 
+		    USERID,
+		    U_NAME,
+		    U_EMAIL,
+		    STATUS
+		FROM mini_db2.T1_USER
+		WHERE U_NAME = #{uName} AND U_EMAIL = #{emailAddr}
+	</select>
+	<select id="selectFindPwd" parameterType="hashmap" resultType="com.example.mini.model.User">
+		SELECT 
+		    USERID,
+		    U_NAME,
+		    U_EMAIL,
+		    STATUS
+		FROM mini_db2.T1_USER
+		WHERE USERID = #{userId} AND U_NAME = #{uName} AND U_EMAIL = #{emailAddr}
+	</select>
+	<update id="updatePwd" parameterType="hashmap">
+		UPDATE mini_db2.T1_USER
+		SET PASSWORD = #{pwd}
+		WHERE USERID = #{userId}
+	</update>
+	 -->
+	
+	
+</mapper>

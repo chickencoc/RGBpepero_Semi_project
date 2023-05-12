@@ -14,9 +14,10 @@
 
 <body>
 	<div id="appHeader">
-	    <div id="header">        
-	        <div class="logobox" style= "position: relative; top: 25px;">
-	            <div id="logo" @click="toMain()"><img src="/image/logo_Marrimo.png"></div>
+	    <div id="header">
+	    	<div class="loginbox"></div>
+	        <div class="logobox">
+	            <div id="logo"><img  @click="toMain()" src="/image/logo_Marrimo.png"></div>
 	        </div>
 	    </div>
     </div>

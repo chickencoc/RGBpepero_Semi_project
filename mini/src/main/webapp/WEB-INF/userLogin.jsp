@@ -3,8 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script src="js/jquery.js"></script>
-<script src="js/vue.js"></script>
+	<jsp:include page="/layout/headerLogo.jsp"></jsp:include>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="/css/Base_rgbPepero.css">
@@ -15,11 +14,6 @@
 <body>
     <div id="app">
             <div class="container">
-                <div class="loginLogo">
-                	<a href="http://localhost:8080/main.do">
-                		<img src="/image/logo_Marrimo.png" class="logo">
-                	</a>
-                </div>
                 <fieldset class="loginBox">
                     <legend class="loginTitle">Login</legend>
                     <div class="loginTextBox">
@@ -27,7 +21,7 @@
                             <img src="/image/Group.png" class="loginImg"><input type="text" class="loginText" placeholder="아이디" v-model="id">
                         </div>
                         <div class="loginInfo loginTextPwd">
-                            <img src="/image/Lock.png" class="loginImg"><input type="password" class="loginText" placeholder="비밀번호" v-model="pwd">
+                            <img src="/image/Lock.png" class="loginImg"><input type="password" class="loginText" placeholder="비밀번호" v-model="pwd" @keyup.enter="fnLogin()">
                         </div>
                     </div>
                     <div class="loginBtnBox">

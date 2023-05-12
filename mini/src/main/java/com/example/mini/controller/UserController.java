@@ -27,8 +27,8 @@ public class UserController {
 	HttpSession session;
 	
 	@RequestMapping("/userSignup.do") 
-	public String regist(HttpServletRequest request, Model model, @RequestParam HashMap<String, Object> map) throws Exception{
-		request.setAttribute("map", map);
+	public String regist(Model model) throws Exception{
+		
         return "/userSignup";
     }
 	
@@ -108,7 +108,7 @@ public class UserController {
 	}
 	
 	
-	@RequestMapping("/userFindPwd.do") 
+	@RequestMapping("/userFindPwd.do")
     public String findPwd(Model model) throws Exception{
 
         return "/userFind2";

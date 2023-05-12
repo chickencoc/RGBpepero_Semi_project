@@ -63,7 +63,7 @@ var app = new Vue({
     			success : function(data) {
     				alert(data.message);
     				if(data.result == "success"){
-    						location.href="/main.do"
+    					location.href="/main.do"
     					}
     				}
     			});

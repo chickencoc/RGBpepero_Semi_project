@@ -26,21 +26,20 @@ public class RegistryServiceImpl implements RegistryService{
 	@Override
 	public void registryOption(HashMap<String, Object> map) {
 		// TODO Auto-generated method stub
-		return registryMapper.registryOption(map);
+		registryMapper.registryOption(map);
 	}
-
 
 	@Override
 	public void registryGift(HashMap<String, Object> map) {
 		// TODO Auto-generated method stub
-		return registryMapper.registryGift(map);
+		registryMapper.registryGift(map);
 	}
 
 
 	@Override
 	public void registryBackImg(HashMap<String, Object> map) {
 		// TODO Auto-generated method stub
-		return registryMapper.registryBackImg(map);
+		registryMapper.registryBackImg(map);
 	}
 	
 

@@ -5,9 +5,9 @@
 <head>
 <script src="js/jquery.js"></script>
 <script src="js/vue.js"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<jsp:include page="/layout/header.jsp"></jsp:include>
 <link rel="stylesheet" href="/css/Base_rgbPepero.css">
 <link rel="stylesheet" href="/css/guest_reg1.css">
 <title>비회원 정보 입력</title>
@@ -30,7 +30,6 @@
 				<legend class="guestRegistTitle">비회원 정보 입력</legend>
 				<div class="guestRegistListQ">
 					<div class="guestRegistList">이름</div>
-					<div class="guestRegistList">이메일</div>
 					<div class="guestRegistList">연락처</div>
 					<div class="guestRegistList">주소</div>
 					<div class="guestRegistList"></div>
@@ -38,47 +37,27 @@
 				</div>
 				<div class="guestRegistListA">
 					<div class="guestRegistList">
-						<input type="text" class="findIdTextBox text1" placeholder="이름 입력"
-							v-model="name">
-					</div>
-					<div class="guestRegistList">
-						<input type="text" class="guestRegistEmailBox text1"
-							placeholder="이메일 입력" v-model="email"> @ <input
-							type="text" class="guestRegistEmailBox text1" id="emailAddr"
-							v-model="email2" :disabled="!isEmailAddrEditable"> <select
-							class="guestRegistryEmailSelect text1" id="emailSelect"
-							v-model="selectedEmailDomain" v-on:change="fnEmailSelectChanged">
-							<option value="">직접 입력</option>
-							<option value="naver.com">naver.com</option>
-							<option value="daum.net">daum.net</option>
-							<option value="gmail.com">gmail.com</option>
-						</select>
+						<input type="text" class="findIdTextBox text1" placeholder="이름 입력" v-model="gname">
 					</div>
 					<div class="guestRegistList">
 						<input type="text" class="guestPhoneText" placeholder="연락처"
 							v-model="phone1"> - <input type="text"
 							class="guestPhoneText" placeholder="연락처" v-model="phone2">
-						- <input type="text" class="guestPhoneText" placeholder="연락처"
-							v-model="phone3">
+						- <input type="text" class="guestPhoneText" placeholder="연락처" v-model="phone3">
 					</div>
 					<div class="guestRegistList">
-						<input type="text" class="guestRegistryAddr text1" disabled
-							id="postcode" placeholder="우편번호" v-model="postcode">
-						<button class="guestRegistBtn btn1" @click="fnAddr">우편번호
-							검색</button>
+						<input type="text" class="guestRegistryAddr text1" disabled id="postcode" placeholder="우편번호" v-model="postcode">
+						<button class="guestRegistBtn btn1" @click="fnAddr">우편번호 검색</button>
 					</div>
 					<div class="guestRegistList">
-						<input type="text" class="guestRegistryAddrDetail text1"
-							placeholder="주소" disabled id="address" v-model="address">
+						<input type="text" class="guestRegistryAddrDetail text1" placeholder="주소" disabled id="address" v-model="address">
 					</div>
 					<div class="guestRegistList">
-						<input type="text" class="guestRegistryAddrDetail text1"
-							placeholder="상세 주소 입력" v-model="addrDetail" id="detailAddress">
+						<input type="text" class="guestRegistryAddrDetail text1" placeholder="상세 주소 입력" id="detailAddress" v-model="addrDetail">
 					</div>
 				</div>
 				<div class="findIdCheck">
-					<button class="guestRegistryCheckBtn findIdBtn btn1"
-						@click="fnConfirm">다음 단계</button>
+					<button class="guestRegistryCheckBtn findIdBtn btn1" @click="fnConfirm">다음 단계</button>
 				</div>
 			</fieldset>
 		</div>
@@ -92,23 +71,20 @@ var app = new Vue({
     data: {
         postcode : '',
         address : '',
-        name: '',
+        addrDetail :'',
+        gname: '',
 	    phone1 :'',
 	    phone2 :'',
-	    phone3 :'',
-	    email :'',
-	    email2 :'',
-	    addrDetail :'',
-        selectedEmailDomain: '',
-        addr2:''
+	    phone3 :''
     },
-    computed: {
+    computed: { //?
         isEmailAddrEditable() {
         return this.selectedEmailDomain === '';
         }   
     }   
     , methods: {
         fnAddr : function(){
+        	var self = this;
         new daum.Postcode({
             oncomplete: function(data) {
                 // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
@@ -148,8 +124,8 @@ var app = new Vue({
                 // }
 
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                document.getElementById('postcode').value = data.zonecode;
-                document.getElementById("address").value = address;
+                self.postcode = data.zonecode;
+                self.address = address;
                 // 커서를 상세주소 필드로 이동한다.
                 document.getElementById("detailAddress").focus();
             }
@@ -172,61 +148,42 @@ var app = new Vue({
                 let getNumberCheck = /[0-9]/;
                 let getNameCheck = /^[가-힣|a-z|A-Z]/;
                 var self = this;
-                if(self.name==''||
-                    self.email==''||
-                    self.email2==''||
+                if(self.gname==''||
                     self.phone1==''||
                     self.phone2==''||
                     self.phone3==''||
-                    self.addr2==''||
+                    self.postcode==''||
                     self.address==''||
                     self.addrDetail==''){
                         alert("모든 정보를 입력해주세요.");
                     }
-                    else if(!getNameCheck.test(self.name)){
+                    else if(!getNameCheck.test(self.gname)){
                         alert("이름이 정확하지 않습니다.")
                     }
                     else if(!getNumberCheck.test(self.phone1)||!getNumberCheck.test(self.phone2)||!getNumberCheck.test(self.phone3)){
                         alert("전화번호는 숫자만 입력 가능합니다.");
-                    }
-
-			// } else{
-	    	// 		var nparmap = {id : self.id, 
-			//     			pwd : self.pwd, 
-			//     			name : self.name, 
-			//     			nickname : self.nickname,
-			//     			age : self.age,
-			//     			gender : self.gender,
-			//     			address : self.address};	
-			// 		  	$.ajax({
-			// 				url : "/regist.dox",
-			// 				dataType : "json",
-			// 				type : "POST",
-			// 				data : nparmap,
-			// 				success : function(data) {
-								
-			// 					console.log(data);
-			// 					alert("회원가입 완료");
-			// 					self.id='';
-			// 					self.pwd='';
-			// 					self.pwd2='';
-			// 					self.name='';
-			// 					self.age='';
-			// 					self.gender='';
-			// 					self.address='';
-			// 					self.nickname='';
-								
-			// 					self.check=true;
-			// 	        	   	$("#idBox").css("pointer-events", "auto");
-			// 	    			$("#idBox").css("opacity", "1.0");
-			// 					}
-			// 				});
-            // }
-			}
-       
-    }   
-    , created: function () {
-        var self = this;
-    }
+                    } else{
+						var nparmap = {
+				    			gname : self.gname, 
+				    			postcode : self.postcode,
+				    			address : self.address,
+				    			addrDetail : self.addrDetail,
+				    			phone : self.phone1 + self.phone2 + self.phone3};	
+						  	$.ajax({
+								url : "/guest/info.dox",
+								dataType : "json",
+								type : "POST",
+								data : nparmap,
+								success : function(data) {
+									location.href="guestFunding.do";
+								}
+							});
+			        }
+		    	}  
+		}   
+		, created: function () {
+			var self = this;
+		
+		}
 });
 </script>

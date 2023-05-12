@@ -3,13 +3,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script src="js/jquery.js"></script>
-<script src="js/vue.js"></script>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<jsp:include page="/layout/header.jsp"></jsp:include>
 	<link rel="stylesheet" href="/css/Base_rgbPepero.css">
-	<link rel="stylesheet" href="/css/Registry.css">
+
 	<title>첫번째 페이지</title>
 </head>
 

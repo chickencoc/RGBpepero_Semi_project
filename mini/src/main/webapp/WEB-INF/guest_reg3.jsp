@@ -3,8 +3,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script src="js/jquery.js"></script>
-<script src="js/vue.js"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <jsp:include page="/layout/header.jsp"></jsp:include>
@@ -27,48 +25,47 @@
 							<td class="info_box_goods_table_img" rowspan="6"><img
 								class="info_box_goods_img"></td>
 							<td class="info_box_goods_table_text fundLists">상품 이름</td>
-							<td class="info_box_goods_table_cnt_price fundListA" colspan="2">{{p_name}}</td>
+							<td class="info_box_goods_table_cnt_price fundListA" colspan="2">{{pdName}}</td>
 						</tr>
 						<tr>
 							<td class="fundLists">상품 가격</td>
-							<td class="fundListA" colspan="2">{{p_price}}</td>
+							<td class="fundListA" colspan="2">{{pdPrice}}원</td>
 						</tr>
 						<tr>
 							<td class="fundLists">남은 금액</td>
-							<td class="fundListA" colspan="2">{{p_price-fputprice}}</td>
+							<td class="fundListA" colspan="2">{{remain}}원</td>
 						</tr>
 						<tr>
 							<td class="fundLists">원하는 결제 금액</td>
-							<td class="fundListA" colspan="2"><input type="text"
-								placeholder="금액 입력" class="text1"> 원</td>
+							<td class="fundListA" colspan="2"><input type="text" placeholder="금액 입력" class="text1" v-model="givePrice" @keyup="fnSelfIn()">원</td>
 						</tr>
 						<tr>
 							<td class="fundLists">금액설정</td>
 							<td class="fundListA" colspan="2">
 								<div>
-									<button class="fundPutMoneyBtn btn1" id="10000btn"
-										onclick="fnFundGuage()">+10,000원</button>
-									<button class="fundPutMoneyBtn btn1">+50,000원</button>
-									<button class="fundPutMoneyBtn btn1">+100,000원</button>
+									<button class="fundPutMoneyBtn btn1" id="10000btn" @click="fnFastIn(10000)">+10,000원</button>
+									<button class="fundPutMoneyBtn btn1" @click="fnFastIn(50000)">+50,000원</button>
+									<button class="fundPutMoneyBtn btn1" @click="fnFastIn(100000)">+100,000원</button>
 								</div>
 								<div>
-									<button class="fundPutMoneyBtn btn1">+10%</button>
-									<button class="fundPutMoneyBtn btn1">+25%</button>
-									<button class="fundPutMoneyBtn btn1">+50%</button>
-									<button class="fundPutMoneyBtn btn1">ALL</button>
+									<button class="fundPutMoneyBtn btn1" @click="fnFastIn(0.1)">+10%</button>
+									<button class="fundPutMoneyBtn btn1" @click="fnFastIn(0.25)">+25%</button>
+									<button class="fundPutMoneyBtn btn1" @click="fnFastIn(0.5)">+50%</button>
+									<button class="fundPutMoneyBtn btn1" @click="fnFastIn(-1)">ALL</button>
 								</div>
 							</td>
 						</tr>
 						<tr>
-							<td class="fundLists">현재 진행도</td>
+							<td class="fundLists">진행도</td>
 							<td class="fundListA">
 								<div>
-									<progress value="30" max="100" id="fundGuageBefore"></progress>
-									<progress value="0" max="100" id="fundGuageAfter"></progress>
+									<progress max="100" id="fundGuageBefore" :value="percent"></progress>
+									<progress max="100" id="fundGuageAfter" :value="addPercent"></progress>
 								</div>
 							</td>
 							<td class="fundGuagePerBox">
-								<p class="fundGuagePer">{{%}} + {{%}}</p>
+								<p class="fundGuagePer" v-if="percent >= addPercent">{{percent}}%</p>
+								<p class="fundGuagePer" v-else>{{percent}}% / {{addPercent}}%</p>
 							</td>
 						</tr>
 					</table>
@@ -80,7 +77,7 @@
 					<div class="payer_info_box">
 						<div class="payer_info_box_text">
 							<p>이름</p>
-							<p>{{name}}</p>
+							<p>{{gname}}</p>
 						</div>
 						<div class="payer_info_box_text">
 							<p>전화번호</p>
@@ -118,7 +115,7 @@
 						<div class="pay_total_price_box_detail">
 							<div>
 								<p>상품 금액 :</p>
-								<p>{{1,234}}원</p>
+								<p>{{pdPrice}}원</p>
 							</div>
 							<div>
 								<p>배송비 :</p>
@@ -126,7 +123,7 @@
 							</div>
 						</div>
 						<h4 class="pay_total_price_box_name_h">결제 금액</h4>
-						<h4 class="pay_total_price_box_name_h">{{900,000}}원</h4>
+						<h4 class="pay_total_price_box_name_h">{{totalPrice}}원</h4>
 					</div>
 				</fieldset>
 				<div class="pay_btn_box">
@@ -141,18 +138,75 @@
 </html>
 <jsp:include page="/layout/footer.jsp"></jsp:include>
 <script type="text/javascript">
-function fnFundGuage() {
-    var Guage = document.getElementById("fundGuageAfter");
-    fundGuageAfter.value = 70;
-    
-}
 	var app = new Vue({
 		el : '#app',
 		data : {
+			gname: "${gname}",
+			phone: "${phone}",
+			address: "${address}",
+			pdName: '',
+			pdPrice: 100000,
+			givePrice: '',
+			remain: 90000,
+			totalPrice: 0,
+			percent: 10,
+			addPercent: 10
 
 		},
 		methods : {
-
+			fnGuest : function() {
+				var self = this;
+				var nparmap = { };
+				$.ajax({
+					url: "/guest/info.dox",
+					dataType: "json",
+					type: "POST",
+					data: nparmap,
+					success: function(data) {
+						console.log(data);
+						self.gname = data.gname;
+						self.phone = data.phone;
+						self.address = data.address;
+						
+					}
+				});
+			},
+			fnSelfIn : function() {
+				var self = this;
+				var gp = self.givePrice;
+				var rm = self.remain;
+				if(gp > rm) gp = rm;
+				self.givePrice = gp;
+				self.fnGauge();
+			},
+			fnFastIn : function(amount) {
+				var self = this;
+				var gp = self.givePrice;
+				var rm = self.remain;
+				
+				if(gp == '') gp = 0;
+				gp = parseInt(gp);
+				rm = parseInt(rm);
+				
+				if(amount > 2) {
+					gp += amount;
+				} else if(amount != -1) {
+					gp += Math.floor(rm * amount, 0);
+				} else {
+					gp = self.remain;
+				};
+				
+				if(gp > rm) gp = rm;
+				self.givePrice = gp;
+				self.fnGauge();
+			},
+			fnGauge : function() {
+				var self = this;
+				self.addPercent = self.percent + (self.givePrice / self.pdPrice) * 100;
+			},
+			fnThree : function(item) {
+				
+			}
 		},
 		created : function() {
 			var self = this;

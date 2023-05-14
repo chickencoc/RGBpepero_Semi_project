@@ -55,6 +55,13 @@ public class RegistryServiceImpl implements RegistryService{
 		// TODO Auto-generated method stub
 		registryMapper.saveUserImg(map);
 	}
+
+
+	@Override
+	public void updateRegistryOption(HashMap<String, Object> map) {
+		// TODO Auto-generated method stub
+		registryMapper.updateRegistryOption(map);
+	}
 	
 
 }

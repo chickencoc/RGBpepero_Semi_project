@@ -1,4 +1,16 @@
-
+.user_category_list{
+    text-align: center;
+}
+.user_category_list>a:not(:last-child):after {
+	content: '';
+	display: inline-block;
+	width: 2px;
+	height: 15px;
+	background: #999;
+	position: relative;
+	top: 2px;
+	margin-left: 13px;
+}
 .regi_content{
     display: grid;
     grid-template-columns: 5% 90% 5%;

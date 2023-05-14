@@ -29,7 +29,7 @@
                 </ul>
                 <div class="reg_options_popup_memo">
                     <div><img src="/image/fi-ss-heart.png" style="position: relative; top: 8px; margin-right: 5px;">선물할 친구들이 참고할 정보를 기재해주세요</div>
-                    <input type="text" id="reg_options_popup_memo_txt">
+                    <input type="text" id="reg_options_popup_memo_txt" v-model="optionMemo">
                 </div>
                 <button class="reg_options_popup_btn" @click="fnOptionInput">저장하기</button>
             </div>       
@@ -40,27 +40,37 @@
 var app = new Vue({ 
     el: '#app',
     data: {
+        optionMemo: "",
     	showNecessaryItem: false,
     	changeToGroupGift: false
     }   
     , methods: {
     	
     	fnOptionInput : function(){
+            var self = this;
     		var item = {
-    			    name: "상품 이름",
-    			    price: "상품 가격",
-    			    stock: 1,
-    			    memo: "",
-    			    showNecessary: this.showNecessaryItem,
-    			    changeToGroupGift: this.changeToGroupGift
+    			    showNecessary: self.showNecessaryItem,
+    			    changeToGroupGift: self.changeToGroupGift,
+                    optionMemo: self.optionMemo
     			  };
-    		
-    		alert("저장되었습니다.");
-    		window.close();
+                  $.ajax({
+                            url: "registryOption.dox",
+                            type: "POST",
+                            dataType: "json",
+                            data: item,
+                            success: function(response) {
+                                // 서버 응답을 처리하는 코드 작성
+                                alert("저장되었습니다.");
+                                window.close();
+                            },
+                            error: function(xhr, textStatus, errorThrown) {
+                                // 오류 처리 코드 작성
+                                console.error(textStatus);
+                            }
+                        });
     	}
     }   
-    , created: function () {
-    	var self = this;
+    , created: function () {  	
 
 	}
 });

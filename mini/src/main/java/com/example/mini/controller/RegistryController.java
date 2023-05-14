@@ -32,11 +32,18 @@ public class RegistryController {
 	@ResponseBody
 	public String selectUserRegistry(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
 		HashMap<String, Object> resultMap = new HashMap<String, Object>();
-		List<Registry> list = registryService.selectUserRegistry(map);
-		resultMap.put("list", list);
+		List<Registry> registry = registryService.selectUserRegistry(map);
+		resultMap.put("registry", registry);
 		return new Gson().toJson(resultMap);
 	}
-	
+	@RequestMapping(value = "/registryOption.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String updateRegistryOption(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		registryService.updateRegistryOption(map);
+		resultMap.put("message", "성공");
+		return new Gson().toJson(resultMap);
+	}
 	@RequestMapping("/guestRegistry.do") 
     public String guestRegistry(Model model) throws Exception{
 

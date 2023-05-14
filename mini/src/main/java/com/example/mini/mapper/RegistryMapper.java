@@ -17,6 +17,9 @@ public interface RegistryMapper {
 	//옵션 팝업 연결
 	void registryOption(HashMap<String, Object> map);
 	
+	//옵션 변경
+	void updateRegistryOption(HashMap<String, Object> map);
+	
 	//선물 팝업 연결
 	void registryGift(HashMap<String, Object> map);
 	

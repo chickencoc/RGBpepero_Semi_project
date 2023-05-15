@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.example.mini.model.Board;
+import com.example.mini.model.BrdImg;
 
 @Mapper
 public interface BoardMapper {
@@ -19,14 +20,19 @@ public interface BoardMapper {
 //	게시글 조회수 증가
 	void updateViewCnt(HashMap<String, Object> map) throws Exception;
 	
+//	게시글 추가
 	void insertBoard(HashMap<String, Object> map) throws Exception;
 	
-	/*
-	User selectLogin(HashMap<String, Object> map); //로그인
+//	게시글 삭제
+	void deleteBoard(HashMap<String, Object> map) throws Exception;
 	
-	int selectUserCnt(HashMap<String, Object> map); //중복체크
+//	게시글 수정
+	void updateBoard(HashMap<String, Object> map) throws Exception;
+
+//	게시글 이미지 추가
+	void insertBoardImg(HashMap<String, Object> map) throws Exception;
 	
-	void insertUser(HashMap<String, Object> map); //회원가입
-	*/
+//	게시글 이미지 조회
+	List<BrdImg> readBoardImg(HashMap<String, Object> map) throws Exception;
 
 }

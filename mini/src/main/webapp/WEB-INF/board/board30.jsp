@@ -86,7 +86,7 @@
             , AccountStatus : "${sessionStatus}"
     	
         }
-    	,watch : {
+    	, watch : {
     		selectItem :function(){
     			var self = this;
     			self.fnGetList();

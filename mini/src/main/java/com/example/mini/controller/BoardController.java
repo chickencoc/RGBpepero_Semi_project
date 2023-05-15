@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.mini.dao.BoardService;
+import com.example.mini.mapper.BoardMapper;
 import com.example.mini.model.Board;
 import com.google.gson.Gson;
 
@@ -31,39 +32,41 @@ public class BoardController {
 		return "/board/editor";
 	}
 
-	@RequestMapping("/upload.do")
-    public String result(@RequestParam("file1") MultipartFile multi, @RequestParam("boardIdx") int boardIdx, HttpServletRequest request,HttpServletResponse response, Model model)
+	@RequestMapping("/board/fileupload.dox")
+    public String result(@RequestParam("file1") MultipartFile multi, @RequestParam("boardNo") int boardNo, HttpServletRequest request,HttpServletResponse response, Model model)
     {
         String url = null;
         String path="c:\\img";
         try {
-  
             //String uploadpath = request.getServletContext().getRealPath(path);
             String uploadpath = path;
-            String originFilename = multi.getOriginalFilename();
-            String extName = originFilename.substring(originFilename.lastIndexOf("."),originFilename.length());
+            String orgName = multi.getOriginalFilename();
+            String imgType = orgName.substring(orgName.lastIndexOf("."),orgName.length());
             long size = multi.getSize();
-            String saveFileName = genSaveFileName(extName);
-            
+            String saveFileName = genSaveFileName(imgType);           
             System.out.println("uploadpath : " + uploadpath);
-            
-            System.out.println("originFilename : " + originFilename);
-            System.out.println("extensionName : " + extName);
+            System.out.println("orgName : " + orgName);
+            System.out.println("extensionName : " + imgType);
             System.out.println("size : " + size);
             System.out.println("saveFileName : " + saveFileName);
             String path2 = System.getProperty("user.dir");
-            System.out.println("Working Directory = " + path2 + "src\\webapp\\img");
+            System.out.println("Working Directory = " + path2 + "\\src\\main\\webapp\\image\\board");
             if(!multi.isEmpty())
             {
-                File file = new File(path2 + "\\src\\main\\webapp\\img", saveFileName);
+                File file = new File(path2 + "\\src\\main\\webapp\\image\\board", saveFileName);
                 multi.transferTo(file);
                 
                 HashMap<String, Object> map = new HashMap<String, Object>();
                 map.put("img", "\\img\\" + saveFileName);
-                map.put("boardIdx", boardIdx);
+                map.put("boardNo", boardNo);
+//                map.put("replyNo", replyNo);
+                map.put("imgSrc", "/image/board/"+saveFileName);
+                map.put("imgName", saveFileName);
+                map.put("orgName", orgName);
+                map.put("imgType", imgType);
                 
                 // insert 쿼리 실행
-                //	        		insertBoardImg(map); 
+                boardService.addBoardImg(map); 
                 
                 model.addAttribute("filename", multi.getOriginalFilename());
                 model.addAttribute("uploadPath", file.getAbsolutePath());
@@ -73,7 +76,7 @@ public class BoardController {
         }catch(Exception e) {
             System.out.println(e);
         }
-        return "redirect:board.do";
+        return "redirect:boardMain.do";
     }
     // 현재 시간을 기준으로 파일 이름 생성
     private String genSaveFileName(String extName) {
@@ -135,6 +138,14 @@ public class BoardController {
 		resultMap.put("result", "success");
 		return new Gson().toJson(resultMap);
 	}
+//    게시판 글 읽을때 이미지 리스트 읽기
+    @RequestMapping(value = "/board/readImg.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String searchBoardImg(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+    	HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		resultMap = boardService.searchBrdImgList(map);
+		return new Gson().toJson(resultMap);
+	}
     
     //작성 페이지
     @RequestMapping("/board3.do") 
@@ -144,13 +155,32 @@ public class BoardController {
 	}
   @RequestMapping(value = "/board/add.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 	@ResponseBody
-	public String insertBbs(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+	public String insertBoard(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
 		HashMap<String, Object> resultMap = new HashMap<String, Object>();
 //		map.put("userId", session.getAttribute("sessionId"));
 		boardService.addBoard(map);
 		resultMap.put("result", "success");
+		resultMap.put("boardNo", map.get("id"));
 		return new Gson().toJson(resultMap);
 	}
+  @RequestMapping(value = "/board/delete.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String delBoard(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		boardService.delBoard(map);
+		resultMap.put("result", "success");
+		return new Gson().toJson(resultMap);
+  }
+  @RequestMapping(value = "/board/edit.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String editBoard(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		boardService.editBoard(map);
+		resultMap.put("result", "success");
+		return new Gson().toJson(resultMap);
+}
+  
+  
     
     
     @RequestMapping("/boardTable.do") 
@@ -162,8 +192,9 @@ public class BoardController {
     public String board30(Model model) throws Exception{
 		return "/board/board30";
 	}
-    @RequestMapping("/board4.do") 
-    public String board4(Model model) throws Exception{
+    @RequestMapping("/boardEdit.do") 
+    public String board4(HttpServletRequest request,Model model,@RequestParam HashMap<String, Object> map) throws Exception{
+    	request.setAttribute("map", map);
 		return "/board/board4";
 	}
 

@@ -30,20 +30,19 @@
 						<td style="text-align : center;" >제목</td>
 						<td><input type="text" id="title" name="title" v-model="title" placeholder="제목을 입력해 주세요."></td>
 						<td>
-							<select class="board_cat" v-if="boardKind == 3">
-			                    <option hidden>카테고리 선택</option>
-			                    <option>ㅁㄴㅇㄹ</option>
-			                    <option>ㅁㄴㅇㄹ</option>
-			                    <option>ㅁㄴㅇㄹ</option>
-			                    <option>ㅁㄴㅇㄹ</option>
-	                		</select>
+							<select class="board_cat" v-model="selectItem" v-if="boardKind == 3">
+			                    <option value="">:: 전체 ::</option>
+			                    <option value="P">상품관련</option>
+			                    <option value="A">계정관련</option>
+			                    <option value="D">배송관련</option>
+			                </select>
 	                	</td>
 					</tr>
 					<tr id="file_line">
 						<td style="text-align : center;" >첨부파일</td>
 						<td>
 							<div>
-							    <input type="file" id="file1" name="file1" > 
+							    <input type="file" id="file1" name="file1" accept="image/*" multiple="multiple"> 
 							</div>
 						</td>
 					</tr>
@@ -78,33 +77,49 @@ var app = new Vue({
 		boardKind :"${map.boardKind}"
     	, userId : "${sessionId}"
         , AccountStatus : "${sessionStatus}"
+        , selectItem : ""
 		
-    }   
+    }
+	,watch : {
+		selectItem :function(){
+			var self = this;
+			self.selectItem = self.selectItem;
+		}
+	}
     // 4. 컴포넌트 추가
     , components: {VueEditor}
     , methods: {
     	fnAddBoard : function(){
             var self = this;
-            var nparmap = { boardKind : self.boardKind ,title : self.title, content : self.content, userId : self.userId, keywordType : self.keywordType};
-            console.log( self.content );
+            var nparmap = { boardKind : self.boardKind ,title : self.title, content : self.content, userId : self.userId, keywordType : self.selectItem };
              $.ajax({
                 url:"/board/add.dox",
                 dataType:"json",	
                 type : "POST", 
                 data : nparmap,
-                success : function(data) { 
+                success : function(data) {
+                	var form = new FormData();
+                	console.log( $("#file1")[0].files.length);
+                	for(var i=0;i < $("#file1")[0].files.length;i++){
+                		console.log($("#file1")[0].files);
+                		console.log($("#file1")[0].files[i]);
+                		 form.append( "file1",  $("#file1")[0].files[i] );
+    	       	     	 form.append( "boardNo",  data.boardNo); // pk
+    	       	     	 console.log(form);
+    	           		 self.upload(form);
+    	           		 form.delete("file1");
+    	           		 form.delete("boardNo");
+                	} 
                 	alert("저장되었습니다.");
-                	self.fnGoList();
+                	 self.fnGoList(); 
                 }
             });  
         } 
     	// 파일 업로드
-	    , upload : function(){
-			var form = new FormData();
-	        form.append( "file1", $("#file1")[0].files[0] );
-	        
+	    , upload : function(form){
+	    	var self= this; 
 	         $.ajax({
-	             url : "/upload.do"
+	             url : "/board/fileupload.dox"
 	           , type : "POST"
 	           , processData : false
 	           , contentType : false
@@ -128,8 +143,6 @@ var app = new Vue({
 	        else{
 	        	self.boardName = "Error!";
 	        }
-	        console.log(self.boardKind);
-	        console.log(self.boardName);
         },
         fnGoList(){
         	var self= this;

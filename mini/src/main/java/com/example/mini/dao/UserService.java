@@ -16,4 +16,8 @@ public interface UserService {
 	HashMap<String, Object> selectFindPwd(HashMap<String, Object> map); //비밀번호 찾기
 	
 	void editPwd(HashMap<String, Object> map); //비밀번호 찾기
+	
+	// mypage 회원정보 출력 및 수정
+	
+	
 }

@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.mini.dao.UserSelectService;
-import com.example.mini.dao.UserService;
 import com.example.mini.dao.UserUpdateService;
 import com.example.mini.model.User;
 import com.google.gson.Gson;
@@ -24,6 +23,7 @@ public class InformationController {
 	
 	@Autowired
 	private UserSelectService userSelectService;
+	@Autowired
 	private UserUpdateService userUpdateService;
 	@Autowired
 	HttpSession session;

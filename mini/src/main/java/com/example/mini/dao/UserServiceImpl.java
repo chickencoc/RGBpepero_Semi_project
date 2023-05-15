@@ -84,5 +84,11 @@ public class UserServiceImpl implements UserService{
 		// TODO Auto-generated method stub
 		userMapper.updatePwd(map);
 	}
+	
+	
+	// mypage 회원정보 출력 및 수정
+	
+	
+	
 
 }

@@ -135,11 +135,12 @@ margin: 20px;
 .text1{
 	position: relative;
 	top:25px;
+	right: 110px;
 
 }
 .text2{
     position: relative;
-    left: 200px;
+    left: 80px;
 }
 .fundingImg{
     position: relative;
@@ -161,7 +162,7 @@ margin: 20px;
 .gname1{ 
     position: relative;
     bottom: 20px;
-    left:50px;
+    left: 5px;
 }
 .content{
     position: relative;
@@ -170,39 +171,52 @@ margin: 20px;
 }
 .check{
     position: relative;
-    right: 150px;
+    right: 30px;
 }
 .check1{
     position: relative;
-    left: 480px;
+    left: 470px;
 
 }
 .check2{
     position: relative;
-    left: 550px;
+    left: 520px;
 
 }
 .check3{
     position: relative;
-    left: 650px;
+    left: 570px;
 
 }
 .check4{
     position: relative;
-    left: 750px;
+    left: 630px;
+    width:50px;
 
 }
 .check5{
     position: relative;
-    left: 115px;
+    left: 93px;
 }
 .check6{
     position: relative;
-    left: 205px;
+    left: 135px;
 }
 .check7{
     position: relative;
-    left: 270px;
+    left: 160px;
+}
+.check8{
+    position: relative;
+    left: 109px;
+}
+.check9{
+    position: relative;
+    left: 150px;
+}
+.check10{
+    position: relative;
+    left: 180px;
 }
 .checkbox{
     position: relative;
@@ -211,14 +225,14 @@ margin: 20px;
 }
 .line{
     position: relative;
-    left: 400px;
-    width: 1300px;
+    left: 300px;
+    width: 1000px;
     
 }
 .line1{
     position: relative;
-    left: 400px;
-    width: 1300px;
+    left: 300px;
+    width: 1000px;
 }
 img{
 width: 150px;

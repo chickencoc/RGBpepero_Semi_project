@@ -172,10 +172,9 @@
                                                 <span class="gname">받은 선물 이름</span>
                                                 <span class="gname1">보낸사람 명</span>
                                             <span class="text2">
-                                                <span><img class="fundingImg1" src="/image/funding.PNG" alt=""></span>
-                                                <span class="check5">1개</span>
-                                                <span class="check6">2023.04.11</span>
-                                                <span class="check7">35,000원</span>
+                                                <span class="check8">1개</span>
+                                                <span class="check9">2023.04.11</span>
+                                                <span class="check10">35,000원</span>
                                             </span>    
                                                 <div class="content">이 컵은 아기자기하고 신혼부부들이 많이 사용합니다.</div>
                                             </div>
@@ -205,10 +204,9 @@
                                                 <span class="gname">받은 선물 이름</span>
                                                 <span class="gname1">보낸사람 명</span>
                                             <span class="text2">    
-                                                <span><img class="fundingImg1" src="/image/funding.PNG" alt=""></span>
-                                                <span class="check5">1개</span>
-                                                <span class="check6">2023.05.02</span>
-                                                <span class="check7">47,000원</span>
+                                                <span class="check8">1개</span>
+                                                <span class="check9">2023.05.02</span>
+                                                <span class="check10">47,000원</span>
                                             </span>    
                                                 <div class="content">어떤 재료든 싹둑!싹둑!썰어버려 싹~싹!</div>
                                             </div>
@@ -217,7 +215,7 @@
 
                             <div class="gift1">
                                 <input class="checkbox" type="checkbox">
-                                        <img class="product1" src="/image/kichin set.jpg" alt=""> <!-- 받은 상품 이미지-->
+                                        <img class="product1" src="/image/kichin_set.jpg" alt=""> <!-- 받은 상품 이미지-->
                                             <div class="giftList1">    
                                                 <span class="gname">받은 선물 이름</span>
                                                 <span class="gname1">보낸사람 명</span>
@@ -233,15 +231,14 @@
                             </div>
                             <div class="gift1">
                                 <input class="checkbox" type="checkbox">
-                                        <img class="product1" src="/image/dish drying rack.jpg" alt=""> <!-- 받은 상품 이미지-->
+                                        <img class="product1" src="/image/dish_drying_rack.jpg" alt=""> <!-- 받은 상품 이미지-->
                                             <div class="giftList1">    
                                                 <span class="gname">받은 선물 이름</span>
                                                 <span class="gname1">보낸사람 명</span>
                                             <span class="text2">    
-                                                <span><img class="fundingImg1" src="/image/funding.PNG" alt=""></span>
-                                                <span class="check5">1개</span>
-                                                <span class="check6">2023.01.10</span>
-                                                <span class="check7">78,000원</span>
+                                                <span class="check8">1개</span>
+                                                <span class="check9">2023.01.10</span>
+                                                <span class="check10">78,000원</span>
                                             </span>    
                                                 <div class="content">물기가 잘 빠져서 사람들이 세탁기로 오해해요</div>
                                             </div>
@@ -254,12 +251,11 @@
                                                 <span class="gname">받은 선물 이름</span>
                                                 <span class="gname1">보낸사람 명</span>
                                             <span class="text2">    
-                                                <span><img class="fundingImg1" src="/image/funding.PNG" alt=""></span>
-                                                <span class="check5">1개</span>
-                                                <span class="check6">2023.03.20</span>
-                                                <span class="check7">12,000원</span>
+                                                <span class="check8">1개</span>
+                                                <span class="check9">2023.03.20</span>
+                                                <span class="check10">12,000원</span>
                                             </span>    
-                                                <div class="content">고급스러운 디자인에 남편이 비상금 통으로 사용하고 싶어해요</div>
+                                                <div class="content">고급스럽고 깔끔한 디자인에 주부들의 마음을 훔쳐요</div>
                                             </div>
                                 <hr class="line1">
                             </div>

@@ -6,6 +6,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <jsp:include page="/layout/header.jsp"></jsp:include>
+<script src="js/jquery.js"></script>
+<script src="js/vue.js"></script>
 <link rel="stylesheet" href="/css/Base_rgbPepero.css">
 <title>회원정보</title>
 <style>
@@ -196,7 +198,7 @@ fieldset select {
 							전화번호<span id="phone">{{list.uPhone}}</span>
 						</div>
 						<div id="addresses">
-							주소 <span id="address1">{{list.uAddr1}}, {{list.uAddr2}}</span>
+							주소 <span id="address1">{{list.uAddr1}} {{list.uAddr2}}</span>
 						</div>
 						<div id="mail">
 							이메일 <span id="email1">{{list.uEmail}}</span>

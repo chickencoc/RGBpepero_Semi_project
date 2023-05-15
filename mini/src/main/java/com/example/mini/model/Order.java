@@ -34,6 +34,7 @@ public class Order {
 	private String kind;
 	private String code;
 	private String name;
+	private String total;
 	
 	public String getOrderNo() {
 		return orderNo;
@@ -232,5 +233,11 @@ public class Order {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	public String getTotal() {
+		return total;
+	}
+	public void setTotal(String total) {
+		this.total = total;
 	}
 }

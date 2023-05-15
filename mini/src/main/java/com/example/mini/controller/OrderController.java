@@ -1,7 +1,6 @@
 package com.example.mini.controller;
 
 import java.util.HashMap;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +15,7 @@ import com.example.mini.model.Order;
 import com.google.gson.Gson;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -44,4 +44,38 @@ public class OrderController {
 		return new Gson().toJson(resultMap);
 	}
 	
+	@RequestMapping("/myInfoGift1.do") 
+    public String myInfoGift1(HttpServletRequest request, Model model) throws Exception{
+		
+        return "/myInfo_gift1";
+	}
+	
+	 @RequestMapping(value = "/myInfoGift1.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+		@ResponseBody
+		public String searchProdList(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+			HashMap<String, Object> resultMap = new HashMap<String, Object>();
+			int startNum = Integer.parseInt(String.valueOf(map.get("startNum")));
+			int lastNum = Integer.parseInt(String.valueOf(map.get("lastNum")));
+			map.put("startNum", startNum);
+			map.put("lastNum", lastNum);
+			resultMap = orderService.searchProdList(map);
+			return new Gson().toJson(resultMap);
+		}
+	 
+	 @RequestMapping("/myInfoGift1Send.do") 
+	    public String myInfoGift1Send(HttpServletRequest request, HttpServletResponse response, Model model,
+	    		@RequestParam HashMap<String, Object> map) throws Exception{
+		 request.setAttribute("map", map);
+	        return "/myInfo_gift1_send";
+		}
+	 
+	 @RequestMapping(value = "/myInfoGift1Send.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+		@ResponseBody
+		public String searchCardInfo(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+			HashMap<String, Object> resultMap = new HashMap<String, Object>();
+			
+			resultMap = orderService.searchCardInfo(map);
+			resultMap.put("message", "성공");
+			return new Gson().toJson(resultMap);
+		}
 }

@@ -54,7 +54,7 @@
                         </tr>
                         <tr>
                             <td colspan="2" class="deliveryContent">
-                                <a href="https://service.epost.go.kr/iservice/usr/trace/usrtrc001k01.jsp">
+                                <a href="https://service.epost.go.kr/iservice/usr/trace/usrtrc001k01.jsp" target="_blank">
                                     <button class="deliveryCheckBtn btn1">배송조회</button>
                                 </a>
                             </td>
@@ -106,7 +106,7 @@
                             </tr>
                             <tr>
                                 <td class="orderInfoTitle">총 금액</td>
-                                <td>{{info.price}}원</td>
+                                <td>{{info.total}}원</td>
                             </tr>
                         </table>
                     </div>
@@ -129,7 +129,8 @@ var app = new Vue({
     	info : {},
     	/* deliveryNo : "${sessionDeliveryNo}",
     	orderNo : "${sessionOrderNo}" */
-    }   
+    }
+	
     , methods: {
     	fnGetInfo : function() {
 			var self = this;

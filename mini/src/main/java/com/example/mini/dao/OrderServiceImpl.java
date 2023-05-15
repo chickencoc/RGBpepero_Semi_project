@@ -1,6 +1,7 @@
 package com.example.mini.dao;
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,24 @@ public class OrderServiceImpl implements OrderService{
 		// TODO Auto-generated method stub
 		Order prodOrder = orderMapper.selectProdOrder(map);
 		return prodOrder;
+	}
+	@Override
+	public HashMap<String, Object> searchProdList(HashMap<String, Object> map) throws Exception {
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		List<Order> order = orderMapper.selectProdList(map);
+		int cnt = orderMapper.prodCardCnt(map);
+		resultMap.put("result", "success");
+		resultMap.put("list", order);
+		resultMap.put("cnt", cnt);
+		return resultMap;
+	}
+	@Override
+	public HashMap<String, Object> searchCardInfo(HashMap<String, Object> map) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		Order order = orderMapper.selectCardInfo(map);
+		resultMap.put("info", order);
+		return resultMap;
 	}
 
 }

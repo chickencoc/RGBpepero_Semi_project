@@ -6,6 +6,8 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<jsp:include page="/layout/header.jsp"></jsp:include>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.3/vue.min.js"></script>
+	<script src="https://unpkg.com/vue2-editor@2.3.11/dist/index.js"></script>
 	<link rel="stylesheet" href="/css/Base_rgbPepero.css">
 	<title>카드 주문 페이지</title>
     <style>
@@ -90,9 +92,19 @@
             grid-template-columns: 500px 600px;
             grid-gap : 30px;
         }
-        .thx_Card_Write #thx_Card{
+        .thx_Card_Write{
             width: 500px;
             height: 250px;
+        }
+        .cardImage{
+        
+        background-image:url(../image/writeCard.PNG);
+        width: 500px;
+        height: 286px;
+        background-repeat: no-repeat;
+        background-size:contain;
+        background-position:center;
+        resize: none;
         }
         .write_Txt .txt_To_Card{
             width: 620px;
@@ -130,10 +142,8 @@
                 </div>  
                 <div class="field_Area">
                     <fieldset class="product_Explane">
-                        <div>상품이름</div>
-                        <div>재질</div>
-                        <div>사이즈</div>
-                        <div>가격</div>
+                        <div>{{info.pName}}</div>
+                        <div>{{info.total}}원</div>
                     </fieldset>
                         <fieldset class="customer_Explane">
                             <div>받는사람</div>
@@ -168,15 +178,16 @@
                 </div>
                 <div class="grid_Area3">
                     <div class="thx_Card_Write">
-                        <img src="../image/writeCard.PNG" id="thx_Card">
+                    <textarea class=cardImage readonly :value="cardContent"></textarea>
+                        <!-- <img src="../image/writeCard.PNG" id="thx_Card"> -->
                     </div>
                     <div class="write_Txt">
-                        <textarea name="text" id="editor"></textarea>
+                        <vue-editor v-model="cardContent"></vue-editor>
                     </div>
                 </div>
             </div>
             <div class="send_Btn">
-                <button id="send_Card" onclick="test()">카드 보내기</button>
+                <button id="send_Card">카드 보내기</button>
             </div>
         </div>
     </div>
@@ -185,49 +196,44 @@
 </html>
 <jsp:include page="/layout/footer.jsp"></jsp:include>
 <script type="text/javascript">
-<script>
 function changeImage(imageUrl) {
-		var mainImage = document.getElementById("main_Img");
-		mainImage.src = imageUrl;
-		mainImage.style.transform = "scale(1)";
-	}
-    function restoreImage() {
-		document.getElementById("main_Img").style.transform = "scale(1)";
-	}
-
-</script>
-<script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/ckeditor.js"></script>
-<script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/translations/ko.js"></script>
-<script>
-ClassicEditor.create( document.querySelector( '#editor' ),{
-removePlugins: [ 'Heading' ],
-removePlugins: [ 'Table' ],
-language: "ko"
-} )
-.then( newEditor => {
- editor = newEditor;
-console.log( 'Editor was initialized', editor );
-} )
-.catch( error => {
-console.error( error );
-} )
-;
-function test(){
-var test1 = editor.getData();
-console.log(test1);
-alert(test1);
+	var mainImage = document.getElementById("main_Img");
+	mainImage.src = imageUrl;
+	mainImage.style.transform = "scale(1)";
 }
-</script>
+function restoreImage() {
+	document.getElementById("main_Img").style.transform = "scale(1)";
+}
+Vue.use(Vue2Editor);
+const VueEditor = Vue2Editor.VueEditor;
 var app = new Vue({ 
     el: '#app',
     data: {
-
-    }   
+	info:{},
+	productNo : "${map.productNo}",
+	cardContent : ''
+    }
+	, components: {VueEditor}
     , methods: {
+    	fnGetInfo : function() {
+			var self = this;
+			var nparmap = {productNo : self.productNo};
+			$.ajax({
+				url : "/myInfoGift1Send.dox",
+				dataType : "json",
+				type : "POST",
+				data : nparmap,
+				success : function(data) {
+					self.info = data.info;
+					console.log(self.info);
+				}
+			});
+		}
 
     }   
     , created: function () {
     	var self = this;
+    	self.fnGetInfo()
 
 	}
 });

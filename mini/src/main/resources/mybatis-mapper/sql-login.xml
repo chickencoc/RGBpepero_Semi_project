@@ -59,7 +59,8 @@
 	</select>
 	<update id="updatePwd" parameterType="hashmap">
 		UPDATE mini_db2.T1_USER
-		SET PASSWORD = #{pwd}
+		SET PASSWORD = #{pwd},
+			UDATETIME = NOW()
 		WHERE USERID = #{userId}
 	</update>
 	

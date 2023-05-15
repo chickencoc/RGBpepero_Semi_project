@@ -11,6 +11,12 @@ import com.example.mini.model.Order;
 public interface OrderMapper {
 	Order selectProdOrder(HashMap<String, Object> map); //상품 정보 리스트
 	
+	List<Order> selectProdList(HashMap<String, Object> map); //상품 리스트
+	
+	int prodCardCnt(HashMap<String, Object> map); //상품 페이징
+	
+	Order selectCardInfo(HashMap<String, Object> map);
+	
 	
 //	int selectUserCnt(HashMap<String, Object> map); //중복체크
 //	

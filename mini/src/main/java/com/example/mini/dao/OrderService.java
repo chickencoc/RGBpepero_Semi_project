@@ -7,7 +7,11 @@ import com.example.mini.model.Order;
 public interface OrderService {
 	
 
-	Order searchProdOrder(HashMap<String, Object> map); //로그인
+	Order searchProdOrder(HashMap<String, Object> map); //
+	
+	HashMap<String, Object> searchProdList(HashMap<String, Object> map) throws Exception; //상품 리스트
+	
+	HashMap<String, Object> searchCardInfo(HashMap<String, Object> map);
 	
 //	int cntUser(HashMap<String, Object> map); //중복확인
 //	

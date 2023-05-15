@@ -10,8 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.example.mini.dao.UserSelectService;
-import com.example.mini.dao.UserUpdateService;
+import com.example.mini.dao.UserService;
 import com.example.mini.model.User;
 import com.google.gson.Gson;
 
@@ -22,9 +21,7 @@ import jakarta.servlet.http.HttpSession;
 public class InformationController {
 	
 	@Autowired
-	private UserSelectService userSelectService;
-	@Autowired
-	private UserUpdateService userUpdateService;
+	private UserService userService;	
 	@Autowired
 	HttpSession session;
 
@@ -41,7 +38,7 @@ public class InformationController {
 		@ResponseBody
 		public String selectUserList(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
 			HashMap<String, Object> resultMap = new HashMap<String, Object>();
-			User list = userSelectService.selectUser(map);
+			User list = userService.selectUser(map);
 			resultMap.put("list", list);
 			return new Gson().toJson(resultMap);
 		}
@@ -58,7 +55,7 @@ public class InformationController {
 	@ResponseBody
 	public String selectUserList2(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
 		HashMap<String, Object> resultMap = new HashMap<String, Object>();
-		User list = userSelectService.selectUser(map);
+		User list = userService.selectUser(map);
 		resultMap.put("list", list);
 		return new Gson().toJson(resultMap);
 	}
@@ -67,7 +64,7 @@ public class InformationController {
 	@ResponseBody
 	public String editInformation(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
 		HashMap<String, Object> resultMap = new HashMap<String, Object>();
-		userUpdateService.updateUser(map);
+		userService.updateUser(map);
 		resultMap.put("result", "success");
 		return new Gson().toJson(resultMap);
 	}

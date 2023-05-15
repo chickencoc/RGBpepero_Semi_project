@@ -88,6 +88,21 @@ public class UserServiceImpl implements UserService{
 	
 	// mypage 회원정보 출력 및 수정
 	
+	//마이페이지 유저정보 출력
+	@Override
+	public User selectUser(HashMap<String, Object> map) {
+		// TODO Auto-generated method stub
+		return userMapper.selectUser(map);
+	}
+	
+	//마이페이지 유저정보 수정
+	@Override
+	public void updateUser(HashMap<String, Object> map) {
+		userMapper.updateUser(map);
+		
+	}
+
+	
 	
 	
 

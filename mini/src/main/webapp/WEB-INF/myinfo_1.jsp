@@ -34,6 +34,7 @@ fieldset {
 	margin: auto;
 	margin-top: 30px;
 	line-height: 40px;
+	box-shadow: 0px 0px 5px 0px #555;
 }
 
 #post {
@@ -147,10 +148,19 @@ fieldset select {
 	margin-left: 57.5px;
 	margin-right: 10px;
 }
+#weddingDate #weddingDay {
+	margin-left: 42px;
+	margin-right: 10px;
+}
 
 #bankInfo select {
 	width: 60px;
 	margin-left: 57.5px;
+}
+fieldset #fieldTitle{
+	font-size : 30px;
+	text-align : center;
+	margin-bottom : 30px;
 }
 
 /* style END */
@@ -161,10 +171,11 @@ fieldset select {
 		<div id="wrapper">
 			<div class="container">
 				<div class="product_category_list">
-					<a href=""><strong>회원정보</strong></a> <a href="">나의 레지스트리</a> 
-					<a href="">받은 선물 목록</a> <a href="">보낸답례품</a> <a href="">캘린더</a>
+					<a href=""><strong>회원정보</strong></a> <a href="">나의 레지스트리</a> <a
+						href="">받은 선물 목록</a> <a href="">보낸답례품</a> <a href="">캘린더</a>
 				</div>
 				<fieldset>
+					<h1 id="fieldTitle">내정보 수정하기</h1>
 					<img src="/image/profile1.PNG" id="profile">
 					<div id="information">
 						<div id="idline">
@@ -175,19 +186,14 @@ fieldset select {
 								v-model="password"></label>
 						</div>
 						<div id="pwline2">
-							<label>비밀번호 확인 <input type="password" id="pw2"></label>
+							<label>비밀번호 확인 <input type="password" id="pw2" v-model="password2"></label>
 						</div>
 						<div id="nameAndPartner">
 							<label>이름 <input type="text" id="name" v-model="uName"></label>
 							<label>배우자명 <input type="text" id="partner"
 								v-model="partner"></label>
 						</div>
-						<div id="gender">
-							<label>성별<input type="radio" id="male" value="M"
-								name="gender">남자
-							</label> <label><input type="radio" id="female" value="F"
-								name="gender">여자</label>
-						</div>
+
 						<div id="phoneNumber">
 							<label>전화번호 <input type="tel" id="phone" v-model="uPhone"></label>
 						</div>
@@ -201,15 +207,21 @@ fieldset select {
 								v-model="uEmail"></label>
 						</div>
 						<div id="birth">
-								<label>생년월일 <input type="text" id="birthDay" v-model="birth"></label>
+							<label>생년월일 <input type="text" id="birthDay"
+								v-model="birth"></label>
 						</div>
+						<div id="weddingDate">
+							<label>결혼예정일 <input type="text" id="weddingDay"
+								v-model="weddingday"></label>
+						</div>
+
 						<div id="bankInfo">
-							계좌정보 <select id="bank">
-								<option value="1">국민</option>
-								<option value="2">신한</option>
-								<option value="3">우리</option>
-								<option value="4">농협</option>
-								<option value="5">기업</option>
+							계좌정보 <select id="bank" v-model="bank">
+								<option value="A">국민</option>
+								<option value="B">신한</option>
+								<option value="C">우리</option>
+								<option value="D">농협</option>
+								<option value="E">기업</option>
 							</select> <input type="text" id="bankNumber" v-model="bankaccount">
 						</div>
 						<button id="btn" @click="fnUserInformationModify">수정완료</button>
@@ -238,9 +250,12 @@ fieldset select {
 			birth : "",
 			bank : "",
 			bankaccount : "",
+			weddingday : "",
+			password2 : "",
 			list : []
 
-		},
+		}
+	,
 		methods : {
 			fnMoveMain : function() {
 				alert("성공적으로 수정되었습니다!");
@@ -262,14 +277,15 @@ fieldset select {
 						console.log(self.list);
 						self.uName = self.list.uName;
 						self.partner = self.list.partner;
-						self.password = self.password;
+						self.password = self.list.password;
 						self.gender = self.list.gender;
 						self.uPhone = self.list.uPhone;
 						self.uAddr1 = self.list.uAddr1;
 						self.uAddr2 = self.list.uAddr2;
 						self.uEmail = self.list.uEmail;
-						self.birth = self.list.birth;
 						self.bank = self.list.bank;
+						self.birth = self.list.birth;
+						self.weddingday = self.list.weddingday;
 						self.bankaccount = self.list.bankaccount;
 					}
 				})
@@ -289,7 +305,8 @@ fieldset select {
 					uEmail : self.uEmail,
 					birth : self.birth,
 					bank : self.bank,
-					bankaccount : self.bankaccount
+					bankaccount : self.bankaccount,
+					weddingday : self.weddingday
 				};
 				console.log(nparmap);
 				$.ajax({
@@ -299,6 +316,11 @@ fieldset select {
 					data : nparmap,
 					success : function(data) {
 						location.href = "/information.do";
+						if(self.password != self.password2){
+							alert("비밀번호와 확인번호가 같지않습니다.");
+							location.href="/informationmodify.do";
+						}else {alert("수정되었습니다!");}
+						
 					}
 				})
 			}
@@ -308,6 +330,6 @@ fieldset select {
 			var self = this;
 			self.fnUserInformationBefore();
 		}
-		
+
 	});
 </script>

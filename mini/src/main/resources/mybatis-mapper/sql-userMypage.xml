@@ -2,7 +2,49 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.example.mini.mapper.SelectUserMapper">	
-
-
+<mapper namespace="com.example.mini.mapper.UserMapper">	
+	<select id="selectUser" parameterType="hashmap" resultType="com.example.mini.model.User">
+		SELECT 
+		    USERID,
+		    U_NAME,
+		    PARTNER,
+		    GENDER,
+		    U_ADDRNO,
+		    U_ADDR1,
+		    U_ADDR2,
+		    U_PHONE,
+		    U_EMAIL,
+		    BIRTH,
+		    WEDDINGDAY,
+		    CDATETIME,
+		    UDATETIME,
+		    STATUS,
+		    BANK,
+		    BANKACCOUNT,
+		    PASSWORD
+		FROM mini_db2.T1_USER
+		WHERE USERID = #{userId} 
+	</select>
+	
+	<update id="updateUser" parameterType="hashmap">
+			UPDATE mini_db2.T1_USER
+			SET
+				PASSWORD = #{password},
+				U_NAME = #{uName},
+				PARTNER = #{partner},
+				GENDER = #{gender},
+				U_ADDRNO = #{uAddrno},
+				U_ADDR1 = #{uAddr1},
+				U_ADDR2 = #{uAddr2},
+				U_PHONE = #{uPhone},
+				U_EMAIL = #{uEmail},
+				BIRTH = #{birth},
+				WEDDINGDAY = #{weddingday},
+				UDATETIME = NOW(),
+				BANK = #{bank},
+				BANKACCOUNT = #{bankaccount}
+			WHERE USERID = #{userId}
+	</update>
+	
+	
 </mapper>

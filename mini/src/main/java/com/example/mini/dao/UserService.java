@@ -2,6 +2,8 @@ package com.example.mini.dao;
 
 import java.util.HashMap;
 
+import com.example.mini.model.User;
+
 public interface UserService {
 	
 
@@ -18,6 +20,10 @@ public interface UserService {
 	void editPwd(HashMap<String, Object> map); //비밀번호 찾기
 	
 	// mypage 회원정보 출력 및 수정
+	
+	User selectUser(HashMap<String, Object> map); //마이페이지 회원정보 출력
+	
+	void updateUser(HashMap<String, Object> map); //마이페이지 회원정보 수정
 	
 	
 }

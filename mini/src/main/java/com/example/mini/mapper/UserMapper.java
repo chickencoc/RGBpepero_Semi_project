@@ -19,5 +19,11 @@ public interface UserMapper {
 	User selectFindPwd(HashMap<String, Object> map);//비밀번호 찾기
 	
 	void updatePwd(HashMap<String, Object> map);//비밀번호 변경
+	
+	//마이페이지
+	
+	User selectUser(HashMap<String, Object> map); //마이페이지 회원정보 
+	
+	void updateUser(HashMap<String, Object> map); //마이페이지 회원정보수정 
 
 }

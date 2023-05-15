@@ -24,12 +24,12 @@
                 </div>
                 <ul class="reg_options_popup_checkbox">
                     <li id="reg_options_popup_checkbox">상품 표시 옵션</li>
-                    <li id="reg_options_popup_checkbox"><input type="checkbox" name="choice" v-model="showNecessaryItem">정말 필요한 물건" 표시</li>                 
-                    <li id="reg_options_popup_checkbox"><input type="checkbox" name="choice" v-model="changeToGroupGift"> "그룹선물(펀딩)"로 변경하기</li>
+                    <li id="reg_options_popup_checkbox"><input type="checkbox" name="choice" v-bind:checked="inputWanted" v-on:change="updateWanted">정말 필요한 물건" 표시</li>                 
+                    <li id="reg_options_popup_checkbox"><input type="checkbox" name="choice" v-bind:checked="inputGroup" v-on:change="updateGroup"> "그룹선물(펀딩)"로 변경하기</li>
                 </ul>
                 <div class="reg_options_popup_memo">
                     <div><img src="/image/fi-ss-heart.png" style="position: relative; top: 8px; margin-right: 5px;">선물할 친구들이 참고할 정보를 기재해주세요</div>
-                    <input type="text" id="reg_options_popup_memo_txt" v-model="optionMemo">
+                    <input type="text" id="reg_options_popup_memo_txt" v-bind:value="inputText" v-on:input="updateInput">
                 </div>
                 <button class="reg_options_popup_btn" @click="fnOptionInput">저장하기</button>
             </div>       
@@ -40,24 +40,35 @@
 var app = new Vue({ 
     el: '#app',
     data: {
-        optionMemo: "",
-    	showNecessaryItem: false,
-    	changeToGroupGift: false
+        registry: [] 
+    ,   updatedWanted: ""
+    ,   updatedGroup: ""
+    ,  	updatedInput: ""
     }   
     , methods: {
-    	
-    	fnOptionInput : function(){
+        updateWanted : function(event){
             var self = this;
-    		var item = {
-    			    showNecessary: self.showNecessaryItem,
-    			    changeToGroupGift: self.changeToGroupGift,
-                    optionMemo: self.optionMemo
-    			  };
+            self.updatedWanted = event.target.checked ? 'A' : '';
+             //체크시 배지
+        }
+    ,   updateGroup : function(event){
+            var self = this;
+            self.updatedGroup = event.target.checked ? 'Y' : '';
+             //체크시 펀딩
+        }
+    ,	updateInput : function(event) {
+            var self = this;
+            self.updatedInput = event.target.value;
+             //텍스트 저장
+        }    
+    ,	fnOptionInput : function(){
+            var self = this;
+    		var nparmap = {rOption: self.updatedWanted, fundYn: self.updatedGroup, rContent: self.updatedInput};
                   $.ajax({
-                            url: "registryOption.dox",
+                            url: "/registryOption.dox",
                             type: "POST",
                             dataType: "json",
-                            data: item,
+                            data: nparmap,
                             success: function(response) {
                                 // 서버 응답을 처리하는 코드 작성
                                 alert("저장되었습니다.");

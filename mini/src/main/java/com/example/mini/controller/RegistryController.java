@@ -1,6 +1,5 @@
 package com.example.mini.controller;
 
-import java.rmi.registry.Registry;
 import java.util.HashMap;
 import java.util.List;
 
@@ -13,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.mini.dao.RegistryService;
+import com.example.mini.model.MyRegistry;
 import com.example.mini.model.UserImage;
 import com.google.gson.Gson;
 
@@ -32,7 +32,7 @@ public class RegistryController {
 	@ResponseBody
 	public String selectUserRegistry(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
 		HashMap<String, Object> resultMap = new HashMap<String, Object>();
-		List<Registry> registry = registryService.selectUserRegistry(map);
+		List<MyRegistry> registry = registryService.selectUserRegistry(map);
 		resultMap.put("registry", registry);
 		return new Gson().toJson(resultMap);
 	}

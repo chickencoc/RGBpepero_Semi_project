@@ -27,8 +27,8 @@
                 <div class="regi_your_url">
                     <h6 style="text-align: center;">당신의 레지스트리 주소</h6>
                     <span id="regi_url">
-                        www.zola.com/registry/twocats
-                        <a href="#" @click=""><img src="/image/fi-ss-upload.png" id="regi_icon"></a>
+                        {{myUrl}}
+                        <a href="#" @click="fnUrlCopy()"><img src="/image/fi-ss-upload.png" id="regi_icon"></a>
                         <span style="font-size: 9px;">주소복사</span>
                     </span>
                 </div>
@@ -52,37 +52,34 @@
                     <a href="/mygiftpage.do" @click="fnProductPage"><img src="/image/fi-sr-plus.png" id="regi_icon"></a>
                     <div>선물 추가하기</div>
                 </div>
-                <div class="myinfo_registry" v-for="(item, index) in registry">                                       
-                    <div class="regi_items">
-                        <div id="regi_wanted_badge"> <!--배지-->
-                        <img src="/image/loundry.jpg" class="regi_items_image">
-                        </div> 
-                        <!-- <div id="regi_wanted_badge" v-else="">
-                            <img src="/image/loundry.jpg" class="items-image">
-                        </div> -->                 
-                        <p class="regi_pro_name">그랑데 세탁기</p>
-                        <p class="regi_pro_price">1,000,000 원</p>
+                <div class="myinfo_registry" v-for="(item, index) in registry">                                    
+                    <div class="regi_items" v-if="">
+                        <div id="regi_wanted_badge" v-if="item.rOption == 'A'"> <!--매우원함-->
+                        <img :src="item.piImgSrc" class="regi_items_image">
+                        </div>                 
+                        <p class="regi_pro_name">{{item.pName}}</p>
+                        <p class="regi_pro_price">{{item.pPrice}} 원</p>
                         <div class="regi_items_options">
-                            <span id="regi_stock_text">수량</span>
+                            <span id="regi_stock_text">{{item.pStock}}</span>
                             <input type="text" id="regi_stock_number" value="1" size="1" readonly>
                             <button id="regi_optionBtn" @click="fnOptionBtn()">옵션설정</button>
                             <a href="#" id="regi_delete" @click="fnDeleteItem()">삭제하기</a>
                         </div>
                     </div>
                     <!--일반-->
-                    <div class="regi_items">
+                    <div class="regi_items" v-if="">
                         <img src="/image/loundry.jpg" class="regi_items_image">                   
-                        <p class="regi_pro_name">그랑데 세탁기</p>
-                        <p class="regi_pro_price">1,000,000 원</p>
+                        <p class="regi_pro_name">{{item.pName}}</p>
+                        <p class="regi_pro_price">{{item.pPrice}} 원</p>
                         <div class="regi_items_options">
-                            <span id="regi_stock_text">수량</span>
+                            <span id="regi_stock_text">{{item.pStock}}</span>
                             <input type="text" id="regi_stock_number" value="1" size="1" readonly>
                             <button id="regi_optionBtn" @click="fnOptionBtn()">옵션설정</button>
                             <a href="#" id="regi_delete" @click="fnDeleteItem()">삭제하기</a>
                         </div>
                     </div>         
                     <!--펀딩퍼센트-->
-                    <div class="regi_items">
+                    <div class="regi_items" v-if="">
                         <img src="/image/loundry.jpg" class="regi_items_image">                   
                         <p class="regi_pro_name">그랑데 세탁기</p>
                         <p class="regi_pro_price">1,000,000 원</p>
@@ -98,7 +95,7 @@
                         </div>
                     </div>
                     <!--받은선물인 경우-->
-                    <div class="regi_items">
+                    <div class="regi_items" v-if="">
                         <img src="/image/loundry.jpg" class="regi_items_image">                   
                         <p class="regi_pro_name">그랑데 세탁기</p>
                         <p class="regi_pro_price">1,000,000 원</p>
@@ -129,7 +126,7 @@
                             <a href="#" id="regi_delete" @click="fnDeleteItem()">삭제하기</a>
                         </div>
                     </div>
-                </div>
+                </div> 
             </div>
         </main>
         </div>
@@ -149,27 +146,30 @@ var app = new Vue({
 	,	list: []
     ,   registry: []
 	,	image: []
-	, 	imgUrl: '/image/loundry.jpg'
+	, 	imgUrl1: ''
+    ,   imgUrl2: ''
+    ,   myUrl:  ''
     }   
     , methods: {
     	
     	fnselectUser: function(){
     		var self = this;
-            var nparmap = {}; //select 요소를 kind 변수에담음. xml이랑 연결됨.
+            var nparmap = {userId: self.userId}; //select 요소를 kind 변수에담음. xml이랑 연결됨.
             $.ajax({
                 url:"/myRegistry.dox",
                 dataType:"json",	
                 type : "POST", 
                 data : nparmap,
-                success : function(data) {                                       
-	                self.list = data.list;
-	                console.log(data);
+                success : function(data) {    
+                    console.log(data);                                   
+	                self.registry = data.registry;
+	                console.log(self.registry);
                 }
      		}); 
     	}	
     ,	fnselectImage : function(){
                 var self = this;
-                var nparmap = {};
+                var nparmap = {userId: self.userId};
 
                 $.ajax({
                     url: "/registryImg.dox",
@@ -179,10 +179,10 @@ var app = new Vue({
                     success: function(data) {
                         self.image = data.image;  // Assuming 'images' is an array of image objects
                         for(var i = 0; i < self.image.length; i++) {
-                            if(self.image[i].imgUestype == 1) {
+                            if(self.image[i].imgUsetype == 1) {
                                 self.imgUrl1 = self.image[i].imgSrc;                       
                             }
-                            else if(self.image[i].imgUestype == 2){
+                            else if(self.image[i].imgUsetype == 2){
                                 self.imgUrl2 = self.image[i].imgSrc;                        
                             }
                             // Add more conditions for other image types if necessary
@@ -193,7 +193,54 @@ var app = new Vue({
                     }
                 });
             }
- 		
+ 	,   fnUrlCopy : function(){
+            var self = this;
+            const originalUrl = window.location.href;
+            const urlParameter = window.location.search;
+            // console.log(urlParameter);
+            const urlStr = originalUrl;
+            const url = new URL(urlStr);
+            const urlParams = url.searchParams;
+
+            const tag = urlParams.get('tag');
+
+            // javascript
+            console.log(tag);
+
+            const like = urlParams.get('like');
+
+            // backend
+            console.log(like)
+
+            // Set 'tag' parameter as 'sessionid'
+            urlParams.set('tag', self.userId);
+
+            // Get the modified URL with updated parameters
+            const modifiedUrl = url.origin + url.pathname + '?' + urlParams.toString();
+
+            // Print the modified URL
+            console.log(modifiedUrl);
+            // Create a temporary input element
+            var tempInput = document.createElement("input");
+            tempInput.style.position = "absolute";
+            tempInput.style.left = "-1000px";
+            tempInput.value = modifiedUrl;
+
+            // Append the input element to the document body
+            document.body.appendChild(tempInput);
+
+            // Select the input element's content
+            tempInput.select();
+            tempInput.setSelectionRange(0, 99999); // For mobile devices
+
+            // Copy the modified URL to the clipboard
+            document.execCommand("copy");
+
+            // Remove the temporary input element
+            document.body.removeChild(tempInput);
+
+            console.log("Modified URL copied to clipboard: " + modifiedUrl);
+    }	
     		
     	
     ,	fnBackImageAlter : function(){
@@ -236,8 +283,10 @@ var app = new Vue({
     }
     }   
     , created : function () {
-    	this.fnselectImage();
-		this.fnselectUser();
+    	var self = this;
+        self.fnselectUser();
+        var originalUrl = window.location.href;
+        this.myUrl = originalUrl;
 	}
 });
 </script>

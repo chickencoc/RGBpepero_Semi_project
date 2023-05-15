@@ -7,7 +7,7 @@ public class UserImage {
 	private String imgName;
 	private String orgName;
 	private String imgType;
-	private String imgUestype;
+	private String imgUsetype;
 	public String getSrcimgNo() {
 		return srcimgNo;
 	}
@@ -44,11 +44,11 @@ public class UserImage {
 	public void setImgType(String imgType) {
 		this.imgType = imgType;
 	}
-	public String getImgUestype() {
-		return imgUestype;
+	public String getImgUsetype() {
+		return imgUsetype;
 	}
-	public void setImgUestype(String imgUestype) {
-		this.imgUestype = imgUestype;
+	public void setImgUsetype(String imgUsetype) {
+		this.imgUsetype = imgUsetype;
 	}
 	
 	

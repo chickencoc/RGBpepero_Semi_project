@@ -5,23 +5,38 @@
 <mapper namespace="com.example.test1.mapper.RegistryMapper">
 	
 	
-	<select id="selectRegistryInfo" parameterType="hashmap" resultType="com.example.mini.model.Registry">
+	<select id="selectUserRegistry" parameterType="hashmap" resultType="com.example.mini.model.MyRegistry">
 		SELECT
-			REGISTYNO,
-			R_URL,
-			R_NAME,
-			PRODUCTNO,
-			TRIPNO,
-			R_CDATETIME,
-			R_UDATETIME,
-			R_OPTION,
-			R_CONTENT,
-			USERID,
-			FUNDYN
+			R.REGISTRYNO,
+			R.PRODUCTNO,
+			R.TRIPNO,
+			R.R_CDATETIME,
+			R.R_UDATETIME,
+			R.R_OPTION,
+			R.R_CONTENT,
+			R.USERID,
+			R.FUNDYN,
+			PI.IMGSRC,
+ 			TI.IMGSRC,
+ 			PM.P_STOCK,
+  			P.P_NAME,
+  			P.P_PRICE
 		FROM 
-			mini_db2.T1_REGISTRY
+			mini_db2.T1_REGISTRY AS R
+		INNER JOIN
+			mini_db2.T1_PRODUCT AS P ON R.PRODUCTNO = P.PRODUCTNO
+		LEFT JOIN	
+			mini_db2.T1_PDIMAGE AS  PI ON P.PRODUCTNO = PI.PRODUCTNO
+		INNER JOIN	
+			mini_db2.T1_USER AS U ON R.USERID = U.USERID
+		LEFT JOIN	
+ 			mini_db2.T1_TRIP AS T ON R.TRIPNO = T.TRIPNO
+   		LEFT JOIN	
+   			mini_db2.T1_TRIPIMAGE AS TI ON T.TRIPNO = TI.TRIPNO
+ 		LEFT JOIN
+  			mini_db2.T1_PDMANAGE AS PM ON P.PRODUCTNO = PM.PRODUCTNO
 		WHERE 
-			USERID = #{userId};
+			R.USERID = #{userId};
 	</select>
 	<update id="updateRegistryOption" parameterType="hashmap">
 		UPDATE mini_db2.T1_REGISTRY
@@ -35,12 +50,13 @@
 	</update>
 	<select id="selectUserImage" parameterType="hashmap" resultType="com.example.mini.model.UserImage">
 		SELECT
-			SRCIMAGENO,
+			SRCIMGNO,
 			USERID,
 			IMGSRC,
 			IMGNAME,
 			ORGNAME,
 			IMGTYPE,
+			IMGUSETYPE			
 		FROM
 			mini_db2.T1_USERIMAGE
 		WHERE 
@@ -49,7 +65,7 @@
 	<insert id="saveUserImg" parameterType="hashmap">
 		INSERT INTO mini_db2.T1_USERIMAGE
 		VALUES
-			(#{srcimageNo}, #{userId}, #{imgSrc}, #{imgName}, #{orgName}), #{imgType}, #{imgUestype})
+			(#{null}, #{userId}, #{imgSrc}, #{imgName}, #{orgName}, #{imgType}, #{imgUsetype})
 			;
 	</insert>
 
@@ -60,8 +76,8 @@
 			IMGNAME = #{imgName},
 			ORGNAME = #{orgName},
 			IMGTYPE = #{imgType},
-			IMGUESTYPE = #{imgUestype}			
+			IMGUSETYPE = #{imgUsetype}			
 		WHERE
-			SRCIMAGENO = #{srcimageNo};
+			SRCIMGNO = #{null} AND USERID = #{userId};
 	</update>
 </mapper>

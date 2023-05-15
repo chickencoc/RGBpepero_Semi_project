@@ -10,13 +10,13 @@
 	<link rel="stylesheet" href="/css/Base_rgbPepero.css">
 	<link rel="stylesheet" href="/css/Registry.css">
 	<link rel="stylesheet" href="/css/myInfo_img.css">
-	<title>회원 레지스트리</title>
+	<title>프로필 이미지 변경</title>
 </head>
 <body>
     <div id="app">  		
 	    <div class="regist_img_main"> 
                 <header id="regist_popup_header">
-                    <div class="regist_img_title">이미지 등록 페이지</div>                                   
+                    <div class="regist_img_title">프로필 이미지 등록 페이지</div>                                   
                 </header>              
                 <main class="regist_img_mainbox">
                     <div class="regist_img_searchbox">
@@ -43,13 +43,14 @@
 </html>
 <script type="text/javascript">	
 			
-	var app = new Vue({ 
+			var app = new Vue({ 
 	    el: '#app',
 	    data: {
-	    	userId: "${sessionId}"	
+	    	userId: "${sessionId}"
 	    ,	image: []
 		,	imageUrl: '' //이미지 주소 가져올 공간
 		,	uploadName: '첨부파일'
+		,	imageType: ''
 	    }   
 	    , methods: {
 
@@ -58,37 +59,69 @@
 	    	}
 	    
 		,	fnRegistImg(event) {
-			      var file = event.target.files[0]; // 선택된 파일
-			      var reader = new FileReader();
-	
-			      reader.onload = function(e) {
-			        app.imageUrl = e.target.result; // 이미지 URL 업데이트
-			      };
-	
-			      reader.readAsDataURL(file); // 파일을 읽어서 Data URL로 변환
-			      this.uploadName = file.name; //업로드 파일 이름 보이기
+				var self = this;
+				var file = event.target.files[0]; // 선택된 파일
+				var reader = new FileReader();
+
+				reader.onload = function(e) {
+				self.imageUrl = e.target.result; // 이미지 URL 업데이트
+				};
+
+				reader.readAsDataURL(file); // 파일을 읽어서 Data URL로 변환
+				self.uploadName = file.name; //업로드 파일 이름 보이기
+
+				self.imageType = self.extractImageType(self.uploadName);
+  				console.log(self.imageType);
 		    }
-		
+		,	extractImageType: function (uploadName) {
+			// 파일 이름에서 마지막 점의 인덱스를 찾습니다.
+			var dotIndex = uploadName.lastIndexOf('.');
+			
+			// 마지막 점이 존재하고, 파일 이름에 확장자가 있는 경우
+			if (dotIndex !== -1 && dotIndex < uploadName.length - 1) {
+				// 파일 이름의 확장자를 추출합니다.
+				var extension = uploadName.substring(dotIndex + 1);
+				
+				// 확장자를 소문자로 변환하여 이미지 유형과 비교합니다.
+				switch (extension.toLowerCase()) {
+				case 'jpg':
+				case 'jpeg':
+					return 'JPEG';
+				case 'png':
+					return 'PNG';
+				case 'gif':
+					return 'GIF';
+				case 'bmp':
+					return 'BMP';
+				// 추가적인 이미지 유형을 필요에 따라 여기에 추가할 수 있습니다.
+				default:
+					return 'Unknown';
+				}
+				
+			}
+			
+			return 'Unknown'; // 확장자가 없는 경우
+		}
 		,	fnUpdateImg : function(){
-				 var formData = new FormData();
-				  formData.append('imgSrc', this.imageUrl);
-				  formData.append('imgName', '이미지명');
-				  formData.append('orgName', '원본이름');
-				  formData.append('imgType', '이미지타입');
-				  formData.append('imgUestype', '2');
-				  formData.append('userId', this.userId);
-				  formData.append('srcimageNo', '이미지번호');
-	
+				var self= this;				 
+				var nparmap = {
+					imgSrc : self.imageUrl,
+					imgName : self.uploadName,
+					orgName : self.uploadName,
+					imgtype : self.imageType,
+					imgUsetype: '2'
+				};
 				  // AJAX 요청을 보냅니다
 				  $.ajax({
 				    url: '/updateRegistryImg.dox', // 서버의 처리 파일 경로를 지정해야 합니다
 				    type: 'POST',
-				    data: formData,
-				    processData: false,
-				    contentType: false,
+					dataType: "json",
+				    data: nparmap,
+				    
 				    success: function(response) {
 				      // 요청이 성공했을 때 실행할 코드를 작성합니다
-				      console.log(response); // 응답 내용을 콘솔에 출력하거나 필요에 따라 처리합니다
+						alert("저장되었습니다.");
+						console.log(response); // 응답 내용을 콘솔에 출력하거나 필요에 따라 처리합니다
 				    },
 				    error: function(xhr, status, error) {
 				      // 요청이 실패했을 때 실행할 코드를 작성합니다

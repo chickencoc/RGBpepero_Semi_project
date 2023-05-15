@@ -1,9 +1,7 @@
 package com.example.mini.model;
 
-public class Registry {
+public class MyRegistry {
 	private String registryNo;
-	private String rUrl;
-	private String rName;
 	private String productNo;
 	private String tripNo;
 	private String rCdatetime;
@@ -12,23 +10,18 @@ public class Registry {
 	private String rContent;
 	private String userId;
 	private String fundYn;
+	private String piImgSrc;
+	private String tiImgSrc;
+	private String pStock;
+	private String pName;
+	private String pPrice;
+
+	
 	public String getRegistryNo() {
 		return registryNo;
 	}
 	public void setRegistryNo(String registryNo) {
 		this.registryNo = registryNo;
-	}
-	public String getrUrl() {
-		return rUrl;
-	}
-	public void setrUrl(String rUrl) {
-		this.rUrl = rUrl;
-	}
-	public String getrName() {
-		return rName;
-	}
-	public void setrName(String rName) {
-		this.rName = rName;
 	}
 	public String getProductNo() {
 		return productNo;
@@ -78,4 +71,35 @@ public class Registry {
 	public void setFundYn(String fundYn) {
 		this.fundYn = fundYn;
 	}
+	public String getPiImgSrc() {
+		return piImgSrc;
+	}
+	public void setPiImgSrc(String piImgSrc) {
+		this.piImgSrc = piImgSrc;
+	}
+	public String getTiImgSrc() {
+		return tiImgSrc;
+	}
+	public void setTiImgSrc(String tiImgSrc) {
+		this.tiImgSrc = tiImgSrc;
+	}
+	public String getpStock() {
+		return pStock;
+	}
+	public void setpStock(String pStock) {
+		this.pStock = pStock;
+	}
+	public String getpName() {
+		return pName;
+	}
+	public void setpName(String pName) {
+		this.pName = pName;
+	}
+	public String getpPrice() {
+		return pPrice;
+	}
+	public void setpPrice(String pPrice) {
+		this.pPrice = pPrice;
+	}
+	
 }

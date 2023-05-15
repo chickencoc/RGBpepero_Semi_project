@@ -1,15 +1,16 @@
 package com.example.mini.dao;
 
-import java.rmi.registry.Registry;
+
 import java.util.HashMap;
 import java.util.List;
 
+import com.example.mini.model.MyRegistry;
 import com.example.mini.model.UserImage;
 
 public interface RegistryService {
 	
 	//레지스트리 목록
-	List<Registry> selectUserRegistry(HashMap<String, Object> map);
+	List<MyRegistry> selectUserRegistry(HashMap<String, Object> map);
 
 	//옵션 팝업 연결
 	void registryOption(HashMap<String, Object> map);

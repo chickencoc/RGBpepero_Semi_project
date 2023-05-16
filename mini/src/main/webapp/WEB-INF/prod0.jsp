@@ -3,8 +3,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script src="js/jquery.js"></script>
-<script src="js/vue.js"></script>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<jsp:include page="/layout/header.jsp"></jsp:include>
@@ -24,7 +22,7 @@
         <div class="container">
             <div class="prodCategoryList">
             <ul>
-            	<li v-for="(item, index) in catList" @click="fnChange(item.code)">{{item.name}}</li>
+            	<li class="prodCategoryList_li" v-for="(item, index) in catList" @click="fnChange(item.code, $event)">{{item.name}}</li>
             </ul>
             </div>
             <div class="prod0Banner">
@@ -36,7 +34,7 @@
             </div>
             <div class="searchBox">
                
-                <input type="text" placeholder="상품명을 입력해주세요" class="searchBar serach">
+                <input type="text" placeholder="상품명을 입력해주세요" class="searchBar search">
                 <button class="prodBtn searchM">검색</button><button class="prodBtn cancelBtn searchR">초기화</button>
             </div>
             <div class="prodSelectBox">
@@ -92,8 +90,9 @@ var app = new Vue({
         pKind : "K"
     }   
     , methods: {
-    	fnChange : function(code){
+    	fnChange : function(code, event){
     		var self = this;
+    		
     		self.selectPage = 1;
     		self.pKind = code;
             self.fnGetProductList();
@@ -114,7 +113,6 @@ var app = new Vue({
 					self.list = data.product;
 					self.cnt = data.cnt;
 					self.pageCount = Math.ceil(self.cnt / 6);
-					console.log(data);
 					}
 				});
 			},
@@ -130,12 +128,9 @@ var app = new Vue({
                 data : nparmap,
                 success : function(data) { 
                 	self.list = data.product;
-                    console.log(data);
-                    console.log(self.list);
 
                     self.cnt = data.cnt;
                     
-                    console.log(self.cnt);
                     self.pageCount = Math.ceil(self.cnt / 6);
                 	}
            		}); 
@@ -150,8 +145,6 @@ var app = new Vue({
 	                data : nparmap,
 	                success : function(data) { 
 	                	self.catList = data.code;
-	                    console.log(data);
-	                    console.log(self.catList);
 	                	}
 	           		}); 
 	        	}

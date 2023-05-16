@@ -8,6 +8,7 @@
 <jsp:include page="/layout/headerLogo.jsp"></jsp:include>
 <link rel="stylesheet" href="/css/Base_rgbPepero.css">
 <link rel="stylesheet" href="/css/guest_reg2.css">
+<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
 <title>일반 결제</title>
 </head>
 
@@ -88,8 +89,8 @@
                         <h4 class="pay_info_box_name_h">결제 수단</h4>
                         <div class="pay_info_box_btns">
                             <label for="pay_info_box_radio_a"><input id="pay_info_box_radio_a" type="radio" name="pay" v-model="purchase" value="C"> 카드 결제</label>
-                            <label for="pay_info_box_radio_b"><input id="pay_info_box_radio_b" type="radio" name="pay" v-model="purchase" value="A"> 무통장 입금</label>
-                            <label for="pay_info_box_radio_c"><input id="pay_info_box_radio_c" type="radio" name="pay" v-model="purchase" value="B"> 빼빼로 페이</label>
+                            <!-- <label for="pay_info_box_radio_b"><input id="pay_info_box_radio_b" type="radio" name="pay" v-model="purchase" value="A"> 무통장 입금</label> 
+                            <label for="pay_info_box_radio_c"><input id="pay_info_box_radio_c" type="radio" name="pay" v-model="purchase" value="B"> 빼빼로 페이</label>  -->
                         </div>
 
                     </div>
@@ -113,7 +114,7 @@
                     </div>
                 </fieldset>
                 <div class="pay_btn_box">
-                    <button class="pay_btn btn1" type="button" @click="fnPhone()">결제 하기</button>
+                    <button class="pay_btn btn1" type="button" @click="requestPay()">결제 하기</button>
                 </div>
             </div>
         </div>
@@ -124,6 +125,8 @@
 </html>
 <jsp:include page="/layout/footer.jsp"></jsp:include>
 <script type="text/javascript">
+
+	IMP.init("imp55171728"); // 예: imp00000000a
 	var app = new Vue({ 
 	    el: '#app'
 	    , data: {
@@ -131,19 +134,39 @@
 			gname: "${gname}",
 			gphone: '',
 			gaddress: "${address}",
-			uname: "${gname}",
-			uphone: "${phone}",
-			uaddress: "${address}",
+			uname: '',
+			uphone: '',
+			uaddress: '',
 			productNo: 1,
 			list: {pdName : 'TEST1', pdPrice : 100000},
 			totalPrice: 0,
 			totalCnt: 2,
 			shipMemo: '',
 			sendContent: '',
-			purchase: 'C'
-			
-
+			purchase: 'C',
+			REGISTRYNO: ''
 	    }
+		, computed: {
+			fnOrderNo : function() { //주문번호 생성 ( O + 2자리년도 + 월 + 일 + 시간 + 분 + 초 + 랜덤 3자리수 )
+		        let date = new Date();
+		        let num1 = "";
+		        let arr = [date.getFullYear().toString().substring(2,4)
+		                    , (date.getMonth() + 1).toString()
+		                    , date.getDate().toString()
+		                    , date.getHours().toString()
+		                    , date.getMinutes().toString()
+		                    , date.getSeconds().toString()
+		                ];
+		        for(var i in arr) { //년도부터 초까지 한자리 수이면 앞에 0 붙여줌
+		            if(arr[i].length < 2) arr[i] = 0 + arr[i];
+		            num1 += arr[i];
+		        }
+		        let num2 = Math.random();
+		        num2 = num2.toString().substring(2,5); //랜덤 3자리 수 생성
+
+		        return 'O' + num1 + num2;
+			}
+		}
 	    , methods: {
 			fnPdList : function() {
 				var self = this;
@@ -151,7 +174,46 @@
 				self.totalPrice = self.list.pdPrice;
 				
 			},
-			fnOrder : function() {
+			fnUserInfo : function() {
+				var self = this;
+				var nparmap = {userId : self.userId};
+	        	$.ajax({
+	    			url : "/guest/userInfo.dox",
+	    			dataType : "json",
+	    			type : "POST",
+	    			data : nparmap,
+	    			success : function(data) {
+	    				self.uname = data.info.uName;
+	    				self.uphone = data.info.uPhone.replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`);
+	    				if(data.info.uAddr2 == null) 
+	    					self.uaddress = '(' + data.info.uAddrno + ') ' + data.info.uAddr1;
+	    				else
+	    					self.uaddress = '(' + data.info.uAddrno + ') ' + data.info.uAddr1 + ", " + data.info.uAddr2;
+	    			}
+    			});
+			},
+			requestPay: function () { //결제창
+				var self = this;
+				orderno = self.fnOrderNo;
+				IMP.request_pay({ // param
+		          pg : "kcp.{test}",
+		          merchant_uid : orderno,
+		          name : self.list.pdName,
+		          amount : self.totalPrice,
+		          buyer_email : "gildong@gmail.com",
+		          buyer_name : "홍길동",
+		          buyer_tel : "010-4242-4242",
+		          buyer_addr : "서울특별시 강남구 신사동",
+		          buyer_postcode : "01181"
+		        }, rsp => { // callback
+	                if (rsp.success) {
+	                	fnOrder(merchant_uid);
+	                } else {
+	                    console.log(rsp);
+	                }
+		        });
+		      },
+			fnOrder : function(orderno) {
 				var self = this;
 				var nparmap = {userId : self.userId
 								, productNo : self.productNo 
@@ -161,6 +223,7 @@
 								, purchase : self.purchase
 								, totalCnt : self.totalCnt
 								, dStatus : 'A'
+								, orderNo : orderno
 								};
 	        	$.ajax({
 	    			url : "/guest/order.dox",
@@ -169,7 +232,7 @@
 	    			data : nparmap,
 	    			success : function(data) {
 	    				if(data.result == "success"){
-	    					
+	    					alert(data.result);
 	    					// location.href="/main.do"
 	    					}
 	    				}
@@ -184,6 +247,7 @@
 		, created: function() {
 			var self = this;
 			self.fnPdList();
+			self.fnUserInfo();
 			self.fnPhoneThree();
 		}
 	});

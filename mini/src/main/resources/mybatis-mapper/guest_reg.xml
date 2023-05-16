@@ -2,32 +2,51 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.example.test1.mapper.GuestRegMapper">
+<mapper namespace="com.example.mini.mapper.GuestRegMapper">
 	
-	
+	<!-- 게스트 정보 출력 -->
 	<select id="selectGuestInfo" parameterType="hashmap" resultType="com.example.mini.model.Guest">
 		SELECT *
 		FROM mini_db2.T1_GUEST;
 	</select>
-
+	<!-- 배송 사전 정보 입력 -->
 	<insert id="insertDelivery" parameterType="hashmap">
 		INSERT INTO mini_db2.T1_DELIVERY
 		VALUES
 			(NULL, 0, #{shipMemo}, #{dStatus}, NULL, NULL)
 	</insert>
-	
-	<insert id="insertGuestOrder" parameterType="hashmap">
-		INSERT INTO mini_db2.T1_ORDER
-		SELECT 
-			NULL, #{gphone}, #{userId}, #{productNo}, NULL, NOW(), #{totalCnt}, U_ADDRNO, U_ADDR1, U_ADDR2, U_PHONE, #{sendContent}, #{purchase}, #{totalPrice}, NULL 
-		FROM mini_db2.T1_USER
-		WHERE USERID = #{userId}
-	</insert>
 		
+	<!-- 결제한 게스트 정보 입력 -->
 	<insert id="insertGuest" parameterType="hashmap">
 		INSERT INTO mini_db2.T1_GUEST
 		VALUES
-			(10, #{userid}, #{gphone}, #{gpostcode}, #{gaddress}, #{gaddrDetail}, #{gname}, 10)
+			(NULL, #{userId}, #{gphone}, #{gpostcode}, #{gaddress}, #{gaddrDetail}, #{gname}, #{orderNo})
+	</insert>
+	
+	<!-- 일반 결제 내역 입력 -->
+	<insert id="insertGuestOrder" parameterType="hashmap">
+		INSERT INTO mini_db2.T1_ORDER
+		SELECT 
+			#{orderNo}, #{gphone}, #{userId}, #{productNo}, NULL, NOW(), #{totalCnt}, U_ADDRNO, U_ADDR1, U_ADDR2, U_PHONE, #{sendContent}, #{purchase}, #{totalPrice}
+		FROM mini_db2.T1_USER
+		WHERE USERID = #{userId}
+	</insert>
+	
+	<!-- 펀딩 결제 내역 입력 -->
+	<insert id="insertGuestOrderF" parameterType="hashmap">
+		INSERT INTO mini_db2.T1_ORDER
+		SELECT 
+			#{orderNo}, #{gphone}, #{userId}, #{fundingNo}, NULL, NOW(), 1, NULL, NULL, NULL, U_PHONE, #{sendContent}, #{purchase}, #{givePrice}
+		FROM mini_db2.T1_USER
+		WHERE USERID = #{userId}
+	</insert>
+	<!-- 펀딩 기록 입력 -->
+	<insert id="insertGuestFunding" parameterType="hashmap">
+		INSERT INTO mini_db2.T1_FUNDING
+		SELECT
+			#{registryNo}, #{fundingNo}, #{userId}, NULL, NULL, #{pdPrice}, #{gphone}, O_CDATETIME, #{givePrice}, 'N'
+		FROM mini_db2.T1_ORDER
+		WHERE PRODUCTNO = #{fundingNo} AND G_PHONE = #{gphone} AND O_MESSAGE = #{sendContent}
 	</insert>
 	
 	

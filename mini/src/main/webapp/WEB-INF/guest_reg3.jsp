@@ -8,6 +8,7 @@
 <jsp:include page="/layout/headerLogo.jsp"></jsp:include>
 <link rel="stylesheet" href="/css/Base_rgbPepero.css">
 <link rel="stylesheet" href="/css/guest_reg3.css">
+<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
 <title>펀딩 결제</title>
 </head>
 
@@ -81,17 +82,17 @@
 						</div>
 						<div class="payer_info_box_text">
 							<p>전화번호</p>
-							<p>{{phone}}</p>
+							<p>{{gphone}}</p>
 						</div>
 						<div class="payer_info_box_text">
 							<p>주소</p>
-							<p>{{address}}</p>
+							<p>{{gaddress}}</p>
 						</div>
 						<div class="payer_info_box_text">
 							<p>신랑, 신부에게 전할 메세지</p>
 						</div>
 						<div>
-							<textarea placeholder="메세지 입력" class="toCoupleMessage"></textarea>
+							<textarea placeholder="메세지 입력" class="toCoupleMessage" v-model="sendContent"></textarea>
 						</div>
 					</div>
 				</fieldset>
@@ -101,33 +102,29 @@
 					<div class="pay_info_box">
 						<h4 class="pay_info_box_name_h">결제 수단</h4>
 						<div class="pay_info_box_btns">
-							<label for="pay_info_box_radio_a"><input
-								id="pay_info_box_radio_a" type="radio" name="pay" checked>
-								카드 결제</label> <label for="pay_info_box_radio_b"><input
-								id="pay_info_box_radio_b" type="radio" name="pay"> 무통장
-								입금</label> <label for="pay_info_box_radio_c"><input
-								id="pay_info_box_radio_c" type="radio" name="pay"> 빼빼로
-								페이</label>
+							<label for="pay_info_box_radio_a"><input id="pay_info_box_radio_a" type="radio" name="pay" checked>카드 결제</label>
+							<!-- <label for="pay_info_box_radio_b"><input id="pay_info_box_radio_b" type="radio" name="pay"> 무통장 입금</label>
+							<label for="pay_info_box_radio_c"><input id="pay_info_box_radio_c" type="radio" name="pay"> 빼빼로 페이</label>  -->
 						</div>
 
 					</div>
 					<div class="pay_total_price_box">
 						<div class="pay_total_price_box_detail">
-							<div>
+							<!-- <div>
 								<p>상품 금액 :</p>
 								<p>{{pdPrice}}원</p>
 							</div>
 							<div>
 								<p>배송비 :</p>
 								<p>무료배송</p>
-							</div>
+							</div>  -->
 						</div>
 						<h4 class="pay_total_price_box_name_h">결제 금액</h4>
-						<h4 class="pay_total_price_box_name_h">{{totalPrice}}원</h4>
+						<h4 class="pay_total_price_box_name_h">{{givePrice}}원</h4>
 					</div>
 				</fieldset>
 				<div class="pay_btn_box">
-					<button class="pay_btn btn1" type="button" @click="">결제 하기</button>
+					<button class="pay_btn btn1" type="button" @click="requestPay()">결제 하기</button>
 				</div>
 			</div>
 		</div>
@@ -138,19 +135,24 @@
 </html>
 <jsp:include page="/layout/footer.jsp"></jsp:include>
 <script type="text/javascript">
+
+	IMP.init("imp55171728"); // 예: imp00000000a / 판매자 코드
 	var app = new Vue({
 		el : '#app',
 		data : {
 			gname: "${gname}",
-			phone: "${phone}",
-			address: "${address}",
+			gphone: "${phone}",
+			gaddress: "${address}",
 			pdName: '',
+			productNo: '',
 			pdPrice: 100000,
 			givePrice: '',
 			remain: 90000,
-			totalPrice: 0,
 			percent: 10,
-			addPercent: 10
+			addPercent: 10,
+			sendContent: '',
+			REGISTRYNO: '',
+			FUNDINGNO: ''
 
 		},
 		methods : {
@@ -165,8 +167,8 @@
 					success: function(data) {
 						console.log(data);
 						self.gname = data.gname;
-						self.phone = data.phone;
-						self.address = data.address;
+						self.gphone = data.phone;
+						self.gaddress = data.address;
 						
 					}
 				});
@@ -204,13 +206,57 @@
 				var self = this;
 				self.addPercent = self.percent + (self.givePrice / self.pdPrice) * 100;
 			},
-			fnThree : function(item) {
-				
+			fnPhoneThree : function() {
+				var self = this;
+				self.gphone = "${phone}".replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`);
+			},
+			requestPay: function () { //결제창
+				var self = this;
+				orderno = self.fnOrderNo;
+				IMP.request_pay({ // param
+		          pg : "kcp.{test}",
+		          merchant_uid : orderno,
+		          name : self.pdName,
+		          amount : self.totalPrice,
+		          buyer_email : "gildong@gmail.com",
+		          buyer_name : "홍길동",
+		          buyer_tel : "010-4242-4242",
+		          buyer_addr : "서울특별시 강남구 신사동",
+		          buyer_postcode : "01181"
+		        }, rsp => { // callback
+	                if (rsp.success) {
+	                	fnOrder(merchant_uid);
+	                } else {
+	                    console.log(rsp);
+	                }
+		        });
+		      },
+			fnOrder : function(orderno) {
+				var self = this;
+				var nparmap = {userId : self.userId
+								, totalPrice : self.givePrice
+								, sendContent : self.sendContent
+								, purchase : self.purchase
+								, orderNo : orderno
+								//, fundingNo : orderno.replaceAll("O","F")
+								};
+	        	$.ajax({
+	    			url : "/guest/order.dox",
+	    			dataType : "json",
+	    			type : "POST",
+	    			data : nparmap,
+	    			success : function(data) {
+	    				if(data.result == "success"){
+	    					alert(data.result);
+	    					// location.href="/main.do"
+	    					}
+	    				}
+	    			});
 			}
 		},
 		created : function() {
 			var self = this;
-
+			self.fnPhoneThree();
 		}
 	});
 </script>

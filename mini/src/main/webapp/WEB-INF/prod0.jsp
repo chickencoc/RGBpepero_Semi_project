@@ -94,6 +94,7 @@ var app = new Vue({
     , methods: {
     	fnChange : function(code){
     		var self = this;
+    		self.selectPage = 1;
     		self.pKind = code;
             self.fnGetProductList();
     	}

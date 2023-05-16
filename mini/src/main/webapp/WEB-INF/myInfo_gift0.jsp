@@ -156,7 +156,7 @@
                                     <a href="javascript:;" id="category2"><img class="list1" @click="fnChangeView1" src="/image/list2.PNG" alt=""></a>
                                 </span>
                                 <div class="text1">
-                                    <span class="check"><input type="checkbox"> 모두 선택</span>
+                                    <span class="check"><input type="checkbox" v-if="fncheckbox"  @click="fncheck"> 모두 선택</span>
                                     <span class="check1">(<img class="fundingImg" src="/image/funding.PNG" alt=""> 펀딩)</span>
                                     <span class="check2">수량</span>
                                     <span class="check3">받은 날짜</span>
@@ -286,18 +286,24 @@ var app = new Vue({
     data: {
 		showFlg : true,
 		name:'',
+		fncheckbox : true
     }   
     , methods: {
     	fnChangeView : function(){
-    		var self=this;
+    		var self = this;
     		self.showFlg = true;
     	},
     	fnChangeView1 : function(){
-    		var self=this;
+    		var self = this;
     		self.showFlg = false;
+    	},
+    	fncheck : function(){
+    		var self = this;
+    		self.fncheckbox = true;
+    		
     	}
 
-    }   
+    }
     , created: function () {
     	var self = this;
 

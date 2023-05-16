@@ -4,7 +4,12 @@
 
 <mapper namespace="com.example.mini.mapper.MyInfoMapper">	
 	<select id="myInfoGift" parameterType="hashmap" resultType="com.example.mini.model.User">
-		SELECT 
+		SELECT DISTINCT P_NAME, P_PRICE, FSETPRICE, FPUTPRICE
+			FROM T1_REGISTRY R
+				INNER JOIN T1_PRODUCT P ON R.PRODUCTNO = P.PRODUCTNO
+				INNER JOIN T1_ORDER O ON O.PRODUCTNO = P.PRODUCTNO
+				INNER JOIN T1_GUEST G ON R.USERID = G.USERID
+				LEFT JOIN T1_FUNDING F ON R.USERID = F.USERID;
 		  
 	</select>
 	

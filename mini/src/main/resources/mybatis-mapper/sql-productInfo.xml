@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.mini.mapper.ProductMapper">	
+	<select id="selectUser" parameterType="hashmap" resultType="com.example.mini.model.Product">
+		SELECT
+		PRODUCTNO, 
+		P_PRICE,
+		P_NAME,
+		P_CONTENT,
+		P_CDATETIME,
+		P_KIND,
+		P_LIKE
+		FROM mini_db2.T1_PRODUCT
+		PRODUCTNO = #{productno};
+	</select>
+	
+
+</mapper>

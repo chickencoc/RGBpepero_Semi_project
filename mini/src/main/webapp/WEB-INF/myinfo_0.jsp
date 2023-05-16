@@ -17,7 +17,7 @@
 }
 
 .container fieldset {
-	padding-top: 100px;
+	padding-top: 50px;
 }
 
 fieldset #information {
@@ -32,8 +32,9 @@ fieldset {
 	width: 900px;
 	height: 700px;
 	margin: auto;
-	margin-top: 30px;
+	margin-top: 10px;
 	line-height: 50px;
+	box-shadow: 0px 0px 5px 0px #555;
 }
 
 #post {
@@ -91,6 +92,7 @@ fieldset select {
 
 .product_category_list {
 	text-align: center;
+	margin-top : 10px;
 }
 
 .inputid {
@@ -161,6 +163,12 @@ fieldset select {
 	margin-right: 10px;
 	color: gray;
 }
+#weddingDay #weddingDate {
+	width: 70px;
+	margin-right: 10px;
+	color: gray;
+	margin-left: 45px;
+}
 
 #bankInfo #bank {
 	margin-left: 57.5px;
@@ -170,6 +178,11 @@ fieldset select {
 #bankInfo #bankNumber {
 	margin-left: 30px;
 	color: gray;
+}
+fieldset #fieldTitle{
+	font-size : 30px;
+	text-align : center;
+	margin-bottom : 30px;
 }
 /* style END */
 </style>
@@ -183,6 +196,7 @@ fieldset select {
 						href="">받은 선물 목록</a> <a href="">보낸답례품</a> <a href="">캘린더</a>
 				</div>
 				<fieldset>
+					<h1 id="fieldTitle">내정보 확인하기</h1>
 					<img src="/image/profile1.PNG" id="profile">
 					<div id="information">
 						<div id="idline">
@@ -205,7 +219,9 @@ fieldset select {
 						</div>
 						<div id="birth">
 							생년월일 <span id="birthYear">{{list.birth}}</span>
-
+						</div>
+						<div id="weddingDay">
+							결혼예정일 <span id="weddingDate">{{list.weddingday}}</span>
 						</div>
 						<div id="bankInfo">
 							계좌정보 <span id="bank">{{bank}}</span> 
@@ -228,7 +244,8 @@ var app = new Vue({
     	bank : "",
     	list : []
 		
-    }   
+    }
+	
     , methods: {
     	
     	fnMoveModify : function(){
@@ -247,16 +264,16 @@ var app = new Vue({
              		console.log(data);
              		self.list = data.list;
              		console.log(self.list);
-             		if(self.list.bank == "1"){
+             		if(self.list.bank == "A"){
              			self.bank= "국민";
-             		  }else if(self.list.bank == "2"){
-             			 self.bank= "우리"; 
-             		  }else if(self.list.bank == "3"){
+             		  }else if(self.list.bank == "B"){
              			 self.bank= "신한"; 
-             		  }else if(self.list.bank == "4"){
-             			 self.bank= "하나"; 
-             		  }else if(self.list.bank == "5"){
+             		  }else if(self.list.bank == "C"){
+             			 self.bank= "우리"; 
+             		  }else if(self.list.bank == "D"){
              			 self.bank= "농협"; 
+             		  }else if(self.list.bank == "E"){
+             			 self.bank= "기업"; 
              		  }
     				}
     			})

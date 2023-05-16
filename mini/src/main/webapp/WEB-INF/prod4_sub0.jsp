@@ -34,10 +34,10 @@
                     </div>
                 </div>
                 <div id="explainbox">
-                    <div>상품명 : <span>{{productname}}</span></div>
-                    <div>좋아요 : {{ddabong}}</div>
+                    <div>상품명 : <span>{{pName}}</span></div>
+                    <div>좋아요 : {{pLike}}</div>
                     <div>재고 : {{cnt}}</div>
-                    <div>상품 가격 : {{price}}</div>
+                    <div>상품 가격 : {{pPrice}}</div>
                     <hr id="inner_line" class="div_line">
                     <div class="buttonbox">
                         <button>레지스트리 등록</button>
@@ -93,15 +93,23 @@
     var app = new Vue({ 
         el: '#app',
         data: {
+        	productno = "",
+        	pName : "",
+        	
+        	
+        	
+        	
+        	
+        	
             list : [],
             checkList : []
         }   
         , methods: {
-            fnGetList : function(){
+            fnProductList : function(){
                 var self = this;
                 var nparmap = {};
                 $.ajax({
-                    url:"/bbs/list.dox",
+                    url:"/product/list.dox",
                     dataType:"json",	
                     type : "POST", 
                     data : nparmap,

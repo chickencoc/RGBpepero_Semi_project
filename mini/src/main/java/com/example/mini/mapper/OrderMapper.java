@@ -17,6 +17,8 @@ public interface OrderMapper {
 	
 	Order selectCardInfo(HashMap<String, Object> map);
 	
+	void insertCardContent(HashMap<String, Object> map); //카드 컨텐츠 추가
+	
 	
 //	int selectUserCnt(HashMap<String, Object> map); //중복체크
 //	

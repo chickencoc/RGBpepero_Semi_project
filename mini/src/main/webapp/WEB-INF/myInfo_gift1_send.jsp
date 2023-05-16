@@ -94,18 +94,14 @@
         }
         .thx_Card_Write{
             width: 500px;
-            height: 250px;
+            height: 286px;
+            text-align:center;
+            vertical-align:middle;
+            position: relative;
+           
+            
         }
-        .cardImage{
         
-        background-image:url(../image/writeCard.PNG);
-        width: 500px;
-        height: 286px;
-        background-repeat: no-repeat;
-        background-size:contain;
-        background-position:center;
-        resize: none;
-        }
         .write_Txt .txt_To_Card{
             width: 620px;
             height: 250px;
@@ -123,6 +119,18 @@
 
         }
         .ck-editor__editable { height: 210px; }
+        .writedCard{
+        width:450px;
+        height:230px;
+        z-index:1;
+        position: absolute;
+        top:12%;
+        }
+        .cardSampleImg{
+        width:500px;
+        height:286px;
+        position:absolute;
+        left:0%}
       
     </style>
 </head>
@@ -147,7 +155,7 @@
                     </fieldset>
                         <fieldset class="customer_Explane">
                             <div>받는사람</div>
-                            <div class="customer_Box"></div>
+                            <div class="customer_Box">gName</div>
                         </fieldset>  
                 </div>  
             </div>
@@ -155,31 +163,12 @@
             <div class="grid_Area2">
                 <h1 class="card_Spoil_Title">카드 미리보기</h1>
                 <div class="option_Box">
-                    <select class="font_Size_Box">
-                        <option>글씨크기</option>
-                        <option>11</option>
-                        <option>13</option>
-                        <option>15</option>
-                        <option>17</option>
-                        <option>19</option>
-                        <option>21</option>
-                    </select>
-                    <select class="font_Kind_Box">
-                        <option>글꼴</option>
-                        <option>나눔고딕</option>
-                        <option>맑은고딕</option>
-                        <option>궁서체</option>
-                    </select>
-                    <select class="font_Effect_Box">
-                        <option>글씨효과</option>
-                        <option>기울임</option>
-                        <option>굵게</option>
-                    </select>
+                    
                 </div>
                 <div class="grid_Area3">
                     <div class="thx_Card_Write">
-                    <textarea class=cardImage readonly :value="cardContent"></textarea>
-                        <!-- <img src="../image/writeCard.PNG" id="thx_Card"> -->
+                    	<img src="/image/writeCard.PNG" class="cardSampleImg">
+                    	<div class="writedCard" v-html="cardContent">{{cardContent}}</div>
                     </div>
                     <div class="write_Txt">
                         <vue-editor v-model="cardContent"></vue-editor>
@@ -187,7 +176,7 @@
                 </div>
             </div>
             <div class="send_Btn">
-                <button id="send_Card">카드 보내기</button>
+                <button id="send_Card" @click="fnAddCard">카드 보내기</button>
             </div>
         </div>
     </div>
@@ -211,7 +200,8 @@ var app = new Vue({
     data: {
 	info:{},
 	productNo : "${map.productNo}",
-	cardContent : ''
+	cardContent : '',
+	userId : "${sessionId}",
     }
 	, components: {VueEditor}
     , methods: {
@@ -229,8 +219,29 @@ var app = new Vue({
 				}
 			});
 		}
-
-    }   
+    	,fnAddCard : function(){
+    		var self = this;
+    		if(confirm("저장하시겠습니까?")){
+	    		var nparmap = {
+			            gPhone : self.gPhone,
+			            userId : self.userId,
+			            cardcontent : self.cardContent,
+			            productNo : self.productNo};	
+					$.ajax({
+						url : "/addCardContent.dox",
+						dataType : "json",
+						type : "POST",
+						data : nparmap,
+						success : function(data) {
+							console.log(data);
+							alert("카드 작성이 완료되었습니다..")
+							location.href="/myRegistry.do" 
+						}
+					 });
+	    		}
+            }
+    	}
+   
     , created: function () {
     	var self = this;
     	self.fnGetInfo()

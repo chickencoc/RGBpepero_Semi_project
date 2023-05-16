@@ -37,5 +37,11 @@ public class OrderServiceImpl implements OrderService{
 		resultMap.put("info", order);
 		return resultMap;
 	}
+	@Override
+	public void addCardContent(HashMap<String, Object> map) {
+		orderMapper.insertCardContent(map);
+		// TODO Auto-generated method stub
+		
+	}
 
 }

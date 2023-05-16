@@ -15,7 +15,7 @@ public interface OrderService {
 	
 //	int cntUser(HashMap<String, Object> map); //중복확인
 //	
-//	void addUser(HashMap<String, Object> map); //회원가입
+	void addCardContent(HashMap<String, Object> map); //카드 컨텐츠 추가
 //	
 //	HashMap<String, Object> selectFindId(HashMap<String, Object> map); //아이디 찾기
 //	

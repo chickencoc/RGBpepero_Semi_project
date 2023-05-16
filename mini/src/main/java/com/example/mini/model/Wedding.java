@@ -7,6 +7,8 @@ public class Wedding {
 	private String wUrl;
 	private String wCdatetime;
 	private String wUdatetime;
+	private String wLocation;
+	private String imgsrc;
 	public String getWeddingNo() {
 		return weddingNo;
 	}
@@ -42,5 +44,17 @@ public class Wedding {
 	}
 	public void setwUdatetime(String wUdatetime) {
 		this.wUdatetime = wUdatetime;
+	}
+	public String getwLocation() {
+		return wLocation;
+	}
+	public void setwLocation(String wLocation) {
+		this.wLocation = wLocation;
+	}
+	public String getImgsrc() {
+		return imgsrc;
+	}
+	public void setImgsrc(String imgsrc) {
+		this.imgsrc = imgsrc;
 	}
 }

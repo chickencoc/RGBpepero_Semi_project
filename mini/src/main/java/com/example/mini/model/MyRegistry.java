@@ -10,12 +10,14 @@ public class MyRegistry {
 	private String rContent;
 	private String userId;
 	private String fundYn;
-	private String piImgSrc;
-	private String tiImgSrc;
+	private String imgSrc;
 	private String pStock;
 	private String pName;
 	private String pPrice;
+	private String orderNo;
 
+
+	
 	
 	public String getRegistryNo() {
 		return registryNo;
@@ -71,18 +73,13 @@ public class MyRegistry {
 	public void setFundYn(String fundYn) {
 		this.fundYn = fundYn;
 	}
-	public String getPiImgSrc() {
-		return piImgSrc;
+	public String getimgSrc() {
+		return imgSrc;
 	}
-	public void setPiImgSrc(String piImgSrc) {
-		this.piImgSrc = piImgSrc;
+	public void setimgSrc(String imgSrc) {
+		this.imgSrc = imgSrc;
 	}
-	public String getTiImgSrc() {
-		return tiImgSrc;
-	}
-	public void setTiImgSrc(String tiImgSrc) {
-		this.tiImgSrc = tiImgSrc;
-	}
+	
 	public String getpStock() {
 		return pStock;
 	}
@@ -101,5 +98,10 @@ public class MyRegistry {
 	public void setpPrice(String pPrice) {
 		this.pPrice = pPrice;
 	}
-	
+	public String getOrderNo() {
+		return orderNo;
+	}
+	public void setOrderNo(String orderNo) {
+		this.orderNo = orderNo;
+	}
 }

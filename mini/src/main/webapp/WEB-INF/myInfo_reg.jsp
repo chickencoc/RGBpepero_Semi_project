@@ -27,7 +27,7 @@
                 <div class="regi_your_url">
                     <h6 style="text-align: center;">당신의 레지스트리 주소</h6>
                     <span id="regi_url">
-                        {{myUrl}}
+                        http://localhost:8080/guestRegistry.do?id={{sessionId}}
                         <a href="#" @click="fnUrlCopy()"><img src="/image/fi-ss-upload.png" id="regi_icon"></a>
                         <span style="font-size: 9px;">주소복사</span>
                     </span>
@@ -38,7 +38,7 @@
                     <button id="regi_back_image_button" @click="fnBackImageAlter()">배경사진 수정</button>
                     <img :src="imgUrl1" id="regi_back_image" alt="이미지">                                      
                 </div>    
-                <a href="#" @click="fnProfileAlter()" id="regi_profile"><img :src="imgUrl2"></a>                       
+                <a href="#" @click="fnProfileAlter()"><img :src="imgUrl2" id="regi_profile"></a>                       
             </div>
             <div class="regi_container">
                 <div class="regi_select">
@@ -52,83 +52,46 @@
                     <a href="/mygiftpage.do" @click="fnProductPage"><img src="/image/fi-sr-plus.png" id="regi_icon"></a>
                     <div>선물 추가하기</div>
                 </div>
-                <div class="myinfo_registry" v-for="(item, index) in registry">                                    
-                    <div class="regi_items" v-if="">
-                        <div id="regi_wanted_badge" v-if="item.rOption == 'A'"> <!--매우원함-->
-                        <img :src="item.piImgSrc" class="regi_items_image">
+                <div class="myinfo_registry" >
+
+                <div v-for="(item, index) in registry">                              
+                    <div class="regi_items" v-if="item.orderNo == null">
+                        <!--매우원함-->
+                        <div id="regi_wanted_badge" v-if="item.rOption == 'A'"> 
+                            <img :src="item.imgSrc" class="regi_items_image" v-if="item.tripNo == null">
+                            <img :src="item.imgSrc" class="regi_items_image" v-if="item.productNo == null">
                         </div>                 
-                        <p class="regi_pro_name">{{item.pName}}</p>
-                        <p class="regi_pro_price">{{item.pPrice}} 원</p>
-                        <div class="regi_items_options">
-                            <span id="regi_stock_text">{{item.pStock}}</span>
-                            <input type="text" id="regi_stock_number" value="1" size="1" readonly>
-                            <button id="regi_optionBtn" @click="fnOptionBtn()">옵션설정</button>
-                            <a href="#" id="regi_delete" @click="fnDeleteItem()">삭제하기</a>
-                        </div>
-                    </div>
-                    <!--일반-->
-                    <div class="regi_items" v-if="">
-                        <img src="/image/loundry.jpg" class="regi_items_image">                   
-                        <p class="regi_pro_name">{{item.pName}}</p>
-                        <p class="regi_pro_price">{{item.pPrice}} 원</p>
-                        <div class="regi_items_options">
-                            <span id="regi_stock_text">{{item.pStock}}</span>
-                            <input type="text" id="regi_stock_number" value="1" size="1" readonly>
-                            <button id="regi_optionBtn" @click="fnOptionBtn()">옵션설정</button>
-                            <a href="#" id="regi_delete" @click="fnDeleteItem()">삭제하기</a>
-                        </div>
-                    </div>         
-                    <!--펀딩퍼센트-->
-                    <div class="regi_items" v-if="">
-                        <img src="/image/loundry.jpg" class="regi_items_image">                   
-                        <p class="regi_pro_name">그랑데 세탁기</p>
-                        <p class="regi_pro_price">1,000,000 원</p>
-                        <div class="regi_percentage" v-if="item.fundYn == Y">
+                            <p class="regi_pro_name">{{item.pName}}</p>
+                            <p class="regi_pro_price">{{item.pPrice}} 원</p>
+                        <!--펀딩퍼센트-->
+                        <div class="regi_percentage" v-if="item.fundYn == 'Y'">
                             <progress id="regi_progress" value="30" max="100"></progress>
-                            <span>{value}%</span>                        
+                            <span>{}%</span>                        
                         </div>
-                        <div class="regi_items_options">    
-                            <span id="regi_stock_text" >수량</span>
-                            <input type="text" id="regi_stock_number" value="1" size="1" readonly>                     
-                            <button id="regi_optionBtn" @click="fnOptionBtn()">옵션설정</button>
-                            <a href="#" id="regi_delete" @click="fnDeleteItem()">삭제하기</a>
+                        <div class="regi_items_options">
+                            <span id="regi_stock_text">수량</span>
+                            <input type="text" id="regi_stock_number" :value="item.pStock" size="1" readonly>
+                            <button id="regi_optionBtn" @click="fnOptionBtn">옵션설정</button>
+                            <a href="#" id="regi_delete" @click="fnDeleteItem">삭제하기</a>
                         </div>
-                    </div>
+                    </div>                
                     <!--받은선물인 경우-->
-                    <div class="regi_items" v-if="">
-                        <img src="/image/loundry.jpg" class="regi_items_image">                   
-                        <p class="regi_pro_name">그랑데 세탁기</p>
-                        <p class="regi_pro_price">1,000,000 원</p>
+                    <div class="regi_items" v-if="item.orderNo != null">
+                        <img :src="item.imgSrc" class="regi_items_image" v-if="item.tripNo == null">
+                        <img :src="item.imgSrc" class="regi_items_image" v-if="item.productNo == null">                  
+                        <p class="regi_pro_name">{{item.pName}}</p>
+                        <p class="regi_pro_price">{{item.pPrice}} 원</p>
                         <div class="regi_items_options">
-                            <button id="regi_orderInfoBtn" @click="fnOrderInfo()">주문상세보기</button>
-                            <button id="regi_reviewBtn" @click="fnReview()">리뷰작성</button>
+                            <button id="regi_orderInfoBtn" @click="fnOrderInfo">주문상세보기</button>
+                            <button id="regi_reviewBtn" @click="fnReview">리뷰작성</button>
                         </div>
-                    </div>
-                    <div class="regi_items">
-                        <img src="/image/loundry.jpg" class="regi_items_image">                   
-                        <p class="regi_pro_name">그랑데 세탁기</p>
-                        <p class="regi_pro_price">1,000,000 원</p>
-                        <div class="regi_items_options">
-                            <span id="regi_stock_text">수량</span>
-                            <input type="text" id="regi_stock_number" value="1" size="1" readonly>
-                            <button id="regi_optionBtn" @click="fnOptionBtn()">옵션설정</button>
-                            <a href="#" id="regi_delete" @click="fnDeleteItem()">삭제하기</a>
-                        </div>
-                    </div>
-                    <div class="regi_items">
-                        <img src="/image/loundry.jpg" class="regi_items_image">                   
-                        <p class="regi_pro_name">그랑데 세탁기</p>
-                        <p class="regi_pro_price">1,000,000 원</p>
-                        <div class="regi_items_options">
-                            <span id="regi_stock_text">수량</span>
-                            <input type="text" id="regi_stock_number" value="1" size="1" readonly>
-                            <button id="regi_optionBtn" @click="fnOptionBtn()">옵션설정</button>
-                            <a href="#" id="regi_delete" @click="fnDeleteItem()">삭제하기</a>
-                        </div>
-                    </div>
+                    </div>                              
+                </div>   
+                
                 </div> 
             </div>
         </main>
+        
         </div>
     </div>
     </div>
@@ -141,14 +104,14 @@
 var app = new Vue({ 
     el: '#app',
     data: {
-    	userId: "${sessionId}"
+        sessionId: "${sessionId}"
+    ,	userId: "${sessionId}"
     ,   sessionName : "${sessionName}"    
-	,	list: []
     ,   registry: []
 	,	image: []
 	, 	imgUrl1: ''
     ,   imgUrl2: ''
-    ,   myUrl:  ''
+    
     }   
     , methods: {
     	
@@ -180,10 +143,12 @@ var app = new Vue({
                         self.image = data.image;  // Assuming 'images' is an array of image objects
                         for(var i = 0; i < self.image.length; i++) {
                             if(self.image[i].imgUsetype == 1) {
-                                self.imgUrl1 = self.image[i].imgSrc;                       
+                                self.imgUrl1 = self.image[i].imgSrc;   
+                                console.log(data);                    
                             }
                             else if(self.image[i].imgUsetype == 2){
-                                self.imgUrl2 = self.image[i].imgSrc;                        
+                                self.imgUrl2 = self.image[i].imgSrc;  
+                                console.log(data);                      
                             }
                             // Add more conditions for other image types if necessary
                         }
@@ -193,100 +158,52 @@ var app = new Vue({
                     }
                 });
             }
- 	,   fnUrlCopy : function(){
-            var self = this;
-            const originalUrl = window.location.href;
-            const urlParameter = window.location.search;
-            // console.log(urlParameter);
-            const urlStr = originalUrl;
-            const url = new URL(urlStr);
-            const urlParams = url.searchParams;
-
-            const tag = urlParams.get('tag');
-
-            // javascript
-            console.log(tag);
-
-            const like = urlParams.get('like');
-
-            // backend
-            console.log(like)
-
-            // Set 'tag' parameter as 'sessionid'
-            urlParams.set('tag', self.userId);
-
-            // Get the modified URL with updated parameters
-            const modifiedUrl = url.origin + url.pathname + '?' + urlParams.toString();
-
-            // Print the modified URL
-            console.log(modifiedUrl);
-            // Create a temporary input element
-            var tempInput = document.createElement("input");
-            tempInput.style.position = "absolute";
-            tempInput.style.left = "-1000px";
-            tempInput.value = modifiedUrl;
-
-            // Append the input element to the document body
-            document.body.appendChild(tempInput);
-
-            // Select the input element's content
-            tempInput.select();
-            tempInput.setSelectionRange(0, 99999); // For mobile devices
-
-            // Copy the modified URL to the clipboard
-            document.execCommand("copy");
-
-            // Remove the temporary input element
-            document.body.removeChild(tempInput);
-
-            console.log("Modified URL copied to clipboard: " + modifiedUrl);
-    }	
-    		
-    	
     ,	fnBackImageAlter : function(){
-    		let popUrl = "/registryBackImg.do";
-    		let popOption = "width = 500px, height=500px, top=300px, left=300px, scrollbars=no";
+            var popUrl = "/registryBackImg.do";
+            var popOption = "width = 500px, height=500px, top=300px, left=300px, scrollbars=no";
     		
-    		window.open(popUrl, "배경이미지설정", [popOption]);
-    		
-    		function handleImageUpdate(imageData) {
-    	        // 이미지 변경 데이터 처리 로직 작성
-    	        console.log(imageData);
-    	        // 여기서 받은 데이터를 원하는 방식으로 처리합니다.
-    	    }
+    		var popup = window.open(popUrl, "배경이미지설정", [popOption]);
+    		popup.onbeforeunload = function() {
+                location.reload();
+            };
     	}
     	
     ,	fnProfileAlter : function(){
-	    	let popUrl = "/registryProfileImg.do";
-			let popOption = "width = 500px, height=500px, top=300px, left=300px, scrollbars=no";
+            var popUrl = "/registryProfileImg.do";
+            var popOption = "width = 500px, height=500px, top=300px, left=300px, scrollbars=no";
 			
-			window.open(popUrl, "프로필이미지설정", [popOption]);
+			var popup = window.open(popUrl, "프로필이미지설정", [popOption]);
+            popup.onbeforeunload = function() {
+                location.reload();
+            };
     	}
     ,	fnOptionBtn: function(){   		
     		let popUrl = "/registryOption.do";
     		let popOption = "width = 600px, height=700px, top=300px, left=300px, scrollbars=no";
     		
-    		window.open(popUrl, "옵션 설정", [popOption]);  		
+    		var popup = window.open(popUrl, "옵션 설정", [popOption]);  
+            popup.onbeforeunload = function() {
+                location.reload();
+            };		
     	}
     ,	fnDeleteItem: function(){
     		confirm("삭제하시겠습니까?");
     		
     	}
     ,	fnOrderInfo: function(){
-    		
+            window.loction.href="/myInfoGift9.do";
     	}
     ,	fnReview: function(){
-    		
+            window.loction.href= "/review.do";
     	}
     ,	fnProductPage: function(){
-    		window.location.href = "/mygiftpage.do";
+    		window.location.href = "/product.do";
     }
     }   
     , created : function () {
     	var self = this;
         self.fnselectUser();
-        var originalUrl = window.location.href;
-        this.myUrl = originalUrl;
+        self.fnselectImage();      
 	}
 });
 </script>

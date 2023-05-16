@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.example.test1.mapper.RegistryMapper">
+<mapper namespace="com.example.mini.mapper.RegistryMapper">
 	
 	
 	<select id="selectUserRegistry" parameterType="hashmap" resultType="com.example.mini.model.MyRegistry">
@@ -20,7 +20,8 @@
  			TI.IMGSRC,
  			PM.P_STOCK,
   			P.P_NAME,
-  			P.P_PRICE
+  			P.P_PRICE,
+            O.ORDERNO
 		FROM 
 			mini_db2.T1_REGISTRY AS R
 		INNER JOIN
@@ -35,8 +36,10 @@
    			mini_db2.T1_TRIPIMAGE AS TI ON T.TRIPNO = TI.TRIPNO
  		LEFT JOIN
   			mini_db2.T1_PDMANAGE AS PM ON P.PRODUCTNO = PM.PRODUCTNO
+		LEFT JOIN
+			mini_db2.T1_ORDER AS O ON P.PRODUCTNO = O.ORDERNO
 		WHERE 
-			R.USERID = #{userId};
+			R.USERID =  #{userId};
 	</select>
 	<update id="updateRegistryOption" parameterType="hashmap">
 		UPDATE mini_db2.T1_REGISTRY
@@ -46,7 +49,7 @@
 			FUNDYN = #{fundYn},
 			R_UDATETIME = #{rUdatetime}			
 		WHERE
-			REGISTYNO = #{registryNo};
+			REGISTRYNO = #{registryNo};
 	</update>
 	<select id="selectUserImage" parameterType="hashmap" resultType="com.example.mini.model.UserImage">
 		SELECT
@@ -65,7 +68,7 @@
 	<insert id="saveUserImg" parameterType="hashmap">
 		INSERT INTO mini_db2.T1_USERIMAGE
 		VALUES
-			(#{null}, #{userId}, #{imgSrc}, #{imgName}, #{orgName}, #{imgType}, #{imgUsetype})
+			(#{srcimgNo}, #{userId}, #{imgSrc}, #{imgName}, #{orgName}, #{imgType}, #{imgUsetype})
 			;
 	</insert>
 
@@ -76,8 +79,9 @@
 			IMGNAME = #{imgName},
 			ORGNAME = #{orgName},
 			IMGTYPE = #{imgType},
-			IMGUSETYPE = #{imgUsetype}			
+			IMGUSETYPE = #{imgUsetype}		
 		WHERE
-			SRCIMGNO = #{null} AND USERID = #{userId};
+			SRCIMGNO = #{srcimgNo} AND USERID = #{userId};
+		
 	</update>
 </mapper>

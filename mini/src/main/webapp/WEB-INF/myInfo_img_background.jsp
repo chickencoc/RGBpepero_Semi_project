@@ -46,7 +46,8 @@
 	var app = new Vue({ 
 	    el: '#app',
 	    data: {
-	    	userId: "${sessionId}"
+			sessionId: "${sessionId}"
+		,	userId: "${sessionId}"
 	    ,	image: []
 		,	imageUrl: '' //이미지 주소 가져올 공간
 		,	uploadName: '첨부파일'
@@ -97,7 +98,8 @@
 				default:
 					return 'Unknown';
 				}
-				
+				self.imageType = extension;
+				console.log(imageType);
 			}
 			
 			return 'Unknown'; // 확장자가 없는 경우
@@ -108,9 +110,10 @@
 					imgSrc : self.imageUrl,
 					imgName : self.uploadName,
 					orgName : self.uploadName,
-					imgtype : self.imageType,
+					imgType : self.imageType,
 					imgUsetype: '1'
 				};
+					console.log(nparmap);
 				  // AJAX 요청을 보냅니다
 				  $.ajax({
 				    url: '/updateRegistryImg.dox', // 서버의 처리 파일 경로를 지정해야 합니다
@@ -121,15 +124,18 @@
 				    success: function(response) {
 				      // 요청이 성공했을 때 실행할 코드를 작성합니다
 						alert("저장되었습니다.");
-						console.log(response); // 응답 내용을 콘솔에 출력하거나 필요에 따라 처리합니다
+						console.log(response); // 응답 내용을 콘솔에 출력하거나 필요에 따라 처리합니다	
+						window.close();					
 				    },
 				    error: function(xhr, status, error) {
 				      // 요청이 실패했을 때 실행할 코드를 작성합니다
 				      console.error(error); // 에러 내용을 콘솔에 출력하거나 필요에 따라 처리합니다
 				    }
 				  });
+				  
 			}
 	    }   
+		
 	    , created: function () {
 	    	
 	

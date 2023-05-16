@@ -24,7 +24,7 @@
                 </div>
                 <ul class="reg_options_popup_checkbox">
                     <li id="reg_options_popup_checkbox">상품 표시 옵션</li>
-                    <li id="reg_options_popup_checkbox"><input type="checkbox" name="choice" v-bind:checked="inputWanted" v-on:change="updateWanted">정말 필요한 물건" 표시</li>                 
+                    <li id="reg_options_popup_checkbox"><input type="checkbox" name="choice" v-bind:checked="inputWanted" v-on:change="updateWanted"> "정말 필요한 물건" 표시</li>                 
                     <li id="reg_options_popup_checkbox"><input type="checkbox" name="choice" v-bind:checked="inputGroup" v-on:change="updateGroup"> "그룹선물(펀딩)"로 변경하기</li>
                 </ul>
                 <div class="reg_options_popup_memo">
@@ -63,7 +63,12 @@ var app = new Vue({
         }    
     ,	fnOptionInput : function(){
             var self = this;
-    		var nparmap = {rOption: self.updatedWanted, fundYn: self.updatedGroup, rContent: self.updatedInput};
+    		var nparmap = {
+                rOption: self.updatedWanted, 
+                fundYn: self.updatedGroup, 
+                rContent: self.updatedInput,
+                rUdatetime: now
+            };
                   $.ajax({
                             url: "/registryOption.dox",
                             type: "POST",

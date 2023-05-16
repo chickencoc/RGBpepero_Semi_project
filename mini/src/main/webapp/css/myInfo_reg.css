@@ -147,9 +147,10 @@
     
 }
 #regi_taken_gift{
-    width: 100px;
+    width: 200px;
     height: 40px;
-
+    cursor: auto;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, .1);
 }
 #regi_icon{
     width: 20px;

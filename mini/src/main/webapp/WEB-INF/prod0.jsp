@@ -11,6 +11,11 @@
 	<link rel="stylesheet" href="/css/Base_rgbPepero.css">
 	<link rel="stylesheet" href="/css/prod0.css">
 	<title>첫번째 페이지</title>
+	<script src="https://unpkg.com/vuejs-paginate@latest"></script>
+	<script src="https://unpkg.com/vuejs-paginate@0.9.0"></script>
+	<style>
+	<!-- 페이징 추가 2-->
+</style>
 </head>
 
 <body>
@@ -18,14 +23,9 @@
 <div id="wrapper">
         <div class="container">
             <div class="prodCategoryList">
-                <a href=""><b>침실</b></a>
-                <a href="">거실</a>
-                <a href="">드레스룸</a>
-                <a href="">주방</a>
-                <a href="">가전제품</a>
-                <a href="">욕실</a> 
-                <a href="">식장</a> 
-                <a href="">여행</a>
+            <ul>
+            	<li v-for="(item, index) in catList" @click="fnChange(item.code)">{{item.name}}</li>
+            </ul>
             </div>
             <div class="prod0Banner">
                 <img src="/image/prod0Banner.jpg" id="bannerImg">
@@ -48,45 +48,13 @@
                 </select>
             </div>
             <div class="prodListBox">
-                <div class="prodList">
-                    <a href="">
-                        <div class="prodBox">
+                <div class="prodList" >
+                        <div class="prodBox" v-for="(item, index) in list">
                             <img src="/image/prod0.jpg" class="prod0Img">
-                            <div class="prodName">{{p_name}}</div>
-                            <div class="prodPrice">{{p_price}}원</div>
-                            <div class="prodLike">좋아요 : <img src="/image/Like.png" class="prodLikeImg"></div>
+                            <div class="prodName">{{item.pName}}</div>
+                            <div class="prodPrice">{{item.pPrice}}원</div>
+                            <div class="prodLike">좋아요 : {{item.iLike}}<img src="/image/Like.png" class="prodLikeImg"></div>
                         </div>
-                    </a>
-                    <div class="prodBox">
-                        <img src="/image/prod0.jpg" class="prod0Img">
-                        <div class="prodName">{{p_name}}</div>
-                        <div class="prodPrice">{{p_price}}원</div>
-                        <div class="prodLike">좋아요 :  <img src="/image/Like.png" class="prodLikeImg"></div>
-                    </div>
-                    <div class="prodBox">
-                        <img src="/image/prod0.jpg" class="prod0Img">
-                        <div class="prodName">{{p_name}}</div>
-                        <div class="prodPrice">{{p_price}}원</div>
-                        <div class="prodLike">좋아요 :  <img src="/image/Like.png" class="prodLikeImg"></div>
-                    </div>
-                    <div class="prodBox">
-                        <img src="/image/prod0.jpg" class="prod0Img">
-                        <div class="prodName">{{p_name}}</div>
-                        <div class="prodPrice">{{p_price}}원</div>
-                        <div class="prodLike">좋아요 :  <img src="/image/Like.png" class="prodLikeImg"></div>
-                    </div>
-                    <div class="prodBox">
-                        <img src="/image/prod0.jpg" class="prod0Img">
-                        <div class="prodName">{{p_name}}</div>
-                        <div class="prodPrice">{{p_price}}원</div>
-                        <div class="prodLike">좋아요 :  <img src="/image/Like.png" class="prodLikeImg"></div>
-                    </div>
-                    <div class="prodBox">
-                        <img src="/image/prod0.jpg" class="prod0Img">
-                        <div class="prodName">{{p_name}}</div>
-                        <div class="prodPrice">{{p_price}}원</div>
-                        <div class="prodLike">좋아요 :  <img src="/image/Like.png" class="prodLikeImg"></div>
-                    </div>
                 </div>
             </div> 
             <div class="pageList">
@@ -94,17 +62,17 @@
                 
             </div>
             <template>
-                <paginate
-                  :page-count="pageCount"
-                  :page-range="3"
-                  :margin-pages="2"
-                  :click-handler="fnSearch"
-                  :prev-text="'<'"
-                  :next-text="'>'"
-                  :container-class="'pagination'"
-                  :page-class="'page-item'">
-                </paginate>
-              </template>
+				<paginate
+				   	:page-count="pageCount"
+				    :page-range="3"
+				    :margin-pages="2"
+				    :click-handler="fnSearch"
+				    :prev-text="'<'"
+				    :next-text="'>'"
+				    :container-class="'pagination'"
+				    :page-class="'page-item'">
+				</paginate>
+			</template>     
         </div>
     </div>
     </div>
@@ -112,20 +80,86 @@
 </html>
 <jsp:include page="/layout/footer.jsp"></jsp:include>
 <script type="text/javascript">
+Vue.component('paginate', VuejsPaginate)
 var app = new Vue({ 
     el: '#app',
     data: {
         selectPage: 1,
         pageCount: 1,
-        cnt : 0
+        cnt : 0,
+        list : [],
+        catList : [],
+        pKind : "K"
     }   
     , methods: {
-       fnSearch : function(){
+    	fnChange : function(code){
+    		var self = this;
+    		self.pKind = code;
+            self.fnGetProductList();
+    	}
+    	,
+    	fnSearch : function(pageNum){
+			var self = this;
+			self.selectPage = pageNum;
+			var startNum = ((pageNum-1) * 6)+1;
+			var lastNum = (pageNum * 6);
+			var nparmap = {startNum : startNum, lastNum : lastNum , pKind : self.pKind};
+			$.ajax({
+				url : "/productList.dox",
+				dataType : "json",
+				type : "POST",
+				data : nparmap,
+				success : function(data) {
+					self.list = data.product;
+					self.cnt = data.cnt;
+					self.pageCount = Math.ceil(self.cnt / 6);
+					console.log(data);
+					}
+				});
+			},
+        fnGetProductList : function(){
+            var self = this;
+            var startNum = ((self.selectPage-1) * 6)+1;
+    		var lastNum = (self.selectPage * 6);
+            var nparmap = {pKind : self.pKind ,startNum : startNum, lastNum : lastNum};
+            $.ajax({
+                url:"/productList.dox",
+                dataType:"json",	
+                type : "POST", 
+                data : nparmap,
+                success : function(data) { 
+                	self.list = data.product;
+                    console.log(data);
+                    console.log(self.list);
 
-        }
+                    self.cnt = data.cnt;
+                    
+                    console.log(self.cnt);
+                    self.pageCount = Math.ceil(self.cnt / 6);
+                	}
+           		}); 
+        	}
+			,fnGetCategoryList : function(){
+	            var self = this;
+	            var nparmap = {};
+	            $.ajax({
+	                url:"/categoryList.dox",
+	                dataType:"json",	
+	                type : "POST", 
+	                data : nparmap,
+	                success : function(data) { 
+	                	self.catList = data.code;
+	                    console.log(data);
+	                    console.log(self.catList);
+	                	}
+	           		}); 
+	        	}
+			
     }   
     , created: function () {
         var self = this;
+        self.fnGetProductList();
+        self.fnGetCategoryList();
     }
 });
 </script>

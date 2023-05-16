@@ -158,3 +158,21 @@ ul {
 .pagination li.active a {
     color:#fff;
 }
+
+.prodCategoryList li{
+	display: inline-block;
+	    margin: 0 5px;
+}
+.prodCategoryList li:not(:last-child):after {
+    content: '';
+    display: inline-block;
+    width: 2px;
+    height: 15px;
+    background: #999;
+    position: relative;
+    top: 2px;
+    margin-left: 13px;
+   }
+.prodCategoryList > li {
+    margin: 0 5px;
+   }

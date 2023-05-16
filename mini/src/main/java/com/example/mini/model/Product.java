@@ -8,7 +8,8 @@ public class Product {
 	private String pName;
 	private String pContent;
 	private String pKind;
-	private String like;
+	private String iLike;
+	private String catName;
 	public String getProductNo() {
 		return productNo;
 	}
@@ -51,10 +52,16 @@ public class Product {
 	public void setpKind(String pKind) {
 		this.pKind = pKind;
 	}
-	public String getLike() {
-		return like;
+	public String getiLike() {
+		return iLike;
 	}
-	public void setLike(String like) {
-		this.like = like;
+	public void setiLike(String iLike) {
+		this.iLike = iLike;
+	}
+	public String getCatName() {
+		return catName;
+	}
+	public void setCatName(String catName) {
+		this.catName = catName;
 	}
 }

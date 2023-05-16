@@ -31,6 +31,33 @@ public class ProductController {
 		return "/prod4_sub0";
 	}
 
+	//상품상세페이지
+	@RequestMapping("/product.do")
+	public String product1(Model model) throws Exception {
+		return "/prod0";
+	}
+//	상품 상세 페이지 정보 넘겨주기
+	@RequestMapping(value = "/productList.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String searchProductList(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		int startNum = Integer.parseInt(String.valueOf(map.get("startNum")));
+		int lastNum = Integer.parseInt(String.valueOf(map.get("lastNum")));
+		map.put("startNum", startNum);
+		map.put("lastNum", lastNum);
+		resultMap = productService.searchProductList(map);
+		return new Gson().toJson(resultMap);
+	}
+//	상품 상세 페이지 정보 넘겨주기
+	@RequestMapping(value = "/categoryList.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String searchCategoryList(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		resultMap = productService.searchCategoryList(map);
+		return new Gson().toJson(resultMap);
+	}	
+	
+	
 	// 상품정보 뿌리기
 	@RequestMapping(value = "/productinfo.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 	@ResponseBody
@@ -40,6 +67,7 @@ public class ProductController {
 		resultMap.put("list", list);
 		return new Gson().toJson(resultMap);
 	}
+	
 	//상품수정페이지
 	@RequestMapping("/productmodify.do")
 	public String productModify(Model model) throws Exception {

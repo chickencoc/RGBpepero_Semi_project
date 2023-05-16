@@ -10,4 +10,11 @@ public interface ProductService {
 
 	Product selectProduct(HashMap<String, Object> map); // 프로덕트 정보 출력
 
+	
+//	제품 리스트 출력
+	HashMap<String, Object> searchProductList(HashMap<String, Object> map);
+	
+//	카테고리 리스트
+	HashMap<String, Object> searchCategoryList(HashMap<String, Object> map);
+	
 }

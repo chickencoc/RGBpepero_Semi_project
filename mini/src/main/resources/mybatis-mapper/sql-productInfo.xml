@@ -3,17 +3,31 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.example.mini.mapper.ProductMapper">	
-	<select id="selectUser" parameterType="hashmap" resultType="com.example.mini.model.Product">
+	<select id="selectProductList" parameterType="hashmap" resultType="com.example.mini.model.Product">
 		SELECT
-		PRODUCTNO, 
-		P_PRICE,
-		P_NAME,
-		P_CONTENT,
-		P_CDATETIME,
-		P_KIND,
-		P_LIKE
-		FROM mini_db2.T1_PRODUCT
-		PRODUCTNO = #{productno};
+			PRODUCTNO,
+			P_PRICE,
+			P_CDATETIME,
+			P_UDATETIME,
+			P_NAME,
+			P_CONTENT,
+			P_KIND,
+			I_LIKE,
+			C.NAME AS CATNAME
+		FROM	mini_db2.T1_PRODUCT P
+		LEFT OUTER join mini_db2.T1_CODE C ON C.CODE = P.P_KIND
+		WHERE	P_KIND = #{pKind}
+		LIMIT #{startNum}, #{lastNum}
+	</select>
+	<select id="selectProductCnt" parameterType="hashmap" resultType="int">
+		SELECT COUNT(*) AS CNT
+		FROM mini_db2.T1_PRODUCT 
+		WHERE	P_KIND = #{pKind}
+	</select>
+	<select id="selectProductCategoryList" parameterType="hashmap" resultType="com.example.mini.model.Code">
+		SELECT *
+		FROM	mini_db2.T1_CODE
+		WHERE	KIND = 'CATEGORY' AND CODE != 'R'
 	</select>
 	
 

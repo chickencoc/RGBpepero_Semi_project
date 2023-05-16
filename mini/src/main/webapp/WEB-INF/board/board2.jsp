@@ -31,7 +31,7 @@
             </div>
             <div></div>
             <template>
-            <div id=newreplybox" v-if="info.boardKind != '2' && AccountStatus == 'S' ">
+            <div id="newreplybox" v-if="info.boardKind != '2' && AccountStatus == 'S' ">
             <button class="board_btn" id="btn_del" @click="fnBoardDel">삭제</button><button class="board_btn" id="btn_edit" @click="fnBoardEdit">수정</button>
             </div>
             <div id="newreplybox" v-if="info.replyYn == 'Y'">

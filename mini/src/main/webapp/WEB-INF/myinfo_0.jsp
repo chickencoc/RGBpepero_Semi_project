@@ -197,7 +197,7 @@ fieldset #fieldTitle{
 				</div>
 				<fieldset>
 					<h1 id="fieldTitle">내정보 확인하기</h1>
-					<img src="/image/profile1.PNG" id="profile">
+					<img src="/image/userimgA/profile1.PNG" id="profile">
 					<div id="information">
 						<div id="idline">
 							아이디<span id="id">{{userId}}</span>

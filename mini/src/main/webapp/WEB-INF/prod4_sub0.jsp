@@ -25,29 +25,24 @@
         </div>
         <div id="contentbox">
             <div id="prodboxtop">
-                <div id="imgbox">
-                    <img id="mainimg" src="/dd">
-                    <div id="subimgbox">
-                        <img class="subimg" src="/dd">
-                        <img class="subimg" src="/dd">
-                        <img class="subimg" src="/dd">
-                    </div>
+                <div id="imgbox">      
+                	<img id="mainimg" :src="mainImg">
                 </div>
                 <div id="explainbox">
-                    <div>상품명 : <span>{{pName}}</span></div>
-                    <div>좋아요 : {{pLike}}</div>
-                    <div>재고 : {{cnt}}</div>
-                    <div>상품 가격 : {{pPrice}}</div>
+                    <div>상품명 : <span>{{list.pName}}</span></div>
+                    <div>좋아요 : {{list.iLike}}</div>
+                    <div>재고 :{{list.pSale}}</div>
+                    <div>상품 가격 : {{list.pPrice}}</div>
                     <hr id="inner_line" class="div_line">
                     <div class="buttonbox">
                         <button>레지스트리 등록</button>
-                        <button>상품정보수정</button>
+                        <button @click="fnMoveModifyProduct">상품정보수정</button>
                     </div>
                 </div>
                 
             </div>
             <div id="prodboxbottom">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                {{list.pContent}}
             </div>
             <hr class="div_line"></hr>
             <h3>후기</h3>
@@ -56,19 +51,19 @@
                     <table id="review_table">
                         <!-- <template> -->
                         <tr>
-                            <td>{{id}}</td>
-                            <td>{{cdatetime}}</td>
+                            <td></td>
+                            <td></td>
                             <td></td>
                             <td></td>
                             <td><button>후기 수정</button></td>
                         </tr>
                         <tr>
                             <!-- 사진 -->
-                            <td><img src="dd"></td>
-                            <td><img src="dd"></td>
-                            <td><img src="dd"></td>
-                            <td><img src="dd"></td>
-                            <td><img src="dd"></td>
+                            <td><img src=""></td>
+                            <td><img src=""></td>
+                            <td><img src=""></td>
+                            <td><img src=""></td>
+                            <td><img src=""></td>
                         </tr>
                         <tr>
                             <!-- 내용 -->
@@ -93,35 +88,65 @@
     var app = new Vue({ 
         el: '#app',
         data: {
-        	productno = "",
+        	productno : 1,
         	pName : "",
-        	
-        	
-        	
-        	
-        	
-        	
+        	pPrice :"",
+        	pUdatetime : "",
+        	pContent : "",
+        	pKind : "",
+        	iLike : "",
+        	srcimgno : "",
+        	imgsrc : "",
+        	imgname : "",
+        	orgname : "",
+        	imgtype : "",
             list : [],
-            checkList : []
+            checkList : [],
+            mainImg : "",
+            pImage : []
         }   
         , methods: {
-            fnProductList : function(){
+            fnProductInformation : function(){
                 var self = this;
-                var nparmap = {};
+                var nparmap = {productno : self.productno};
                 $.ajax({
-                    url:"/product/list.dox",
+                    url:"/producttemporaryinfo.dox",
                     dataType:"json",	
                     type : "POST", 
                     data : nparmap,
                     success : function(data) { 
                         console.log(data);
+                        self.list = data.list;
+                        console.log(data.list);
+                        console.log(self.list);
                     }
                 }); 
-            } 
+            },
+            fnProductImgs : function(){
+                var self = this;
+                var nparmap = {productNo : self.productno};
+                $.ajax({
+                    url:"/productImgs.dox",
+                    dataType:"json",	
+                    type : "POST", 
+                    data : nparmap,
+                    success : function(data) { 
+                    	self.pImage = data.pImage;
+                        console.log(data);
+                        console.log(self.pImage);
+                    }
+                }); 
+            },
+            fnMoveModifyProduct : function(){
+        		var self = this;
+        		location.href="/productmodifytemporary.do";
+        	}
         }   
         , created: function () {
             var self = this;
-     
+            console.log(self.productno);
+            self.fnProductInformation();
+            self.fnProductImgs();
     
         }
     });

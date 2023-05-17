@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.mini.mapper.ProductTemporaryMapper">	
+	<select id="selectProductTemporaryInfo" parameterType="hashmap" resultType="com.example.mini.model.Product">
+		SELECT
+			P.PRODUCTNO, 
+			P_PRICE,
+			P_NAME,
+			P_CONTENT,
+			P_CDATETIME,
+			P_KIND,
+			I_LIKE,
+            P_SALECNT,
+            P_STOCK,
+			P_STOCK - P_SALECNT AS PSALE
+		FROM mini_db2.T1_PRODUCT P
+		INNER JOIN mini_db2.T1_PDMANAGE PD ON PD.PRODUCTNO = P.PRODUCTNO
+		WHERE P.PRODUCTNO = #{productno};
+	</select>
+	
+	
+	<select id="productImages" parameterType="hashmap" resultType="com.example.mini.model.PdImage">
+		SELECT
+			SRCIMGNO,
+			PRODUCTNO,
+			IMGSRC,
+			IMGNAME,
+			ORGNAME,
+			IMGTYPE	
+		FROM mini_db2.T1_PDIMAGE
+		WHERE PRODUCTNO = #{productNo};
+	</select>
+	
+	
+
+</mapper>

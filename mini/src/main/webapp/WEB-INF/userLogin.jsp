@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<jsp:include page="/layout/headerLogo.jsp"></jsp:include>
+	<jsp:include page="/layout/header.jsp"></jsp:include>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="/css/Base_rgbPepero.css">
@@ -18,10 +18,10 @@
                     <legend class="loginTitle">Login</legend>
                     <div class="loginTextBox">
                         <div class="loginInfo loginTextId">
-                            <img src="/image/Group.png" class="loginImg"><input type="text" class="loginText" placeholder="아이디" v-model="id">
+                            <img src="/image/icon/Group.png" class="loginImg"><input type="text" class="loginText" placeholder="아이디" v-model="id">
                         </div>
                         <div class="loginInfo loginTextPwd">
-                            <img src="/image/Lock.png" class="loginImg"><input type="password" class="loginText" placeholder="비밀번호" v-model="pwd" @keyup.enter="fnLogin()">
+                            <img src="/image/icon/Lock.png" class="loginImg"><input type="password" class="loginText" placeholder="비밀번호" v-model="pwd" @keyup.enter="fnLogin()">
                         </div>
                     </div>
                     <div class="loginBtnBox">

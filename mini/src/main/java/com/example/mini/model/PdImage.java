@@ -7,6 +7,8 @@ public class PdImage {
 	private String imgname;
 	private String orgname;
 	private String imgtype;
+	private String mainyn;
+	
 	public String getSrcImgNo() {
 		return srcImgNo;
 	}
@@ -42,5 +44,11 @@ public class PdImage {
 	}
 	public void setImgtype(String imgtype) {
 		this.imgtype = imgtype;
+	}
+	public String getMainyn() {
+		return mainyn;
+	}
+	public void setMainyn(String mainyn) {
+		this.mainyn = mainyn;
 	}
 }

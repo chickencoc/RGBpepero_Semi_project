@@ -12,7 +12,7 @@
 <body>
     <div id="footer">
             <ul class="footer_ul">
-                <li><img src="/image/logo_Marrimo.png"></li>
+                <li><img src="/image/icon/logo_Marrimo.png"></li>
                 <li><a href="#">고객센터</a></li>
                 <li><a href="#">자주하는 질문</a></li>
                 <li><a href="#">혼수 상품</a></li>

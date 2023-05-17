@@ -75,7 +75,7 @@
 	<insert id="saveUserImg" parameterType="hashmap">
 		INSERT INTO mini_db2.T1_USERIMAGE
 		VALUES
-			(#{srcimgNo}, #{userId}, #{imgSrc}, #{imgName}, #{orgName}, #{imgType}, #{imgUsetype})
+			(#{NULL}, #{userId}, #{imgSrc}, #{imgName}, #{orgName}, #{imgType}, #{imgUsetype})
 			;
 	</insert>
 
@@ -88,7 +88,7 @@
 			IMGTYPE = #{imgType},
 			IMGUSETYPE = #{imgUsetype}		
 		WHERE
-			SRCIMGNO = #{srcimgNo} AND USERID = #{userId};
+			IMGUSETYPE = #{imgUsetype} AND USERID = #{userId};
 		
 	</update>
 </mapper>

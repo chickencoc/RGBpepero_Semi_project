@@ -107,11 +107,12 @@
 		,	fnUpdateImg : function(){
 				var self= this;				 
 				var nparmap = {
+					userId : self.userId,
 					imgSrc : self.imageUrl,
 					imgName : self.uploadName,
 					orgName : self.uploadName,
 					imgType : self.imageType,
-					imgUsetype: '1'
+					imgUsetype: 1
 				};
 					console.log(nparmap);
 				  // AJAX 요청을 보냅니다
@@ -125,6 +126,7 @@
 				      // 요청이 성공했을 때 실행할 코드를 작성합니다
 						alert("저장되었습니다.");
 						console.log(response); // 응답 내용을 콘솔에 출력하거나 필요에 따라 처리합니다	
+						window.opener.parent.location.reload();
 						window.close();					
 				    },
 				    error: function(xhr, status, error) {

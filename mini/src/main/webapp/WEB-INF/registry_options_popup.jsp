@@ -15,7 +15,8 @@
 <body>
     <div id="app">	
             <div class="reg_options_popup">               
-                <div class="reg_options_popup_image">
+                <div >
+                    <img :src="item.imgSrc" class="reg_options_popup_image">
                 </div>
                 <div class="reg_options_popup_info">
                     <div id="reg_options_popup_name">{{item.pName}}</div>
@@ -26,7 +27,7 @@
                     <li id="reg_options_popup_checkbox">상품 표시 옵션</li>
                     <li id="reg_options_popup_checkbox"><input type="checkbox" name="choice" v-bind:checked="inputWanted" v-on:change="updateWanted"> "정말 필요한 물건" 표시</li>                 
                     <li id="reg_options_popup_checkbox"><input type="checkbox" name="choice" v-bind:checked="inputGroup" v-on:change="updateGroup"> "그룹선물(펀딩)"로 변경하기</li>
-                </ul>    
+                </ul>                      
                 <div class="reg_options_popup_memo">
                     <div><img src="/image/fi-ss-heart.png" style="position: relative; top: 8px; margin-right: 5px;">선물할 친구들이 참고할 정보를 기재해주세요</div>
                     <input type="text" id="reg_options_popup_memo_txt" v-bind:value="inputText" v-on:input="updateInput">
@@ -81,6 +82,7 @@ var app = new Vue({
                 rOption: self.wanted, 
                 fundYn: self.group, 
                 rContent: self.inputText,
+                rCnt: self.item.rCnt
                 
             };
                   $.ajax({
@@ -91,29 +93,38 @@ var app = new Vue({
                             success: function(response) {
                                 // 서버 응답을 처리하는 코드 작성
                                 alert("저장되었습니다.");
-                                console.log();
-                                // window.close();
+                                console.log();                               
+                                localStorage.removeItem('userItemList');
+                                window.opener.parent.location.reload();    
+                                window.close();
                             },
                             error: function(xhr, textStatus, errorThrown) {
                                 // 오류 처리 코드 작성
                                 console.error(textStatus);
                             }
                         });
-                localStorage.removeItem('userItemList');
-                window.close();
+                
+                
         },
         fnGetInformation : function() {
             var self = this;
             
-            // inputWanted: false
+            if(self.item.rOption === 'A'){
+                self.inputWanted = true;
+                
+            }
             
-            // self.
-            // inputGroup: false
+            if(self.item.fundYn === 'Y') {
+                self.inputGroup = true;
+                
+            } 
+            
         }
     }   
     , created: function () {  	
         var self = this;
         self.fnselectOption();
+        self.fnGetInformation();
         console.log(self.item);
 	}
 });

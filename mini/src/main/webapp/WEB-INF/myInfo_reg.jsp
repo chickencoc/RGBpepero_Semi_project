@@ -57,10 +57,8 @@
                 <div v-for="(item, index) in registry">                              
                     <div class="regi_items" v-if="item.orderNo == null">
                         <!--매우원함-->
-                        <div id="regi_wanted_badge" v-if="item.rOption == 'A'"> 
-                            <img :src="item.imgSrc" class="regi_items_image" v-if="item.tripNo == null">
-                            <img :src="item.imgSrc" class="regi_items_image" v-if="item.productNo == null">
-                        </div>                 
+                        <div id="regi_wanted_badge" v-if="item.rOption == 'A'"> </div>
+                            <img :src="item.imgSrc" class="regi_items_image">             
                             <p class="regi_pro_name">{{item.pName}}</p>
                             <p class="regi_pro_price">{{item.pPrice}} 원</p>
                         <!--펀딩퍼센트-->
@@ -171,9 +169,7 @@ var app = new Vue({
             let popOption = "width = 500px, height=500px, top=300px, left=300px, scrollbars=no";
     		
     		let popup = window.open(popUrl, "배경이미지설정", [popOption]);
-    		popup.onbeforeunload = function() {
-                location.reload();
-            };
+    		
     	}
     	
     ,	fnProfileAlter : function(){
@@ -181,9 +177,7 @@ var app = new Vue({
             let popOption = "width = 500px, height=500px, top=300px, left=300px, scrollbars=no";
 			
 			let popup = window.open(popUrl, "프로필이미지설정", [popOption]);
-            popup.onbeforeunload = function() {
-                location.reload();
-            };
+            
     	}
     ,	fnOptionBtn: function(item){  
             localStorage.setItem('userItemList', JSON.stringify(item)); 
@@ -192,7 +186,7 @@ var app = new Vue({
     		let popOption = "width = 600px, height=700px, top=300px, left=300px, scrollbars=no";
     		
     		let popup = window.open(popUrl, "옵션 설정", [popOption]);  
-           		
+            	
     	}
     ,	fnDeleteItem: function(){
     		confirm("삭제하시겠습니까?");

@@ -15,15 +15,14 @@
 .prodSelectBox { text-align: right; margin:2%; } 
 .prodListBox { height: 720px;
     /* display: grid; grid-template-columns: repeat(3, 1fr); grid-gap: 10px; height: 500px; */}
-.prodBox { height: 350px; margin: 0 auto; display: flex; justify-content: center; align-items: center; flex-direction: column; width:100%; border: 1px solid black;}
-.prod0Img { width:80%; } 
+.prodBox {  width: 325px; height: 400px; margin: 0 auto; justify-content: center; align-items: center; flex-direction: column; width:100%; box-shadow: 0 2px 5px rgba(0, 0, 0, .1);}
+.prod0Img { width: 325px; height: 220px;} 
 .prodName { font-size:1.2em; margin-top:5%; } 
 .prodPrice { margin-top:5%; } 
 .prodLike { margin-top:5%; } 
-.prodLikeImg { width:25%; } 
-.pageList { text-align: center;
-    /* position:relative; */ /* bottom:5%; */ /* margin-top: 400px; */}
-.pageListNum { width:5%; margin-top:5%; margin-right:2%; } 
+.prodLikeImg { width:20px; height: 20px; margin-left: 5px;} 
+.pageList { text-align: center; position:relative; position: relative; top: 120px;}
+.pageListNum { position: relative; width:5%; margin-top:5%; margin-right:2%; } 
 .prodList { display: grid; grid-template-columns: repeat(3, 1fr); grid-gap: 10px; height: 500px; }
 
 
@@ -37,7 +36,7 @@
 
 
 /* 페이지네이션 */
-.pagination { margin:24px; display: inline-flex; } 
+.pagination { margin:24px; display: inline-flex; position: relative; top: 20px;} 
 ul { text-align: center; } 
 .pagination li { min-width:32px; padding:2px 6px; text-align:center; margin:0 3px; border-radius: 6px; border:1px solid #eee; color:#666; display : inline; } 
 .pagination li:hover { background: #E4DBD6; } 

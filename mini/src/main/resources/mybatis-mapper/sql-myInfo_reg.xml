@@ -13,6 +13,7 @@
 			R.R_CDATETIME,
 			R.R_UDATETIME,
 			R.R_OPTION,
+			R.R_CNT,
 			R.R_CONTENT,
 			R.USERID,
 			R.FUNDYN,
@@ -21,7 +22,10 @@
  			PM.P_STOCK,
   			P.P_NAME,
   			P.P_PRICE,
-            O.ORDERNO
+            O.ORDERNO,
+            U.U_NAME,
+            F.FSETPRICE,
+            F.FPUTPRICE
 		FROM 
 			mini_db2.T1_REGISTRY AS R
 		INNER JOIN
@@ -37,7 +41,9 @@
  		LEFT JOIN
   			mini_db2.T1_PDMANAGE AS PM ON P.PRODUCTNO = PM.PRODUCTNO
 		LEFT JOIN
-			mini_db2.T1_ORDER AS O ON P.PRODUCTNO = O.ORDERNO
+			mini_db2.T1_ORDER AS O ON P.PRODUCTNO = O.PRODUCTNO
+		LEFT JOIN
+			mini_db2.T1_FUNDING AS F ON R.REGISTRYNO = F.REGISTRYNO
 		WHERE 
 			R.USERID =  #{userId};
 	</select>
@@ -47,6 +53,7 @@
 			R_OPTION = #{rOption},
 			R_CONTENT = #{rContent},
 			FUNDYN = #{fundYn},
+			R_CNT = #{rCnt},
 			R_UDATETIME = #{rUdatetime}			
 		WHERE
 			REGISTRYNO = #{registryNo};

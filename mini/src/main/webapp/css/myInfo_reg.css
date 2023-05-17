@@ -88,6 +88,8 @@
     position: relative;   
     width: 250px;
     height: 170px;
+    background-color: lightpink;
+    
 }
 .regi_pro_name{
     text-align: center;

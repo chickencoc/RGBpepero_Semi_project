@@ -66,13 +66,13 @@
                         <!--펀딩퍼센트-->
                         <div class="regi_percentage" v-if="item.fundYn == 'Y'">
                             <progress id="regi_progress" value="30" max="100"></progress>
-                            <span>{}%</span>                        
+                            <span>{progressValue}%</span>                        
                         </div>
                         <div class="regi_items_options">
                             <span id="regi_stock_text">수량</span>
-                            <input type="text" id="regi_stock_number" :value="item.pStock" size="1" readonly>
-                            <button id="regi_optionBtn" @click="fnOptionBtn">옵션설정</button>
-                            <a href="#" id="regi_delete" @click="fnDeleteItem">삭제하기</a>
+                            <input type="text" id="regi_stock_number" :value="item.rCnt" size="1" readonly>
+                            <button id="regi_optionBtn" @click="fnOptionBtn(item)">옵션설정</button>
+                            <a href="#" id="regi_delete" @click="fnDeleteItem(item)">삭제하기</a>
                         </div>
                     </div>                
                     <!--받은선물인 경우-->
@@ -82,8 +82,8 @@
                         <p class="regi_pro_name">{{item.pName}}</p>
                         <p class="regi_pro_price">{{item.pPrice}} 원</p>
                         <div class="regi_items_options">
-                            <button id="regi_orderInfoBtn" @click="fnOrderInfo">주문상세보기</button>
-                            <button id="regi_reviewBtn" @click="fnReview">리뷰작성</button>
+                            <button id="regi_orderInfoBtn" @click="fnOrderInfo(item)">주문상세보기</button>
+                            <button id="regi_reviewBtn" @click="fnReview(item)">리뷰작성</button>
                         </div>
                     </div>                              
                 </div>   
@@ -161,38 +161,38 @@ var app = new Vue({
             }
     ,   fnUrlCopy : function() {
             var self = this;
-            var copyurl = document.getElementById('regi_url_copy');
+            let copyurl = document.getElementById('regi_url_copy');
                     console.log(copyurl);
                     copyurl.select();
                     document.execCommand("copy");
     }
     ,	fnBackImageAlter : function(){
-            var popUrl = "/registryBackImg.do";
-            var popOption = "width = 500px, height=500px, top=300px, left=300px, scrollbars=no";
+            let popUrl = "/registryBackImg.do";
+            let popOption = "width = 500px, height=500px, top=300px, left=300px, scrollbars=no";
     		
-    		var popup = window.open(popUrl, "배경이미지설정", [popOption]);
+    		let popup = window.open(popUrl, "배경이미지설정", [popOption]);
     		popup.onbeforeunload = function() {
                 location.reload();
             };
     	}
     	
     ,	fnProfileAlter : function(){
-            var popUrl = "/registryProfileImg.do";
-            var popOption = "width = 500px, height=500px, top=300px, left=300px, scrollbars=no";
+            let popUrl = "/registryProfileImg.do";
+            let popOption = "width = 500px, height=500px, top=300px, left=300px, scrollbars=no";
 			
-			var popup = window.open(popUrl, "프로필이미지설정", [popOption]);
+			let popup = window.open(popUrl, "프로필이미지설정", [popOption]);
             popup.onbeforeunload = function() {
                 location.reload();
             };
     	}
-    ,	fnOptionBtn: function(){   		
+    ,	fnOptionBtn: function(item){  
+            localStorage.setItem('userItemList', JSON.stringify(item)); 
+            console.log(item);		
     		let popUrl = "/registryOption.do";
     		let popOption = "width = 600px, height=700px, top=300px, left=300px, scrollbars=no";
     		
-    		var popup = window.open(popUrl, "옵션 설정", [popOption]);  
-            popup.onbeforeunload = function() {
-                location.reload();
-            };		
+    		let popup = window.open(popUrl, "옵션 설정", [popOption]);  
+           		
     	}
     ,	fnDeleteItem: function(){
     		confirm("삭제하시겠습니까?");

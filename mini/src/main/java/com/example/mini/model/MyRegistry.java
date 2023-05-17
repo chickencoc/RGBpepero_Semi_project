@@ -1,5 +1,8 @@
 package com.example.mini.model;
 
+import lombok.Data;
+
+@Data
 public class MyRegistry {
 	private String registryNo;
 	private String productNo;
@@ -8,6 +11,7 @@ public class MyRegistry {
 	private String rUdatetime;
 	private String rOption;
 	private String rContent;
+	private String rCnt;
 	private String userId;
 	private String fundYn;
 	private String imgSrc;
@@ -15,9 +19,12 @@ public class MyRegistry {
 	private String pName;
 	private String pPrice;
 	private String orderNo;
-
-
+	private String uName;
 	
+	private String fSetprice;
+	private String fPutprice;
+
+
 	
 	public String getRegistryNo() {
 		return registryNo;
@@ -103,5 +110,23 @@ public class MyRegistry {
 	}
 	public void setOrderNo(String orderNo) {
 		this.orderNo = orderNo;
+	}
+	public String getuName() {
+		return uName;
+	}
+	public void setuName(String uName) {
+		this.uName = uName;
+	}
+	public String getfSetprice() {
+		return fSetprice;
+	}
+	public void setfSetprice(String fSetprice) {
+		this.fSetprice = fSetprice;
+	}
+	public String getfPutprice() {
+		return fPutprice;
+	}
+	public void setfPutprice(String fPutprice) {
+		this.fPutprice = fPutprice;
 	}
 }

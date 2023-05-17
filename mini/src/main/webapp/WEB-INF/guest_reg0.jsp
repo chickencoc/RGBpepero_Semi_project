@@ -19,7 +19,7 @@
 		<div class="regi_content">
         <main class="regi_main">
             <div class="regi_container">              
-                <span id="regi_user">누구의 레지스트리</span>           
+                <span id="regi_user">{{userName}}의 레지스트리</span>           
             </div>           
             <div class="regi_container">                
                 <div class="regi_back_image">
@@ -48,13 +48,13 @@
                                 <p class="regi_pro_price">{{item.pPrice}} 원</p>
                             <!--펀딩퍼센트-->
                             <div class="regi_percentage" v-if="item.fundYn == 'Y'">
-                                <progress id="regi_progress" value="30" max="100"></progress>
-                                <span>{}%</span>                        
+                                <progress id="regi_progress" :value="progressValue" max="100"></progress>
+                                <span>{{progressValue = (item.fPutprice / item.fSetprice) * 100}}%</span>                        
                             </div>
                             <div class="regi_items_options_taken">
                                 <span id="regi_stock_text">수량</span>
                                 <input type="text" id="regi_stock_number" :value="item.pStock" size="1" readonly>
-                                <button id="regi_giveBtn" @click="">선물하기</button>
+                                <button id="regi_giveBtn" @click="fnGiveGift(item)">선물하기</button>
                             </div>
                         </div>                
                         <!--받은선물인 경우-->
@@ -68,7 +68,7 @@
                             </div>
                         </div>                              
                     </div>   
-                    </div> 
+                </div> 
             </div>
         </main>
         </div>
@@ -87,6 +87,8 @@ var app = new Vue({
     ,	image: []
 	, 	imgUrl1: ''
     ,   imgUrl2: ''
+    ,   userName: ""
+    // ,   progressValue : (item.fPutprice / item.fSetprice) * 100
     }   
     , methods: {
         fnGetId: function(){
@@ -110,9 +112,11 @@ var app = new Vue({
                 success : function(data) {    
                     console.log(data);                                   
 	                self.registry = data.registry;
+                    self.userName= self.registry[0].uName;
 	                console.log(self.registry);
                 }
      		}); 
+            
     	}	
     ,	fnselectImage : function(){
                 var self = this;
@@ -143,11 +147,13 @@ var app = new Vue({
                 });
             }
         
-	,	fnGiveGift: function() {
-			let popUrl = "/registryGift.do";
-    		let popOption = "width = 500px, height=600px, top=300px, left=300px, scrollbars=no";
-    		
-    		window.open(popUrl, "옵션 설정", [popOption]);
+	,	fnGiveGift: function(item) {  
+            localStorage.setItem('guestItemList', JSON.stringify(item));
+			let popUrl = "/registryGift.do?=" + item.productNo;           
+    		let popOption = "width = 500px, height=600px, top=300px, left=300px, scrollbars=no";            
+            console.log(item); 		
+            console.log(popUrl); 		
+    		window.open(popUrl, "선물하기", [popOption]);
 		}
     }   
     , created: function () {
@@ -155,6 +161,7 @@ var app = new Vue({
         self.fnGetId();
         self.fnselectUser();
         self.fnselectImage();
+        
 	}
 });
 </script>

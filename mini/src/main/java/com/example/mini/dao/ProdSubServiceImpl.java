@@ -46,5 +46,36 @@ public class ProdSubServiceImpl implements ProdSubService{
 		resultMap.put("cnt", cnt);
 		return resultMap;
 	}
+	@Override
+	public void addWedding(HashMap<String, Object> map) {
+		// TODO Auto-generated method stub
+		prodSubMapper.insertWedding(map);
+		
+	}
+	@Override
+	public void addImg(HashMap<String, Object> map) {
+		// TODO Auto-generated method stub
+		prodSubMapper.insertWeddingImg(map);
+		
+	}
+	@Override
+	public void removeWeddding(HashMap<String, Object> map) {
+		// TODO Auto-generated method stub
+		prodSubMapper.deleteWedding(map);
+		
+	}
+	@Override
+	public void editWedding(HashMap<String, Object> map) {
+		// TODO Auto-generated method stub
+		prodSubMapper.updateWedding(map);
+	}
+	@Override
+	public HashMap<String, Object> searchWeddingInfo(HashMap<String, Object> map) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		Wedding wedding = prodSubMapper.selectWeddingInfo(map);
+		resultMap.put("info", wedding);
+		return resultMap;
+	}
 	
 }

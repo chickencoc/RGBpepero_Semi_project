@@ -207,6 +207,10 @@
             </div>
             <div class="grid_Area2">
                 <div class="imgBox2" v-for="(item, index) in list">
+                	<div v-if="status=='S'">
+                		<button class="modify"  @click="fnRemoveWedding(item)">삭제하기</button>
+                		 <button class="modify" @click="fnEditWedding">수정하기</button>
+                	</div>
                 	<a href="javascript:;" @click="fnMoveUrl(item.wUrl)">
 	                    <div><img :src="item.imgsrc" id="weddingImg5"></div>
 	                    <div class="hall_Location">{{item.wLocation}}</div>
@@ -228,7 +232,9 @@
 				</paginate>
 			</template>     
             <div class="modifyButton">
-                <button class="modify">수정하기</button>
+                <button class="modify" v-if="status=='S'" @click="fnAddWedding">추가하기</button>
+               
+                
             </div>
         </div>
     </div>
@@ -248,7 +254,8 @@ var app = new Vue({
 		wLocation:'',
 		rList:[],
 		catList : [],
-		pKind: 'W'
+		pKind: 'W',
+		status: "${sessionStatus}",
 		
     }
     ,watch: {
@@ -374,6 +381,30 @@ var app = new Vue({
                	}
           	}); 
        	}
+	   ,fnAddWedding : function(){
+		   location.href="prod5Sub1.do"
+	   }
+	   ,fnEditWedding : function(){
+		   var self = this;
+			self.pageChange("/weddingModify.do", {weddingNo : self.weddingNo});
+	   }
+	   ,fnRemoveWedding : function(item){
+		   var self = this;
+			var nparmap = item; //key 값을 보내야 한다.
+			if(!confirm("정말 삭제하시겠습니까?")){
+				return;
+			}
+			$.ajax({
+				url : "/removeWedding.dox",
+				dataType : "json",
+				type : "POST",
+				data : nparmap,
+				success : function(data) {
+					alert("삭제되었습니다.");
+					self.fnGetList();
+				}
+			});
+	   }
 	   
     }   
     , created: function () {

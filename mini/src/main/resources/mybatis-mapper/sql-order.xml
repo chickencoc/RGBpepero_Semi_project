@@ -6,7 +6,7 @@
 	<select id="selectProdOrder" parameterType="hashmap" resultType="com.example.mini.model.Order">
 		SELECT O.ORDERNO,
 			G.G_PHONE,
-			G.USERID,
+			G.G_NAME,
 			U_NAME,
 			U_PHONE,
 			P.PRODUCTNO,
@@ -77,7 +77,7 @@
     	<if test="arrayOrder == 'P_CDATETIME'">
         ORDER BY P_CDATETIME
     	</if>	
-		LIMIT #{startNum}, #{lastNum}
+		LIMIT #{startNum}, 6
 	</select>
 	
 	<select id="prodCardCnt" parameterType="hashmap" resultType="int">

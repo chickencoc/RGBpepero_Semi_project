@@ -18,5 +18,15 @@ public interface ProdSubMapper {
 	
 	List<Trip> selectTripList(HashMap<String, Object> map);
 	
+	Wedding selectWeddingInfo(HashMap<String, Object> map);
+	
 	int selectTripCnt(HashMap<String, Object> map);
+	
+	void insertWedding(HashMap<String, Object> map);
+	
+	void insertWeddingImg(HashMap<String, Object> map);
+	
+	void deleteWedding(HashMap<String, Object> map);
+	
+	void updateWedding(HashMap<String, Object> map);
 }

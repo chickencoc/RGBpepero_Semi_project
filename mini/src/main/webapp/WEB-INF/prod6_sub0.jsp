@@ -141,7 +141,8 @@
 .prodCategoryList li {display: inline-block; margin: 0 5px; } 
 .prodCategoryList li:not(:last-child):after { content: ''; display: inline-block; width: 2px; height: 15px; background: #999; position: relative; top: 2px; margin-left: 13px; } 
 .prodCategoryList > li { margin: 0 5px; } 
-
+	.btnBox{text-align:right
+		}
     </style>
 </head>
 <body>
@@ -182,6 +183,7 @@
                     </a>
                 </div>
             </div>
+            <div class="btnBox"><button class="btn1" v-if="status=='S'">추가</button></div>
              <template class="pageList">
 				<paginate
 				   	:page-count="pageCount"
@@ -212,7 +214,8 @@ var app = new Vue({
 	cnt : 0,
 	tName:'',
 	catList : [],
-    pKind : "A"
+    pKind : "A",
+    status: "${sessionStatus}",
 	
     },watch: {
    		tKind: function(newVal){

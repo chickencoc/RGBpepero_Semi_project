@@ -4,7 +4,7 @@
 
 <mapper namespace="com.example.mini.mapper.ProdSubMapper">	
 	<select id="selectWeddingList" parameterType="hashmap" resultType="com.example.mini.model.Wedding">
-		SELECT WEDDINGNO,
+		SELECT W.WEDDINGNO,
 			W_NAME,
 			W_LOCATION,
 			W_ADDR,
@@ -12,21 +12,23 @@
 			W_CDATETIME,
 			IMGSRC
 		FROM mini_db2.T1_WEDDING W
+		LEFT JOIN mini_db2.T1_WEDDINGIMAGE WI ON WI.WEDDINGNO = W.WEDDINGNO
 		WHERE 1=1
 		<if test="wLocation != '' and wLocation != null">
 				AND W_LOCATION = #{wLocation}
 		</if>	
-		LIMIT #{startNum}, #{lastNum}
+		LIMIT #{startNum}, 8
 	</select>
 		<select id="selectWeddingRecommendList" parameterType="hashmap" resultType="com.example.mini.model.Wedding">
-		SELECT WEDDINGNO,
+		SELECT W.WEDDINGNO,
 			W_NAME,
 			W_LOCATION,
 			W_ADDR,
 			W_URL,
 			W_CDATETIME,
 			IMGSRC
-		FROM mini_db2.T1_WEDDING
+		FROM mini_db2.T1_WEDDING W
+		LEFT JOIN mini_db2.T1_WEDDINGIMAGE WI ON WI.WEDDINGNO = W.WEDDINGNO
 	</select>
 	<select id="selectWeddingCnt" parameterType="hashmap" resultType="int">
 		SELECT COUNT(*) AS CNT
@@ -56,13 +58,53 @@
 			AND T_NAME LIKE CONCAT('%', #{tName}, '%')
 		</if>
 		GROUP BY T.TRIPNO, T_KIND, T_ADDR, T_CDATETIME, T_NAME, T_CONTENT
-		LIMIT #{startNum}, #{lastNum}
+		LIMIT #{startNum}, 6
 		
 	</select>
 	<select id="selectTripCnt" parameterType="hashmap" resultType="int">
 		SELECT COUNT(*) AS CNT
 		FROM mini_db2.T1_TRIP
 		WHERE T_KIND = #{tKind}
+	</select>
+	
+	<insert id="insertWedding" parameterType="hashmap"  useGeneratedKeys="true" keyProperty="id" keyColumn="weddingNo">
+		INSERT INTO T1_WEDDING
+			(WEDDINGNO, W_NAME, W_LOCATION, W_ADDR, W_URL, W_CDATETIME)
+		VALUES 
+			(NULL, #{wName}, #{wLocation}, #{wAddr}, #{wUrl}, NOW())
+	</insert>
+	<insert id="insertWeddingImg">
+		INSERT INTO T1_WEDDINGIMAGE
+		VALUES (NULL, #{weddingNo}, #{imgSrc}, #{imgName}, #{orgName}, #{imgType})
+	</insert>
+	<delete id="deleteWedding" parameterType="hashmap">
+		DELETE FROM mini_db2.T1_WEDDING
+		WHERE WEDDINGNO = #{weddingNo}
+	</delete>
+	
+	<update id="updateWedding" parameterType="hashmap" >
+		UPDATE mini_db2.T1_WEDDING 
+		SET 
+			W_NAME = #{wName},
+			W_LOCATION = #{wLocation},
+			W_ADDR = #{wAddr},
+			W_URL = #{wUrl},
+			W_UDATETIME = NOW()
+		WHERE 
+			WEDDINGNO = #{weddingNo}
+	</update>
+	
+	<select id="selectWeddingInfo" parameterType="hashmap" resultType="com.example.mini.model.Wedding">
+		SELECT W.WEDDINGNO,
+			W_NAME,
+			W_LOCATION,
+			W_ADDR,
+			W_URL,
+			W_CDATETIME,
+			IMGSRC
+		FROM mini_db2.T1_WEDDING W
+		LEFT JOIN mini_db2.T1_WEDDINGIMAGE WI ON WI.WEDDINGNO = W.WEDDINGNO
+		WHERE W.WEDDINGNO = #{weddingNo}
 	</select>
 </mapper>
 <!-- 	<select id="selectUserCnt" parameterType="hashmap" resultType="int">

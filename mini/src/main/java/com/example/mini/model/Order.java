@@ -3,6 +3,7 @@ package com.example.mini.model;
 public class Order {
 	private String orderNo;
 	private String guestNo;
+	private String gName;
 	private String userId;
 	private String uName;
 	private String uPhone;
@@ -239,5 +240,11 @@ public class Order {
 	}
 	public void setTotal(String total) {
 		this.total = total;
+	}
+	public String getgName() {
+		return gName;
+	}
+	public void setgName(String gName) {
+		this.gName = gName;
 	}
 }

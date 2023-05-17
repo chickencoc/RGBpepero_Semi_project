@@ -9,6 +9,34 @@ public class Wedding {
 	private String wUdatetime;
 	private String wLocation;
 	private String imgsrc;
+	private String srcimgNo;
+	private String imgname;
+	private String orgname;
+	private String imgtype;
+	public String getSrcimgNo() {
+		return srcimgNo;
+	}
+	public void setSrcimgNo(String srcimgNo) {
+		this.srcimgNo = srcimgNo;
+	}
+	public String getImgname() {
+		return imgname;
+	}
+	public void setImgname(String imgname) {
+		this.imgname = imgname;
+	}
+	public String getOrgname() {
+		return orgname;
+	}
+	public void setOrgname(String orgname) {
+		this.orgname = orgname;
+	}
+	public String getImgtype() {
+		return imgtype;
+	}
+	public void setImgtype(String imgtype) {
+		this.imgtype = imgtype;
+	}
 	public String getWeddingNo() {
 		return weddingNo;
 	}

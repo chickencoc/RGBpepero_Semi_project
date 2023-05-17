@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.mini.mapper.ProdSubMapper">	
+	<select id="selectWeddingList" parameterType="hashmap" resultType="com.example.mini.model.Wedding">
+		SELECT WEDDINGNO,
+			W_NAME,
+			W_LOCATION,
+			W_ADDR,
+			W_URL,
+			W_CDATETIME,
+			IMGSRC
+		FROM mini_db2.T1_WEDDING W
+		WHERE 1=1
+		<if test="wLocation != '' and wLocation != null">
+				AND W_LOCATION = #{wLocation}
+		</if>	
+		LIMIT #{startNum}, #{lastNum}
+	</select>
+		<select id="selectWeddingRecommendList" parameterType="hashmap" resultType="com.example.mini.model.Wedding">
+		SELECT WEDDINGNO,
+			W_NAME,
+			W_LOCATION,
+			W_ADDR,
+			W_URL,
+			W_CDATETIME,
+			IMGSRC
+		FROM mini_db2.T1_WEDDING
+	</select>
+	<select id="selectWeddingCnt" parameterType="hashmap" resultType="int">
+		SELECT COUNT(*) AS CNT
+		FROM mini_db2.T1_WEDDING
+		WHERE 1=1
+		<if test="wLocation != '' and wLocation != null">
+				AND W_LOCATION = #{wLocation}
+		</if>	
+	</select>
+	<select id="selectTripList" parameterType="hashmap" resultType="com.example.mini.model.Trip">
+		SELECT T.TRIPNO,
+		    T_KIND,
+		    T_ADDR,
+		    T_CDATETIME,
+		    T_NAME,
+		    T_CONTENT,
+		    MIN(SRCIMGNO) AS SRCIMGNO,
+		    MIN(IMGSRC) AS IMGSRC,
+		    MIN(IMGNAME) AS IMGNAME,
+		    MIN(ORGNAME) AS ORGNAME,
+		    MIN(IMGTYPE) AS IMGTYPE
+		FROM mini_db2.T1_TRIP T
+		LEFT JOIN mini_db2.T1_TRIPIMAGE TI ON TI.TRIPNO = T.TRIPNO
+		
+		WHERE T_KIND = #{tKind}
+		<if test="tName != '' and tName != null">
+			AND T_NAME LIKE CONCAT('%', #{tName}, '%')
+		</if>
+		GROUP BY T.TRIPNO, T_KIND, T_ADDR, T_CDATETIME, T_NAME, T_CONTENT
+		LIMIT #{startNum}, #{lastNum}
+		
+	</select>
+	<select id="selectTripCnt" parameterType="hashmap" resultType="int">
+		SELECT COUNT(*) AS CNT
+		FROM mini_db2.T1_TRIP
+		WHERE T_KIND = #{tKind}
+	</select>
+</mapper>
+<!-- 	<select id="selectUserCnt" parameterType="hashmap" resultType="int">
+		SELECT COUNT(*) AS CNT
+		FROM mini_db2.T1_USER
+		WHERE USERID = #{userId}
+	</select>
+	
+	<insert id="insertUser" parameterType="hashmap">
+		INSERT INTO T1_USER
+			(USERID, PASSWORD, U_NAME, PARTNER, GENDER, U_ADDRNO, U_ADDR1, U_ADDR2, U_PHONE, 
+			U_EMAIL, BIRTH, WEDDINGDAY, CDATETIME, UDATETIME, STATUS, BANK, BANKACCOUNT)
+		VALUES 
+			(#{userId}, #{pwd}, #{uName}, #{partner}, #{gender}, #{addrNo}, #{addr1}, #{addr2}, #{phoneNumber},
+			#{emailAddr}, #{birthday}, #{weddingday}, NOW(), NULL, 'U', #{bank}, #{bankaccount} )
+	</insert>
+	<select id="selectFindId" parameterType="hashmap" resultType="com.example.mini.model.User">
+		SELECT 
+		    USERID,
+		    U_NAME,
+		    U_EMAIL,
+		    STATUS
+		FROM mini_db2.T1_USER
+		WHERE U_NAME = #{uName} AND U_EMAIL = #{emailAddr}
+	</select>
+	<select id="selectFindPwd" parameterType="hashmap" resultType="com.example.mini.model.User">
+		SELECT 
+		    USERID,
+		    U_NAME,
+		    U_EMAIL,
+		    STATUS
+		FROM mini_db2.T1_USER
+		WHERE USERID = #{userId} AND U_NAME = #{uName} AND U_EMAIL = #{emailAddr}
+	</select>
+	<update id="updatePwd" parameterType="hashmap">
+		UPDATE mini_db2.T1_USER
+		SET PASSWORD = #{pwd}
+		WHERE USERID = #{userId}
+	</update>
+	 -->
+	
+	

@@ -22,8 +22,7 @@
 .list1 { position: relative; top: 10px; left: 5px; width: 30px; height: 30px; } 
 .arrow { position: relative; top: 5px; left: 10px; } 
 .arrow1 { width: 20px; height: 20px; } 
-.arrow2 {
- width: 20px; height: 20px; } 
+.arrow2 { width: 20px; height: 20px; } 
 .number { position: relative; bottom: 5px; } 
 .btn2 {margin: 20px; } 
 #scroll1 { margin: 10px; } 

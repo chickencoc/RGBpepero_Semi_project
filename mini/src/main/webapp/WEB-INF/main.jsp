@@ -32,7 +32,7 @@
                     <div class="pageDetail_textbox">
                         <div class="pageDetail_text">
                             <h4>당신의 레지스트리를 행복으로 채우세요</h4>
-                            <a class="pageDetail_link">PRODUCT >></a>
+                            <a class="pageDetail_link" href="product.do">PRODUCT >></a>
                         </div>
                     </div>
                 </div>
@@ -43,7 +43,7 @@
                     <div class="pageDetail_textbox">
                         <div class="pageDetail_text">
                             <h4>사랑하는 사람과 함께하는 여행</h4>
-                            <a class="pageDetail_link">TRIP >></a>
+                            <a class="pageDetail_link" href="triprecommend.do">TRIP >></a>
                         </div>
                     </div>
                 </div>
@@ -54,7 +54,7 @@
                     <div class="pageDetail_textbox">
                         <div class="pageDetail_text">
                             <h4>감사한 마음을 정성어린 카드로 전달하세요</h4>
-                            <a class="pageDetail_link">CARD >></a>
+                            <a class="pageDetail_link" href="mygiftpage.do">CARD >></a>
                         </div>
                     </div>
                 </div>
@@ -65,7 +65,7 @@
                     <div class="pageDetail_textbox">
                         <div class="pageDetail_text">
                             <h4>이쁜만큼 기분도 두배</h4>
-                            <a class="pageDetail_link">VENUE >></a>
+                            <a class="pageDetail_link" href="weddingrecommend.do">VENUE >></a>
                         </div>
                     </div>
                 </div>
@@ -87,7 +87,7 @@
                     <div class="pageDetail_textbox">
                         <div class="pageDetail_text">
                             <h4>당신의 친구와 일정을 공유하세요</h4>
-                            <a class="pageDetail_link">CALENDER >></a>
+                            <a class="pageDetail_link" href="calender.do">CALENDER >></a>
                         </div>
                     </div>
                 </div>

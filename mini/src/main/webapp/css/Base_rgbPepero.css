@@ -22,6 +22,9 @@ input[type=text].text1 {border: 2px solid #363636; font-family: 'Nanum Gothic', 
 input[type=text].search {border: 5px solid #363636; border-top-right-radius: 0; border-bottom-right-radius: 0;}
 input[type=radio] {appearance: none; border: 2px solid #363636; border-radius: 2px; background-color: transparent; transition: background-color 0.4s;}
 input[type=radio]:checked {background-color: #363636; }
+input[type=checkbox].none {appearance: none; border: none; border-radius: 0; background-color: transparent; transition: none; padding: 0;}
+input[type=checkbox] {appearance: none; border: 2px solid #363636; border-radius: 2px; background-color: transparent; transition: background-color 0.4s;}
+input[type=checkbox]:checked {background-color: #363636; }
 button {border: none; padding: 0 20px; vertical-align: middle; font-weight: 600;  font-size: 16px; cursor: pointer;}
 button.btn1 {background-color: #363636; color: white; border-radius: 6px;}
 button.searchM {background-color: #363636; color: white; line-height: 1.7;}
@@ -52,7 +55,7 @@ h1, h2, h3, h4, h5, h6 {font-size: medium;}
 
 /* wrapper */
 #mainWrapper {max-width: none; min-width: 1240px; padding: 0 15px; min-height:calc(100vh - 420px); margin:0 auto;}
-#wrapper {max-width:1240px; min-height:calc(100vh - 420px); margin:0 auto; padding:0 20px;}
+#wrapper {width: 1240px; min-height:calc(100vh - 420px); margin:0 auto; padding:0 20px;}
 
 
 /* #header {position: fixed; z-index: 99; top: 0;}

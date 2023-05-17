@@ -10,6 +10,8 @@ public class Product {
 	private String pKind;
 	private String iLike;
 	private String catName;
+	private String pStock;
+	private String pSaleCnt;
 	public String getProductNo() {
 		return productNo;
 	}
@@ -63,5 +65,17 @@ public class Product {
 	}
 	public void setCatName(String catName) {
 		this.catName = catName;
+	}
+	public String getpStock() {
+		return pStock;
+	}
+	public void setpStock(String pStock) {
+		this.pStock = pStock;
+	}
+	public String getpSaleCnt() {
+		return pSaleCnt;
+	}
+	public void setpSaleCnt(String pSaleCnt) {
+		this.pSaleCnt = pSaleCnt;
 	}
 }

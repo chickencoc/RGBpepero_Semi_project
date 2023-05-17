@@ -87,6 +87,7 @@ var app = new Vue({
         cnt : 0,
         list : [],
         catList : [],
+        pdImgList : [],
         pKind : "K"
     }   
     , methods: {
@@ -128,7 +129,6 @@ var app = new Vue({
                 data : nparmap,
                 success : function(data) { 
                 	self.list = data.product;
-
                     self.cnt = data.cnt;
                     
                     self.pageCount = Math.ceil(self.cnt / 6);
@@ -145,6 +145,19 @@ var app = new Vue({
 	                data : nparmap,
 	                success : function(data) { 
 	                	self.catList = data.code;
+	                	}
+	           		}); 
+	        	}
+			,fnGetProductImg : function(){
+	            var self = this;
+	            var nparmap = {};
+	            $.ajax({
+	                url:"/productImgList.dox",
+	                dataType:"json",	
+	                type : "POST", 
+	                data : nparmap,
+	                success : function(data) { 
+	                	self.pdImgList = data.productImg;
 	                	}
 	           		}); 
 	        	}

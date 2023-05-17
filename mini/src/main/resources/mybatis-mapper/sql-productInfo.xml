@@ -29,6 +29,8 @@
 		FROM	mini_db2.T1_CODE
 		WHERE	KIND = 'CATEGORY' AND CODE != 'R'
 	</select>
+	<select id="selectProductList" parameterType="hashmap" resultType="com.example.mini.model.PdImage">
+	</select>
 	
 
 </mapper>

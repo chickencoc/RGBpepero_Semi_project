@@ -48,7 +48,7 @@
             <div class="prodListBox">
                 <div class="prodList" >
                         <div class="prodBox" v-for="(item, index) in list">
-                            <img src="/image/prod0.jpg" class="prod0Img">
+                        	<img :src="item.imgSrc" class="prod0Img">
                             <div class="prodName">{{item.pName}}</div>
                             <div class="prodPrice">{{item.pPrice}}원</div>
                             <div class="prodLike">좋아요 : {{item.iLike}}<img src="/image/Like.png" class="prodLikeImg"></div>
@@ -145,19 +145,6 @@ var app = new Vue({
 	                data : nparmap,
 	                success : function(data) { 
 	                	self.catList = data.code;
-	                	}
-	           		}); 
-	        	}
-			,fnGetProductImg : function(){
-	            var self = this;
-	            var nparmap = {};
-	            $.ajax({
-	                url:"/productImgList.dox",
-	                dataType:"json",	
-	                type : "POST", 
-	                data : nparmap,
-	                success : function(data) { 
-	                	self.pdImgList = data.productImg;
 	                	}
 	           		}); 
 	        	}

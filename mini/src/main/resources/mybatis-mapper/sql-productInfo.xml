@@ -5,7 +5,7 @@
 <mapper namespace="com.example.mini.mapper.ProductMapper">	
 	<select id="selectProductList" parameterType="hashmap" resultType="com.example.mini.model.Product">
 		SELECT
-			PRODUCTNO,
+			P.PRODUCTNO,
 			P_PRICE,
 			P_CDATETIME,
 			P_UDATETIME,
@@ -13,9 +13,11 @@
 			P_CONTENT,
 			P_KIND,
 			I_LIKE,
-			C.NAME AS CATNAME
+			C.NAME AS CATNAME,
+			IMGSRC
 		FROM	mini_db2.T1_PRODUCT P
-		LEFT OUTER join mini_db2.T1_CODE C ON C.CODE = P.P_KIND
+		LEFT OUTER JOIN mini_db2.T1_CODE C ON C.CODE = P.P_KIND
+		LEFT OUTER JOIN mini_db2.T1_PDIMAGE PI ON P.PRODUCTNO = PI.PRODUCTNO
 		WHERE	P_KIND = #{pKind}
 		LIMIT #{startNum}, #{lastNum}
 	</select>
@@ -29,10 +31,14 @@
 		FROM	mini_db2.T1_CODE
 		WHERE	KIND = 'CATEGORY' AND CODE != 'R'
 	</select>
-	<!-- <select id="selectProductList" parameterType="hashmap" resultType="com.example.mini.model.PdImage">
+	<!-- <select id="selectProductImgList" parameterType="hashmap" resultType="com.example.mini.model.PdImage">
 		SELECT 
-			SRCIMGNO ,
-			
+			SRCIMGNO,
+			PRODUCTNO,
+			IMGSRC,
+			IMGNAME,
+			ORGNAME,
+			IMGTYPE
 	</select> -->
 	
 

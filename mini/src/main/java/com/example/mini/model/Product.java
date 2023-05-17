@@ -13,6 +13,7 @@ public class Product {
 	private String pStock;
 	private String pSaleCnt;
 	private String pSale;
+	private String imgSrc;
 	public String getProductNo() {
 		return productNo;
 	}
@@ -84,5 +85,11 @@ public class Product {
 	}
 	public void setpSaleCnt(String pSaleCnt) {
 		this.pSaleCnt = pSaleCnt;
+	}
+	public String getImgSrc() {
+		return imgSrc;
+	}
+	public void setImgSrc(String imgSrc) {
+		this.imgSrc = imgSrc;
 	}
 }

@@ -68,6 +68,8 @@ public class ProductController {
 		return new Gson().toJson(resultMap);
 	}
 	
+	
+	
 	//상품수정페이지
 	@RequestMapping("/productmodify.do")
 	public String productModify(Model model) throws Exception {

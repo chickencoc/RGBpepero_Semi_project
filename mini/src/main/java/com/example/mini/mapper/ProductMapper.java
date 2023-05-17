@@ -22,4 +22,5 @@ public interface ProductMapper {
 //	카테고리 리스트
 	List<Code>selectProductCategoryList(HashMap<String, Object> map);
 	
+	
 }

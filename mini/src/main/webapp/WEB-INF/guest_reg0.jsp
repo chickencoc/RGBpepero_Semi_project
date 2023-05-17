@@ -3,14 +3,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script src="js/jquery.js"></script>
-<script src="js/vue.js"></script>
+    <script src="js/jquery.js"></script>
+    <script src="js/vue.js"></script>
+    <jsp:include page="/layout/header.jsp"></jsp:include>
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">	
 	<link rel="stylesheet" href="/css/Base_rgbPepero.css">
 	<link rel="stylesheet" href="/css/Registry.css">
 	<link rel="stylesheet" href="/css/myInfo_reg.css">
-	<jsp:include page="/layout/headerLogo.jsp"></jsp:include>
 	<title>비회원용 페이지</title>
 </head>
 
@@ -19,7 +19,7 @@
 		<div class="regi_content">
         <main class="regi_main">
             <div class="regi_container">              
-                <span id="regi_user">누구의 레지스트리</span>            
+                <span id="regi_user">누구의 레지스트리</span>           
             </div>           
             <div class="regi_container">                
                 <div class="regi_back_image">
@@ -92,13 +92,11 @@ var app = new Vue({
         fnGetId: function(){
             var self = this;
             var originalUrl = window.location.href;
-            var urlParameter = window.location.search;
-            console.log(urlParameter);
-            var urlStr = originalUrl;
+            var urlParameter = window.location.search;           
+            var urlStr = originalUrl;           
             var url = new URL(urlStr);
-            var urlParams = url.searchParams;
-
-            self.userId = urlParams.get('tag'); 
+            var urlParams = url.searchParams;         
+            self.userId = urlParams.get('id'); 
             console.log(self.userId);
         }
     ,   fnselectUser: function(){

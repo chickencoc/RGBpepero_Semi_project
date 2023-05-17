@@ -27,7 +27,7 @@
                 <div class="regi_your_url">
                     <h6 style="text-align: center;">당신의 레지스트리 주소</h6>
                     <span id="regi_url">
-                        http://localhost:8080/guestRegistry.do?id={{sessionId}}
+                    <input id="regi_url_copy" :value="myUrl">    
                         <a href="#" @click="fnUrlCopy()"><img src="/image/fi-ss-upload.png" id="regi_icon"></a>
                         <span style="font-size: 9px;">주소복사</span>
                     </span>
@@ -111,6 +111,7 @@ var app = new Vue({
 	,	image: []
 	, 	imgUrl1: ''
     ,   imgUrl2: ''
+    ,   myUrl: 'http://localhost:8080/guestRegistry.do?id=${sessionId}'
     
     }   
     , methods: {
@@ -158,6 +159,13 @@ var app = new Vue({
                     }
                 });
             }
+    ,   fnUrlCopy : function() {
+            var self = this;
+            var copyurl = document.getElementById('regi_url_copy');
+                    console.log(copyurl);
+                    copyurl.select();
+                    document.execCommand("copy");
+    }
     ,	fnBackImageAlter : function(){
             var popUrl = "/registryBackImg.do";
             var popOption = "width = 500px, height=500px, top=300px, left=300px, scrollbars=no";

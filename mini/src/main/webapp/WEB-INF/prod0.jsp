@@ -12,7 +12,7 @@
 	<script src="https://unpkg.com/vuejs-paginate@latest"></script>
 	<script src="https://unpkg.com/vuejs-paginate@0.9.0"></script>
 	<style>
-	<!-- 페이징 추가 2-->
+	
 </style>
 </head>
 
@@ -26,7 +26,7 @@
             </ul>
             </div>
             <div class="prod0Banner">
-                <img src="/image/prod0Banner.jpg" id="bannerImg">
+                <img src="/image/banner1.jpg" id="bannerImg">
                 <div class="bannerText">
                     <p>하루 중 가장 많은 시간을 보내는 곳</p>
                     <p>편안하고 아늑한 잠자리를 위하여</p>

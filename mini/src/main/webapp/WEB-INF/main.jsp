@@ -19,7 +19,7 @@
             <div class="banner_btnbox">
                 <button class="custom_btn banner_btn">Let`s Go</button>
             </div>
-            <img class="imgDown" src="/image/caret-down.png" alt="go down">
+            <img class="imgDown" src="/image/icon/caret-down.png" alt="go down">
         </div>
     </div>
     <div id="mainWrapper">
@@ -27,7 +27,7 @@
             <div class="pageDetail">
                 <div class="menu_cat_items" id="product" name="product">
                     <div class="pageDetail_imgbox">
-                        <img src="/image/registry.jpg">
+                        <img src="/image/categoryK/registry.jpg">
                     </div>
                     <div class="pageDetail_textbox">
                         <div class="pageDetail_text">
@@ -38,7 +38,7 @@
                 </div>
                 <div class="menu_cat_items" id="trip" name="trip">
                     <div class="pageDetail_imgbox">
-                        <img src="/image/trip.jpg">
+                        <img src="/image/tripO/trip.jpg">
                     </div>
                     <div class="pageDetail_textbox">
                         <div class="pageDetail_text">
@@ -49,7 +49,7 @@
                 </div>
                 <div class="menu_cat_items" id="card" name="card">
                     <div class="pageDetail_imgbox">
-                        <img src="/image/card.jpg">
+                        <img src="/image/categoryR/card.jpg">
                     </div>
                     <div class="pageDetail_textbox">
                         <div class="pageDetail_text">
@@ -60,7 +60,7 @@
                 </div>
                 <div class="menu_cat_items" id="venue" name="venue">
                     <div class="pageDetail_imgbox">
-                        <img src="/image/venue2.jpg">
+                        <img src="/image/userimgB/venue2.jpg">
                     </div>
                     <div class="pageDetail_textbox">
                         <div class="pageDetail_text">
@@ -71,7 +71,7 @@
                 </div>
                 <div class="menu_cat_items" id="represent" name="represent">
                     <div class="pageDetail_imgbox">
-                        <img src="/image/return2.jpg">
+                        <img src="/image/categoryR/return2.jpg">
                     </div>
                     <div class="pageDetail_textbox">
                         <div class="pageDetail_text">
@@ -82,7 +82,7 @@
                 </div>
                 <div class="menu_cat_items" id="calender" name="calender">
                     <div class="pageDetail_imgbox">
-                        <img src="/image/calender.jpg">
+                        <img src="/image/categoryV/calender.jpg">
                     </div>
                     <div class="pageDetail_textbox">
                         <div class="pageDetail_text">

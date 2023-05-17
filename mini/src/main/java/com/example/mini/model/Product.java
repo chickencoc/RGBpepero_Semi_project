@@ -14,6 +14,7 @@ public class Product {
 	private String pSaleCnt;
 	private String pSale;
 	private String imgSrc;
+	private String mainYn;
 	public String getProductNo() {
 		return productNo;
 	}
@@ -91,5 +92,11 @@ public class Product {
 	}
 	public void setImgSrc(String imgSrc) {
 		this.imgSrc = imgSrc;
+	}
+	public String getMainYn() {
+		return mainYn;
+	}
+	public void setMainYn(String mainYn) {
+		this.mainYn = mainYn;
 	}
 }

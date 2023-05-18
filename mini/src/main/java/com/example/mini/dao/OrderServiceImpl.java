@@ -43,5 +43,14 @@ public class OrderServiceImpl implements OrderService{
 		// TODO Auto-generated method stub
 		
 	}
+	@Override
+	public HashMap<String, Object> searchCardBackInfo(HashMap<String, Object> map) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		Order card = orderMapper.selectCardBackgroundInfo(map);
+		resultMap.put("card", card);
+		return resultMap;
+
+	}
 
 }

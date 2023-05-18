@@ -54,16 +54,17 @@
             <div class="itemSearchBox">
                 <input class="itemSearchBar search" type="text" value="검색" v-model="pName" @keyup.enter="fnSearchGift"></input>
                         <button class="itemSearchBar searchM" @click=fnSearchGift>검색</button>
-                        <button class="itemSearchBar searchR">초기화</button>
+                        <button class="itemSearchBar searchR" @click=fnSearchReset>초기화</button>
                     <select name="" class="itemSearchBar slt1" v-model="arrayOrder">
                         <option value="O_CDATETIME">최신순</option>
                         <option value="PRICE">가격순</option>
                         <option value="funding">펀딩</option>
-                        <option value="productGift">상품 선물</option>
                     </select>
-                    <span class="listStyleBtns">
-                        <img class="listStyleImg" @click="fnChangeView($event)" src="/image/list1.jpg" alt="">
-                    </span>
+                    	<span class="listStyleBtns">
+                    		<a href="javascript:;">
+                        		<img class="listStyleImg" @click="fnChangeView($event)" src="/image/list1.jpg" alt="">
+                        	</a>
+                    	</span>
             </div>
             <div class="giftContentBox">
                 <div class="profileBox">
@@ -121,7 +122,7 @@
                         <!-- 받은 상품 -->
                         <tr class="giftDetailList" v-for="(item, index) in list">
                             <td class="giftDetailList_check">
-                                <input type="checkbox" name="gifts" @click="fnCheckBoxChk()" v-model="checkedBox" value="1">
+                                <input type="checkbox" name="gifts" @click="fnCheckBoxChk()" v-model="checkedBox" value="1"  v-bind:value="item">
                             </td>
                             <td class="giftDetailList_img">
                                 <img :src="item.imgsrc">
@@ -215,9 +216,6 @@ var app = new Vue({
         fnCheckBoxChk : function(){
             $("input[name=gifts]:eq(0)").prop("checked", false);
     	},
-        fnSendReturn : function() {
-            // location.href
-        },
         fnSendCard : function() {
             // location.href
         }
@@ -268,6 +266,55 @@ var app = new Vue({
         	var self = this;
         	self.fnGetList();
         }
+        ,fnSearchReset : function(){
+        	var self = this;
+        	self.pName = ''
+        }
+        ,fnSendCard : function(){
+        	var self = this;
+        	if(self.checkedBox==''){
+        		alert("보낼 사람을 선택해주세요.")
+        	} else{
+	    	self.pageChange("/myInfoGift1.do", {checkedBox : self.checkedBox});
+        	}
+        }
+        ,fnSendReturn : function() {
+        	var self=this;
+        	if(self.checkedBox==''){
+        		alert("보낼 사람을 선택해주세요.")
+        	} else{
+            // location.href
+            }
+        }
+        , pageChange : function(url, param) {
+			var target = "_self";
+			if(param == undefined){
+			//	this.linkCall(url);
+				return;
+			}
+			var form = document.createElement("form"); 
+			form.name = "dataform";
+			form.action = url;
+			form.method = "post";
+			form.target = target;
+			for(var name in param){
+				var item = name;
+				var val = "";
+				if(param[name] instanceof Object){
+					val = JSON.stringify(param[name]);
+				} else {
+					val = param[name];
+				}
+				var input = document.createElement("input");
+	    		input.type = "hidden";
+	    		input.name = item;
+	    		input.value = val;
+	    		form.insertBefore(input, null);
+			}
+			document.body.appendChild(form);
+			form.submit();
+			document.body.removeChild(form);
+		}
     }
     , created: function () {
     	var self = this;

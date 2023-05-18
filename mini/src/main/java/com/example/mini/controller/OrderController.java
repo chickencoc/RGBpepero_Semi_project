@@ -45,8 +45,9 @@ public class OrderController {
 	}
 	
 	@RequestMapping("/myInfoGift1.do") 
-    public String myInfoGift1(HttpServletRequest request, Model model) throws Exception{
-		
+    public String myInfoGift1(HttpServletRequest request, HttpServletResponse response, Model model,
+    		@RequestParam HashMap<String, Object> map) throws Exception{
+		request.setAttribute("map", map);
         return "/myInfo_gift1";
 	}
 	
@@ -85,6 +86,15 @@ public class OrderController {
 			HashMap<String, Object> resultMap = new HashMap<String, Object>();
 			orderService.addCardContent(map);
 			resultMap.put("result", "success");
+			return new Gson().toJson(resultMap);
+		}
+	 
+	 @RequestMapping(value = "/myInfoGift1SendBackground.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+		@ResponseBody
+		public String searchCardBackgroundInfo(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+		 HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		 	resultMap = orderService.searchCardBackInfo(map);
+			resultMap.put("message", "성공");
 			return new Gson().toJson(resultMap);
 		}
 }

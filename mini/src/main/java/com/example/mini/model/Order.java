@@ -4,6 +4,7 @@ public class Order {
 	private String orderNo;
 	private String guestNo;
 	private String gName;
+	private String gPhone;
 	private String userId;
 	private String uName;
 	private String uPhone;
@@ -246,5 +247,11 @@ public class Order {
 	}
 	public void setgName(String gName) {
 		this.gName = gName;
+	}
+	public String getgPhone() {
+		return gPhone;
+	}
+	public void setgPhone(String gPhone) {
+		this.gPhone = gPhone;
 	}
 }

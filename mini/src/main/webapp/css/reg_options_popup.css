@@ -1,68 +1,13 @@
-div, li{
-    margin: 20px;
-}
-.reg_options_popup{
-    border: 1px solid black;
-    width: 520px;
-    height: 660px;
-    justify-content: center;
-    align-items: center;
-    padding: 10px;
-}
-.reg_options_popup_image{   
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);   
-    width: 250px;
-    height: 200px;
-}
-.reg_options_popup_info{
-    position: relative;
-    left: 260px;
-    bottom: 180px;
-    width: 220px;
-}
-.reg_options_popup_checkbox{
-    border: 1px dashed black;
-    width: 500px;
-    height: 100px;
-    position: relative;
-    bottom: 100px;
-}
-#reg_options_popup_checkbox{
-    position: relative;
-    bottom: 50px;
-}
-.reg_options_popup_memo{
-    position: relative;
-    bottom: 100px;
-    margin: 0;
-}
-#reg_options_popup_memo_txt{
-    
-    width: 500px;
-    height: 100px;
-}
-.reg_options_popup_btn{
-    width: 100px;
-    height: 35px;
-    position: relative;
-    bottom: 50px;
-    margin-left: 200px;
-}
-.reg_gift_popup_btn{
-    width: 100px;
-    height: 35px;
-    position: relative;
-    bottom: 50px;
-    margin-left: 200px;
-}
-#reg_options_popup_stock_number{
-    text-align: center;
-    width: 30px;
-    height: 25px;
-    margin-left: 5px;
-}
-#reg_gift_popup_close, #reg_option_popup_close{
-    width: 10px;
-    height: 10px;
-    float: right;
-}
+/* div, li { margin: 20px; } */ 
+.reg_options_popup { border: 1px solid black; width: 520px; height: 660px; justify-content: center; align-items: center; padding: 10px; } 
+.reg_options_popup_image { background-image: url(/image/loundry.jpg); box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+		background-repeat: no-repeat; background-position: center; background-size: cover; width: 250px; height: 200px; } 
+.reg_options_popup_info { position: relative; left: 260px; bottom: 180px; width: 220px; } 
+.reg_options_popup_checkbox { border: 1px dashed black; width: 500px; height: 100px; position: relative; bottom: 100px; } 
+#reg_options_popup_checkbox { position: relative; bottom: 50px; } 
+.reg_options_popup_memo { position: relative; bottom: 100px; margin: 0; } 
+#reg_options_popup_memo_txt { width: 500px; height: 100px; } 
+.reg_options_popup_btn { width: 100px; height: 35px; position: relative; bottom: 50px; margin-left: 200px; } 
+.reg_gift_popup_btn { width: 100px; height: 35px; position: relative; bottom: 50px; margin-left: 200px; } 
+#reg_options_popup_stock_number { text-align: center; width: 30px; height: 25px; margin-left: 5px; } 
+#reg_gift_popup_close, #reg_option_popup_close { width: 10px; height: 10px; float: right; } 

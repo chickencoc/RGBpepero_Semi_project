@@ -175,20 +175,20 @@ var app = new Vue({
                     	self.mainText = "하루 중 가장 많은 시간을 보내는 곳"
                     	self.subText = "편안하고 아늑한 잠자리를 위하여"
                     }else if(self.pKind == "L"){
-                    	self.mainText = "거실"
-                    	self.subText = ""
+                    	self.mainText = "부부의 생활을 공유하는 공간"
+                    	self.subText = "거실 제품입니다."
                     }else if(self.pKind == "D"){
                     	self.mainText = "드레스룸"
                     	self.subText = ""
                     }else if(self.pKind == "K"){
-                     	self.mainText = "주방"
-                     	self.subText = ""
+                     	self.mainText = "맛있는 냄새와 즐거운 음식"
+                     	self.subText = "주방 제품입니다."
                     }else if(self.pKind == "V"){
                      	self.mainText = "다용도실"
                      	self.subText = ""
                     }else if(self.pKind == "T"){
-                     	self.mainText = "욕실"
-                     	self.subText = ""
+                     	self.mainText = "세상에서 가장 깔끔해지는 공간"
+                     	self.subText = "욕실 제품입니다."
                     }else if(self.pKind == "H"){
                      	self.mainText = "취미"
                      	self.subText = ""

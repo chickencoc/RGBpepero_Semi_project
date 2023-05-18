@@ -147,6 +147,7 @@ var app = new Vue({
 		fnResetSearchProd : function(){
 			var self = this;
 			self.keyword = "";
+			self.selectItem = "";
 			self.fnGetProductList();
 		},
         fnGetProductList : function(){

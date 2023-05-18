@@ -1,6 +1,7 @@
 package com.example.mini.controller;
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -41,4 +42,5 @@ public class MyInfoController {
 		resultMap = myInfoService.searchMyGiftList(map);
 		return new Gson().toJson(resultMap);
 	}
+
 }

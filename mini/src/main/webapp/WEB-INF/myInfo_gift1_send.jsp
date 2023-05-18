@@ -141,33 +141,34 @@
             <div class="thxCard_title">감사카드</div>
             <div class="grid_Area1">
                 <div class="imgGrid">
-                   <img src="../image/card1.PNG" id="main_Img">
-                   <div class="thumb_Nails"> 
+                   <img :src="info.imgsrc" id="main_Img">
+                  <!--  <div class="thumb_Nails"> 
                         <img src="../image/card2.PNG" id="thumb1" onmouseover="changeImage(this.src)" onmouseout="restoreImage()">
                         <img src="../image/card3.PNG" id="thumb2" onmouseover="changeImage(this.src)" onmouseout="restoreImage()">
                         <img src="../image/card4.PNG" id="thumb3" onmouseover="changeImage(this.src)" onmouseout="restoreImage()">
-                   </div>
+                   </div> -->
                 </div>  
                 <div class="field_Area">
                     <fieldset class="product_Explane">
                         <div>{{info.pName}}</div>
                         <div>{{info.total}}원</div>
                     </fieldset>
-                        <fieldset class="customer_Explane">
+                        <fieldset class="customer_Explane" >
                             <div>받는사람</div>
-                            <div class="customer_Box">gName</div>
+                            <div class="customer_Box">
+                            	<div v-for="(item, index) in checkedBox">{{item.gName}} {{item.gPhone}}</div>
+                            </div>
                         </fieldset>  
                 </div>  
             </div>
             <div class="hr_Line"><hr></div>
             <div class="grid_Area2">
                 <h1 class="card_Spoil_Title">카드 미리보기</h1>
-                <div class="option_Box">
-                    
+                <div class="option_Box">                    
                 </div>
                 <div class="grid_Area3">
                     <div class="thx_Card_Write">
-                    	<img src="/image/writeCard.PNG" class="cardSampleImg">
+                    	<img :src="card.imgsrc" class="cardSampleImg">
                     	<div class="writedCard" v-html="cardContent">{{cardContent}}</div>
                     </div>
                     <div class="write_Txt">
@@ -198,53 +199,87 @@ const VueEditor = Vue2Editor.VueEditor;
 var app = new Vue({ 
     el: '#app',
     data: {
-	info:{},
-	productNo : "${map.productNo}",
-	cardContent : '',
-	userId : "${sessionId}",
+		info:{},
+		productNo : "${map.productNo}",
+		cardContent : '',
+		userId : "${sessionId}",
+		checkedBox : [],
+		gPhoneO : {},
+		card:{}
     }
 	, components: {VueEditor}
     , methods: {
     	fnGetInfo : function() {
 			var self = this;
 			var nparmap = {productNo : self.productNo};
+			for(var i=0; i<self.checkedBox.length; i++){
+				var item=self.checkedBox[i];
+				var gPhone = item.gPhone;
+				self.gPhoneO[i]=gPhone;
+				console.log(self.gPhoneO);
+			}
+			
 			$.ajax({
 				url : "/myInfoGift1Send.dox",
 				dataType : "json",
 				type : "POST",
 				data : nparmap,
 				success : function(data) {
+					console.log(data)
 					self.info = data.info;
 					console.log(self.info);
+					console.log(self.checkedBox);
+					console.log(self.checkedBox.length)
 				}
 			});
 		}
-    	,fnAddCard : function(){
-    		var self = this;
-    		if(confirm("저장하시겠습니까?")){
-	    		var nparmap = {
-			            gPhone : self.gPhone,
-			            userId : self.userId,
-			            cardcontent : self.cardContent,
-			            productNo : self.productNo};	
-					$.ajax({
-						url : "/addCardContent.dox",
-						dataType : "json",
-						type : "POST",
-						data : nparmap,
-						success : function(data) {
-							console.log(data);
-							alert("카드 작성이 완료되었습니다..")
-							location.href="/myRegistry.do" 
-						}
-					 });
-	    		}
-            }
+    	,fnAddCard: function() {
+    	    var self = this;
+    	    if (confirm("작성을 완료하시겠습니까?")) {
+    	    	var nparmap = {};
+    	        for(var i=0; i<self.checkedBox.length; i++){
+	    	        nparmap = {
+	    	            gPhone: self.gPhoneO[i],
+	    	            userId: self.userId,
+	    	            cardcontent: self.cardContent,
+	    	            productNo: self.productNo,
+	    	        };
+	    	         $.ajax({
+	    	            url: "/addCardContent.dox",
+	    	            dataType: "json",
+	    	            type: "POST",
+	    	            data: nparmap,
+	    	            success: function(data) {
+	    	                console.log(data);
+	    	            }
+	    	        }); 
+    	        }
+                alert("주문 페이지로 이동합니다.");
+                
+    	    }
     	}
+    	,fnCardInfo : function() {
+			var self = this;
+			var nparmap = {productNo : self.productNo};			
+			$.ajax({
+				url : "/myInfoGift1SendBackground.dox",
+				dataType : "json",
+				type : "POST",
+				data : nparmap,
+				success : function(data) {
+					console.log(data)
+					self.card = data.card;
+					console.log(self.card);
+				}
+			});
+		}
+    }
    
     , created: function () {
     	var self = this;
-    	self.fnGetInfo()
+    	self.checkedBox = JSON.parse('${map.checkedBox}');
+    	self.fnGetInfo();
+    	self.fnCardInfo();
 
 	}
 });

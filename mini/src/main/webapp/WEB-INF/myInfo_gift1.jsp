@@ -112,6 +112,7 @@ var app = new Vue({
     data: {
 		list :{},
 		arrayOrder : 'P_CDATETIME',
+		checkedBox : '${map.checkedBox}',
 			<!-- 페이징 추가 5-->
 		selectPage: 1,
 		pageCount: 1,
@@ -139,7 +140,7 @@ var app = new Vue({
                 dataType:"json",	
                 type : "POST", 
                 data : nparmap,
-                success : function(data) { 
+                success : function(data) {
                 	self.list = data.list;
                     console.log(data);
                     self.cnt = data.cnt;
@@ -170,7 +171,7 @@ var app = new Vue({
 			}
 	    , fnProdMove : function(productNo){
 	    	var self = this;
-	    	self.pageChange("/myInfoGift1Send.do", {productNo : productNo});
+	    	self.pageChange("/myInfoGift1Send.do", {productNo : productNo, checkedBox: self.checkedBox});
 	    	
 	    }
 	    , pageChange : function(url, param) {

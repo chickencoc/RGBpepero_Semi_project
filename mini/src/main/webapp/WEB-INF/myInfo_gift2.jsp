@@ -3,8 +3,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script src="js/jquery.js"></script>
-<script src="js/vue.js"></script>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<jsp:include page="/layout/header.jsp"></jsp:include>
@@ -17,13 +15,13 @@
     <div id="app">
     <div id="wrapper">
         <div class="container" id="app">
-            <div class="return_gift_list_menu">
-                <a href="">회원정보</a>
-                <a href="">나의 레지스트리</a>
-                <a href="">받은 선물 목록</a>
-                <a href=""><strong>보낸답례품</strong></a>
-                <a href="">캘린더</a>
-            </div>
+			<div class="myinfo_category_list">
+				<a href="information.do">회원정보</a>
+				<a href="myRegistry.do">나의 레지스트리</a>
+				<a href="mygift.do">받은 선물 목록</a>
+				<a href="returngoods.do"><strong>보낸답례품</strong></a>
+				<a href="main.do">캘린더</a>
+			</div>  	
             <div class="returnSearchBox">
                 <input type="text" placeholder="이름" class="returnSearchBar search">
                 <button class="returnSearchBtn searchM">검색</button>

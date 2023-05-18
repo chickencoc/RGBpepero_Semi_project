@@ -17,7 +17,7 @@
             <h6 class="bannertxt_main">For all the <span id="spanTxt">celebrations</span> along the way</h6>
             <h4 class="bannertxt_sub">당신의 행복한 결혼을 이곳에서 시작하세요</h4>
             <div class="banner_btnbox">
-                <button class="custom_btn banner_btn">Let`s Go</button>
+                <button class="custom_btn banner_btn" onclick="toLogin()">Let`s Go</button>
             </div>
             <img class="imgDown" src="/image/icon/caret-down.png" alt="go down">
         </div>
@@ -104,7 +104,7 @@
                     </ul>
                     <ul class="pageList_qna">
                         <li><h5>도움이 필요 하신가요??</h5></li>
-                        <li><a href="#">문의하기</a></li>
+                        <li><a class="pageDetail_link" href="inquery.do">문의하기</a></li>
                     </ul>
                 </div>
             </div>
@@ -139,5 +139,9 @@
 	
 	// let spanTxt = document.getElementById('spanTxt');
 	// const spanTxtlist = ['celebrations', 'to-dos', 'big decisions', 'happy tears', 'days']
+	
+	const toLogin = () => {
+    	location.href="userLogin.do";
+	};
 	
 </script>

@@ -28,6 +28,7 @@
 .pageList > .pageList_ul > li:hover::before { left: -7px;}
 
 .pageList > .pageList_qna { position: absolute; bottom: 70px;}
+.pageList > .pageList_qna > li:last-child { text-align: right; margin-top: 7px;}
 @media (max-height: 800px) { .pageList { top: 20px; } }
 
 /* 페이지 소개 contents */

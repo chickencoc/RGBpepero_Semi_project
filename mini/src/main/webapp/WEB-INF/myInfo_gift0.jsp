@@ -44,6 +44,13 @@
     <div id="app">
 
         <div id="wrapper">
+   			<div class="myinfo_category_list">
+				<a href="information.do">회원정보</a>
+				<a href="myRegistry.do">나의 레지스트리</a>
+				<a href="mygift.do"><strong>받은 선물 목록</strong></a>
+				<a href="returngoods.do">보낸답례품</a>
+				<a href="main.do">캘린더</a>
+			</div>
             <div class="itemSearchBox">
                 <input class="itemSearchBar search" type="text" value="검색" v-model="pName" @keyup.enter="fnSearchGift"></input>
                         <button class="itemSearchBar searchM" @click=fnSearchGift>검색</button>

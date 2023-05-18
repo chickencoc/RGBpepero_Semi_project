@@ -16,6 +16,7 @@ import com.example.mini.model.Product;
 import com.example.mini.model.User;
 import com.google.gson.Gson;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -33,7 +34,8 @@ public class ProductController {
 
 	//상품상세페이지
 	@RequestMapping("/product.do")
-	public String product1(Model model) throws Exception {
+	public String product1(HttpServletRequest request,Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+		request.setAttribute("map", map);
 		return "/prod0";
 	}
 //	상품 상세 페이지 정보 넘겨주기

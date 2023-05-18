@@ -9,7 +9,7 @@
 
        #imgbox {width : 400px;}
        #subimgbox{ height: 100px;  display: grid; grid-gap: 1rem; grid-template-columns: 1fr 1fr 1fr; margin-left: 16px;}
-       #mainimg{border: 1px solid black; width: 400px; height: 320px;}
+       #mainimg{border: 1px solid black; width: 400px; height: 320px; background-image: url("/image/icon/error.png"); background-repeat: no-repeat; background-size: cover; background-position: center;}
        .subimg{ border: 1px solid black; width : 100px; height : 100px;}
 
       
@@ -26,3 +26,9 @@
        .review_detail{width: 962px; background: #555;}
        #re_tb{ margin-top: 30px; display: flex; justify-content: center;}
        #re_tb  hr{width: 962px;}  
+       .prodCategoryList {height: 45px; display: flex; justify-content: center; align-items: center;}
+		.prodCategoryList li {display: inline-block; margin: 0 5px; } 
+		.prodCategoryList li:not(:last-child):after { content: ''; display: inline-block; width: 2px; height: 15px; background: #999; position: relative; top: 2px; margin-left: 13px; } 
+		.prodCategoryList > li { margin: 0 5px; } 
+		/* 카테고리 글자 굵기 토글용 */
+		.prodCategoryListColor { font-weight: bold;}

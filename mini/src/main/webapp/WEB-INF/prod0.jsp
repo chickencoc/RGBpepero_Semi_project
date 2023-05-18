@@ -28,8 +28,8 @@
             <div class="prod0Banner">
                 <img src="/image/prod0Banner.jpg" id="bannerImg">
                 <div class="bannerText">
-                    <p>하루 중 가장 많은 시간을 보내는 곳</p>
-                    <p>편안하고 아늑한 잠자리를 위하여</p>
+                    <p>{{mainText}}</p>
+                    <p>{{subText}}</p>
                 </div>
             </div>
             <div class="searchBox">
@@ -47,19 +47,15 @@
             </div>
             <div class="prodListBox">
                 <div class="prodList" >
-                        <div class="prodBox" v-for="(item, index) in list">
+                        <div class="prodBox" v-for="(item, index) in list" @click="fnView(item.productNo)">
 	                        <template v-if="item.imgSrc != null || item.imgSrc != ''">
 	                        	<img :src="item.imgSrc" class="prod0Img">
 	                        </template>
                             <div class="prodName">{{item.pName}}</div>
                             <div class="prodPrice">{{item.pPrice}}원</div>
-                            <div class="prodLike">좋아요 : {{item.iLike}}<img src="/image/Like.png" class="prodLikeImg"></div>
+                            <div class="prodLike">좋아요 : {{item.iLike}}<img src="/image/icon/Like.png" class="prodLikeImg"></div>
                         </div>
                 </div>
-            </div> 
-            <div class="pageList">
-                <input type="number" class="pageListNum" min="1"> <a href="">페이지로 이동</a>
-                
             </div>
             <template>
 				<paginate
@@ -90,9 +86,11 @@ var app = new Vue({
         list : [],
         catList : [],
         pdImgList : [],
-        pKind : "",
+        pKind : "${map.pKind}",
         keyword : "",
-        selectItem : ""
+        selectItem : "",
+        mainText : "",
+        subText : "",
     } 
 	, watch : {
 		selectItem :function(){
@@ -173,6 +171,31 @@ var app = new Vue({
                 	self.list = data.product;
                 	console.log(self.list);
                     self.cnt = data.cnt;
+                    if(self.pKind == "B"){
+                    	self.mainText = "하루 중 가장 많은 시간을 보내는 곳"
+                    	self.subText = "편안하고 아늑한 잠자리를 위하여"
+                    }else if(self.pKind == "L"){
+                    	self.mainText = "거실"
+                    	self.subText = ""
+                    }else if(self.pKind == "D"){
+                    	self.mainText = "드레스룸"
+                    	self.subText = ""
+                    }else if(self.pKind == "K"){
+                     	self.mainText = "주방"
+                     	self.subText = ""
+                    }else if(self.pKind == "V"){
+                     	self.mainText = "다용도실"
+                     	self.subText = ""
+                    }else if(self.pKind == "T"){
+                     	self.mainText = "욕실"
+                     	self.subText = ""
+                    }else if(self.pKind == "H"){
+                     	self.mainText = "취미"
+                     	self.subText = ""
+                    }else{
+                    	self.mainText = "Error!"
+                        self.subText = "Error!"
+                    }
                     self.pageCount = Math.ceil(self.cnt / 6);
 					console.log("selectPage" + self.selectPage);
                     
@@ -221,7 +244,10 @@ var app = new Vue({
 				document.body.appendChild(form);
 				form.submit();
 				document.body.removeChild(form);
-			}
+			}, fnView : function(productNo){
+	    		var self = this;
+	    		self.pageChange("./producttemporaryinfo.do", {productNo : productNo});
+	    	}
 			
     }   
     , created: function () {

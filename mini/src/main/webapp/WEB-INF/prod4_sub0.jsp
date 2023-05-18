@@ -14,19 +14,15 @@
     <!-- wrap START -->
  <div id="app"> 
     <div id="wrapper">
-        <div class="list">
-            <a href="">침실</a>
-            <a href="">거실</a>
-            <a href="">드레스룸</a>
-            <a href=""><strong>주방</strong></a>
-            <a href="">다용도실</a>
-            <a href="">욕실</a>
-            <a href="">취미</a>
-        </div>
+        <div class="prodCategoryList">
+            <ul>
+            	<li class="prodCategoryList_li" v-for="(item, index) in catList" @click="fnChange(item.code, $event)"><template v-if="item.code == pKind"><b>{{item.name}}</b></template><template v-else>{{item.name}}</template></li>
+            </ul>
+            </div>
         <div id="contentbox">
             <div id="prodboxtop">
-                <div id="imgbox">      
-                	<img id="mainimg" :src="imgsrc">
+                <div id="imgbox">   
+                	<img id="mainimg" :src="list.imgSrc">
                 </div>
                 <div id="explainbox">
                     <div>상품명 : <span>{{list.pName}}</span></div>
@@ -88,54 +84,96 @@
     var app = new Vue({ 
         el: '#app',
         data: {
-        	productno : 1,      	
+        	productNo : "${map.productNo}",      	
             list : [],
-            checkList : [],
-            imgsrc : ""
+            pKind : "",
+            catList : [],
+            checkList : []
     
         }   
         , methods: {
+        	fnChange : function(code, event){
+        		var self = this;
+        		
+        		self.keyword = "";
+        		console.log(self.selectPage);
+        		if(code == "W"){
+        			location.href="/weddingrecommend.do";
+        		}else if(code == "A"){
+        			location.href="/triprecommend.do";
+        		}else{
+            		self.pKind = code;
+            		self.pageChange("./product.do", {pKind : self.pKind});
+            		
+                    
+                    
+        		}
+        		console.log(self.selectPage);
+        	},fnGetCategoryList : function(){
+	            var self = this;
+	            var nparmap = {};
+	            $.ajax({
+	                url:"/categoryList.dox",
+	                dataType:"json",	
+	                type : "POST", 
+	                data : nparmap,
+	                success : function(data) { 
+	                	self.catList = data.code;
+	                	}
+	           		}); 
+	        }
+        	,
             fnProductInformation : function(){
                 var self = this;
-                var nparmap = {productno : self.productno};
+                var nparmap = {productNo : self.productNo};
                 $.ajax({
                     url:"/producttemporaryinfo.dox",
                     dataType:"json",	
                     type : "POST", 
                     data : nparmap,
                     success : function(data) { 
-                        console.log(data);
                         self.list = data.list;
-                        console.log(data.list);
-                        console.log(self.list);
-                    }
-                }); 
-            },
-            fnProductImgs : function(){
-                var self = this;
-                var nparmap = {productNo : self.productno};
-                $.ajax({
-                    url:"/productImgs.dox",
-                    dataType:"json",	
-                    type : "POST", 
-                    data : nparmap,
-                    success : function(data) { 
-                    	self.pImage = data.pImage;
-                        console.log(data);
-                        console.log(self.pImage);
+                        self.pKind = self.list.pKind;
                     }
                 }); 
             },
             fnMoveModifyProduct : function(){
         		var self = this;
         		location.href="/productmodifytemporary.do";
-        	}
+        	}, pageChange : function(url, param) {
+				var target = "_self";
+				if(param == undefined){
+				//	this.linkCall(url);
+					return;
+				}
+				var form = document.createElement("form"); 
+				form.name = "dataform";
+				form.action = url;
+				form.method = "post";
+				form.target = target;
+				for(var name in param){
+					var item = name;
+					var val = "";
+					if(param[name] instanceof Object){
+						val = JSON.stringify(param[name]);
+					} else {
+						val = param[name];
+					}
+					var input = document.createElement("input");
+		    		input.type = "hidden";
+		    		input.name = item;
+		    		input.value = val;
+		    		form.insertBefore(input, null);
+				}
+				document.body.appendChild(form);
+				form.submit();
+				document.body.removeChild(form);
+			}
         }   
         , created: function () {
             var self = this;
-            console.log(self.productno);
             self.fnProductInformation();
-            self.fnProductImgs();
+            self.fnGetCategoryList();
     
         }
     });

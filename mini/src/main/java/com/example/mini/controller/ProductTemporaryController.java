@@ -20,6 +20,7 @@ import com.example.mini.model.User;
 import com.example.mini.model.UserImage;
 import com.google.gson.Gson;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -31,7 +32,8 @@ public class ProductTemporaryController {
 
 	//상품상세페이지
 	@RequestMapping("/producttemporaryinfo.do")
-	public String productTemporaryInfo(Model model) throws Exception {
+	public String productTemporaryInfo(HttpServletRequest request,Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+		request.setAttribute("map", map);
 		return "/prod4_sub0";
 	}
 
@@ -42,17 +44,6 @@ public class ProductTemporaryController {
 		HashMap<String, Object> resultMap = new HashMap<String, Object>();
 		Product list = productTemporaryService.selectProduct(map);
 		resultMap.put("list", list);
-		System.out.println(list);
-		return new Gson().toJson(resultMap);
-	}
-
-	//상품이미지 뿌리기 
-	@RequestMapping(value = "/productImgs.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
-	@ResponseBody
-	public String selectProductImage(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
-		HashMap<String, Object> resultMap = new HashMap<String, Object>();
-		List<PdImage> pImage = productTemporaryService.selectProductImage(map);
-		resultMap.put("pImage", pImage);
 		return new Gson().toJson(resultMap);
 	}
 	

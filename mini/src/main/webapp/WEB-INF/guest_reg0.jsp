@@ -40,9 +40,10 @@
                     <div v-for="(item, index) in registry">                              
                         <div class="regi_items" v-if="item.orderNo == null">
                             <!--매우원함-->
-                            <div id="regi_wanted_badge" v-if="item.rOption == 'A'"> </div>
-                                <img :src="item.imgSrc" class="regi_items_image">
-                                             
+                            <div id="regi_wanted_badge" v-if="item.rOption == 'A'"> 
+                                <img :src="item.imgSrc" class="regi_items_image" v-if="item.tripNo == null">
+                                <img :src="item.imgSrc" class="regi_items_image" v-if="item.productNo == null">
+                            </div>                 
                                 <p class="regi_pro_name">{{item.pName}}</p>
                                 <p class="regi_pro_price">{{item.pPrice}} 원</p>
                             <!--펀딩퍼센트-->

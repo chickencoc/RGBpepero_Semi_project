@@ -153,7 +153,7 @@ var app = new Vue({
             var self = this;
             var startNum = ((self.selectPage-1) * 6);
     		var lastNum = (self.selectPage * 6);
-            var nparmap = {pKind : self.pKind ,startNum : startNum, lastNum : lastNum, keywordType : self.selectItem, keyword : self.keyword};
+            var nparmap = {pKind : self.pKind ,startNum : startNum, lastNum : lastNum, keywordType : self.selectItem, keyword : self.keyword, keywordType : self.selectItem};
             $.ajax({
                 url:"/productList.dox",
                 dataType:"json",	

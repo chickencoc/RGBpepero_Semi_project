@@ -40,6 +40,18 @@
 		SELECT COUNT(*) AS CNT
 		FROM mini_db2.T1_PRODUCT 
 		WHERE	P_KIND = #{pKind}
+		<if test="keyword != '' and keyword != null">
+				AND P_NAME LIKE CONCAT('%',#{keyword},'%')
+		</if>
+		<if test='keywordType == "p"'>
+				ORDER BY P_PRICE
+		</if>
+		<if test='keywordType == "i"'>
+				ORDER BY I_LIKE DESC
+		</if>
+		<if test='keywordType == "c"'>
+				ORDER BY P_CDATETIME DESC
+		</if>
 	</select>
 	<select id="selectProductCategoryList" parameterType="hashmap" resultType="com.example.mini.model.Code">
 		SELECT *

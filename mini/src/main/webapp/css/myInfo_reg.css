@@ -10,10 +10,11 @@
 #regi_back_image_button {width: 140px;position: relative;top: 30px;left: 10px; } 
 .myinfo_registry { width: 100%; height: auto; display: grid; place-items: center; grid-template-columns: repeat(3, 1fr); grid-auto-rows: 10fr; padding: 10px; } 
 .regi_select { position: relative; left: 430px; } 
-.regi_add_gifts { display: flex; flex-direction: column; align-items: center; border:1px dashed black; width: 1000px; margin: 10px; padding: 10px; } 
+.regi_add_gifts { display: flex; flex-direction: column; align-items: center; border:1px dashed black; width: 1000px; margin: 10px; padding: 10px; border-radius: 5px; } 
+.regi_add_gifts:hover { cursor: pointer; }
 .regi_add_gifts:hover { background-color: black; color: white; } 
 
-.regi_items { width: 250px; height: 370px; box-shadow: 0 2px 5px rgba(0, 0, 0, .1); margin: 10px; } 
+.regi_items { width: 250px; height: 370px; box-shadow: 0 2px 5px rgba(0, 0, 0, .1); border-radius: 5px; margin: 10px; overflow: hidden; } 
 .regi_items_image { position: relative; width: 250px; height: 170px; background-color: lightpink;}
 .regi_pro_name { text-align: center; } 
 .regi_pro_price { text-align: center; margin: 10px; } 
@@ -34,8 +35,8 @@
 #regi_url { font-size: 15px; margin: 10px; } 
 #regi_profile { box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); width: 150px; height: 150px; border-radius: 50%; position: relative; bottom: 100px;} 
 #regi_wanted_badge { position: relative; overflow: hidden; /* 불필요한 부분 가리기 */ padding: 1px; } 
-#regi_wanted_badge:after { content: ""; position: absolute; z-index: 1; width: 130px; height: 30px; background: white; content: "갖고싶은선물";  /* 보여주는 텍스트 */ text-align: center; color: black;
-    font-family: 'Arial'; font-size: 12px; font-weight: bold; padding: 5px 10px; left: -30px; top: 10px; transform: rotate(-35deg); box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); } 
+#regi_wanted_badge:after { content: ""; position: absolute; z-index: 1; width: 130px; height: 18px; background: white; content: "갖고싶은선물";  /* 보여주는 텍스트 */ text-align: center; color: black;
+    font-family: 'Arial'; font-size: 12px; font-weight: bold; padding: 5px 10px; left: -32px; top: 18px; transform: rotate(-35deg); box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); } 
 .regi_percentage { display: flex; justify-content: center; position: relative; top: 20px; } 
 #regi_progress { appearance: none; } 
 #regi_progress::-webkit-progress-bar { background:white; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); border-radius:10px; height: 10px; margin-top: 8px; } 

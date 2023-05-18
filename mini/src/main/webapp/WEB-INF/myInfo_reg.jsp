@@ -65,8 +65,8 @@
 	                    </select>
 	                </div>
 	                
-	                <div class="regi_add_gifts">
-	                    <a href="/mygiftpage.do" @click="fnProductPage"><img src="/image/icon/fi-sr-plus.png" id="regi_icon"></a>
+	                <div class="regi_add_gifts" @click="fnProductPage">
+	                    <img src="/image/icon/fi-sr-plus.png" id="regi_icon">
 	                    <div>선물 추가하기</div>
 	                </div>
 	                <div class="myinfo_registry" >
@@ -88,7 +88,7 @@
 	                        <div class="regi_items_options">
 	                            <span id="regi_stock_text">수량</span>
 	                            <input type="text" id="regi_stock_number" :value="item.rCnt" size="1" readonly>
-	                            <button id="regi_optionBtn" @click="fnOptionBtn(item)">옵션설정</button>
+	                            <button id="regi_optionBtn" class="btn1" @click="fnOptionBtn(item)">옵션설정</button>
 	                            <a href="#" id="regi_delete" @click="fnDeleteItem(item)">삭제하기</a>
 	                        </div>
 	                    </div>                
@@ -272,7 +272,7 @@
 	            window.loction.href= "/review.do";
 	    	}
 	    ,	fnProductPage: function(){
-	    		window.location.href = "/product.do";
+	    		window.location.href = "/bedroom.do";
 	    	}
 	    ,
 	    

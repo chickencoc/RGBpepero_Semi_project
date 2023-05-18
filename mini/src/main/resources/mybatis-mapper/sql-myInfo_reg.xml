@@ -15,37 +15,28 @@
 			R.R_OPTION,
 			R.R_CNT,
 			R.R_CONTENT,
-			R.USERID,
 			R.FUNDYN,
+			R.USERID,
+		    U.U_NAME,
+		    U.PARTNER,
+		    P.PRODUCTNO,
+		 	P.P_NAME,
+		 	P.P_PRICE,
+			PM.P_STOCK,
 			PI.IMGSRC,
- 			TI.IMGSRC,
- 			PM.P_STOCK,
-  			P.P_NAME,
-  			P.P_PRICE,
-            O.ORDERNO,
-            U.U_NAME,
-            F.FSETPRICE,
-            F.FPUTPRICE
-		FROM 
-			mini_db2.T1_REGISTRY AS R
-		INNER JOIN
-			mini_db2.T1_PRODUCT AS P ON R.PRODUCTNO = P.PRODUCTNO
-		LEFT JOIN	
-			mini_db2.T1_PDIMAGE AS  PI ON P.PRODUCTNO = PI.PRODUCTNO
-		INNER JOIN	
-			mini_db2.T1_USER AS U ON R.USERID = U.USERID
-		LEFT JOIN	
- 			mini_db2.T1_TRIP AS T ON R.TRIPNO = T.TRIPNO
-   		LEFT JOIN	
-   			mini_db2.T1_TRIPIMAGE AS TI ON T.TRIPNO = TI.TRIPNO
- 		LEFT JOIN
-  			mini_db2.T1_PDMANAGE AS PM ON P.PRODUCTNO = PM.PRODUCTNO
-		LEFT JOIN
-			mini_db2.T1_ORDER AS O ON P.PRODUCTNO = O.PRODUCTNO
-		LEFT JOIN
-			mini_db2.T1_FUNDING AS F ON R.REGISTRYNO = F.REGISTRYNO
-		WHERE 
-			R.USERID =  #{userId};
+		 	TI.IMGSRC,
+			F.FSETPRICE,
+			F.FPUTPRICE,
+			O.ORDERNO
+		FROM mini_db2.T1_REGISTRY AS R
+		INNER JOIN mini_db2.T1_USER AS U ON U.USERID = R.USERID
+		INNER JOIN mini_db2.T1_PRODUCT AS P ON P.PRODUCTNO = R.PRODUCTNO
+		INNER JOIN mini_db2.T1_PDIMAGE AS  PI ON PI.PRODUCTNO = P.PRODUCTNO
+		INNER JOIN mini_db2.T1_PDMANAGE AS PM ON PM.PRODUCTNO = P.PRODUCTNO
+		LEFT JOIN mini_db2.T1_TRIPIMAGE AS TI ON TI.TRIPNO = R.TRIPNO
+		LEFT JOIN (SELECT 	REGISTRYNO, FSETPRICE, SUM(FPUTPRICE) AS FPUTPRICE FROM mini_db2.T1_FUNDING GROUP BY FSETPRICE) F ON F.REGISTRYNO = R.REGISTRYNO
+		LEFT JOIN mini_db2.T1_ORDER AS O ON O.PRODUCTNO = R.PRODUCTNO AND O.USERID = R.USERID
+		WHERE R.USERID = #{userId};
 	</select>
 	<update id="updateRegistryOption" parameterType="hashmap">
 		UPDATE mini_db2.T1_REGISTRY
@@ -53,6 +44,7 @@
 			R_OPTION = #{rOption},
 			R_CONTENT = #{rContent},
 			FUNDYN = #{fundYn},
+			R_UDATETIME = NOW(),
 			R_CNT = #{rCnt},
 			R_UDATETIME = #{rUdatetime}			
 		WHERE
@@ -86,9 +78,15 @@
 			IMGNAME = #{imgName},
 			ORGNAME = #{orgName},
 			IMGTYPE = #{imgType},
-			IMGUSETYPE = #{imgUsetype}		
+			IMGUSETYPE = #{imgUsetype}
 		WHERE
 			IMGUSETYPE = #{imgUsetype} AND USERID = #{userId};
 		
 	</update>
+	
+	<!-- 레지스트리 추가 -->
+	<insert id="registryAdd" parameterType="hashMap">
+		INSERT INTO mini_db2.T1_REGISTRY
+		VALUES (NULL, #{productNo}, NULL, NOW(), NULL, #{rCnt}, #{rOption}, #{rContent}, #{userId}, #{fundYn})
+	</insert>
 </mapper>

@@ -27,6 +27,7 @@ import jakarta.servlet.http.HttpSession;
 public class ProductTemporaryController {
 	@Autowired
 	private ProductTemporaryService productTemporaryService;
+	
 	@Autowired
 	HttpSession session;
 
@@ -34,6 +35,9 @@ public class ProductTemporaryController {
 	@RequestMapping("/producttemporaryinfo.do")
 	public String productTemporaryInfo(HttpServletRequest request,Model model, @RequestParam HashMap<String, Object> map) throws Exception {
 		request.setAttribute("map", map);
+		request.setAttribute("sessionId", session.getAttribute("sessionId"));
+		request.setAttribute("sessionName", session.getAttribute("sessionName"));
+		request.setAttribute("sessionStatus", session.getAttribute("sessionStatus"));
 		return "/prod4_sub0";
 	}
 
@@ -52,5 +56,6 @@ public class ProductTemporaryController {
 		public String productModify(Model model) throws Exception {
 			return "/prod4_sub01";
 		}
+				
 
 }

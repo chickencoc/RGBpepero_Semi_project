@@ -70,3 +70,11 @@ body { padding-top: 120px;} */
 .myinfo_category_list>a {margin: 0 5px; } 
 .myinfo_category_list {text-align: center; margin-top : 50px; } 
 
+/* dim popup  */
+.dimClose {grid-area: header; width: 10px; height: 10px; position: relative; left: 525px; bottom: 8px;}
+.user-read {display: none; position: relative; z-index:1001;}
+.user-read.on {display: block;}
+.dim-layer {position: fixed; _position: absolute;  top: 0;  left: 0; width: 100%;  height: 100%;  z-index: 1001;}
+.dim-layer .read_dim {position: absolute;  top: 0;  left: 0;  width: 100%; height: 100%; background: #000; opacity: .5; filter: alpha(opacity=50);}
+.read-inner {max-width: 600px; height: 700px; border-radius: 8px; background: #fff; display: grid; box-sizing: border-box; z-index: 1002; justify-items: center; place-items: center;
+			position: fixed; margin: 0 auto; left: 0; right: 0;top: 50%; transform: translateY(-50%);padding: 25px}

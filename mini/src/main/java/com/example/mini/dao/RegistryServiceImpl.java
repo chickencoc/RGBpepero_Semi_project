@@ -62,6 +62,13 @@ public class RegistryServiceImpl implements RegistryService{
 		
 		registryMapper.updateRegistryOption(map);
 	}
+
+	// 레지스트리 추가 - 상점 페이지에서
+	@Override
+	public void registryAdd(HashMap<String, Object> map) {
+		// TODO Auto-generated method stub
+		registryMapper.registryAdd(map);
+	}
 	
 
 }

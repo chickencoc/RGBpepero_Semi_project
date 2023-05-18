@@ -94,4 +94,15 @@ public class RegistryController {
 		resultMap.put("message", "성공");
 		return new Gson().toJson(resultMap);
 	}
+	
+	//레지스트리 추가
+	@RequestMapping(value = "/registryAdd.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String registryAdd(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		registryService.registryAdd(map);
+		resultMap.put("message", "성공");
+		return new Gson().toJson(resultMap);
+	}
+	
 }

@@ -1,34 +1,39 @@
-.list{margin-left: 350px; width: 1240px;}
-        .list > a:not(:last-child):after {content: '';display: inline-block;width: 2px;height: 15px;background: #999;position: relative;top: 2px;margin-left: 13px;}
-       .list > a {margin: 0 5px;}
+.list { margin-left: 350px; width: 1240px; }
+ .list > a:not(:last-child):after { content: ''; display: inline-block; width: 2px; height: 15px; background: #999; position: relative; top: 2px; margin-left: 13px; } 
+ .list > a { margin: 0 5px; } 
 
-       
+ 
 
-       #prodboxtop{border: 1px solid #999; display: flex; justify-content: space-around; padding: 46px 10px;}
-       #prodboxbottom{background: #999; height: 300px; margin-top: 50px; margin-bottom: 50px;}
+ #prodboxtop { border: 1px solid #9993; display: flex; justify-content: space-around; padding: 46px 10px; align-items: center; }
+ 
+.contentbox .prodcase { padding: 30px 15px; margin: 10px 0; } 
+ #prodboxbottom { background: #999; height: 300px; margin-top: 50px; margin-bottom: 50px; }
 
-       #imgbox {width : 400px;}
-       #subimgbox{ height: 100px;  display: grid; grid-gap: 1rem; grid-template-columns: 1fr 1fr 1fr; margin-left: 16px;}
-       #mainimg{border: 1px solid black; width: 400px; height: 320px; background-image: url("/image/icon/error.png"); background-repeat: no-repeat; background-size: cover; background-position: center;}
-       .subimg{ border: 1px solid black; width : 100px; height : 100px;}
+ #prodboxtop #imgbox { width : 400px; margin-bottom: 50px; } 
+ #prodboxtop #imgbox #mainimg { border: 1px solid black; width: 400px; height: 320px; background-image: url("/image/icon/error.png"); background-repeat: no-repeat; background-size: cover; background-position: center; }
+ #subimgbox { height: 100px; display: grid; grid-gap: 1rem; grid-template-columns: 1fr 1fr 1fr; margin-left: 16px; } 
+ .subimg { border: 1px solid black; width : 100px; height : 100px; }
+ #prodboxtop .buttonbox { margin-right: 30px; float: right; } 
 
-      
-       .div_line{border-bottom: 1px solid black;}
-       #inner_line{width: 600px;}
+ 
+ .div_line { border-bottom: 1px solid black; } 
+ #inner_line { width: 600px; } 
 
-       #explainbox{font-size: 1.5em;}
-       #explainbox div{margin-left: 40px; line-height: 3.6em;}
-       .buttonbox{margin-right: 30px; float: right;}
-       #contentbox button{ margin-left: 20px; background: black; color: white; padding: 10px;}
-       #reviewbox img{width: 175px; height: 150px; margin-right: 20px; border: 1px solid #555;}
-       #reviewbox{background: #999;}
-       #reviewbox button{ float: right; margin-right: 25px;}
-       .review_detail{width: 962px; background: #555;}
-       #re_tb{ margin-top: 30px; display: flex; justify-content: center;}
-       #re_tb  hr{width: 962px;}  
-       .prodCategoryList {height: 45px; display: flex; justify-content: center; align-items: center;}
-		.prodCategoryList li {display: inline-block; margin: 0 5px; } 
-		.prodCategoryList li:not(:last-child):after { content: ''; display: inline-block; width: 2px; height: 15px; background: #999; position: relative; top: 2px; margin-left: 13px; } 
-		.prodCategoryList > li { margin: 0 5px; } 
-		/* 카테고리 글자 굵기 토글용 */
-		.prodCategoryListColor { font-weight: bold;}
+ #prodboxtop #explainbox { font-size: 1.5em; } 
+ #prodboxtop #explainbox div { margin-left: 40px; line-height: 3.6em; }
+  
+
+ #contentbox button { margin-left: 20px; padding: 10px; } 
+ #reviewbox img { width: 175px; height: 150px; margin-right: 20px; border: 1px solid #555; } 
+ #reviewbox { background: #999; } 
+ #reviewbox button { float: right; margin-right: 25px; } 
+ .review_detail { width: 962px; background: #555; }
+ #re_tb { margin-top: 30px; display: flex; justify-content: center; } 
+ #re_tb hr { width: 962px; } 
+ .prodCategoryList { height: 45px; display: flex; justify-content: center; align-items: center; } 
+.prodCategoryList li { display: inline-block; margin: 0 5px; } 
+.prodCategoryList li:not(:last-child):after { content: ''; display: inline-block; width: 2px; height: 15px; background: #999; position: relative; top: 2px; margin-left: 13px; } 
+.prodCategoryList > li { margin: 0 5px; } 
+
+/* 카테고리 글자 굵기 토글용 */
+.prodCategoryListColor { font-weight: bold; } 

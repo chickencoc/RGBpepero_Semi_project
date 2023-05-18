@@ -33,4 +33,7 @@ public interface RegistryMapper {
 	//이미지 수정
 	void updateUserImg(HashMap<String, Object> map);
 	
+	//레지스트리 추가 - 상품 상세 페이지에서
+	void registryAdd(HashMap<String, Object> map);
+	
 }

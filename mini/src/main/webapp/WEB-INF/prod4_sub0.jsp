@@ -26,7 +26,7 @@
         <div id="contentbox">
             <div id="prodboxtop">
                 <div id="imgbox">      
-                	<img id="mainimg" :src="mainImg">
+                	<img id="mainimg" :src="imgsrc">
                 </div>
                 <div id="explainbox">
                     <div>상품명 : <span>{{list.pName}}</span></div>
@@ -88,22 +88,11 @@
     var app = new Vue({ 
         el: '#app',
         data: {
-        	productno : 1,
-        	pName : "",
-        	pPrice :"",
-        	pUdatetime : "",
-        	pContent : "",
-        	pKind : "",
-        	iLike : "",
-        	srcimgno : "",
-        	imgsrc : "",
-        	imgname : "",
-        	orgname : "",
-        	imgtype : "",
+        	productno : 1,      	
             list : [],
             checkList : [],
-            mainImg : "",
-            pImage : []
+            imgsrc : ""
+    
         }   
         , methods: {
             fnProductInformation : function(){

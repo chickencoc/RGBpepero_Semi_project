@@ -118,13 +118,16 @@ fieldset select {
 #nameAndPartner #name {
 	margin-left: 86px;
 }
+#nameAndPartner2 #partner {
+	margin-left: 57px;
+}
 
 #gender #male {
 	margin-left: 90px;
 }
 
 #phoneNumber #phone {
-	margin-left: 57px;
+	margin-left: 56px;
 }
 
 #addresses #address1 {
@@ -190,8 +193,9 @@ fieldset #fieldTitle{
 						</div>
 						<div id="nameAndPartner">
 							<label>이름 <input type="text" id="name" v-model="uName"></label>
-							<label>배우자명 <input type="text" id="partner"
-								v-model="partner"></label>
+						</div>					
+						<div id="nameAndPartner2">
+							<label>배우자명 <input type="text" id="partner" v-model="partner"></label>
 						</div>
 
 						<div id="phoneNumber">

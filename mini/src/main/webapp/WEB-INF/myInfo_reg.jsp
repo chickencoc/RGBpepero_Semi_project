@@ -12,12 +12,12 @@
 	<title>회원 레지스트리</title>
 	<style>
 		/* 회원정보 상세 보기*/
-		.dimClose {position:absolute; top: 30px; right:30px;}
+		.dimClose {grid-area: header; width: 10px; height: 10px; position: relative; left: 525px; bottom: 8px;}
 		.user-read {display: none; position: relative; z-index:1001;}
 		.user-read.on {display: block;}
 		.dim-layer {position: fixed; _position: absolute;  top: 0;  left: 0; width: 100%;  height: 100%;  z-index: 1001;}
 		.dim-layer .read_dim {position: absolute;  top: 0;  left: 0;  width: 100%; height: 100%; background: #000; opacity: .5; filter: alpha(opacity=50);}
-		.read-inner {max-width: 600px; height: 700px; border-radius: 8px; background: #fff; display: inline-block; box-sizing: border-box; z-index: 1002;
+		.read-inner {max-width: 600px; height: 700px; border-radius: 8px; background: #fff; display: grid; box-sizing: border-box; z-index: 1002; justify-items: center; place-items: center;
 					position: fixed; margin: 0 auto; left: 0; right: 0;top: 50%; transform: translateY(-50%);padding: 25px}
 	</style>
 </head>
@@ -60,7 +60,7 @@
 	                </div>
 	                
 	                <div class="regi_add_gifts">
-	                    <a href="/mygiftpage.do" @click="fnProductPage"><img src="/image/fi-sr-plus.png" id="regi_icon"></a>
+	                    <a href="/mygiftpage.do" @click="fnProductPage"><img src="/image/icon/fi-sr-plus.png" id="regi_icon"></a>
 	                    <div>선물 추가하기</div>
 	                </div>
 	                <div class="myinfo_registry" >
@@ -68,10 +68,10 @@
 	                <div v-for="(item, index) in registry">                              
 	                    <div class="regi_items" v-if="item.orderNo == null">
 	                        <!--매우원함-->
-	                        <div id="regi_wanted_badge" v-if="item.rOption == 'A'"> 
-	                            <img :src="item.imgSrc" class="regi_items_image" v-if="item.tripNo == null">
-	                            <img :src="item.imgSrc" class="regi_items_image" v-if="item.productNo == null">
-	                        </div>                 
+	                        <div id="regi_wanted_badge" v-if="item.rOption == 'A'">
+								 <img :src="item.imgSrc" class="regi_items_image">
+							</div>
+							<img :src="item.imgSrc" class="regi_items_image" v-if="item.rOption != 'A'">
 	                            <p class="regi_pro_name">{{item.pName}}</p>
 	                            <p class="regi_pro_price">{{item.pPrice}} 원</p>
 	                        <!--펀딩퍼센트-->
@@ -112,21 +112,27 @@
 		       </div>
 		        <!-- dim content -->
 		        <div class="read-inner">
+					
 		            <div class="reg_options_popup">
-		                <div class="reg_options_popup_image">
-		                </div>
+						
+						<img src="../image/icon/fi-sr-cross.png" @click="dimClose" class="dimClose" id="reg_option_popup_close">
+						
+		                <div class="reg_options_popup_imageBox">
+							<img :src="item.imgSrc" id="reg_options_popup_image">
+						</div>
 		                <div class="reg_options_popup_info">
+							
 		                    <div id="reg_options_popup_name">{{item.pName}}</div>
-		                    <div id="reg_options_popup_price">{{item.pPrice}}</div>
+		                    <div id="reg_options_popup_price">{{item.pPrice}} 원</div>
 		                    <div>수량<input type="text" size="1" :value="item.rCnt" id="reg_options_popup_stock_number"></div>
 		                </div>
 		                <ul class="reg_options_popup_checkbox">
-		                    <li id="reg_options_popup_checkbox">상품 표시 옵션</li>
+		                    <li id="reg_options_popup_checkbox_title">상품 표시 옵션</li>
 		                    <li id="reg_options_popup_checkbox"><input type="checkbox" name="choice" v-bind:checked="inputWanted" v-on:change="updateWanted"> "정말 필요한 물건" 표시</li>                 
 		                    <li id="reg_options_popup_checkbox"><input type="checkbox" name="choice" v-bind:checked="inputGroup" v-on:change="updateGroup"> "그룹선물(펀딩)"로 변경하기</li>
 		                </ul>    
 		                <div class="reg_options_popup_memo">
-		                    <div><img src="/image/fi-ss-heart.png" style="position: relative; top: 8px; margin-right: 5px;">선물할 친구들이 참고할 정보를 기재해주세요</div>
+		                    <div><img src="../image/icon/fi-ss-heart.png" style="position: relative; top: 8px; margin-right: 5px;">선물할 친구들이 참고할 정보를 기재해주세요</div>
 		                    <input type="text" id="reg_options_popup_memo_txt" v-bind:value="inputText" v-on:input="updateInput">
 		                </div>
 		                <button class="reg_options_popup_btn" @click="fnOptionInput">저장하기</button>
@@ -154,7 +160,7 @@
 		    , imgUrl2: ''
 		    , myUrl: 'http://localhost:8080/guestRegistry.do?id=${sessionId}'
 		    //dim popup
-		    , item: []
+		    , item: {}
 		    , inputWanted: false
 		    , inputGroup: false
 		    , inputText: ''
@@ -234,17 +240,14 @@
 	    	}
 	    ,	fnOptionBtn: function(item){
 	    		var self = this;
-	            //localStorage.setItem('userItemList', JSON.stringify(item)); 
-	            //console.log(item);		
-	    		//let popUrl = "/registryOption.do";
-	    		//let popOption = "width = 600px, height=700px, top=300px, left=300px, scrollbars=no";
-	    		//let popup = window.open(popUrl, "옵션 설정", [popOption]);
+	            localStorage.setItem('userItemList', JSON.stringify(item)); 			    		
 	    		
 	           	$('.user-read').fadeIn().addClass('on');
 			    $('.read-inner').fadeIn().addClass('on');
 			    $("body").css("overflow", "hidden"); //body 스크롤바 없애기
 
 		        self.fnselectOption();
+				self.fnGetInformation();
 	    	}
 	    ,	fnDeleteItem: function(){
 	    		confirm("삭제하시겠습니까?");
@@ -262,15 +265,16 @@
 	    ,
 	    
 	    // dim popup script START
-		    fnselectOption: function(){
-	            var self = this;          
-	            const userItemList = localStorage.getItem('userItemList');    
-	            var item = JSON.parse(userItemList);                 
-	            console.log(item);
-	            self.item = item;
+		//method
+		     fnselectOption: function(){
+	              var self = this;          
+	              const userItemList = localStorage.getItem('userItemList');    
+	              var item = JSON.parse(userItemList);                 
+	              self.item = item;
+				  console.log(item);
 	            
-	        }
-	    ,    updateWanted : function(event){
+	         }
+	    ,   updateWanted : function(event){
 	            var self = this;
 	            self.wanted = event.target.checked ? 'A' : '';
 	            console.log(self.wanted);
@@ -292,9 +296,10 @@
 	            var self = this;
 	    		var nparmap = {
 	                registryNo: self.item.registryNo,
-	                rOption: self.wanted, 
-	                fundYn: self.group, 
-	                rContent: self.inputText,
+					rOption: self.wanted, 
+					fundYn: self.group, 
+					rContent: self.inputText,
+					rCnt: self.item.rCnt
 	                
 	            };
 	                  $.ajax({
@@ -305,39 +310,54 @@
 	                            success: function(response) {
 	                                // 서버 응답을 처리하는 코드 작성
 	                                alert("저장되었습니다.");
-	                                console.log();
-	                                // window.close();
+	                                self.dimClose();
 	                            },
 	                            error: function(xhr, textStatus, errorThrown) {
 	                                // 오류 처리 코드 작성
 	                                console.error(textStatus);
 	                            }
 	                        });
-	                localStorage.removeItem('userItemList');
-	                window.close();
-	        },
-	        fnGetInformation : function() {
+					// $(document).on("click", ".dimClose", function() {
+					// $('.user-read').fadeOut().removeClass('on');
+					// $('.read-inner').fadeOut().removeClass('on');
+					// $("body").css("overflow", "visible"); //body 스크롤바 없애기
+					// localStorage.removeItem('userItemList');
+	                
+	        }
+		,	dimClose: function(){
+				var self= this;
+				 
+				$('.user-read').fadeOut().removeClass('on');
+				$('.read-inner').fadeOut().removeClass('on');
+				$("body").css("overflow", "visible");
+				localStorage.removeItem('userItemList');
+				window.location.reload();
+
+		}
+	    ,   fnGetInformation : function() {
 	            var self = this;
 	            
-	            // inputWanted: false
-	            
-	            // self.
-	            // inputGroup: false
+				if(self.item.rOption === 'A'){
+                self.inputWanted = true;
+                
+            	}
+            
+            	if(self.item.fundYn === 'Y') {
+                self.inputGroup = true;
+                
+            	} 
 	        }
 	    // dim popup script END
 	    
-	    } //method
+	    } 
 	    , created : function () {
 	    	var self = this;
 	        self.fnselectUser();
-	        self.fnselectImage();      
+	        self.fnselectImage();
+			console.log(self.registry);      
 		}
 	});
 
-	$(document).on("click", ".dimClose", function() {
-	    $('.user-read').fadeOut().removeClass('on');
-	    $('.read-inner').fadeOut().removeClass('on');
-	    $("body").css("overflow", "visible"); //body 스크롤바 없애기
-	});
+	
 	
 </script>

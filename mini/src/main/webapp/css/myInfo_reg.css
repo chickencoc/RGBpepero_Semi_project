@@ -13,7 +13,7 @@
 .regi_add_gifts:hover { background-color: black; color: white; } 
 
 .regi_items { width: 250px; height: 370px; box-shadow: 0 2px 5px rgba(0, 0, 0, .1); margin: 10px; } 
-.regi_items_image { position: relative; width: 250px; height: 170px; background-color: lightpink; }
+.regi_items_image { position: relative; width: 250px; height: 170px; background-color: lightpink; z-index:1;}
 .regi_pro_name { text-align: center; } 
 .regi_pro_price { text-align: center; margin: 10px; } 
 .regi_items_options { display: grid; justify-items: center; align-items: center; grid-template-columns: 1fr 1fr; width: 100%; margin-top: 10px; } 
@@ -32,10 +32,9 @@
 #regi_giveBtn { width: 100px; height: 40px; } 
 #regi_url { font-size: 15px; margin: 10px; } 
 #regi_profile { box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); width: 80px; height: 80px; border-radius: 50%; position: relative; bottom: 50px; background-image: url(/image/profile_image.png); background-repeat: no-repeat; background-position: center; background-size: cover; } 
-#regi_wanted_badge { position: relative; overflow: hidden; /* 불필요한 부분 가리기 */
- padding: 1px; } 
-#regi_wanted_badge:after { content: ""; position: absolute; z-index: 1; width: 150px; height: 18px; background: white; content: "갖고싶은선물"; /* 보여주는 텍스트 */
- text-align: center; color: black; font-family: 'Arial'; font-size: 12px; font-weight: bold; padding: 5px 10px; left: -30px; top: 20px; transform: rotate(-35deg); box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); } 
+#regi_wanted_badge { position: relative; overflow: hidden; /* 불필요한 부분 가리기 */ padding: 1px; z-index:0;} 
+#regi_wanted_badge:after { content: ""; position: absolute; z-index: 990; width: 130px; height: 30px; background: white; content: "갖고싶은선물";  /* 보여주는 텍스트 */ text-align: center; color: black;
+    font-family: 'Arial'; font-size: 12px; font-weight: bold; padding: 5px 10px; left: -30px; top: 10px; transform: rotate(-35deg); box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); } 
 .regi_percentage { display: flex; justify-content: center; position: relative; top: 20px; } 
 #regi_progress { appearance: none; } 
 #regi_progress::-webkit-progress-bar { background:white; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); border-radius:10px; height: 10px; margin-top: 8px; } 

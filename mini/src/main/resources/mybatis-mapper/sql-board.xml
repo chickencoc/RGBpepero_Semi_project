@@ -82,5 +82,35 @@
 			IMGTYPE
 		FROM mini_db2.T1_BRDIMG
 		WHERE BOARDNO = #{boardNo}
+		
 	</select>
+	<select id="readBrdReply" parameterType="hashmap" resultType="com.example.mini.model.BrdReply">
+		SELECT
+			REPLYNO,
+			BOARDNO,
+			TITLE,
+	    	R.USERID,
+	    	U_NAME AS NAME,
+	    	CONTENT,
+	    	DELYN,
+	    	R.CDATETIME AS CDATETIME,
+	    	R.UDATETIME AS UDATETIME
+	    FROM mini_db2.T1_BRDREPLY R
+		INNER JOIN mini_db2.T1_USER U ON R.USERID = U.USERID
+		WHERE REPLYNO = #{replyNo}
+	</select>
+	<insert id="insertBrdReply" parameterType="hashmap" useGeneratedKeys="true" keyProperty="id" keyColumn="boardNo">
+	INSERT INTO mini_db2.T1_BRDREPLY
+	VALUE (NULL, #{boardNo},#{userId},NOW(),NULL,#{title},#{content},'N')
+	</insert>
+	<update id="updateBrdReply" parameterType="hashmap">
+		UPDATE mini_db2.T1_BOARD
+		SET REPLYYN = 'Y'
+		WHERE BOARDNO = #{boardNo}
+	</update>
+	<update id="deleteBrdReply" parameterType="hashmap">
+		UPDATE mini_db2.T1_BRDREPLY
+		SET DELYN = 'Y'
+		WHERE BOARDNO = #{boardNo}
+	</update>
 </mapper>

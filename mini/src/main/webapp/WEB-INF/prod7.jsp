@@ -28,8 +28,8 @@
             <div class="prod0Banner">
                 <img src="/image/prod0Banner.jpg" id="bannerImg">
                 <div class="bannerText">
-                    <p>부부의 생활을 공유하는 공간</p>
-                    <p>거실 제품입니다.</p>
+                    <p>취미</p>
+                    <p>가제</p>
                 </div>
             </div>
             <div class="searchBox">
@@ -86,7 +86,7 @@ var app = new Vue({
         list : [],
         catList : [],
         pdImgList : [],
-        pKind : "L",
+        pKind : "H",
         keyword : "${map.keyword}",
         selectItem : ""
     } 
@@ -163,7 +163,6 @@ var app = new Vue({
                 	self.list = data.product;
                     self.cnt = data.cnt;
                     self.pageCount = Math.ceil(self.cnt / 6);
-                    
                 	}
            		}); 
         	}

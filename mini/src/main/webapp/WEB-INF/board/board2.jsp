@@ -134,23 +134,34 @@ const VueEditor = Vue2Editor.VueEditor;
     		document.body.appendChild(form);
     		form.submit();
     		document.body.removeChild(form);
-    	}
+    	},
         
-        , fnAddBoard : function(){
+        fnAddReply : function(){
             var self = this;
-            var nparmap = {title : self.title, content : self.content};
-            console.log( self.content );
-            /* $.ajax({
-                url:"/board/add.dox",
+            var nparmap = { boardNo : self.boardNo ,title : self.replyTitle, content : self.replyContent, userId : self.userId };
+             $.ajax({
+                url:"/board/addReply.dox",
                 dataType:"json",	
                 type : "POST", 
                 data : nparmap,
-                success : function(data) { 
+                success : function(data) {
+                	/* var form = new FormData();
+                	console.log( $("#file1")[0].files.length);
+                	for(var i=0;i < $("#file1")[0].files.length;i++){
+                		console.log($("#file1")[0].files);
+                		console.log($("#file1")[0].files[i]);
+                		 form.append( "file1",  $("#file1")[0].files[i] );
+    	       	     	 form.append( "boardNo",  data.boardNo); // pk
+    	       	     	 console.log(form);
+    	           		 self.upload(form);
+    	           		 form.delete("file1");
+    	           		 form.delete("boardNo");
+                	}  */
                 	alert("저장되었습니다.");
-                	location.href="bbs.do";
+                	 self.fnGoList(); 
                 }
-            });  */
-        }
+            });  
+        } 
         , fnBoardEdit : function(){
         	var self = this;
         	alert(self.boardNo);

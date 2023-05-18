@@ -22,14 +22,14 @@
         <div class="container">
             <div class="prodCategoryList">
             <ul>
-            	<li class="prodCategoryList_li" v-for="(item, index) in catList" @click="fnChange(item.code, $event)"><template v-if="item.code == pKind"><b>{{item.name}}</b></template><template v-else>{{item.name}}</template></li>
+            	<li class="prodCategoryList_li" v-for="(item, index) in catList" @click="fnChange(item.code)"><template v-if="item.code == pKind"><b>{{item.name}}</b></template><template v-else>{{item.name}}</template></li>
             </ul>
             </div>
             <div class="prod0Banner">
                 <img src="/image/prod0Banner.jpg" id="bannerImg">
                 <div class="bannerText">
-                    <p>{{mainText}}</p>
-                    <p>{{subText}}</p>
+                    <p>세상에서 가장 깔끔해지는 공간</p>
+                    <p>욕실 제품입니다.</p>
                 </div>
             </div>
             <div class="searchBox">
@@ -86,38 +86,40 @@ var app = new Vue({
         list : [],
         catList : [],
         pdImgList : [],
-        pKind : "${map.pKind}",
-        keyword : "",
-        selectItem : "",
-        mainText : "",
-        subText : "",
+        pKind : "T",
+        keyword : "${map.keyword}",
+        selectItem : ""
     } 
 	, watch : {
-		selectItem :function(){
-			var self = this;
-			self.fnGetProductList();
+		selectItem : "fnGetProductList"
+		, keyword : "fnSearchProd"
 		}
-}
     , methods: {
-    	fnChange : function(code, event){
+    	fnChange : function(code){
     		var self = this;
     		
     		self.keyword = "";
-    		console.log(self.selectPage);
     		if(code == "W"){
     			location.href="/weddingrecommend.do";
     		}else if(code == "A"){
     			location.href="/triprecommend.do";
+    		}else if(code == "B"){
+    			location.href="/bedroom.do";
+    		}else if(code == "L"){
+    			location.href="/livingroom.do";
+    		}else if(code == "D"){
+    			location.href="/dressroom.do";
+    		}else if(code == "K"){
+    			location.href="/kitchen.do";
+    		}else if(code == "V"){
+    			location.href="/utilityroom.do";
+    		}else if(code == "T"){
+    			location.href="/toilet.do";
+    		}else if(code == "H"){
+    			location.href="/hobby.do";
     		}else{
-        		self.pKind = code;
-        		self.selectPage = 1;
-                self.fnGetProductList();
-                console.log(self.selectPage);
-                self.selectPage.active = true;
-                
-                
+    			location.href="/main.do";
     		}
-    		console.log(self.selectPage);
     	}
     	,
     	fnSearch : function(pageNum){
@@ -132,33 +134,23 @@ var app = new Vue({
 				type : "POST",
 				data : nparmap,
 				success : function(data) {
-					console.log("pageNum : "+pageNum);
-					console.log("startNum : "+startNum);
-					console.log("lastNum : "+lastNum);
 					self.list = data.product;
 					self.cnt = data.cnt;
-					console.log(self.list);
 					self.pageCount = Math.ceil(self.cnt / 6);
-					console.log("selectPage" + self.selectPage);
 					}
 				});
 			},
-			fnSearchProd : function(){
+		fnSearchProd : function(){
 				var self = this;
-				console.log(self.keyword);
-				self.fnGetProductList();
-			}
-			,
-			fnResetSearchProd : function(){
-				var self = this;
-				self.keyword = "";
-				console.log(self.keyword);
-				self.fnGetProductList();
-			}
-			,
+				self.fnGetProductList(); 
+			},
+		fnResetSearchProd : function(){
+			var self = this;
+			self.keyword = "";
+			self.fnGetProductList();
+		},
         fnGetProductList : function(){
             var self = this;
-            self.selectPage = 1;
             var startNum = ((self.selectPage-1) * 6);
     		var lastNum = (self.selectPage * 6);
             var nparmap = {pKind : self.pKind ,startNum : startNum, lastNum : lastNum, keywordType : self.selectItem, keyword : self.keyword};
@@ -169,36 +161,8 @@ var app = new Vue({
                 data : nparmap,
                 success : function(data) { 
                 	self.list = data.product;
-                	console.log(self.list);
                     self.cnt = data.cnt;
-                    if(self.pKind == "B"){
-                    	self.mainText = "하루 중 가장 많은 시간을 보내는 곳"
-                    	self.subText = "편안하고 아늑한 잠자리를 위하여"
-                    }else if(self.pKind == "L"){
-                    	self.mainText = "부부의 생활을 공유하는 공간"
-                    	self.subText = "거실 제품입니다."
-                    }else if(self.pKind == "D"){
-                    	self.mainText = "드레스룸"
-                    	self.subText = ""
-                    }else if(self.pKind == "K"){
-                     	self.mainText = "맛있는 냄새와 즐거운 음식"
-                     	self.subText = "주방 제품입니다."
-                    }else if(self.pKind == "V"){
-                     	self.mainText = "다용도실"
-                     	self.subText = ""
-                    }else if(self.pKind == "T"){
-                     	self.mainText = "세상에서 가장 깔끔해지는 공간"
-                     	self.subText = "욕실 제품입니다."
-                    }else if(self.pKind == "H"){
-                     	self.mainText = "취미"
-                     	self.subText = ""
-                    }else{
-                    	self.mainText = "Error!"
-                        self.subText = "Error!"
-                    }
                     self.pageCount = Math.ceil(self.cnt / 6);
-					console.log("selectPage" + self.selectPage);
-                    
                     
                 	}
            		}); 
@@ -244,7 +208,8 @@ var app = new Vue({
 				document.body.appendChild(form);
 				form.submit();
 				document.body.removeChild(form);
-			}, fnView : function(productNo){
+			}
+			, fnView : function(productNo){
 	    		var self = this;
 	    		self.pageChange("./producttemporaryinfo.do", {productNo : productNo});
 	    	}
@@ -253,9 +218,6 @@ var app = new Vue({
     , created: function () {
         var self = this;
         self.fnGetCategoryList();
-        if(self.pKind ==""){
-        	self.pKind = "K";
-        }
         self.fnGetProductList();
     }
 });

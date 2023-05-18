@@ -31,12 +31,48 @@ public class ProductController {
 	public String productInfo(Model model) throws Exception {
 		return "/prod4_sub0";
 	}
-
-	//상품상세페이지
-	@RequestMapping("/product.do")
-	public String product1(HttpServletRequest request,Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+	//상품페이지 침실
+		@RequestMapping("/bedroom.do")
+		public String product1(HttpServletRequest request,Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+			request.setAttribute("map", map);
+			return "/prod1";
+		}
+	//상품페이지 거실
+	@RequestMapping("/livingroom.do")
+	public String livingroom(HttpServletRequest request,Model model, @RequestParam HashMap<String, Object> map) throws Exception {
 		request.setAttribute("map", map);
-		return "/prod0";
+		return "/prod2";
+	}
+	//상품페이지 드레스룸
+	@RequestMapping("/dressroom.do")
+	public String dressroom(HttpServletRequest request,Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+		request.setAttribute("map", map);
+		return "/prod3";
+	}
+	
+	//상품페이지 주방
+	@RequestMapping("/kitchen.do")
+	public String kitchen(HttpServletRequest request,Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+		request.setAttribute("map", map);
+		return "/prod4";
+	}
+	//상품페이지 다용도실
+	@RequestMapping("/utilityroom.do")
+	public String utilityroom(HttpServletRequest request,Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+		request.setAttribute("map", map);
+		return "/prod5";
+	}
+	//상품페이지 욕실
+	@RequestMapping("/toilet.do")
+	public String toilet(HttpServletRequest request,Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+		request.setAttribute("map", map);
+		return "/prod6";
+	}
+	//상품페이지 취미
+	@RequestMapping("/hobby.do")
+	public String hobby(HttpServletRequest request,Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+		request.setAttribute("map", map);
+		return "/prod7";
 	}
 //	상품 상세 페이지 정보 넘겨주기
 	@RequestMapping(value = "/productList.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")

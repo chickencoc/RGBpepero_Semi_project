@@ -19,13 +19,17 @@
 		<div class="regi_content">
         <main class="regi_main">
             <div class="regi_container">              
-                <span id="regi_user">{{userName}}의 레지스트리</span>           
+                <span id="regi_user">{{userName}} & {{partner}}의 레지스트리</span>           
             </div>           
             <div class="regi_container">                
-                <div class="regi_back_image">
-                	<img :src="imgUrl1" id="regi_back_image" alt="이미지">                               
+                <div class="regi_back_image_box" v-if="imgUrl1 != ''">
+                	<img :src="imgUrl1" class="regi_back_image" >                               
                 </div>    
-                    <img :src="imgUrl2" id="regi_profile">                      
+                <div class="regi_back_image_box" v-if="imgUrl1 === ''" style="background-color: lightpink;">
+                	<div class="regi_back_image" style="background-color: lightpink;"> </div>                            
+                </div>    
+                    <img :src="imgUrl2" id="regi_profile" v-if="imgUrl2 != ''">
+                    <div id="regi_profile" v-if="imgUrl2 === ''" style="background-color: lightcoral;"></div>                      
             </div>
             <div class="regi_container">
                 <div class="regi_select">

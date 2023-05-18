@@ -32,7 +32,7 @@
                 
                 <footer id="regist_popup_footer">
                     <div class="regist_popup_footer_main">
-                        <img src="/image/logo_Marrimo.png" id="regist_popup_logo">              
+                        <img src="../image/icon/logo_Marrimo.png" id="regist_popup_logo">              
                         <span>도움이 필요하신가요?</span>
                         <a href="#" @click="fnServiceCenter">고객센터</a>
                     </div>
@@ -48,14 +48,21 @@
 	    data: {
 			sessionId: "${sessionId}"
 		,	userId: "${sessionId}"
-	    ,	image: []
+	    ,	item: {}
 		,	imageUrl: '' //이미지 주소 가져올 공간
 		,	uploadName: '첨부파일'
 		,	imageType: ''
 	    }   
 	    , methods: {
-
-	    	fnServiceCenter : function(){
+			fnGetUserInfo: function(){
+	              var self = this;          
+	              const userImgInfo = localStorage.getItem('userImgInfo');    
+	              var item = JSON.parse(userImgInfo);                 
+	              self.item = item;
+				  console.log(item);
+	            
+	         }
+	    ,	fnServiceCenter : function(){
 	    			window.open("/boardMain.do");
 	    	}
 	    
@@ -114,14 +121,15 @@
 					imgType : self.imageType,
 					imgUsetype: 2
 				};
-					console.log(nparmap);
+					console.log(nparmap);					
 				  // AJAX 요청을 보냅니다
+				  if(self.item.userId != null) { 
 				  $.ajax({
-				    url: '/updateRegistryImg.dox', // 서버의 처리 파일 경로를 지정해야 합니다
-				    type: 'POST',
-					dataType: "json",
-				    data: nparmap,
-				    
+						url: '/updateRegistryImg.dox', // 서버의 처리 파일 경로를 지정해야 합니다
+						type: 'POST',
+						dataType: "json",
+						data: nparmap,
+						
 				    success: function(response) {
 				      // 요청이 성공했을 때 실행할 코드를 작성합니다
 						alert("저장되었습니다.");
@@ -135,11 +143,33 @@
 				    }
 				  });
 				  
-			}
+				}
+					else {	//이미지 정보가 없을 때
+					$.ajax({
+						url: '/saveRegistryImg.dox', // 서버의 처리 파일 경로를 지정해야 합니다
+						type: 'POST',
+						dataType: "json",
+						data: nparmap,
+				    
+				    success: function(response) {
+				      // 요청이 성공했을 때 실행할 코드를 작성합니다
+						alert("저장되었습니다.");
+						console.log(response); // 응답 내용을 콘솔에 출력하거나 필요에 따라 처리합니다	
+						window.opener.parent.location.reload();
+						window.close();					
+				    },
+				    error: function(xhr, status, error) {
+				      // 요청이 실패했을 때 실행할 코드를 작성합니다
+				      console.error(error); // 에러 내용을 콘솔에 출력하거나 필요에 따라 처리합니다
+				    }
+				  });
+				}
 	    }   
-		
+	}
 	    , created: function () {
-	    	
+			var self= this;
+			self.fnGetUserInfo();
+	    	console.log(self.item);
 	
 		}
 	});

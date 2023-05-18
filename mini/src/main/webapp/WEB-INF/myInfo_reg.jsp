@@ -12,10 +12,10 @@
 	<title>회원 레지스트리</title>
 	<style>
 		/* 회원정보 상세 보기*/
-		.dimClose {grid-area: header; width: 10px; height: 10px; position: relative; left: 525px; bottom: 8px;}
+		.dimClose {grid-area: header; width: 20px; height: 20px; position: relative; left: 525px; bottom: 8px;}
 		.user-read {display: none; position: relative; z-index:1001;}
 		.user-read.on {display: block;}
-		.dim-layer {position: fixed; _position: absolute;  top: 0;  left: 0; width: 100%;  height: 100%;  z-index: 1001;}
+		.dim-layer {position: fixed; position: absolute;  top: 0;  left: 0; width: 100%;  height: 100%;  z-index: 1001;}
 		.dim-layer .read_dim {position: absolute;  top: 0;  left: 0;  width: 100%; height: 100%; background: #000; opacity: .5; filter: alpha(opacity=50);}
 		.read-inner {max-width: 600px; height: 700px; border-radius: 8px; background: #fff; display: grid; box-sizing: border-box; z-index: 1002; justify-items: center; place-items: center;
 					position: fixed; margin: 0 auto; left: 0; right: 0;top: 50%; transform: translateY(-50%);padding: 25px}
@@ -45,11 +45,17 @@
 	                </div>
 	            </div>           
 	            <div class="regi_container">                
-	                <div class="regi_back_image_box">
-	                    <button id="regi_back_image_button" @click="fnBackImageAlter()">배경사진 수정</button>
-	                    <img :src="imgUrl1" class="regi_back_image" alt="이미지">                                      
-	                </div>    
-	                <a href="#" @click="fnProfileAlter()"><img :src="imgUrl2" id="regi_profile"></a>                       
+	                <div class="regi_back_image_box" v-if="imgUrl1 != ''">
+	                    <button id="regi_back_image_button" @click="fnBackImageAlter(item)">배경사진 수정</button>
+	                    <img :src="imgUrl1" class="regi_back_image">                                      
+	                </div>
+					<div class="regi_back_image_box" v-if="imgUrl1 === ''">
+						<button id="regi_back_image_button" @click="fnBackImageAlter(item)">배경사진 수정</button>
+						<div class="regi_back_image" style="background-color: lightpink;"> </div>                            
+					</div>    
+	                <a href="#" @click="fnProfileAlter(item)"><img :src="imgUrl2" id="regi_profile" v-if="imgUrl2 != ''"></a>                       
+	                <a href="#" @click="fnProfileAlter(item)"><div id="regi_profile" v-if="imgUrl2 === ''" style="background-color: lightcoral; text-align: center; display: flex;
+						align-items: center; justify-content: center; color: #fff;">프로필 변경</div></a>                       
 	            </div>
 	            <div class="regi_container">
 	                <div class="regi_select">
@@ -212,29 +218,35 @@
 	                    }
 	                });
 	            }
-	    ,   fnUrlCopy : function() {
-	            var self = this;
-	            let copyurl = document.getElementById('regi_url_copy');
-	                    console.log(copyurl);
-	                    copyurl.select();
-	                    document.execCommand("copy");
+	    ,   fnUrlCopy : function() {	            
+				var self = this;
+				var copyTextarea = document.createElement('textarea');
+				copyTextarea.value = self.myUrl; //myUrl을 밸류값으로 넣어줌.
+				document.body.appendChild(copyTextarea);
+				copyTextarea.select();
+				document.execCommand('copy');
+				document.body.removeChild(copyTextarea);
 	    }
-	    ,	fnBackImageAlter : function(){
+	    ,	fnBackImageAlter : function(item){
 	            let popUrl = "/registryBackImg.do";
 	            let popOption = "width = 500px, height=500px, top=300px, left=300px, scrollbars=no";
-	    		
+				localStorage.setItem('userImgInfo', JSON.stringify(item));				
 	    		let popup = window.open(popUrl, "배경이미지설정", [popOption]);
 	    		popup.onbeforeunload = function() {
-	                location.reload();
+					localStorage.removeItem('userImgInfo');
+	            	location.reload();
 	            };
+				
+				
 	    	}
 	    	
-	    ,	fnProfileAlter : function(){
+	    ,	fnProfileAlter : function(item){
 	            let popUrl = "/registryProfileImg.do";
 	            let popOption = "width = 500px, height=500px, top=300px, left=300px, scrollbars=no";
-				
+				localStorage.setItem('userImgInfo', JSON.stringify(item));
 				let popup = window.open(popUrl, "프로필이미지설정", [popOption]);
 	            popup.onbeforeunload = function() {
+					localStorage.removeItem('userImgInfo');
 	                location.reload();
 	            };
 	    	}
@@ -331,7 +343,9 @@
 				$('.read-inner').fadeOut().removeClass('on');
 				$("body").css("overflow", "visible");
 				localStorage.removeItem('userItemList');
-				window.location.reload();
+				//window.location.reload();
+				self.fnselectUser();
+	       		self.fnselectImage();
 
 		}
 	    ,   fnGetInformation : function() {

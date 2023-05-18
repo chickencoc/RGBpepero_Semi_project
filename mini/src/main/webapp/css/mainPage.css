@@ -5,6 +5,7 @@
 .banner .textbox .bannertxt_main { font-family: 'Raleway', sans-serif; font-weight: 400; font-size: 50px; color: black; letter-spacing: 0.03em; }
 .banner .textbox .bannertxt_main > span { font-weight: 600; font-size: 50px; color: black;}
 .banner .textbox .bannertxt_sub { font-family: 'Hahmlet', serif;  font-weight: 500; font-size: 25px; color: black; letter-spacing: 0.03em; }
+.banner .textbox .bannerLine {width: 70%; height: 2px; display:block; background-color: black; margin: 0 auto;}
 
 /* banner "let's go" button */
 .banner .textbox .banner_btnbox { margin-top: 70px; cursor: pointer;}

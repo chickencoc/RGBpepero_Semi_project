@@ -3,8 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script src="js/jquery.js"></script>
-<script src="js/vue.js"></script>
+	<jsp:include page="/layout/headerLogo.jsp"></jsp:include>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="/css/Base_rgbPepero.css">
@@ -15,12 +14,7 @@
 <body>
    <div id="app">
         <div class="container">
-           <div class="findPageLogo">
-           		<a href="http://localhost:8080/main.do">
-           			<img src="/image/logo_Marrimo.png">
-           		</a>
-           </div>
-           <fieldset class="findIdBox">
+           <fieldset class="findIdBox boxshadowline">
                <legend class="findIdMent">아이디 찾기</legend>
                <div class="findIdListQ">
                    <div class="findIdList">이름</div>

@@ -1,14 +1,14 @@
-.container { margin: auto; width: 700px; min-height: 100vh; text-align: center; } 
-.loginBox { width:400px; box-shadow: 0px 0px 5px 0px #555; border-radius:10px; padding:10px; margin:auto; margin-top: 70px; } 
+.container { margin: auto; width: 700px; min-height: 100vh; min-height: calc(100vh - 101px - 130px - 150px); text-align: center; padding-top: 70px; } 
+.loginBox { width:400px; height: 294px; padding:10px; margin:auto;} 
 .loginTitleBox { text-align: center; } 
-.loginTitle { font-size: 1.3em; margin: 10px auto; font-weight: 600; background-color: white; } 
+.loginTitle { font-size: 1.3em; margin: 10px auto; font-weight: 600; background-color: white; transform: translatey(-30px); } 
 .loginInfo { border:1px solid #ccc; padding-left:15px; position:relative; } 
 .loginImg { width:12px; height:15px; position:absolute; left:6%; top:35%; } 
 .loginCategoryList { text-align:center; font-size:0.8em; margin-top: 20px; color:#888; } 
 .loginBtnBox { text-align: center; } 
 .loginBtnBox .loginBtn { width:90%; height:50px; font-size:1.0em; margin-bottom:10px; font-weight:bold; border-radius: 10px; border:1px solid #ccc; } 
 .loginInfo .loginText { width:90%; height:50px; font-size:0.9em; border: 0px; padding:5%; } 
-.loginTextBox { margin:20px; margin-bottom: 50px; width:90%; } 
+.loginTextBox { margin:5px auto; margin-bottom: 50px; width:90%; } 
 .loginTextId { border-top-right-radius: 10px; border-top-left-radius: 10px; border-bottom:0px; } 
 .loginTextPwd { border-bottom-left-radius: 10px; border-bottom-right-radius: 10px; } 
 .loginCategoryList > a:not(:last-child):after { content: ''; display: inline-block; width: 2px; height: 11px; background: #999; position: relative; top: 1px; margin-left: 13px; } 

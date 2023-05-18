@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<jsp:include page="/layout/header.jsp"></jsp:include>
+	<jsp:include page="/layout/headerLogo.jsp"></jsp:include>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="/css/Base_rgbPepero.css">
@@ -14,7 +14,7 @@
 <body>
     <div id="app">
             <div class="container">
-                <fieldset class="loginBox">
+                <fieldset class="loginBox boxshadowline">
                     <legend class="loginTitle">Login</legend>
                     <div class="loginTextBox">
                         <div class="loginInfo loginTextId">

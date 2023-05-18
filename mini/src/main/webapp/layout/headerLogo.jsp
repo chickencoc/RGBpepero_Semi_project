@@ -17,7 +17,7 @@
 	    <div id="header">
 	    	<div class="loginbox"></div>
 	        <div class="logobox">
-	            <div id="logo"><img  @click="toMain()" src="/image/logo_Marrimo.png"></div>
+	            <div id="logo"><img  @click="toMain()" src="/image/icon/logo_Marrimo.png"></div>
 	        </div>
 	    </div>
     </div>

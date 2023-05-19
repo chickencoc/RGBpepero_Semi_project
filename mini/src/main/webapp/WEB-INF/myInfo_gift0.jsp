@@ -81,7 +81,7 @@
                                 <div>제품명 : {{item.pName}}</div>
                                 <div>선물해준 사람 : {{item.gName}}</div>
                                 <div>선물 날짜 : {{item.oCdatetime}}</div>
-                                <label><input @click="fnDivSelect($event)" class="none" name="gifts" type="checkbox" v-model="checkedBox" value="1">상품선물</label>
+                                <label><input @click="fnDivSelect($event)" class="none" name="gifts" type="checkbox" v-model="checkedBox" value="1" v-bind:value="item">상품선물</label>
                             </div>
                         </div>
                     </div>
@@ -99,8 +99,8 @@
 							</paginate>
 						</template>     
                         <div class="returnGiftBtnBox">
-                            <button class="btn1">답례품 보내기</button>
-                            <button class="btn1">카드 작성하기</button>
+                            <button class="btn1" @click="fnSendReturn">답례품 보내기</button>
+                            <button class="btn1" @click="fnSendCard">카드 작성하기</button>
                         </div>    
                     </div>
                 </div> <!-- 그리드 스타일 end -->
@@ -283,7 +283,7 @@ var app = new Vue({
         	if(self.checkedBox==''){
         		alert("보낼 사람을 선택해주세요.")
         	} else{
-            // location.href
+        		self.pageChange("/myInfoGift2List.do", {checkedBox : self.checkedBox});
             }
         }
         , pageChange : function(url, param) {

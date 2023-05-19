@@ -173,7 +173,7 @@ Vue.component('paginate', VuejsPaginate)
 var app = new Vue({ 
     el: '#app',
     data: {
-		showFlg : true,
+		showFlg : true,   
 		name:'',
 		checkedBox : [],
         giftItems : [], //v-for="(item, index) in giftItems"

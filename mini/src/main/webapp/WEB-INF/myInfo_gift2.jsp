@@ -37,11 +37,11 @@
                         <th>보낸 날짜</th>
                         <th>금액</th>
                     </tr>
-                    <tr>
+                    <tr v-for="(item,index) in returnList">
                         <td rowspan="2" class="returnProdImgBox">
-                            <img src="/image/prod1.jpg" class="returnProdImg">
+                            <img :src="item.imgSrc" class="returnProdImg">
                         </td>
-                        <td class="returnProdNameBox">p_name</td>
+                        <td class="returnProdNameBox">{{pName}}</td>
                         <td class="returnGuestNameBox" rowspan="2">
                             <div class="returnGuestNameBox2">
                                 
@@ -51,16 +51,7 @@
                                 </div>
                                 <p>g_name</p>
                                 <div v-if="!guestFlg">
-                                    <p>g_name</p>
-                                    <p>g_name</p>
-                                    <p>g_name</p>
-                                    <p>g_name</p>
-                                    <p>g_name</p>
-                                    <p>g_name</p>
-                                    <p>g_name</p>
-                                    <p>g_name</p>
-                                    <p>g_name</p>
-                                    <p>g_name</p>
+                                    <p>{{gName}}</p>
                                 </div>
                             </div>
                         </td>
@@ -98,7 +89,10 @@ var app = new Vue({
         guestFlg : true,
         selectPage: 1,
         pageCount: 1,
-        cnt : 0
+        cnt : 0,
+        returnList : [],
+		returnGuestList : []
+		
     }   
     , methods: {
         fnShowGuest : function(){
@@ -107,7 +101,25 @@ var app = new Vue({
         }
         ,fnSearch : function(){
 
-        }
+        },
+        fnGetProductList : function(){
+            var self = this;
+            var startNum = ((self.selectPage-1) * 6);
+    		var lastNum = (self.selectPage * 6);
+            var nparmap = {pKind : self.pKind ,startNum : startNum, lastNum : lastNum, keywordType : self.selectItem, keyword : self.keyword};
+            $.ajax({
+                url:"/productList.dox",
+                dataType:"json",	
+                type : "POST", 
+                data : nparmap,
+                success : function(data) { 
+                	self.list = data.product;
+                    self.cnt = data.cnt;
+                    self.pageCount = Math.ceil(self.cnt / 6);
+                    
+                	}
+           		}); 
+        	}
     }   
     , created: function () {
         var self = this;

@@ -144,22 +144,8 @@
 						<div class="main_Img">
 							<img src="../image/plus.png" id="main_Plus">
 						</div>
-						<div class="thumb_Nails">
-							<div class="thumb_Nail" id="thumb1">
-								<img src="../image/plus.png" id="thumb_Plus">
-							</div>
-							<div class="thumb_Nail" id="thumb2">
-								<img src="../image/plus.png" id="thumb_Plus">
-							</div>
-							<div class="thumb_Nail" id="thumb3">
-								<img src="../image/plus.png" id="thumb_Plus">
-							</div>
-						</div>
 					</div>
 					<div class="inputs">
-						<div>
-							상품번호<input type="text" class="input_Elememt" id="product_No">
-						</div>
 						<div>
 							상품명<input type="text" class="input_Elememt" id="product_Name">
 						</div>
@@ -188,6 +174,11 @@
 	var app = new Vue({
 		el : '#app',
 		data : {
+			productNo : "${map.productNo}"
+			, list :[]
+			, pName : ""
+			, 
+			
 
 		},
 		methods : {

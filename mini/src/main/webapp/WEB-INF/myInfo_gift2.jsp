@@ -89,11 +89,16 @@ var app = new Vue({
         guestFlg : true,
         selectPage: 1,
         pageCount: 1,
+<<<<<<< HEAD
         cnt : 0,
         returnList : [],
 		returnGuestList : []
 		
     }   
+=======
+        cnt : 0
+    }
+>>>>>>> branch 'main' of https://github.com/chickencoc/RGBpepero_Semi_project.git
     , methods: {
         fnShowGuest : function(){
             var self = this;

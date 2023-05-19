@@ -15,6 +15,7 @@ import com.example.mini.dao.MyInfoService;
 import com.google.gson.Gson;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -42,5 +43,42 @@ public class MyInfoController {
 		resultMap = myInfoService.searchMyGiftList(map);
 		return new Gson().toJson(resultMap);
 	}
-
+	
+	@RequestMapping("/myInfoGift2List.do") 
+    public String giftList(HttpServletRequest request, HttpServletResponse response, Model model,
+    		@RequestParam HashMap<String, Object> map) throws Exception{
+		request.setAttribute("map", map);
+		
+        return "/myInfo_gift2_list";
+    }
+	
+	 @RequestMapping(value = "/myInfoGift2List.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+		@ResponseBody
+		public String searchProdList(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+			HashMap<String, Object> resultMap = new HashMap<String, Object>();
+			int startNum = Integer.parseInt(String.valueOf(map.get("startNum")));
+			int lastNum = Integer.parseInt(String.valueOf(map.get("lastNum")));
+			map.put("startNum", startNum);
+			map.put("lastNum", lastNum);
+			resultMap = myInfoService.searchReturnGiftList(map);
+			return new Gson().toJson(resultMap);
+		}
+	 
+	 @RequestMapping("/myInfoGift2Send.do") 
+	    public String giftSend(HttpServletRequest request, HttpServletResponse response, Model model,
+	    		@RequestParam HashMap<String, Object> map) throws Exception{
+			request.setAttribute("map", map);
+			
+	        return "/myInfo_gift2_send";
+	    }
+	 
+	 @RequestMapping(value = "/myInfoGift2Send.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+		@ResponseBody
+		public String searchGiftInfo(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+			HashMap<String, Object> resultMap = new HashMap<String, Object>();
+			
+			resultMap = myInfoService.searchReturnGiftInfo(map);
+			resultMap.put("message", "성공");
+			return new Gson().toJson(resultMap);
+		}
 }

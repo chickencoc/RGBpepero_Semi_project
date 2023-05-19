@@ -127,6 +127,7 @@ var app = new Vue({
     data: {
     	userId : "${sessionId}",
     	info : {},
+    	product : []
     	/* deliveryNo : "${sessionDeliveryNo}",
     	orderNo : "${sessionOrderNo}" */
     }
@@ -134,7 +135,9 @@ var app = new Vue({
     , methods: {
     	fnGetInfo : function() {
 			var self = this;
-			var nparmap = {userId : self.userId};
+			var nparmap = {userId : self.userId,
+					deliveryNo : self.product.deliveryNo,
+					orderNo : self.product.orderNo};
 			$.ajax({
 				url : "/myInfoGift9.dox",
 				dataType : "json",
@@ -157,6 +160,7 @@ var app = new Vue({
     }   
     , created: function () {
     	var self = this;
+    	self.product = JSON.parse('${map.product}');
     	self.fnGetInfo();
 	}
 });

@@ -16,7 +16,10 @@ public class OrderServiceImpl implements OrderService{
 	@Override
 	public Order searchProdOrder(HashMap<String, Object> map) {
 		// TODO Auto-generated method stub
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
 		Order prodOrder = orderMapper.selectProdOrder(map);
+		resultMap.put("result", "sucess");
+		resultMap.put("list", prodOrder);
 		return prodOrder;
 	}
 	@Override
@@ -51,6 +54,12 @@ public class OrderServiceImpl implements OrderService{
 		resultMap.put("card", card);
 		return resultMap;
 
+	}
+	@Override
+	public void addGiftOrder(HashMap<String, Object> map) {
+		// TODO Auto-generated method stub
+		orderMapper.insertReturnGift(map);
+		
 	}
 
 }

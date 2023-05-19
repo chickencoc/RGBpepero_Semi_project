@@ -15,6 +15,8 @@ public interface OrderService {
 	
 	HashMap<String, Object> searchCardBackInfo(HashMap<String, Object> map);
 	
+	void addGiftOrder(HashMap<String, Object> map);
+	
 //	int cntUser(HashMap<String, Object> map); //중복확인
 //	
 	void addCardContent(HashMap<String, Object> map); //카드 컨텐츠 추가

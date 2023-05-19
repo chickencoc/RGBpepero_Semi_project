@@ -83,11 +83,11 @@ p{
 }
 #return_gift_searchBtn{
     width: 60px;
-    height: 30px;
+    height: 35px;
 }
 #return_gift_resetBtn{
     width: 60px;
-    height: 30px;
+    height: 35px;
 }
 .return_gift_listbox{
     display: grid;

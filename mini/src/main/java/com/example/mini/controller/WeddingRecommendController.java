@@ -164,7 +164,7 @@ public class WeddingRecommendController {
 		return new Gson().toJson(resultMap);
 	}
     
-    @RequestMapping("/weddingModify.do") 
+    @RequestMapping("/prod5Sub2.do") 
     public String weddingModify(HttpServletRequest request, Model model, @RequestParam HashMap<String, Object> map) throws Exception{
 		request.setAttribute("map", map);
         return "/prod5_sub2";

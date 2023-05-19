@@ -13,5 +13,11 @@ public interface MyInfoMapper {
 	List<Order> selectMyInfoGiftList(HashMap<String, Object> map);
 	
 	int cntMyInfoGift(HashMap<String, Object> map);
+	
+	List<Order> selectReturnGiftProdList(HashMap<String, Object> map);
+	
+	int cntReturnGiftProd(HashMap<String, Object> map);
+	
+	Order selectReturnGiftInfo(HashMap<String, Object> map);
 
 }

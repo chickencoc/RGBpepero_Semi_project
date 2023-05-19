@@ -19,7 +19,8 @@
 		FROM	mini_db2.T1_PRODUCT P
 		LEFT OUTER JOIN mini_db2.T1_CODE C ON C.CODE = P.P_KIND
 		LEFT OUTER JOIN mini_db2.T1_PDIMAGE PI ON P.PRODUCTNO = PI.PRODUCTNO
-		WHERE	P_KIND = #{pKind} <!-- AND  MAINYN = 'Y' -->
+		WHERE	P_KIND = #{pKind} 
+		AND  MAINYN = 'Y' 
 		
 		<if test="keyword != '' and keyword != null">
 				AND P_NAME LIKE CONCAT('%',#{keyword},'%')
@@ -38,8 +39,10 @@
 	</select>
 	<select id="selectProductCnt" parameterType="hashmap" resultType="int">
 		SELECT COUNT(*) AS CNT
-		FROM mini_db2.T1_PRODUCT 
+		FROM mini_db2.T1_PRODUCT P
+		LEFT OUTER JOIN mini_db2.T1_PDIMAGE PI ON P.PRODUCTNO = PI.PRODUCTNO 
 		WHERE	P_KIND = #{pKind}
+				AND  MAINYN = 'Y' 
 		<if test="keyword != '' and keyword != null">
 				AND P_NAME LIKE CONCAT('%',#{keyword},'%')
 		</if>

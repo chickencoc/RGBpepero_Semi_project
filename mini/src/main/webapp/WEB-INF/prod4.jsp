@@ -26,7 +26,7 @@
             </ul>
             </div>
             <div class="prod0Banner">
-                <img src="/image/prod0Banner.jpg" id="bannerImg">
+                <img src="/image/categoryK/kitchenBanner.jpg" id="bannerImg">
                 <div class="bannerText">
                     <p>맛있는 냄새와 즐거운 음식</p>
                     <p>주방 제품입니다.</p>
@@ -100,7 +100,7 @@ var app = new Vue({
     		
     		self.keyword = "";
     		if(code == "W"){
-    			location.href="/weddingrecommend.do";
+    			location.href="/prod5Sub0.do";
     		}else if(code == "A"){
     			location.href="/triprecommend.do";
     		}else if(code == "B"){

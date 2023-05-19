@@ -99,7 +99,7 @@ var app = new Vue({
         selectPage: 1,
         pageCount: 1,
         cnt : 0
-    }   
+    }
     , methods: {
         fnShowGuest : function(){
             var self = this;

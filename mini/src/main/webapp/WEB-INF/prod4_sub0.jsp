@@ -322,7 +322,7 @@
 	            
 	            	if(self.item.fundYn === 'Y') {
 	                self.inputGroup = true;
-	                
+	                //abs
 	            	} 
 		        }
 		    // dim popup script END

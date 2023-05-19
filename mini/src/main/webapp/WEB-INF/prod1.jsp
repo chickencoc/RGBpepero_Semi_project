@@ -100,7 +100,7 @@ var app = new Vue({
     		
     		self.keyword = "";
     		if(code == "W"){
-    			location.href="/weddingrecommend.do";
+    			location.href="/prod5Sub0.do";
     		}else if(code == "A"){
     			location.href="/triprecommend.do";
     		}else if(code == "B"){

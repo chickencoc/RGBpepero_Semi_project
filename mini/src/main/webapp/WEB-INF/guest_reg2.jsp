@@ -31,7 +31,7 @@
                         <tr>
                             <td class="info_box_goods_table_img"><img class="info_box_goods_img"></td>
                             <td class="info_box_goods_table_text">{{list.pdName}}</td>
-                            <td class="info_box_goods_table_cnt_price">{{totalCnt}} 개</td>
+                            <td class="info_box_goods_table_cnt_price">{{list.rCnt}} 개</td>
                             <td class="info_box_goods_table_cnt_price">{{list.pdPrice}} 원</td>
                         </tr>
                     </table>
@@ -137,10 +137,10 @@
 			uname: '',
 			uphone: '',
 			uaddress: '',
-			productNo: 1,
-			list: {pdName : 'TEST1', pdPrice : 100000},
+			productNo: '${item.productNo}',
+			list: '${item}',
 			totalPrice: 0,
-			totalCnt: 2,
+			totalCnt: '${item.rCnt}',
 			shipMemo: '',
 			sendContent: '',
 			purchase: 'C',
@@ -249,6 +249,7 @@
 			self.fnPdList();
 			self.fnUserInfo();
 			self.fnPhoneThree();
+			console.log('${item}');
 		}
 	});
 </script>

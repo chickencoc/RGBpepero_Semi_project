@@ -25,10 +25,13 @@ public class GuestRegController {
 	
 	@Autowired
 	HttpSession sessGuest;
+	
+	@Autowired
+	HttpServletRequest requestItem;
 
 	@RequestMapping("/guest.do")
-    public String guestInfo(Model model) throws Exception{
-
+    public String guestInfo(Model model, @RequestParam HashMap<String, Object> map) throws Exception{
+		requestItem.setAttribute("item", map);
         return "/guest_reg1";
     }
 	
@@ -50,6 +53,7 @@ public class GuestRegController {
 		request.setAttribute("gname", sessGuest.getAttribute("name"));
 		request.setAttribute("phone", sessGuest.getAttribute("phone"));
 		request.setAttribute("address", "(" + sessGuest.getAttribute("postcode") + ") " + sessGuest.getAttribute("address") + " " + sessGuest.getAttribute("addrDetail"));
+//		/requestItem.setAttribute("item", map);
         return "/guest_reg2";
     }
 	

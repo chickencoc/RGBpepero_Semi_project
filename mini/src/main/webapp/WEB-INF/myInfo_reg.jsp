@@ -263,14 +263,15 @@
 	    	}
 	    ,	fnOptionBtn: function(item){
 	    		var self = this;
-	            localStorage.setItem('userItemList', JSON.stringify(item)); 			    		
+	            localStorage.setItem('userItemList', JSON.stringify(item));
+
+		        self.fnselectOption();
+				self.fnGetInformation();
 	    		
 	           	$('.user-read').fadeIn().addClass('on');
 			    $('.read-inner').fadeIn().addClass('on');
 			    $("body").css("overflow", "hidden"); //body 스크롤바 없애기
 
-		        self.fnselectOption();
-				self.fnGetInformation();
 	    	}
 	    ,	fnDeleteItem: function(thing){
 	    		if(confirm("삭제하시겠습니까? \n\n* 펀딩 상품인 경우 펀딩이 종료됩니다.")) {
@@ -304,12 +305,11 @@
 	    // dim popup script START
 		//method
 		     fnselectOption: function(){
-	              var self = this;          
+	              var self = this;
 	              const userItemList = localStorage.getItem('userItemList');    
 	              var item = JSON.parse(userItemList);                 
 	              self.item = item;
 	              console.log(item);
-	              console.log(self.inputGroup);
 	            
 	         }
 	    ,   updateWanted : function(event){
@@ -358,11 +358,6 @@
 	                                console.error(textStatus);
 	                            }
 	                        });
-					// $(document).on("click", ".dimClose", function() {
-					// $('.user-read').fadeOut().removeClass('on');
-					// $('.read-inner').fadeOut().removeClass('on');
-					// $("body").css("overflow", "visible"); //body 스크롤바 없애기
-					// localStorage.removeItem('userItemList');
 	                
 	        }
 		,	dimClose: function(){
@@ -372,7 +367,7 @@
 				$('.read-inner').fadeOut().removeClass('on');
 				$("body").css("overflow", "visible");
 				localStorage.removeItem('userItemList');
-				//window.location.reload();
+				
 				self.fnselectUser();
 	       		self.fnselectImage();
 
@@ -380,14 +375,12 @@
 	    ,   fnGetInformation : function() {
 	            var self = this;
 	            
-				if(self.item.rOption === 'A'){
-                self.inputWanted = true;
-                
+				if(self.item.rOption == 'A'){
+                	self.inputWanted = true;
             	}
             
-            	if(self.item.fundYn === 'Y') {
-                self.inputGroup = true;
-                
+            	if(self.item.fundYn == 'Y') {
+                	self.inputGroup = true;
             	} 
 	        }
 	    // dim popup script END

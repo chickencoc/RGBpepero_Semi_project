@@ -104,7 +104,10 @@
 		                <ul class="reg_options_popup_checkbox">
 		                    <li id="reg_options_popup_checkbox_title">상품 표시 옵션</li>
 		                    <li id="reg_options_popup_checkbox"><input type="checkbox" name="choice" v-bind:checked="inputWanted" v-on:change="updateWanted"> "정말 필요한 물건" 표시</li>                 
-		                    <li id="reg_options_popup_checkbox"><input type="checkbox" name="choice" v-bind:checked="inputGroup" v-on:change="updateGroup"> "그룹선물(펀딩)"로 변경하기</li>
+		                    <li id="reg_options_popup_checkbox">
+		                    	<input type="checkbox" name="choice" v-bind:checked="inputGroup" v-on:change="updateGroup"> "그룹선물(펀딩)"로 변경하기 
+		                    	<span style="font-size: 12px; color: orangered;">[설정시 일반으로 변경 불가, 삭제만 가능]</span>
+		                    </li>
 		                </ul>    
 		                <div class="reg_options_popup_memo">
 		                    <div><img src="../image/icon/fi-ss-heart.png" style="position: relative; top: 8px; margin-right: 5px;">선물할 친구들이 참고할 정보를 기재해주세요.</div>
@@ -137,9 +140,30 @@
 		    , inputGroup: false
 		    , inputText: ''
 		    , wanted: ''
-		    , group: ''
+		    , group: 'N'
     
-        }   
+        }
+    	, computed: {
+			fnFundingNo : function() { //펀딩번호 생성 ( F + 2자리년도 + 월 + 일 + 시간 + 분 + 초 + 랜덤 3자리수 )
+		        let date = new Date();
+		        let num1 = "";
+		        let arr = [date.getFullYear().toString().substring(2,4)
+		                    , (date.getMonth() + 1).toString()
+		                    , date.getDate().toString()
+		                    , date.getHours().toString()
+		                    , date.getMinutes().toString()
+		                    , date.getSeconds().toString()
+		                ];
+		        for(var i in arr) { //년도부터 초까지 한자리 수이면 앞에 0 붙여줌
+		            if(arr[i].length < 2) arr[i] = 0 + arr[i];
+		            num1 += arr[i];
+		        }
+		        let num2 = Math.random();
+		        num2 = num2.toString().substring(2,5); //랜덤 3자리 수 생성
+
+		        return 'F' + num1 + num2;
+			}
+		}
         , methods: {
         	fnChange : function(code, event){
         		var self = this;
@@ -154,11 +178,10 @@
             		self.pKind = code;
             		self.pageChange("./product.do", {pKind : self.pKind});
             		
-                    
-                    
         		}
         		console.log(self.selectPage);
-        	},fnGetCategoryList : function(){
+        	},
+        	fnGetCategoryList : function(){
 	            var self = this;
 	            var nparmap = {};
 	            $.ajax({
@@ -182,7 +205,6 @@
                     data : nparmap,
                     success : function(data) { 
                         self.list = data.list;
-                        console.log(self.list);
                         self.pKind = self.list.pKind;
                     }
                 }); 
@@ -190,7 +212,8 @@
             fnMoveModifyProduct : function(){
         		var self = this;
         		location.href="/productmodifytemporary.do";
-        	}, pageChange : function(url, param) {
+        	},
+        	pageChange : function(url, param) {
 				var target = "_self";
 				if(param == undefined){
 				//	this.linkCall(url);
@@ -257,7 +280,9 @@
 						rOption: self.wanted,
 						fundYn: self.group,
 						rContent: self.inputText,
-						rCnt: self.item.rCnt
+						rCnt: self.item.rCnt,
+						fsetprice : self.item.rCnt * self.item.pPrice,
+						fundingNo : self.fnFundingNo
 		            };
 		    		console.log(nparmap);
 	                  $.ajax({

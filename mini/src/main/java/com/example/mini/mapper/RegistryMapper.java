@@ -36,4 +36,11 @@ public interface RegistryMapper {
 	//레지스트리 추가 - 상품 상세 페이지에서
 	void registryAdd(HashMap<String, Object> map);
 	
+	//레지스트리 삭제
+	void registryDel(HashMap<String, Object> map);
+	void registryDelFund(HashMap<String, Object> map);
+	
+	//레지스트리 펀딩으로 추가 - 상품 상세 페이지에서
+	void registryAddFunding(HashMap<String, Object> map);
+	
 }

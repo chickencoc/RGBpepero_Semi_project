@@ -45,7 +45,7 @@ public class RegistryController {
 		resultMap.put("message", "성공");
 		return new Gson().toJson(resultMap);
 	}
-	@RequestMapping("/guestRegistry.do") 
+	@RequestMapping("/guestRegistry.do")
     public String guestRegistry(Model model) throws Exception{
 
         return "guest_reg0";
@@ -102,6 +102,16 @@ public class RegistryController {
 		HashMap<String, Object> resultMap = new HashMap<String, Object>();
 		registryService.registryAdd(map);
 		resultMap.put("message", "성공");
+		return new Gson().toJson(resultMap);
+	}
+	
+	//레지스트리 삭제
+	@RequestMapping(value = "/myRegistryDelete.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String registryDel(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		registryService.registryDel(map);
+		resultMap.put("result", "성공");
 		return new Gson().toJson(resultMap);
 	}
 	

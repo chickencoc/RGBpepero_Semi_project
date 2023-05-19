@@ -26,11 +26,11 @@
 							<td class="info_box_goods_table_img" rowspan="6"><img
 								class="info_box_goods_img"></td>
 							<td class="info_box_goods_table_text fundLists">상품 이름</td>
-							<td class="info_box_goods_table_cnt_price fundListA" colspan="2">{{pdName}}</td>
+							<td class="info_box_goods_table_cnt_price fundListA" colspan="2">{{info.pName}}</td>
 						</tr>
 						<tr>
 							<td class="fundLists">상품 가격</td>
-							<td class="fundListA" colspan="2">{{pdPrice}}원</td>
+							<td class="fundListA" colspan="2">{{info.pPrice}}원</td>
 						</tr>
 						<tr>
 							<td class="fundLists">남은 금액</td>
@@ -65,8 +65,8 @@
 								</div>
 							</td>
 							<td class="fundGuagePerBox">
-								<p class="fundGuagePer" v-if="percent >= addPercent">{{percent}}%</p>
-								<p class="fundGuagePer" v-else>{{percent}}% / {{addPercent}}%</p>
+								<p class="fundGuagePer" v-if="percent >= addPercent">{{info.progVal}}%</p>
+								<p class="fundGuagePer" v-else>{{info.progVal}}% / {{addPercent}}%</p>
 							</td>
 						</tr>
 					</table>
@@ -143,12 +143,12 @@
 			gname: "${gname}",
 			gphone: "${phone}",
 			gaddress: "${address}",
-			pdName: '',
-			productNo: '',
+			info: '${item}',
+			productNo: '${item.productNo}',
 			pdPrice: 100000,
 			givePrice: '',
 			remain: 90000,
-			percent: 10,
+			percent: '${item.progVal}',
 			addPercent: 10,
 			sendContent: '',
 			REGISTRYNO: '',

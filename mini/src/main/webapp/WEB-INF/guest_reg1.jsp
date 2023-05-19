@@ -53,7 +53,7 @@
 					</div>
 				</div>
 				<div class="findIdCheck">
-					<button class="guestRegistryCheckBtn findIdBtn btn1" @click="fnConfirm">다음 단계</button>
+					<button class="guestRegistryCheckBtn findIdBtn btn1" @click="fnConfirm()">다음 단계</button>
 				</div>
 			</fieldset>
 		</div>
@@ -72,7 +72,7 @@ var app = new Vue({
 	    phone1 :'',
 	    phone2 :'',
 	    phone3 :'',
-	    mode : 'n'
+	    mode : '${item.fundYn}'
     }
     , computed: { //?
         isEmailAddrEditable() {
@@ -172,9 +172,9 @@ var app = new Vue({
 								type : "POST",
 								data : nparmap,
 								success : function(data) {
-									if(self.mode == 'n')
+									if(self.mode != 'F')
 										location.href="guestNormal.do";
-									else if(self.mode == 'f')
+									else 
 										location.href="guestFunding.do";
 								}
 							});
@@ -198,7 +198,7 @@ var app = new Vue({
 	} //method
 	, created: function() {
 		var self = this;
-	
+		console.log('${item}');
 	}
 });
 </script>

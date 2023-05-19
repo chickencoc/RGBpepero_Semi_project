@@ -8,6 +8,8 @@
 	<jsp:include page="/layout/header.jsp"></jsp:include>
 	<link rel="stylesheet" href="/css/Base_rgbPepero.css">
     <link rel="stylesheet" href="/css/myInfo_gift2.css">
+    <script src="https://unpkg.com/vuejs-paginate@latest"></script>
+	<script src="https://unpkg.com/vuejs-paginate@0.9.0"></script>
 	<title>보낸 답례품</title>
 </head>
 
@@ -37,11 +39,11 @@
                         <th>보낸 날짜</th>
                         <th>금액</th>
                     </tr>
-                    <tr>
-                        <td rowspan="2" class="returnProdImgBox">
-                            <img src="/image/prod1.jpg" class="returnProdImg">
+                    <tr v-for="(item, index) in returnList">
+                        <td rowspan="2" class="returnProdImgBox" >
+                            <img :src="item.imgSrc" class="returnProdImg">
                         </td>
-                        <td class="returnProdNameBox">p_name</td>
+                        <td class="returnProdNameBox">{{item.p_name}}</td>
                         <td class="returnGuestNameBox" rowspan="2">
                             <div class="returnGuestNameBox2">
                                 
@@ -49,24 +51,14 @@
                                     <a href="" v-if="guestFlg">더 보기▼</a>
                                     <a href="" v-if="!guestFlg">접기▲</a>
                                 </div>
-                                <p>g_name</p>
-                                <div v-if="!guestFlg">
-                                    <p>g_name</p>
-                                    <p>g_name</p>
-                                    <p>g_name</p>
-                                    <p>g_name</p>
-                                    <p>g_name</p>
-                                    <p>g_name</p>
-                                    <p>g_name</p>
-                                    <p>g_name</p>
-                                    <p>g_name</p>
-                                    <p>g_name</p>
+                                <div v-if="!guestFlg" v-for="(item, index) in returnGuestList">
+                                    <p>{{item.g_name}}</p>
                                 </div>
                             </div>
                         </td>
-                        <td  rowspan="2" class="returnProdCntBox">1개</td>
-                        <td  rowspan="2" class="returnProdDateBox">cdatetime</td>
-                        <td  rowspan="2" class="returnProdPriceBox">price</td>
+                        <td  rowspan="2" class="returnProdCntBox">{{item.cnt}}</td>
+                        <td  rowspan="2" class="returnProdDateBox">{{item.cdatetime}}</td>
+                        <td  rowspan="2" class="returnProdPriceBox">{{item.price}}</td>
                     </tr>
                     
                 </table>
@@ -98,7 +90,12 @@ var app = new Vue({
         guestFlg : true,
         selectPage: 1,
         pageCount: 1,
-        cnt : 0
+        cnt : 0,
+        returnList : [],
+        returnGuestList : [],
+        userId : "${sessionId}",
+        price : [],
+        retCnt : []
     }
     , methods: {
         fnShowGuest : function(){
@@ -106,8 +103,53 @@ var app = new Vue({
             self.guestFlg=!self.guestFlg
         }
         ,fnSearch : function(){
-
-        }
+        	var self = this;
+			self.selectPage = pageNum;
+			var startNum = ((pageNum-1) * 6);
+			var lastNum = (pageNum * 6)-1;
+			var nparmap = {startNum : startNum, lastNum : lastNum ,userId : self.userId};
+			$.ajax({
+				url : "/productList.dox",
+				dataType : "json",
+				type : "POST",
+				data : nparmap,
+				success : function(data) {
+					self.returnList = data.returnList;
+					self.cnt = data.cnt;
+					self.pageCount = Math.ceil(self.cnt / 6);
+					}
+				});
+			},
+        fnGetReturnList : function(){
+            var self = this;
+            var startNum = ((self.selectPage-1) * 6);
+    		var lastNum = (self.selectPage * 6);
+            var nparmap = {startNum : startNum, lastNum : lastNum ,userId : self.userId};
+            $.ajax({
+                url:"/returnList.dox",
+                dataType:"json",	
+                type : "POST", 
+                data : nparmap,
+                success : function(data) { 
+                	self.returnList = data.returnList;
+                    self.cnt = data.cnt;
+                    self.pageCount = Math.ceil(self.cnt / 6);
+                	}
+           		}); 
+        	},
+            fnGetReturnGuestList : function(productNo){
+                var self = this;
+                var nparmap = {userId : self.userId, productNo : productNo};
+                $.ajax({
+                    url:"/returnGuestList.dox",
+                    dataType:"json",	
+                    type : "POST", 
+                    data : nparmap,
+                    success : function(data) { 
+                    	self.returnGuestList = data.returnGuestList;
+                    	}   
+               		}); 
+            	}
     }   
     , created: function () {
         var self = this;

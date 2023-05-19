@@ -22,6 +22,7 @@
 		    P.PRODUCTNO,
 		 	P.P_NAME,
 		 	P.P_PRICE,
+		 	(P.P_PRICE * R_CNT) AS TOTALPRICE,
 			PM.P_STOCK,
 			PI.IMGSRC,
 		 	TI.IMGSRC,
@@ -36,7 +37,8 @@
 		LEFT JOIN mini_db2.T1_TRIPIMAGE AS TI ON TI.TRIPNO = R.TRIPNO
 		LEFT JOIN (SELECT 	REGISTRYNO, FSETPRICE, SUM(FPUTPRICE) AS FPUTPRICE FROM mini_db2.T1_FUNDING GROUP BY FSETPRICE) F ON F.REGISTRYNO = R.REGISTRYNO
 		LEFT JOIN mini_db2.T1_ORDER AS O ON O.PRODUCTNO = R.PRODUCTNO AND O.USERID = R.USERID
-		WHERE R.USERID = #{userId};
+		WHERE R.USERID = #{userId} AND R.FUNDYN != 'D'
+		ORDER BY ${sortOp}
 	</select>
 	<update id="updateRegistryOption" parameterType="hashmap">
 		UPDATE mini_db2.T1_REGISTRY
@@ -48,7 +50,7 @@
 			R_CNT = #{rCnt},
 			R_UDATETIME = #{rUdatetime}			
 		WHERE
-			REGISTRYNO = #{registryNo};
+			REGISTRYNO = #{registryNo}
 	</update>
 	<select id="selectUserImage" parameterType="hashmap" resultType="com.example.mini.model.UserImage">
 		SELECT
@@ -58,35 +60,58 @@
 			IMGNAME,
 			ORGNAME,
 			IMGTYPE,
-			IMGUSETYPE			
+			IMGUSETYPE
 		FROM
 			mini_db2.T1_USERIMAGE
 		WHERE 
-			USERID = #{userId};
+			USERID = #{userId}
 	</select>
 	<insert id="saveUserImg" parameterType="hashmap">
 		INSERT INTO mini_db2.T1_USERIMAGE
 		VALUES
 			(#{NULL}, #{userId}, #{imgSrc}, #{imgName}, #{orgName}, #{imgType}, #{imgUsetype})
-			;
 	</insert>
 
 	<update id="updateUserImg" parameterType="hashmap">
 		UPDATE mini_db2.T1_USERIMAGE
-		SET			
+		SET
 			IMGSRC = #{imgSrc},
 			IMGNAME = #{imgName},
 			ORGNAME = #{orgName},
 			IMGTYPE = #{imgType},
 			IMGUSETYPE = #{imgUsetype}
 		WHERE
-			IMGUSETYPE = #{imgUsetype} AND USERID = #{userId};
-		
-	</update>
+			IMGUSETYPE = #{imgUsetype} AND USERID = #{userId}
+	</update>	
 	
 	<!-- 레지스트리 추가 -->
 	<insert id="registryAdd" parameterType="hashMap">
 		INSERT INTO mini_db2.T1_REGISTRY
 		VALUES (NULL, #{productNo}, NULL, NOW(), NULL, #{rCnt}, #{rOption}, #{rContent}, #{userId}, #{fundYn})
 	</insert>
+	
+	<!-- 레지스트리 삭제 - 데이터는 남기고 삭제표시만 함 -->
+	<update id="registryDel" parameterType="hashMap">
+		UPDATE mini_db2.T1_REGISTRY
+		SET FUNDYN = 'D'
+		WHERE REGISTRYNO = #{registryNo}
+	</update>
+	
+	<!-- 레지스트리 삭제 - 데이터는 남기고 삭제표시만 함 -->
+	<update id="registryDelFund" parameterType="hashMap">
+		UPDATE mini_db2.T1_FUNDING
+		SET FUNDYN = 'N'
+		WHERE G_PHONE = NULL AND REGISTRYNO = #{registryNo}
+	</update>
+	
+	<!-- 유저 펀딩 기록 입력 -->
+	<insert id="registryAddFunding" parameterType="hashmap">
+		INSERT INTO mini_db2.T1_FUNDING
+		SELECT
+			REGISTRYNO, #{fundingNo}, #{userId}, NOW(), DATE_ADD(NOW(), INTERVAL 1 MONTH), #{fsetprice}, NULL, NULL, NULL, #{fundYn}
+		FROM mini_db2.T1_REGISTRY
+		WHERE USERID = #{userId} AND FUNDYN ='Y'
+		ORDER BY REGISTRYNO DESC LIMIT 1;
+	</insert>
+
 </mapper>

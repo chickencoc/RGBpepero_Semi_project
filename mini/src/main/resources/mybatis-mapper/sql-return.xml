@@ -2,10 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.example.mini.mapper.ReturnMapper">
+<mapper namespace="com.example.mini.mapper.ReturnMapper">	
 	<select id="selectReturnList" parameterType="hashmap" resultType="com.example.mini.model.Return">
-		SELECT 
-	        G_NAME,
+		SELECT
+	   		R.PRODUCTNO AS PRODUCTNO,
+		    G_NAME,
 	        PI.IMGSRC,
 	        RC.RETCNT AS RETCNT,
 	        RENO,
@@ -23,15 +24,17 @@
 					FROM mini_db2.T1_RETURN
 		            GROUP BY PRODUCTNO) RC ON RC.PRODUCTNO = R.PRODUCTNO
 		WHERE G.USERID = #{userId}
-		GROUP BY PRODUCTNO
+		GROUP BY PRODUCTNO;
 		LIMIT #{startNum}, 6
+		
 	</select>
 	<select id="selectReturnGuestList" parameterType="hashmap" resultType="com.example.mini.model.Return">
-		SELECT
-			G_NAME
-	    FROM mini_db2.RETURN R
-		INNER JOIN mini_db2.T1_GUEST G ON G.G_PHONE = R.G_PHONE
-		WHERE PRODUCTNO = #{productNo}
+		SELECT 
+			G_NAME,
+			PRODUCTNO
+		FROM mini_db2.T1_RETURN R
+		LEFT JOIN mini_db2.T1_GUEST G ON G.USERID = R.USERID AND G.G_PHONE = R.G_PHONE
+		WHERE USERID = #{userId} AND PRODUCTNO = #{productNo}
+		GROUP BY PRODUCTNO; 
 	</select>
-	
 </mapper>

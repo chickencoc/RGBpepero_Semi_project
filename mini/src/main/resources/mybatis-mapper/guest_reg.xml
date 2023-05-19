@@ -40,7 +40,8 @@
 		FROM mini_db2.T1_USER
 		WHERE USERID = #{userId}
 	</insert>
-	<!-- 펀딩 기록 입력 -->
+	
+	<!-- 게스트 펀딩 기록 입력 -->
 	<insert id="insertGuestFunding" parameterType="hashmap">
 		INSERT INTO mini_db2.T1_FUNDING
 		SELECT

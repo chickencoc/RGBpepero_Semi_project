@@ -39,11 +39,11 @@
                         <th>보낸 날짜</th>
                         <th>금액</th>
                     </tr>
-                    <tr v-for="(item, index) in returnList">
-                        <td rowspan="2" class="returnProdImgBox" >
+                    <tr v-for="(item,index) in returnList">
+                        <td rowspan="2" class="returnProdImgBox">
                             <img :src="item.imgSrc" class="returnProdImg">
                         </td>
-                        <td class="returnProdNameBox">{{item.p_name}}</td>
+                        <td class="returnProdNameBox">{{pName}}</td>
                         <td class="returnGuestNameBox" rowspan="2">
                             <div class="returnGuestNameBox2">
                                 
@@ -51,8 +51,9 @@
                                     <a href="" v-if="guestFlg">더 보기▼</a>
                                     <a href="" v-if="!guestFlg">접기▲</a>
                                 </div>
-                                <div v-if="!guestFlg" v-for="(item, index) in returnGuestList">
-                                    <p>{{item.g_name}}</p>
+                                <p>g_name</p>
+                                <div v-if="!guestFlg">
+                                    <p>{{gName}}</p>
                                 </div>
                             </div>
                         </td>
@@ -90,66 +91,42 @@ var app = new Vue({
         guestFlg : true,
         selectPage: 1,
         pageCount: 1,
+<<<<<<< HEAD
         cnt : 0,
         returnList : [],
-        returnGuestList : [],
-        userId : "${sessionId}",
-        price : [],
-        retCnt : []
+		returnGuestList : []
+		
+    }   
+=======
+        cnt : 0
     }
+>>>>>>> branch 'main' of https://github.com/chickencoc/RGBpepero_Semi_project.git
     , methods: {
         fnShowGuest : function(){
             var self = this;
             self.guestFlg=!self.guestFlg
         }
         ,fnSearch : function(){
-        	var self = this;
-			self.selectPage = pageNum;
-			var startNum = ((pageNum-1) * 6);
-			var lastNum = (pageNum * 6)-1;
-			var nparmap = {startNum : startNum, lastNum : lastNum ,userId : self.userId};
-			$.ajax({
-				url : "/productList.dox",
-				dataType : "json",
-				type : "POST",
-				data : nparmap,
-				success : function(data) {
-					self.returnList = data.returnList;
-					self.cnt = data.cnt;
-					self.pageCount = Math.ceil(self.cnt / 6);
-					}
-				});
-			},
-        fnGetReturnList : function(){
+
+        },
+        fnGetProductList : function(){
             var self = this;
             var startNum = ((self.selectPage-1) * 6);
     		var lastNum = (self.selectPage * 6);
-            var nparmap = {startNum : startNum, lastNum : lastNum ,userId : self.userId};
+            var nparmap = {pKind : self.pKind ,startNum : startNum, lastNum : lastNum, keywordType : self.selectItem, keyword : self.keyword};
             $.ajax({
-                url:"/returnList.dox",
+                url:"/productList.dox",
                 dataType:"json",	
                 type : "POST", 
                 data : nparmap,
                 success : function(data) { 
-                	self.returnList = data.returnList;
+                	self.list = data.product;
                     self.cnt = data.cnt;
                     self.pageCount = Math.ceil(self.cnt / 6);
+                    
                 	}
            		}); 
-        	},
-            fnGetReturnGuestList : function(productNo){
-                var self = this;
-                var nparmap = {userId : self.userId, productNo : productNo};
-                $.ajax({
-                    url:"/returnGuestList.dox",
-                    dataType:"json",	
-                    type : "POST", 
-                    data : nparmap,
-                    success : function(data) { 
-                    	self.returnGuestList = data.returnGuestList;
-                    	}   
-               		}); 
-            	}
+        	}
     }   
     , created: function () {
         var self = this;

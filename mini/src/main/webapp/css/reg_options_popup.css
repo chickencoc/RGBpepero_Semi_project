@@ -3,13 +3,13 @@
 					 border:1px solid black; width: 560px; height: 660px; justify-content: center; align-items: center; padding: 10px; } 
 .reg_options_popup_imageBox { display: flex;  width: 250px; height: 200px; } 
 #reg_options_popup_image{ width: 250px; height: 200px; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);}
-.reg_options_popup_info { width: 270px; display: grid; align-items: center; justify-items: baseline; } 
-#reg_options_popup_name{ margin: 10px 10px; font-weight: 500;}
-#reg_options_popup_price{ margin: 30px 10px;}
+.reg_options_popup_info { width: 270px; display: grid; align-items: center; justify-items: baseline; gap: 15px 0; } 
+#reg_options_popup_name{ margin: 0 10px; font-weight: 500;}
+.reg_options_popup_price{ margin: 0 10px;}
 .reg_options_popup_checkbox { border: 1px dashed black; width: 539px; height: 100px; position: relative; top: 15px;} 
 #reg_options_popup_checkbox_title { position:relative; bottom: 50px; margin: 16px 10px; font-size: 18px;} 
 #reg_options_popup_checkbox { position:relative; bottom: 50px; margin: 20px 20px; } 
 .reg_options_popup_memo { grid-area: memo;} 
 #reg_options_popup_memo_txt { width: 539px; height: 100px; margin-top: 20px;} 
 .reg_options_popup_btn, .reg_gift_popup_btn{ grid-area: footer; width: 100px; height: 35px; position: relative; left: 220px; } 
-#reg_options_popup_stock_number { text-align: center; width: 30px; height: 25px; margin: 0px 10px;  } 
+#reg_options_popup_stock_number { text-align: center; width: 50px; height: 25px;  } 

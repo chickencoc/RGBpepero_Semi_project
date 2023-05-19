@@ -53,23 +53,26 @@
 						<button id="regi_back_image_button" @click="fnBackImageAlter(item)">배경사진 수정</button>
 						<div class="regi_back_image" style="background-color: lightpink;"> </div>                            
 					</div>    
-	                <a href="#" @click="fnProfileAlter(item)"><img :src="imgUrl2" id="regi_profile" v-if="imgUrl2 != ''"></a>                       
-	                <a href="#" @click="fnProfileAlter(item)"><div id="regi_profile" v-if="imgUrl2 === ''" style="background-color: lightcoral; text-align: center; display: flex;
-						align-items: center; justify-content: center; color: #fff;">프로필 변경</div></a>                       
+	                <img :src="imgUrl2" id="regi_profile" @click="fnProfileAlter(item)" v-if="imgUrl2 != ''">                       
+	                <div id="regi_profile" @click="fnProfileAlter(item)" v-if="imgUrl2 === ''" style="background-color: lightcoral; text-align: center; display: flex;
+						align-items: center; justify-content: center; color: #fff;">프로필 변경</div>                      
 	            </div>
 	            <div class="regi_container">
-	                <div class="regi_select">
-	                    <select style="width: 80px;">
-	                        <option>등록순</option>
-	                        <option>가격순</option>
-	                    </select>
-	                </div>
 	                
 	                <div class="regi_add_gifts" @click="fnProductPage">
 	                    <img src="/image/icon/fi-sr-plus.png" id="regi_icon">
 	                    <div>선물 추가하기</div>
 	                </div>
-	                <div class="myinfo_registry" >
+	                <div class="regi_select">
+	                    <select v-model="sortOp" @change="fnselectUser()">
+	                        <option value="R.R_CDATETIME DESC">최신순</option>
+	                        <option value="R.R_CDATETIME">오래된순</option>
+	                        <option value="TOTALPRICE">낮은 가격순</option>
+	                        <option value="TOTALPRICE DESC">높은 가격순</option>
+	                    </select>
+	                </div>
+	                
+	                <div class="myinfo_registry boxshadowline" >
 	
 	                <div v-for="(item, index) in registry">                              
 	                    <div class="regi_items" v-if="item.orderNo == null">
@@ -82,14 +85,14 @@
 	                            <p class="regi_pro_price">{{item.pPrice}} 원</p>
 	                        <!--펀딩퍼센트-->
 	                        <div class="regi_percentage" v-if="item.fundYn == 'Y'">
-	                            <progress id="regi_progress" value="30" max="100"></progress>
-	                            <span>{progressValue}%</span>                        
+	                            <progress id="regi_progress" :value="item.progVal" max="100"></progress>
+	                            <span style="margin-left: 10px;">{{item.progVal}}%</span>                        
 	                        </div>
 	                        <div class="regi_items_options">
 	                            <span id="regi_stock_text">수량</span>
-	                            <input type="text" id="regi_stock_number" :value="item.rCnt" size="1" readonly>
+	                            <label id="regi_stock_number">{{item.rCnt}}</label>
 	                            <button id="regi_optionBtn" class="btn1" @click="fnOptionBtn(item)">옵션설정</button>
-	                            <a href="#" id="regi_delete" @click="fnDeleteItem(item)">삭제하기</a>
+	                            <a id="regi_delete" @click="fnDeleteItem(item)">삭제하기</a>
 	                        </div>
 	                    </div>                
 	                    <!--받은선물인 경우-->
@@ -128,14 +131,18 @@
 						</div>
 		                <div class="reg_options_popup_info">
 							
-		                    <div id="reg_options_popup_name">{{item.pName}}</div>
-		                    <div id="reg_options_popup_price">{{item.pPrice}} 원</div>
-		                    <div>수량<input type="text" size="1" :value="item.rCnt" id="reg_options_popup_stock_number"></div>
+		                    <div id="reg_options_popup_name">상품 명 : {{item.pName}}</div>
+		                    <div class="reg_options_popup_price">상품 가격 : {{item.pPrice}}원</div>
+		                    <div>상품 수량 : <input type="text" size="1" v-model="item.rCnt" id="reg_options_popup_stock_number"></div>
+		                    <div class="reg_options_popup_price">합계 : {{item.pPrice * item.rCnt}}원</div>
 		                </div>
 		                <ul class="reg_options_popup_checkbox">
 		                    <li id="reg_options_popup_checkbox_title">상품 표시 옵션</li>
 		                    <li id="reg_options_popup_checkbox"><input type="checkbox" name="choice" v-bind:checked="inputWanted" v-on:change="updateWanted"> "정말 필요한 물건" 표시</li>                 
-		                    <li id="reg_options_popup_checkbox"><input type="checkbox" name="choice" v-bind:checked="inputGroup" v-on:change="updateGroup"> "그룹선물(펀딩)"로 변경하기</li>
+		                    <li id="reg_options_popup_checkbox" v-if="item.fundYn != 'Y'">
+		                    	<input type="checkbox" name="choice" v-bind:checked="inputGroup" v-on:change="updateGroup"> "그룹선물(펀딩)"로 변경하기
+		                    	<span style="font-size: 12px; color: orangered;">[설정시 일반으로 변경 불가, 삭제만 가능]</span>
+		                    </li>
 		                </ul>    
 		                <div class="reg_options_popup_memo">
 		                    <div><img src="../image/icon/fi-ss-heart.png" style="position: relative; top: 8px; margin-right: 5px;">선물할 친구들이 참고할 정보를 기재해주세요</div>
@@ -165,6 +172,8 @@
 			, imgUrl1: ''
 		    , imgUrl2: ''
 		    , myUrl: 'http://localhost:8080/guestRegistry.do?id=${sessionId}'
+		    , sortOp: 'R.R_CDATETIME DESC'
+		    
 		    //dim popup
 		    , item: {}
 		    , inputWanted: false
@@ -177,16 +186,20 @@
 	    	
 	    	fnselectUser: function(){
 	    		var self = this;
-	            var nparmap = {userId: self.userId}; //select 요소를 kind 변수에담음. xml이랑 연결됨.
+	            var nparmap = {userId : self.userId, sortOp : self.sortOp}; //select 요소를 kind 변수에담음. xml이랑 연결됨.
 	            $.ajax({
 	                url:"/myRegistry.dox",
 	                dataType:"json",	
 	                type : "POST", 
 	                data : nparmap,
 	                success : function(data) {    
-	                    console.log(data);                                   
+	                    console.log(data.registry);   
+	                    for( i in data.registry) {
+	                    	data.registry[i].progVal = Math.round(data.registry[i].fputprice / data.registry[i].fsetprice * 100);
+	                    	if(isNaN(data.registry[i].progVal))
+	                    		data.registry[i].progVal = 0;
+	                    }
 		                self.registry = data.registry;
-		                console.log(self.registry);
 	                }
 	     		}); 
 	    	}	
@@ -203,12 +216,10 @@
 	                        self.image = data.image;  // Assuming 'images' is an array of image objects
 	                        for(var i = 0; i < self.image.length; i++) {
 	                            if(self.image[i].imgUsetype == 1) {
-	                                self.imgUrl1 = self.image[i].imgSrc;   
-	                                console.log(data);                    
+	                                self.imgUrl1 = self.image[i].imgSrc;                
 	                            }
 	                            else if(self.image[i].imgUsetype == 2){
-	                                self.imgUrl2 = self.image[i].imgSrc;  
-	                                console.log(data);                      
+	                                self.imgUrl2 = self.image[i].imgSrc;
 	                            }
 	                            // Add more conditions for other image types if necessary
 	                        }
@@ -261,8 +272,22 @@
 		        self.fnselectOption();
 				self.fnGetInformation();
 	    	}
-	    ,	fnDeleteItem: function(){
-	    		confirm("삭제하시겠습니까?");
+	    ,	fnDeleteItem: function(thing){
+	    		if(confirm("삭제하시겠습니까? \n\n* 펀딩 상품인 경우 펀딩이 종료됩니다.")) {
+	                var nparmap = {registryNo: thing.registryNo
+	                				,fundYn: thing.fundYn
+	                				};
+					$.ajax({
+			                url:"/myRegistryDelete.dox",
+			                dataType:"json",	
+			                type : "POST", 
+			                data : nparmap,
+			                success : function(data) {
+			                	
+			                }
+			     	}); 
+	    		}
+				console.log(thing);
 	    		
 	    	}
 	    ,	fnOrderInfo: function(){
@@ -283,25 +308,29 @@
 	              const userItemList = localStorage.getItem('userItemList');    
 	              var item = JSON.parse(userItemList);                 
 	              self.item = item;
-				  console.log(item);
+	              console.log(item);
+	              console.log(self.inputGroup);
 	            
 	         }
 	    ,   updateWanted : function(event){
 	            var self = this;
 	            self.wanted = event.target.checked ? 'A' : '';
-	            console.log(self.wanted);
 	             //체크시 배지
 	        }
 	    ,   updateGroup : function(event){
 	            var self = this;
-	            self.group = event.target.checked ? 'Y' : '';
-	            console.log(self.group);
+	            if(event.target.checked == true) {
+	  	            if(confirm("정말 펀딩 항목으로 설정하시겠습니까? \n\n*변경한 상품은 일반 상품으로 되돌릴 수 없습니다.")) {
+		            	self.group = event.target.checked ? 'Y' : '';
+		            } else {
+		            	event.target.checked = false;
+		            }
+	            }
 	             //체크시 펀딩
 	        }
 	    ,	updateInput : function(event) {
 	            var self = this;
 	            self.inputText = event.target.value;
-	            console.log(self.inputText);
 	             //텍스트 저장
 	        }    
 	    ,	fnOptionInput : function(){
@@ -368,7 +397,6 @@
 	    	var self = this;
 	        self.fnselectUser();
 	        self.fnselectImage();
-			console.log(self.registry);      
 		}
 	});
 

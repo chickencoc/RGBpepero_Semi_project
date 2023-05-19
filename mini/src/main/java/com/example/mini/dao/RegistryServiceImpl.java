@@ -67,7 +67,26 @@ public class RegistryServiceImpl implements RegistryService{
 	@Override
 	public void registryAdd(HashMap<String, Object> map) {
 		// TODO Auto-generated method stub
-		registryMapper.registryAdd(map);
+		
+		if(map.get("fundYn").equals("Y")) { //펀딩일 때
+			registryMapper.registryAdd(map);
+			registryMapper.registryAddFunding(map);
+		} else { //펀딩이 아닐 때
+			registryMapper.registryAdd(map);
+		}
+	}
+	
+	// 레지스트리 삭제
+	@Override
+	public void registryDel(HashMap<String, Object> map) {
+		// TODO Auto-generated method stub
+		
+		if(map.get("fundYn").equals("Y")) { //펀딩일 때
+			registryMapper.registryDel(map);
+			registryMapper.registryDelFund(map);
+		} else { //펀딩이 아닐 때
+			registryMapper.registryDel(map);
+		}
 	}
 	
 

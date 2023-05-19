@@ -245,7 +245,9 @@
 		    // dim popup script START
 		    	fnOptionBtn: function(item){
 	    		var self = this;
-	    		
+
+            	self.inputWanted = false;
+            	self.inputGroup = false;
 	           	$('.user-read').fadeIn().addClass('on');
 			    $('.read-inner').fadeIn().addClass('on');
 			    $("body").css("overflow", "hidden"); //body 스크롤바 없애기
@@ -308,21 +310,19 @@
 					$('.read-inner').fadeOut().removeClass('on');
 					$("body").css("overflow", "visible");
 					localStorage.removeItem('userItemList');
-		            self.fnProductInformation();
-		            self.fnGetCategoryList();
+		            //self.fnProductInformation();
+		            //self.fnGetCategoryList();
 
 			}
 		    ,   fnGetInformation : function() {
 		            var self = this;
 		            
 					if(self.item.rOption === 'A'){
-	                self.inputWanted = true;
-	                
+	                	self.inputWanted = true;
 	            	}
 	            
 	            	if(self.item.fundYn === 'Y') {
-	                self.inputGroup = true;
-	                //abs
+	                	self.inputGroup = true;
 	            	} 
 		        }
 		    // dim popup script END

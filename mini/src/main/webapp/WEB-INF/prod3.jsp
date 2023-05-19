@@ -26,10 +26,10 @@
             </ul>
             </div>
             <div class="prod0Banner">
-                <img src="/image/prod0Banner.jpg" id="bannerImg">
+                <img src="/image/categoryD/dressRoomBanner.jpg" id="bannerImg">
                 <div class="bannerText">
                     <p>드레스룸</p>
-                    <p>가제</p>
+                    <p>하루의 새로운시작을 갖춰입는 공간</p>
                 </div>
             </div>
             <div class="searchBox">

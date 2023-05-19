@@ -26,7 +26,7 @@
             </ul>
             </div>
             <div class="prod0Banner">
-                <img src="/image/prod0Banner.jpg" id="bannerImg">
+                <img src="/image/categoryL/livingRoomBanner.jpg" id="bannerImg">
                 <div class="bannerText">
                     <p>부부의 생활을 공유하는 공간</p>
                     <p>거실 제품입니다.</p>

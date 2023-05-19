@@ -21,7 +21,7 @@
 }
 
 fieldset #information {
-	margin-left: 200px;
+	margin-left: 130px;
 }
 
 #information input {
@@ -29,12 +29,14 @@ fieldset #information {
 }
 
 fieldset {
-	width: 900px;
-	height: 700px;
-	margin: auto;
-	margin-top: 30px;
+	width: 670px;
+	height: 800px;
+	margin : auto;
+	margin-top: 25px;
 	line-height: 40px;
-	box-shadow: 0px 0px 5px 0px #555;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); 
+	border-radius: 10px;
+	
 }
 
 #post {
@@ -43,13 +45,14 @@ fieldset {
 
 #information button {
 	border-radius: 30px;
-	color: white;
-	background-color: black;
 	border: 1px solid black;
 	width: 120px;
-	height: 50px;
-	margin-left: 200px;
+	height: 30px;
+	margin-left: 120px;
 	margin-top: 25px;
+	background-color: #363636; 
+	color: white; border-radius: 6px;
+	
 }
 
 #information select {
@@ -62,21 +65,23 @@ fieldset {
 }
 
 fieldset #profile {
-	margin-top: 10px;
+	margin-top: -120px;
 	position: absolute;
-	margin-left: 30px;
+	margin-left: 280px;
+	
+	
 }
 
 fieldset input {
-	border: 2px solid black;
+	border: 1px solid gray;
 }
 
 fieldset select {
-	border: 2px solid black;
+	border: 1px solid black;
 }
 
 #idd {
-	border: 2px;
+	border: 1px;
 }
 
 .product_category_list>a:not(:last-child):after {
@@ -109,17 +114,21 @@ fieldset select {
 
 #pwline input {
 	margin-left: 55px;
+	width: 190px;
 }
 
 #pwline2 input {
 	margin-left: 22px;
+	width: 190px;
 }
 
 #nameAndPartner #name {
 	margin-left: 86px;
+	width: 190px;
 }
 #nameAndPartner2 #partner {
 	margin-left: 57px;
+	width: 190px;
 }
 
 #gender #male {
@@ -128,32 +137,38 @@ fieldset select {
 
 #phoneNumber #phone {
 	margin-left: 56px;
+	width: 190px;
 }
 
 #addresses #address1 {
-	margin-left: 91px;
-	width: 350px;
+	margin-left: 89px;
+	width: 190px;
 }
 
 #addresses #address2 {
 	margin-left: 121px;
+	width: 190px;
 }
 
 #addresses #address3 {
 	margin-left: 121px;
+	width: 190px;
 }
 
 #mail #email1 {
 	margin-left: 72.5px;
+	width: 190px;
 }
 
 #birth #birthDay {
 	margin-left: 57.5px;
 	margin-right: 10px;
+	width: 190px;
 }
 #weddingDate #weddingDay {
 	margin-left: 42px;
 	margin-right: 10px;
+	width: 190px;
 }
 
 #bankInfo select {
@@ -163,7 +178,7 @@ fieldset select {
 fieldset #fieldTitle{
 	font-size : 30px;
 	text-align : center;
-	margin-bottom : 30px;
+	margin-bottom : 120px;
 }
 
 /* style END */
@@ -173,9 +188,12 @@ fieldset #fieldTitle{
 	<div id="app">
 		<div id="wrapper">
 			<div class="container">
-				<div class="product_category_list">
-					<a href=""><strong>회원정보</strong></a> <a href="">나의 레지스트리</a> <a
-						href="">받은 선물 목록</a> <a href="">보낸답례품</a> <a href="">캘린더</a>
+					<div class="myinfo_category_list">
+					<a href="information.do"><strong>회원정보</strong></a>
+					<a href="myRegistry.do">나의 레지스트리</a>
+					<a href="mygift.do">받은 선물 목록</a>
+					<a href="returngoods.do">보낸답례품</a>
+					<a href="main.do">캘린더</a>
 				</div>
 				<fieldset>
 					<h1 id="fieldTitle">내정보 수정하기</h1>

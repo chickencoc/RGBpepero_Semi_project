@@ -42,5 +42,8 @@ public class MyInfoController {
 		resultMap = myInfoService.searchMyGiftList(map);
 		return new Gson().toJson(resultMap);
 	}
-
+	@RequestMapping("/mygiftinfo.do") 
+		public String selectInfo(HttpServletRequest request, Model model){
+        return "/myInfo_gift2_list";
+    }
 }

@@ -11,6 +11,7 @@
 	<link rel="stylesheet" href="../css/Base_rgbPepero.css">
 	<link rel="stylesheet" href="../css/Registry.css">
 	<link rel="stylesheet" href="../css/myInfo_gift2_list.css">
+    <link rel="stylesheet"  href="../css/Exam.css">
 	<title>답례품 목록 페이지</title>
 </head>
 
@@ -29,17 +30,42 @@
             <div class="return_gift_container">
                 <div id="return_gift_menu_txt">답례품</div>  
                 <div class="return_gift_banner_container">                    
-                <div class="return_gift_banner">
-                    <div class="return_gift_banner_img"><img src="../image/categoryR/gift_boxes.jpg"></div>
-                    <div class="return_gift_banner_img"><img src="../image/categoryR/cardBackground.jpg"></div>
-                    <div class="return_gift_banner_img"><img src="../image/categoryR/card2.jpg"></div>
-                    <span class="return_gift_banner_txt">#답례품</span>
+                <div class="slidebox">
+                    <input type="radio" name="slide" id="slide1" checked>
+                    <input type="radio" name="slide" id="slide2">
+                    <input type="radio" name="slide" id="slide3">
+                    <input type="radio" name="slide" id="slide4">
+                    <ul class="slidelist">
+                        <li class="slideitem">
+                            <div>
+                                <label for="slide4" class="left"></label>
+                                <label for="slide2" class="right"></label>
+                                <img src="../image/banner/bedroom_banner.jpg">
+                            </div>
+                        </li>
+                        <li class="slideitem">
+                            <div>
+                                <label for="slide1" class="left"></label>
+                                <label for="slide3" class="right"></label>
+                                <img src="../image/banner/bathroom_banner.jpg">
+                            </div>
+                        </li>
+                        <li class="slideitem">
+                            <div>
+                                <label for="slide2" class="left"></label>
+                                <label for="slide4" class="right"></label>
+                                <img src="../image/banner/dressroom_banner.jpg">
+                            </div>
+                        </li>
+                        <li class="slideitem">
+                            <div>
+                                <label for="slide3" class="left"></label>
+                                <label for="slide1" class="right"></label>
+                                <img src="../image/banner/kitchen_banner.jpg">
+                            </div>
+                        </li>
+                    </ul>
                 </div>
-                </div>
-                <div>
-                <button @click="bannerBtn1" class="banner_btn">1페이지</button>
-                <button @click="bannerBtn2" class="banner_btn">2페이지</button>
-                <button @click="bannerBtn3" class="banner_btn">3페이지</button>
                 </div>
                 <br>
                 <div class="return_gift_search">
@@ -159,18 +185,7 @@ var app = new Vue({
     }   
     , methods: {
         
-        bannerBtn1: function(){
-            var self = this;            
-            document.querySelector('.return_gift_banner').style.transform = 'translate(200vw)';  
-        }
-    ,    bannerBtn2: function(){
-            var self = this;            
-            document.querySelector('.return_gift_banner').style.transform = 'translate(-100vw)';  
-        }
-    ,    bannerBtn3: function(){
-            var self = this;            
-            document.querySelector('.return_gift_banner').style.transform = 'translate(-200vw)';  
-        }
+    
     }   
     , created: function () {
     	var self = this;

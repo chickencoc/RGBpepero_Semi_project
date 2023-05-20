@@ -27,5 +27,12 @@ public class MyInfoServiceImpl implements MyInfoService{
 		return resultMap;
 	}
 
+	@Override
+	public void selectInfo(HashMap<String, Object> map) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		myInfoMapper.selectInfo(resultMap);
+	}
+
 
 }

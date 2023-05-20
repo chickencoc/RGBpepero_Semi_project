@@ -6,5 +6,5 @@ public interface MyInfoService {
 	
 	HashMap<String, Object> searchMyGiftList(HashMap<String, Object> map) throws Exception;
 	
-
+	void selectInfo(HashMap<String, Object> map);
 }

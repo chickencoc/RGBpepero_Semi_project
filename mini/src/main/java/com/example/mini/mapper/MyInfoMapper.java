@@ -14,4 +14,5 @@ public interface MyInfoMapper {
 	
 	int cntMyInfoGift(HashMap<String, Object> map);
 
+	void selectInfo(HashMap<String, Object> map);
 }

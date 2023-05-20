@@ -1,3 +1,6 @@
+*{
+    
+}
 p{
     margin-bottom: 10px;
 }
@@ -39,20 +42,30 @@ p{
 .return_gift_list_menu > a {
     margin: 0 5px;   
 }
-
+.return_gift_banner_container{
+    overflow: hidden;
+}
 .return_gift_banner{
-    width:1000px;
+    width:300vw; /*vw : 화면에 보이는 너비만큼 300은 3배*/
     height: 300px;
-    background-image: url(/semiproject1/image/wijdan-mq-H5yiRXDUkto-unsplash.jpg);
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    text-align: center;
+    transform: translate(-100vw);/*애니메이션 이동은 트랜스로*/
+    transition: transform 1s;
+    white-space: nowrap;
     box-shadow: 0 3px 5px rgba(0, 0, 0, .1);
+}
+.return_gift_banner_img{
+    width: 100vw;
+    float: left;
+    height: 300px;
+    
+}
+.return_gift_banner_img img{
+    width: 100%;
+    
 }
 .return_gift_banner_txt{
     position: relative;
-    top: 130px;
+    bottom: 150px;
     font-size: 25px;
     color: white;
     text-shadow:1px 1px 1px #999;

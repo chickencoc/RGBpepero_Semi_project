@@ -11,33 +11,6 @@
 	<script src="https://unpkg.com/vuejs-paginate@latest"></script>
 	<script src="https://unpkg.com/vuejs-paginate@0.9.0"></script>
 	<title>받은 선물 목록</title>
-	<style>
-	.pagination li {
-	    min-width:32px;
-	    padding:2px 6px;
-	    text-align:center;
-	    margin:0 3px;
-	    border-radius: 6px;
-	    border:1px solid #eee;
-	    color:#666;
-	    display : inline;
-	}
-	.pagination li:hover {
-	    background: #E4DBD6;
-	}
-	.page-item a {
-	    color:#666;
-	    text-decoration: none;
-	}
-	.pagination li.active {
-	    background-color : #E7AA8D;
-	    color:#fff;
-	}
-	.pagination li.active a {
-	    color:#fff;
-	}
-	
-	</style>
 </head>
 
 <body>
@@ -68,7 +41,7 @@
             </div>
             <div class="giftContentBox">
                 <div class="profileBox">
-                    <img src="/image/profile.png"> <!-- 프로필 이미지 -->
+                    <img src="../image/userimgA/profile.png"> <!-- 프로필 이미지 -->
                     <div class="profileUid">ID : {{userId}}</div>
                 </div>
                 <!-- 그리드 스타일 -->
@@ -76,12 +49,12 @@
                     <div class="giftDetailBox1">
                         <!-- 사진 전체 묶음 -->
                         <div class="giftDetail" v-for="(item, index) in list">
-                            <img class="product" :src="item.imgsrc"> <!-- 받은 상품 이미지-->
+                            <label><input @click="fnDivSelect($event)" class="none" name="gifts" type="checkbox" v-model="checkedBox" value="1">상품선물</label>
+							<img class="product" :src="item.imgsrc"> <!-- 받은 상품 이미지-->
                             <div class="giftList">
-                                <div>제품명 : {{item.pName}}</div>
-                                <div>선물해준 사람 : {{item.gName}}</div>
-                                <div>선물 날짜 : {{item.oCdatetime}}</div>
-                                <label><input @click="fnDivSelect($event)" class="none" name="gifts" type="checkbox" v-model="checkedBox" value="1">상품선물</label>
+                                <div id="giftListName">{{item.pName}}</div>
+                                <div id="giftListGuest">보낸사람 : {{item.gName}}</div>
+                                <div id="giftListDate">받은날짜 : {{item.oCdatetime}}</div>    
                             </div>
                         </div>
                     </div>

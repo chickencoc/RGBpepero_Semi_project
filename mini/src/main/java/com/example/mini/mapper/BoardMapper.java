@@ -17,6 +17,7 @@ public interface BoardMapper {
 	
 //	게시글 목록 읽기
 	List<Board> selectBoardList(HashMap<String, Object> map) throws Exception;
+	int selectBoardCnt(HashMap<String, Object> map);
 	
 //	게시글 조회수 증가
 	void updateViewCnt(HashMap<String, Object> map) throws Exception;

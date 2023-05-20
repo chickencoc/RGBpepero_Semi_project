@@ -20,8 +20,10 @@ public class BoardServiceImpl implements BoardService{
 	public HashMap<String, Object> searchBoardList(HashMap<String, Object> map) throws Exception {
 		HashMap<String, Object> resultMap = new HashMap<String, Object>();
 		List<Board> board = boardMapper.selectBoardList(map);
+		int cnt = boardMapper.selectBoardCnt(map);
 		resultMap.put("result", "success");
 		resultMap.put("board", board);
+		resultMap.put("cnt", cnt);
 		return resultMap;
 	}
 

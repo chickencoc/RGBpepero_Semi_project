@@ -118,6 +118,10 @@ public class BoardController {
 	@ResponseBody
 	public String searchBoardList(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
 		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		int startNum = Integer.parseInt(String.valueOf(map.get("startNum")));
+		int lastNum = Integer.parseInt(String.valueOf(map.get("lastNum")));
+		map.put("startNum", startNum);
+		map.put("lastNum", lastNum);
 		resultMap = boardService.searchBoardList(map);
 		return new Gson().toJson(resultMap);
 	}

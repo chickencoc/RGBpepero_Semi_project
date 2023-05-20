@@ -26,9 +26,23 @@ public class GuestRegController {
 	@Autowired
 	HttpSession sessGuest;
 
-	@RequestMapping("/guest.do")
-    public String guestInfo(Model model) throws Exception{
+	@Autowired
+	HttpSession sessItem;
+	
+	//상품 데이터 임시 저장
+	@RequestMapping(value = "/guest/getItem.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String getItem(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		resultMap.put("item", sessItem.getAttribute("item"));
+		return new Gson().toJson(resultMap);
+	}
+	
 
+	@RequestMapping("/guest.do")
+    public String guestInfo(HttpServletRequest request, Model model, @RequestParam HashMap<String, Object> map) throws Exception{
+		request.setAttribute("item", map);
+		sessItem.setAttribute("item", map);
         return "/guest_reg1";
     }
 	

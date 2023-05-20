@@ -28,10 +28,24 @@ public class MyInfoServiceImpl implements MyInfoService{
 	}
 
 	@Override
-	public void selectInfo(HashMap<String, Object> map) {
+	public HashMap<String, Object> searchReturnGiftList(HashMap<String, Object> map) {
 		// TODO Auto-generated method stub
 		HashMap<String, Object> resultMap = new HashMap<String, Object>();
-		myInfoMapper.selectInfo(resultMap);
+		List<Order> giftList = myInfoMapper.selectReturnGiftProdList(map);
+		int cnt = myInfoMapper.cntReturnGiftProd(map);
+		resultMap.put("result", "success");
+		resultMap.put("list", giftList);
+		resultMap.put("cnt", cnt);
+		return resultMap;
+	}
+
+	@Override
+	public HashMap<String, Object> searchReturnGiftInfo(HashMap<String, Object> map) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		Order giftInfo = myInfoMapper.selectReturnGiftInfo(map);
+		resultMap.put("info", giftInfo);
+		return resultMap;
 	}
 
 

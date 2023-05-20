@@ -8,12 +8,48 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<jsp:include page="/layout/header.jsp"></jsp:include>
-	<link rel="stylesheet" href="../css/Base_rgbPepero.css">
-	<link rel="stylesheet" href="../css/Registry.css">
-	<link rel="stylesheet" href="../css/myInfo_gift2_list.css">
+	<link rel="stylesheet" href="/css/Base_rgbPepero.css">
+	<link rel="stylesheet" href="/css/Registry.css">
+	<link rel="stylesheet" href="/css/myInfo_gift2_list.css">
+		<script src="https://unpkg.com/vuejs-paginate@latest"></script>
+	<script src="https://unpkg.com/vuejs-paginate@0.9.0"></script>
 	<title>답례품 목록 페이지</title>
 </head>
+<style>
+	<!-- 페이징 추가 2-->
+	.pagination {
 
+        display: inline-flex;
+        
+    }
+    ul {
+        text-align: center;
+    }
+	.pagination li {
+	    min-width:32px;
+	    padding:2px 6px;
+	    text-align:center;
+	    margin:0 3px;
+	    border-radius: 6px;
+	    border:1px solid #eee;
+	    color:#666;
+	    display : inline;
+	}
+	.pagination li:hover {
+	    background: #E4DBD6;
+	}
+	.page-item a {
+	    color:#666;
+	    text-decoration: none;
+	}
+	.pagination li.active {
+	    background-color : #E7AA8D;
+	    color:#fff;
+	}
+	.pagination li.active a {
+	    color:#fff;
+	}
+</style>
 <body>
     <div id="app">
 	<div id="wrapper">
@@ -43,105 +79,43 @@
                 </div>
                 <br>
                 <div class="return_gift_search">
-                    <input type="text" id="return_gift_input_txt">
-                    <button id="return_gift_searchBtn">검색</button>
-                    <button id="return_gift_resetBtn">초기화</button>
+                    <input type="text" id="return_gift_input_txt search" v-model="keyword" placeholer="상품명 입력" @keyup.enter="fnSearchList">
+                    <button id="return_gift_searchBtn btn1 searchM" @click="fnSearchList">검색</button>
+                    <button id="return_gift_resetBtn btn searchR">초기화</button>
                 </div>
                 <div class="return_gift_select">
-                    <select class="return_gift_select_bar">
-                        <option class="return_gift_select_option">기본순</option>
-                        <option class="return_gift_select_option">낮은가격순</option>
-                        <option class="return_gift_select_option">높은가격순</option>
+                    <select class="return_gift_select_bar" v-model="arrayOrder">
+						<option class="return_gift_select_option" value="P_CDATETIME">최신순</option>
+                        <option class="return_gift_select_option" value="lowPrice">낮은가격순</option>
+                        <option class="return_gift_select_option" value="highPrice">높은가격순</option>
                     </select>
                 </div>
                 
                     <div class="return_gift_listbox">
-                        <div class="return_gift_list_item">
+                        <div class="return_gift_list_item" v-for="(item, index) in list">
                             <div>
-                                <a href="#"><img class="return_gift_list_item_image" src="../image/davey-gravy-qZRdiO1WIic-unsplash.jpg"></a>
+                                <a href="javascript:;" @click="fnSendMove(item)">
+                                	<img class="return_gift_list_item_image" :src="item.imgsrc" >
+                                </a>
                             </div>
                             <div class="return_gift_list_item_info">
-                                <p class="return_gift_list_item_name">[신라호텔] 고급 마카롱 5구 세트</p>
-                                <p class="return_gift_list_item_price">20,000 원</p>
-                                <p class="return_gift_list_item_explain">신라호텔 명장이 직접 만든 고급 마카롱!</p>
+                                <p class="return_gift_list_item_name">{{item.pName}}</p>
+                                <p class="return_gift_list_item_price">{{item.pPrice}}</p>
+                                <p class="return_gift_list_item_explain">{{item.pContent}}</p>
                             </div>
-                        </div>
-                        <div class="return_gift_list_item">
-                            <div>
-                                <a href="#"><img class="return_gift_list_item_image" src="../image/everdrop-gmbh-_0-wAt9dkFA-unsplash.jpg"></a>
-                            </div>
-                            <ul class="return_gift_list_item_info">
-                                <p class="return_gift_list_item_name">[EVER DROP] 수건 2종 세트</p>
-                                <p class="return_gift_list_item_price">10,000 원</p>
-                                <p class="return_gift_list_item_explain">이탈리아 명장이 한땀 한땀 만든 수건!</p>
-                            </ul>
-                        </div>
-                        <div class="return_gift_list_item">
-                            <div>
-                                <a href="#"><img class="return_gift_list_item_image" src="../image/bruno-martins-Pfrne_5S_-8-unsplash.jpg"></a>
-                            </div>
-                            <ul class="return_gift_list_item_info">
-                                <p class="return_gift_list_item_name">[BRUNOMARTINS] 최고급 레드 와인 1병</p>
-                                <p class="return_gift_list_item_price">48,000 원</p>
-                                <p class="return_gift_list_item_explain">체코에서 딴 포도로 만든 최고오오급 와인</p>
-                            </ul>
-                        </div>
-                        <div class="return_gift_list_item">
-                            <div>
-                                <a href="#"><img class="return_gift_list_item_image" src="../image/pmv-chamara-CiiVHf5K00o-unsplash.jpg"></a>
-                            </div>
-                            <ul class="return_gift_list_item_info">
-                                <p class="return_gift_list_item_name">[CHAMARA] 스킨케어세트</p>
-                                <p class="return_gift_list_item_price">30,000 원</p>
-                                <p class="return_gift_list_item_explain">유해한 성분은 모두 빼고 순한 성분으로 구성! 민감성 피부도 사용가능한 기초 스킨케어 세트</p>
-                            </ul>
-                        </div>
-                        <div class="return_gift_list_item">
-                            <div>
-                                <a href="#"><img class="return_gift_list_item_image" src="../image/everdrop-gmbh-fMpiuMxwacE-unsplash.jpg"></a>
-                            </div>
-                            <ul class="return_gift_list_item_info">
-                                <p class="return_gift_list_item_name">[EVER DROP] 천연 세제 3종 세트</p>
-                                <p class="return_gift_list_item_price">20,000 원</p>
-                                <p class="return_gift_list_item_explain">민감한 우리 아이 피부에도 걱정 없는 세제</p>
-                            </ul>
-                        </div>
-                        <div class="return_gift_list_item">
-                            <div>
-                                <a href="#"><img class="return_gift_list_item_image" src="../image/luma-candles-K1Xi_R_mfpk-unsplash.jpg"></a>
-                            </div>
-                            <ul class="return_gift_list_item_info">
-                                <p class="return_gift_list_item_name">[LUMA] 라벤더/장미/우드 향초 1세트</p>
-                                <p class="return_gift_list_item_price">10,000 원</p>
-                                <p class="return_gift_list_item_explain">유해성분 걱정 없는 향초!</p>
-                            </ul>
-                        </div>
-                        <div class="return_gift_list_item">
-                            <div>
-                                <a href="#"><img class="return_gift_list_item_image" src="../image/jonathan-borba-Rsfz17HyiAg-unsplash.jpg"></a>
-                            </div>
-                            <ul class="return_gift_list_item_info">
-                                <p class="return_gift_list_item_name">[JONATHAN] 미니 티백 10종 세트</p>
-                                <p class="return_gift_list_item_price">15,000 원</p>
-                                <p class="return_gift_list_item_explain">호불호 없는 티백 10종!</p>
-                            </ul>
-                        </div>
-                        <div class="return_gift_list_item">
-                            <div>
-                                <a href="#"><img class="return_gift_list_item_image" src="../image/insung-yoon-baLUAKBNsG4-unsplash.jpg"></a>
-                            </div>
-                            <ul class="return_gift_list_item_info">
-                                <p class="return_gift_list_item_name">표현하지 않으면 모릅니다</p>
-                                <p class="return_gift_list_item_price">지금 선물로 마음을 표현하세요!</p>
-                                <p class="return_gift_list_item_explain">저희가 준비한 답례품 리스트는 최고의 품질!</p>
-                            </ul>
                         </div>
                     </div>
                     <div class="return_gift_pagechange">
-                        <a><img src="../image/fi-sr-angle-left.png" id="return_gift_pagechange_icon"></a>
-                        <span>{{1}}</span>
-                        <a><img src="../image/fi-sr-angle-right.png" id="return_gift_pagechange_icon"></a>
-                        <div>{{}}페이지로 이동</div>
+                        <paginate
+				   	:page-count="pageCount"
+				    :page-range="3"
+				    :margin-pages="2"
+				    :click-handler="fnSearch"
+				    :prev-text="'<'"
+				    :next-text="'>'"
+				    :container-class="'pagination'"
+				    :page-class="'page-item'">
+				</paginate>
                     </div>                  
             </div>                
         </main>
@@ -152,28 +126,112 @@
 </html>
 <jsp:include page="/layout/footer.jsp"></jsp:include>
 <script type="text/javascript">
+Vue.component('paginate', VuejsPaginate)
 var app = new Vue({ 
     el: '#app',
     data: {
-
-    }   
+    	selectPage: 1,
+		pageCount: 1,
+		cnt : 0,
+		list:{},
+		arrayOrder : 'P_CDATETIME',
+		checkedBox : '${map.checkedBox}',
+		keyword:''
+    }
+	,watch : {
+		arrayOrder :function(){
+			var self = this;
+			self.fnGetList();
+		}
+	}
     , methods: {
-        
-        bannerBtn1: function(){
-            var self = this;            
-            document.querySelector('.return_gift_banner').style.transform = 'translate(200vw)';  
-        }
-    ,    bannerBtn2: function(){
-            var self = this;            
-            document.querySelector('.return_gift_banner').style.transform = 'translate(-100vw)';  
-        }
-    ,    bannerBtn3: function(){
-            var self = this;            
-            document.querySelector('.return_gift_banner').style.transform = 'translate(-200vw)';  
-        }
+    	 fnSearch : function(pageNum){
+ 			var self = this;
+ 			self.selectPage = pageNum;
+ 			var startNum = ((pageNum-1) * 9);
+ 			var lastNum = (pageNum * 9)+1;
+ 			var nparmap = {startNum : startNum, lastNum : lastNum};
+ 			$.ajax({
+ 				url : "/myInfoGift1.dox",
+ 				dataType : "json",
+ 				type : "POST",
+ 				data : nparmap,
+ 				success : function(data) {
+ 					self.list = data.list;
+ 					self.cnt = data.cnt;
+ 					self.pageCount = Math.ceil(self.cnt / 9);
+ 					console.log(data);
+ 					}
+ 				});
+ 			}
+	    , pageChange : function(url, param) {
+			var target = "_self";
+			if(param == undefined){
+			//	this.linkCall(url);
+				return;
+			}
+			var form = document.createElement("form"); 
+			form.name = "dataform";
+			form.action = url;
+			form.method = "post";
+			form.target = target;
+			for(var name in param){
+				var item = name;
+				var val = "";
+				if(param[name] instanceof Object){
+					val = JSON.stringify(param[name]);
+				} else {
+					val = param[name];
+				}
+				var input = document.createElement("input");
+	    		input.type = "hidden";
+	    		input.name = item;
+	    		input.value = val;
+	    		form.insertBefore(input, null);
+			}
+			document.body.appendChild(form);
+			form.submit();
+			document.body.removeChild(form);
+		}
+	    ,fnGetList : function(){
+	        var self = this;
+	        <!-- 페이징 추가 6-->
+			var startNum = ((self.selectPage-1) * 9);
+			var lastNum = (self.selectPage * 9)+1;
+	        var nparmap = {keyword : self.keyword,
+					kind : self.selectItem, 
+					startNum : startNum, 
+					lastNum : lastNum,
+					arrayOrder : self.arrayOrder,
+					keyword : self.keyword};
+	        $.ajax({
+	            url:"/myInfoGift2List.dox",
+	            dataType:"json",	
+	            type : "POST", 
+	            data : nparmap,
+	            success : function(data) {
+	            	self.list = data.list;
+	                console.log(data);
+	                self.cnt = data.cnt;
+	                console.log(self.cnt);
+	                self.pageCount = Math.ceil(self.cnt / 9);
+	            }
+	        }); 
+	    } 
+	    , fnSendMove : function(item){
+	    	var self = this;
+	    	self.pageChange("/myInfoGift2Send.do", {product : item, checkedBox: self.checkedBox})
+	    	
+	    }
+	    , fnSearchList : function(){
+	    	var self = this;
+	    	self.fnGetList();
+	    }
+
     }   
     , created: function () {
     	var self = this;
+    	self.fnGetList();
 
 	}
 });

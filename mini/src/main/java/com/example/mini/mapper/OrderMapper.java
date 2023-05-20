@@ -21,6 +21,8 @@ public interface OrderMapper {
 	
 	Order selectCardBackgroundInfo(HashMap<String, Object> map); //카드 썸네일
 	
+	void insertReturnGift(HashMap<String, Object> map);
+	
 //	int selectUserCnt(HashMap<String, Object> map); //중복체크
 //	
 //	void insertUser(HashMap<String, Object> map); //회원가입

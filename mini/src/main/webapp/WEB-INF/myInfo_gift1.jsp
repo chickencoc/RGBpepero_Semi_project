@@ -75,11 +75,11 @@
             </div>
             <div class="cardImg_list" > <!-- 사진 전체 묶음 -->
                 <div class="cardThumbnail"  v-for="(item, index) in list" :key="index">
-                    <a href="javascript:;" @click=fnProdMove(item.productNo)>
-                        <img class="card" src="item.imgsrc" alt="">
+                    <a href="javascript:;" @click=fnProdMove(item)>
+                        <img class="card" :src="item.imgsrc" alt="">
                         <div class="cardList1">
                             <div>{{item.pName}}</div>
-                            <div>{{item.price}}원</div>
+                            <div>{{(item.pPrice).toLocaleString()}}원</div>
                         </div>
                     </a>
                 </div>   
@@ -128,8 +128,8 @@ var app = new Vue({
     	fnGetList : function(){
             var self = this;
             <!-- 페이징 추가 6-->
-			var startNum = ((self.selectPage-1) * 6)+1;
-    		var lastNum = (self.selectPage * 6);
+			var startNum = ((self.selectPage-1) * 6);
+    		var lastNum = (self.selectPage * 6)+1;
             var nparmap = {keyword : self.keyword,
     				kind : self.selectItem, 
     				startNum : startNum, 
@@ -153,8 +153,8 @@ var app = new Vue({
 	    , fnSearch : function(pageNum){
 			var self = this;
 			self.selectPage = pageNum;
-			var startNum = ((pageNum-1) * 6)+1;
-			var lastNum = (pageNum * 6);
+			var startNum = ((pageNum-1) * 6);
+			var lastNum = (pageNum * 6)+1;
 			var nparmap = {startNum : startNum, lastNum : lastNum};
 			$.ajax({
 				url : "/myInfoGift1.dox",
@@ -169,9 +169,9 @@ var app = new Vue({
 					}
 				});
 			}
-	    , fnProdMove : function(productNo){
+	    , fnProdMove : function(item){
 	    	var self = this;
-	    	self.pageChange("/myInfoGift1Send.do", {productNo : productNo, checkedBox: self.checkedBox});
+	    	self.pageChange("/myInfoGift1Send.do", {product : item, checkedBox: self.checkedBox});
 	    	
 	    }
 	    , pageChange : function(url, param) {

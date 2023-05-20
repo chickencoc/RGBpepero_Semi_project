@@ -26,11 +26,11 @@
 							<td class="info_box_goods_table_img" rowspan="6"><img
 								class="info_box_goods_img"></td>
 							<td class="info_box_goods_table_text fundLists">상품 이름</td>
-							<td class="info_box_goods_table_cnt_price fundListA" colspan="2">{{pdName}}</td>
+							<td class="info_box_goods_table_cnt_price fundListA" colspan="2">{{info.pName}}</td>
 						</tr>
 						<tr>
 							<td class="fundLists">상품 가격</td>
-							<td class="fundListA" colspan="2">{{pdPrice}}원</td>
+							<td class="fundListA" colspan="2">{{info.pPrice}}원</td>
 						</tr>
 						<tr>
 							<td class="fundLists">남은 금액</td>
@@ -65,8 +65,8 @@
 								</div>
 							</td>
 							<td class="fundGuagePerBox">
-								<p class="fundGuagePer" v-if="percent >= addPercent">{{percent}}%</p>
-								<p class="fundGuagePer" v-else>{{percent}}% / {{addPercent}}%</p>
+								<p class="fundGuagePer" v-if="percent >= addPercent">{{info.progVal}}%</p>
+								<p class="fundGuagePer" v-else>{{info.progVal}}% / {{addPercent}}%</p>
 							</td>
 						</tr>
 					</table>
@@ -143,19 +143,39 @@
 			gname: "${gname}",
 			gphone: "${phone}",
 			gaddress: "${address}",
-			pdName: '',
-			productNo: '',
+			info: '${item}',
+			productNo: '${item.productNo}',
 			pdPrice: 100000,
 			givePrice: '',
 			remain: 90000,
-			percent: 10,
+			percent: '${item.progVal}',
 			addPercent: 10,
 			sendContent: '',
 			REGISTRYNO: '',
 			FUNDINGNO: ''
 
-		},
-		methods : {
+		}
+		, computed: {
+			fnOrderNo : function() { //주문번호 생성 ( O + 2자리년도 + 월 + 일 + 시간 + 분 + 초 + 랜덤 3자리수 )
+		        let date = new Date();
+		        let num1 = "";
+		        let arr = [date.getFullYear().toString().substring(2,4)
+		                    , (date.getMonth() + 1).toString()
+		                    , date.getDate().toString()
+		                    , date.getHours().toString()
+		                    , date.getMinutes().toString()
+		                    , date.getSeconds().toString()
+		                ];
+		        for(var i in arr) { //년도부터 초까지 한자리 수이면 앞에 0 붙여줌
+		            if(arr[i].length < 2) arr[i] = 0 + arr[i];
+		            num1 += arr[i];
+		        }
+		        let num2 = Math.random();
+		        num2 = num2.toString().substring(2,5); //랜덤 3자리 수 생성
+
+		        return 'O' + num1 + num2;
+			}
+		, methods : {
 			fnGuest : function() {
 				var self = this;
 				var nparmap = { };
@@ -212,11 +232,11 @@
 			},
 			requestPay: function () { //결제창
 				var self = this;
-				orderno = self.fnOrderNo;
+				var orderno = self.fnOrderNo;
 				IMP.request_pay({ // param
 		          pg : "kcp.{test}",
 		          merchant_uid : orderno,
-		          name : self.pdName,
+		          name : self.list.pName,
 		          amount : self.totalPrice,
 		          buyer_email : "gildong@gmail.com",
 		          buyer_name : "홍길동",
@@ -225,7 +245,7 @@
 		          buyer_postcode : "01181"
 		        }, rsp => { // callback
 	                if (rsp.success) {
-	                	fnOrder(merchant_uid);
+	                	self.fnOrder(orderno);
 	                } else {
 	                    console.log(rsp);
 	                }

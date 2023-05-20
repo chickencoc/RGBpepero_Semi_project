@@ -30,9 +30,9 @@
                         </tr>
                         <tr>
                             <td class="info_box_goods_table_img"><img class="info_box_goods_img"></td>
-                            <td class="info_box_goods_table_text">{{list.pdName}}</td>
-                            <td class="info_box_goods_table_cnt_price">{{totalCnt}} 개</td>
-                            <td class="info_box_goods_table_cnt_price">{{list.pdPrice}} 원</td>
+                            <td class="info_box_goods_table_text">{{list.pName}}</td>
+                            <td class="info_box_goods_table_cnt_price">{{list.rCnt}} 개</td>
+                            <td class="info_box_goods_table_cnt_price">{{list.totalprice}} 원</td>
                         </tr>
                     </table>
                 </fieldset>
@@ -130,17 +130,15 @@
 	var app = new Vue({ 
 	    el: '#app'
 	    , data: {
-	    	userId: 'admin123',
 			gname: "${gname}",
 			gphone: '',
 			gaddress: "${address}",
 			uname: '',
 			uphone: '',
 			uaddress: '',
-			productNo: 1,
-			list: {pdName : 'TEST1', pdPrice : 100000},
-			totalPrice: 0,
-			totalCnt: 2,
+			list: [],
+			totalPrice: '',
+			totalCnt: '',
 			shipMemo: '',
 			sendContent: '',
 			purchase: 'C',
@@ -171,12 +169,11 @@
 			fnPdList : function() {
 				var self = this;
 	
-				self.totalPrice = self.list.pdPrice;
 				
 			},
 			fnUserInfo : function() {
 				var self = this;
-				var nparmap = {userId : self.userId};
+				var nparmap = {userId : self.list.userId};
 	        	$.ajax({
 	    			url : "/guest/userInfo.dox",
 	    			dataType : "json",
@@ -194,11 +191,11 @@
 			},
 			requestPay: function () { //결제창
 				var self = this;
-				orderno = self.fnOrderNo;
+				var orderno = self.fnOrderNo;
 				IMP.request_pay({ // param
 		          pg : "kcp.{test}",
 		          merchant_uid : orderno,
-		          name : self.list.pdName,
+		          name : self.list.pName,
 		          amount : self.totalPrice,
 		          buyer_email : "gildong@gmail.com",
 		          buyer_name : "홍길동",
@@ -207,16 +204,19 @@
 		          buyer_postcode : "01181"
 		        }, rsp => { // callback
 	                if (rsp.success) {
-	                	fnOrder(merchant_uid);
+	                	self.fnOrder(orderno);
 	                } else {
 	                    console.log(rsp);
 	                }
 		        });
+//				if(confirm("결제??")) {
+//					self.fnOrder(orderno);
+//				}
 		      },
 			fnOrder : function(orderno) {
 				var self = this;
-				var nparmap = {userId : self.userId
-								, productNo : self.productNo 
+				var nparmap = {userId : self.list.userId
+								, productNo : self.list.productNo 
 								, totalPrice : self.totalPrice
 								, shipMemo : self.shipMemo
 								, sendContent : self.sendContent
@@ -241,14 +241,32 @@
 			fnPhoneThree : function() {
 				var self = this;
 				self.gphone = "${phone}".replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`);
+			},
+			fnGetItem : function() {
+				var self = this;
+				var nparmap = {};
+	        	$.ajax({
+	    			url : "/guest/getItem.dox",
+	    			dataType : "json",
+	    			type : "POST",
+	    			data : nparmap,
+	    			success : function(data) {
+	    				self.list = data.item;
+	    				console.log(self.list);
+	    				
+	    				self.totalPrice = data.item.totalprice;
+	    				self.totalCnt = data.item.rCnt;
+	    				
+	    				self.fnUserInfo();
+	    				self.fnPhoneThree();
+	    			}
+    			});
 			}
 	    
 		}
 		, created: function() {
 			var self = this;
-			self.fnPdList();
-			self.fnUserInfo();
-			self.fnPhoneThree();
+			self.fnGetItem();
 		}
 	});
 </script>

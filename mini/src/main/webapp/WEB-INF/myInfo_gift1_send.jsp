@@ -151,7 +151,7 @@
                 <div class="field_Area">
                     <fieldset class="product_Explane">
                         <div>{{info.pName}}</div>
-                        <div>{{info.total}}원</div>
+                        <div>{{info.pPrice}}원 X {{checkedBox.length}} 명 = {{(info.pPrice*checkedBox.length).toLocaleString()}}원</div>
                     </fieldset>
                         <fieldset class="customer_Explane" >
                             <div>받는사람</div>
@@ -200,7 +200,7 @@ var app = new Vue({
     el: '#app',
     data: {
 		info:{},
-		productNo : "${map.productNo}",
+		product : [],
 		cardContent : '',
 		userId : "${sessionId}",
 		checkedBox : [],
@@ -211,7 +211,7 @@ var app = new Vue({
     , methods: {
     	fnGetInfo : function() {
 			var self = this;
-			var nparmap = {productNo : self.productNo};
+			var nparmap = {productNo : self.product.productNo};
 			for(var i=0; i<self.checkedBox.length; i++){
 				var item=self.checkedBox[i];
 				var gPhone = item.gPhone;
@@ -233,7 +233,36 @@ var app = new Vue({
 				}
 			});
 		}
-    	,fnAddCard: function() {
+	    , pageChange : function(url, param) {
+			var target = "_self";
+			if(param == undefined){
+			//	this.linkCall(url);
+				return;
+			}
+			var form = document.createElement("form"); 
+			form.name = "dataform";
+			form.action = url;
+			form.method = "post";
+			form.target = target;
+			for(var name in param){
+				var item = name;
+				var val = "";
+				if(param[name] instanceof Object){
+					val = JSON.stringify(param[name]);
+				} else {
+					val = param[name];
+				}
+				var input = document.createElement("input");
+	    		input.type = "hidden";
+	    		input.name = item;
+	    		input.value = val;
+	    		form.insertBefore(input, null);
+			}
+			document.body.appendChild(form);
+			form.submit();
+			document.body.removeChild(form);
+		}
+    	,fn: function() {
     	    var self = this;
     	    if (confirm("작성을 완료하시겠습니까?")) {
     	    	var nparmap = {};
@@ -242,7 +271,7 @@ var app = new Vue({
 	    	            gPhone: self.gPhoneO[i],
 	    	            userId: self.userId,
 	    	            cardcontent: self.cardContent,
-	    	            productNo: self.productNo,
+	    	            productNo: self.product.productNo,
 	    	        };
 	    	         $.ajax({
 	    	            url: "/addCardContent.dox",
@@ -260,7 +289,7 @@ var app = new Vue({
     	}
     	,fnCardInfo : function() {
 			var self = this;
-			var nparmap = {productNo : self.productNo};			
+			var nparmap = {productNo : self.product.productNo};			
 			$.ajax({
 				url : "/myInfoGift1SendBackground.dox",
 				dataType : "json",
@@ -273,11 +302,16 @@ var app = new Vue({
 				}
 			});
 		}
+    	,fnAddCard : function(){
+    		var self = this;
+	    	self.pageChange("/myInfoGift8.do", {checkedBox: self.checkedBox, product : self.product})
+    	}
     }
    
     , created: function () {
     	var self = this;
     	self.checkedBox = JSON.parse('${map.checkedBox}');
+    	self.product = JSON.parse('${map.product}');
     	self.fnGetInfo();
     	self.fnCardInfo();
 

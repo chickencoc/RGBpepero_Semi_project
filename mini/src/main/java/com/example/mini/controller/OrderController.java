@@ -37,8 +37,9 @@ public class OrderController {
 	
 	@RequestMapping(value = "/myInfoGift9.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 	@ResponseBody
-	public String searchProdOrder(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+	public String searchProdOrder(HttpServletRequest request, HttpServletResponse response,Model model, @RequestParam HashMap<String, Object> map) throws Exception {
 		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		request.setAttribute("map", map);
 		Order order = orderService.searchProdOrder(map);
 		resultMap.put("info", order);
 		return new Gson().toJson(resultMap);
@@ -95,6 +96,23 @@ public class OrderController {
 		 HashMap<String, Object> resultMap = new HashMap<String, Object>();
 		 	resultMap = orderService.searchCardBackInfo(map);
 			resultMap.put("message", "성공");
+			return new Gson().toJson(resultMap);
+		}
+	 
+	 
+	 @RequestMapping("/myInfoGift8.do") 
+	    public String myInfoGift8(HttpServletRequest request, HttpServletResponse response, Model model,
+	    		@RequestParam HashMap<String, Object> map) throws Exception{
+		 request.setAttribute("map", map);
+	        return "/myInfo_gift8";
+		}
+	 
+	 @RequestMapping(value = "/addGiftOrder.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+		@ResponseBody
+		public String addGiftOrder(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+			HashMap<String, Object> resultMap = new HashMap<String, Object>();
+			orderService.addGiftOrder(map);
+			resultMap.put("result", "success");
 			return new Gson().toJson(resultMap);
 		}
 }

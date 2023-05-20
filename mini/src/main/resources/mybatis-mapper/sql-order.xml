@@ -45,29 +45,27 @@
 		WHERE (O.G_PHONE IS NULL OR G.G_PHONE IS NOT NULL)
 			AND (O.USERID IS NULL OR U.USERID IS NOT NULL)
 		    AND G.USERID = #{userId} 
-<!-- 		    AND D.DELIVERYNO = #{deliveryNo}
-	 	    AND O.ORDERNO = #{orderNo} -->
+		    AND D.DELIVERYNO = #{deliveryNo}
+	 	    AND O.ORDERNO = #{orderNo} 
 		
 	</select>
 	
 	<select id="selectProdList" parameterType="hashmap" resultType="com.example.mini.model.Order">
 		SELECT P.PRODUCTNO,
-			FORMAT(P_PRICE, 0) AS PRICE,
+			P_PRICE,
 			P_NAME,
 			P_CDATETIME,
+            P_KIND,
 			PI.SRCIMGNO,
             PI.IMGSRC,
             PI.IMGNAME,
             PI.ORGNAME,
-            PI.IMGTYPE,
-            O_CNT,
-            FORMAT(P_PRICE*O_CNT, 0) AS TOTAL,
-            C.NAME 
+            PI.IMGTYPE
 		FROM mini_db2.T1_PRODUCT P
 		LEFT JOIN mini_db2.T1_PDIMAGE PI ON PI.PRODUCTNO = P.PRODUCTNO
-		INNER JOIN mini_db2.T1_ORDER O ON O.PRODUCTNO = P.PRODUCTNO
-		LEFT JOIN mini_db2.T1_CODE C ON C.CODE = P.P_KIND AND C.KIND = 'CATEGORY'
-		WHERE C.NAME = '답례품'
+        WHERE P_KIND = 'R'
+			AND P_NAME LIKE '%카드%'
+			AND MAINYN = 'Y'
 		 <if test="arrayOrder == 'like'">
         ORDER BY like_count
     	</if>
@@ -83,27 +81,26 @@
 	<select id="prodCardCnt" parameterType="hashmap" resultType="int">
 		SELECT COUNT(*) AS CNT
 		FROM mini_db2.T1_PRODUCT P
-		LEFT JOIN mini_db2.T1_CODE C ON C.CODE = P.P_KIND AND C.KIND = 'CATEGORY'
-		WHERE C.NAME = '답례품'
+		LEFT JOIN mini_db2.T1_PDIMAGE PI ON PI.PRODUCTNO = P.PRODUCTNO
+		WHERE P_KIND = 'R'
+			AND P_NAME LIKE '%카드%'
+			AND MAINYN = 'Y'
 	</select>
 	<select id="selectCardInfo" parameterType="hashmap" resultType="com.example.mini.model.Order">
 		SELECT  DISTINCT 
 			P.PRODUCTNO,
-			FORMAT(P_PRICE, 0) AS PRICE,
+			P_PRICE,
 			P_NAME,
 			P_CDATETIME,
 			PI.SRCIMGNO,
             PI.IMGSRC,
             PI.IMGNAME,
             PI.ORGNAME,
-            PI.IMGTYPE,
-            O_CNT,
-            FORMAT(P_PRICE*O_CNT, 0) AS TOTAL 
+            PI.IMGTYPE
 		FROM mini_db2.T1_PRODUCT P
 		LEFT JOIN mini_db2.T1_PDIMAGE PI ON PI.PRODUCTNO = P.PRODUCTNO
-		INNER JOIN mini_db2.T1_ORDER O ON O.PRODUCTNO = P.PRODUCTNO
 		WHERE P.PRODUCTNO = #{productNo}
-		AND MAINYN = 'Y'
+			AND MAINYN = 'Y'
 	</select>
 	
 	<insert id="insertCardContent" parameterType="hashmap">
@@ -115,22 +112,25 @@
 	<select id="selectCardBackgroundInfo" parameterType="hashmap" resultType="com.example.mini.model.Order">
 		SELECT  DISTINCT 
 			P.PRODUCTNO,
-			FORMAT(P_PRICE, 0) AS PRICE,
+			P_PRICE,
 			P_NAME,
 			P_CDATETIME,
 			PI.SRCIMGNO,
             PI.IMGSRC,
             PI.IMGNAME,
             PI.ORGNAME,
-            PI.IMGTYPE,
-            O_CNT,
-            FORMAT(P_PRICE*O_CNT, 0) AS TOTAL 
+            PI.IMGTYPE
 		FROM mini_db2.T1_PRODUCT P
 		LEFT JOIN mini_db2.T1_PDIMAGE PI ON PI.PRODUCTNO = P.PRODUCTNO
-		INNER JOIN mini_db2.T1_ORDER O ON O.PRODUCTNO = P.PRODUCTNO
 		WHERE P.PRODUCTNO = #{productNo} 
 		AND MAINYN = 'T'
 	</select>
+	
+		<insert id="insertReturnGift" parameterType="hashmap">
+		INSERT INTO T1_RETURN
+		VALUES 
+			(NULL, #{userId}, #{gPhone}, NOW(), #{productNo}, #{orderNo})
+	</insert>
 </mapper>
 <!-- 	<select id="selectUserCnt" parameterType="hashmap" resultType="int">
 		SELECT COUNT(*) AS CNT

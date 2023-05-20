@@ -147,16 +147,18 @@
 					</div>
 					<div class="inputs">
 						<div>
-							상품명<input type="text" class="input_Elememt" id="product_Name">
+							상품명<input type="text" class="input_Elememt" id="product_Name" v-model="pName">
 						</div>
 						<div>
-							개수<input type="number" class="input_Elememt" id="product_Cnt">개
+							개수<input type="number" class="input_Elememt" id="product_Cnt"v-model="pStock">개
 						</div>
 						<div>
-							가격<input type="text" class="input_Elememt" id="product_Price">원
+							가격<input type="text" class="input_Elememt" id="product_Price" v-model="price">원
 						</div>
 						<div>
-							상품종류<input type="text" class="input_Elememt" id="product_Kind">
+							상품종류<select>
+									<option></option>
+								 </select>
 						</div>
 					</div>
 				</div>

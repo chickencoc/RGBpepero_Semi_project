@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.example.mini.dao.BoardService;
 import com.example.mini.mapper.BoardMapper;
 import com.example.mini.model.Board;
+import com.example.mini.model.BrdReply;
 import com.google.gson.Gson;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -180,7 +181,44 @@ public class BoardController {
 		return new Gson().toJson(resultMap);
 }
   
+//  댓글 가져오기
   
+  @RequestMapping(value = "board/readReply.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String searchBrdReply(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		BrdReply reply = boardService.searchBrdReply(map);
+		resultMap.put("reply", reply);
+		resultMap.put("result", "success");
+		return new Gson().toJson(resultMap);
+	}
+  
+  @RequestMapping(value = "board/addReply.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String addBrdReply(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		boardService.addBrdReply(map);
+		resultMap.put("result", "success");
+		return new Gson().toJson(resultMap);
+	}
+  @RequestMapping(value = "/board/editReply.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String editReply(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		boardService.editBrdReply(map);
+		resultMap.put("result", "success");
+		return new Gson().toJson(resultMap);
+}
+  
+  
+  @RequestMapping(value = "/board/deleteReply.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String delReply(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		boardService.delBrdReply(map);
+		resultMap.put("result", "success");
+		return new Gson().toJson(resultMap);
+}
     
     
     @RequestMapping("/boardTable.do") 

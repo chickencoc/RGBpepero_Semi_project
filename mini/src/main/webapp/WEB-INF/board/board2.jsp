@@ -23,8 +23,8 @@
             <div id="board_info_line"><span id="board_info_cat">{{boardName}}</span><span>{{info.name}}</span><span>조회수 : {{info.viewCnt}}</span></div>
             <div id="board_info_line2"><span>{{info.cdatetime}} 작성됨</span><span v-if="info.udatetime!=null">{{info.udatetime}} 수정됨</span></div>
             <div id="board_img_list">
-       			<div v-for="(item, index) in list">
-       				<img :src="item.imgsrc">
+       			<div v-for="(item, index) in list" id="brdImgBox">
+       				<img :src="item.imgsrc" class="brdImgLine">
        			</div>     	
             </div>
             <div id="board_info_content" v-html="content"></div>
@@ -32,19 +32,25 @@
             <div></div>
             <template>
             <div id="newreplybox" v-if="info.boardKind != '2' && AccountStatus == 'S' ">
-            <button class="board_btn" id="btn_del" @click="fnBoardDel">삭제</button><button class="board_btn" id="btn_edit" @click="fnBoardEdit">수정</button>
+            <button class="board_btn" id="btn_del" @click="fnBoardDel">삭제</button><button class="board_btn" id="btn_edit" @click="fnBoardEdit">수정</button><button  class="board_btn" @click="fnGoList()">목록으로</button>
             </div>
-            <div id="newreplybox" v-if="info.replyYn == 'Y'">
-                <div id="reply_head">질문사항 답변<button class="board_btn" id="btn_del" @click="fnBoardDel">삭제</button><button class="board_btn" id="btn_edit" @click="fnBoardEdit">수정</button><button v-if="AccountStatus == 'S' && info.replyYn == 'Y'" class="board_btn" id="btn_reply">답변 수정</button></div>
-                <div id="board_info_line">{{reply.name}}</div>
-                <div id="board_info_line"><span>{{reply.cdatetime}} 작성됨</span></div>
-                <div id="board_info_content">{{reply.content}}</div>
+            <div id="newreplybox" v-if="info.replyYn == 'Y'&& info.boardKind == '2' && !editFlg">
+                <div id="reply_head">질문사항 답변<button class="board_btn" id="btn_del" @click="fnBoardDel">게시글 삭제</button><button class="board_btn" id="btn_del" @click="fnReplyDel" v-if="AccountStatus == 'S'">답변 삭제</button><button class="board_btn" id="btn_edit" @click="fnBoardEdit">수정</button><button v-if="AccountStatus == 'S'" class="board_btn" id="btn_reply" @click="fnEditFlg">답변 수정</button><button @click="fnGoList()" class="board_btn">목록으로</button></div>
+                <div id="board_info_line"><span>제목</span><span>{{reply.title}}</span></div>
+                <div id="board_info_line"><span>작성자</span><span>{{reply.name}}</span></div>
+                <div id="board_info_line"><span>{{reply.cDatetime}} 작성됨</span><span v-if="reply.uDatetime != null">{{reply.uDatetime}} 수정됨</span></div>
+                <div id="board_info_content"  v-html="reply.content"></div>
             </div>
             <div id="newreplybox" v-if="info.replyYn == 'N' && info.boardKind == '2'">
-                <div id="reply_head">질문사항 답변<button class="board_btn" id="btn_del" @click="fnBoardDel">삭제</button><button class="board_btn" id="btn_edit" @click="fnBoardEdit">수정</button><button v-if="AccountStatus == 'S'" class="board_btn" id="btn_reply">답변</button></div>
+                <div id="reply_head">질문사항 답변<button class="board_btn" id="btn_del" @click="fnBoardDel">게시글 삭제</button><button class="board_btn" id="btn_edit" @click="fnBoardEdit">수정</button><button v-if="AccountStatus == 'S'" class="board_btn" id="btn_reply" @click="fnBrdReplyAdd">답변</button><button @click="fnGoList()" class="board_btn">목록으로</button></div>
                 <div v-if="AccountStatus != 'S'">아직 답변이 작성되지 않았습니다.</div>
             </div>
             <div id="newreplybox" v-if="info.replyYn == 'N' && info.boardKind == '2' && AccountStatus == 'S'">
+            	<input type="text" id="title" name="title" v-model="replyTitle" placeholder="제목을 입력해 주세요.">
+            	<vue-editor id="editor" v-model="replyContent"></vue-editor>
+            </div>
+            <div id="newreplybox" v-if="info.replyYn == 'Y' && info.boardKind == '2' && AccountStatus == 'S' && editFlg">
+            	<div id="reply_head">질문사항 답변<button class="board_btn" id="btn_del" @click="fnBoardDel">게시글 삭제</button><button class="board_btn" id="btn_del" @click="fnReplyDel" v-if="AccountStatus == 'S'">답변 삭제</button><button class="board_btn" id="btn_edit" @click="fnBoardEdit">수정</button><button class="board_btn" id="btn_edit" @click="fnBrdReplyEdit">수정 완료</button><button v-if="AccountStatus == 'S'" class="board_btn" id="btn_reply" @click="fnEditFlg">답변 수정 취소</button><button @click="fnGoList()" class="board_btn">목록으로</button></div>
             	<input type="text" id="title" name="title" v-model="replyTitle" placeholder="제목을 입력해 주세요.">
             	<vue-editor id="editor" v-model="replyContent"></vue-editor>
             </div>
@@ -68,10 +74,13 @@ const VueEditor = Vue2Editor.VueEditor;
            , boardNo : "${map.boardNo}"
      	   , sessionId : "${sessionId}"
      	   , AccountStatus : "${sessionStatus}"
+     	   , replyNo : ""
      	   , replyTitle : ""
      	   , replyContent : ""
      	   , content : ""
      	   , boardKind : ""
+     	   , userId : "${sessionId}"
+     	   , editFlg : false
         }
     	, components: {VueEditor}
         , methods: {
@@ -134,39 +143,71 @@ const VueEditor = Vue2Editor.VueEditor;
     		document.body.appendChild(form);
     		form.submit();
     		document.body.removeChild(form);
-    	},
-        
-        fnAddReply : function(){
+    	}
+        , fnBoardEdit : function(){
+        	var self = this;
+    		self.pageChange("./boardEdit.do", {boardNo : self.boardNo});
+        }
+        ,fnGetReplyInfo : function(){
             var self = this;
-            var nparmap = { boardNo : self.boardNo ,title : self.replyTitle, content : self.replyContent, userId : self.userId };
-             $.ajax({
-                url:"/board/addReply.dox",
+            var nparmap = {boardNo : self.boardNo};
+            $.ajax({
+                url:"board/readReply.dox",
                 dataType:"json",	
                 type : "POST", 
                 data : nparmap,
                 success : function(data) {
-                	/* var form = new FormData();
-                	console.log( $("#file1")[0].files.length);
-                	for(var i=0;i < $("#file1")[0].files.length;i++){
-                		console.log($("#file1")[0].files);
-                		console.log($("#file1")[0].files[i]);
-                		 form.append( "file1",  $("#file1")[0].files[i] );
-    	       	     	 form.append( "boardNo",  data.boardNo); // pk
-    	       	     	 console.log(form);
-    	           		 self.upload(form);
-    	           		 form.delete("file1");
-    	           		 form.delete("boardNo");
-                	}  */
-                	alert("저장되었습니다.");
-                	 self.fnGoList(); 
+                    self.reply = data.reply;
+                    self.replyTitle =  self.reply.title;
+                  	self.replyContent = self.reply.content;
+                  	self.replyNo = self.reply.replyNo;
+                  	console.log(self.replyNo);
+                }
+            }); 
+        },fnEditFlg : function (){
+        	var self = this;
+        	self.editFlg = !self.editFlg;
+        }
+        ,fnBrdReplyEdit : function(){
+       	 var self = this;
+            var nparmap = { replyNo : self.replyNo ,title : self.replyTitle, content : self.replyContent};
+             $.ajax({
+                url:"/board/editReply.dox",
+                dataType:"json",	
+                type : "POST", 
+                data : nparmap,
+                success : function(data) {
+               	 alert("저장되었습니다.");
+               	 self.editFlg = !self.editFlg;
+               	 self.pageChange("./readBoard.do", {boardNo : boardNo});
+               }
+           });  
+       }
+        ,fnBrdReplyAdd : function(){
+        	 var self = this;
+        	 if(self.replyTitle == ''){
+        		 alert("제목이 비어있습니다.");
+        		 return;
+        	 }else if(self.replyContent == ''){
+        		 alert("내용이 비어있습니다.");
+        		 return;
+        	 }
+        	 if(!confirm("답변하시겠습니까?")){
+ 				
+ 				return;
+ 			};
+             var nparmap = { boardNo : self.boardNo ,title : self.replyTitle, content : self.replyContent, userId : self.userId };
+              $.ajax({
+                 url:"/board/addReply.dox",
+                 dataType:"json",	
+                 type : "POST", 
+                 data : nparmap,
+                 success : function(data) {
+                	 alert("저장되었습니다.");
+                	 self.pageChange("./readBoard.do", {boardNo : boardNo});
                 }
             });  
         } 
-        , fnBoardEdit : function(){
-        	var self = this;
-        	alert(self.boardNo);
-    		self.pageChange("./boardEdit.do", {boardNo : self.boardNo});
-        }
         , fnBoardDel : function(){
             var self = this;
             var nparmap = {boardNo : self.boardNo};
@@ -193,6 +234,47 @@ const VueEditor = Vue2Editor.VueEditor;
         	        }
                 }
             });  
+        } , fnReplyDel : function(){
+            var self = this;
+            var nparmap = {replyNo : self.replyNo ,boardNo : self.boardNo};
+			if(!confirm("정말 삭제하시겠습니까?")){
+				
+				return;
+			};
+             $.ajax({
+                url:"/board/deleteReply.dox",
+                dataType:"json",	
+                type : "POST", 
+                data : nparmap,
+                success : function(data) { 
+                	alert("삭제되었습니다.");
+                	if(self.boardKind == '1'){
+                		location.href = "/notice.do";
+        	        }else if(self.boardKind == '2'){
+        	        	location.href = "/inquery.do";
+        	        }else if(self.boardKind == '3'){
+        	        	location.href = "/board30.do";
+        	        }
+        	        else{
+        	        	location.href = "/main.do";
+        	        }
+                }
+            });  
+        }
+        
+        ,fnGoList(){
+        	var self= this;
+        	
+        	if(self.boardKind == '1'){
+        		location.href = "/notice.do";
+	        }else if(self.boardKind == '2'){
+	        	location.href = "/inquery.do";
+	        }else if(self.boardKind == '3'){
+	        	location.href = "/board30.do";
+	        }
+	        else{
+	        	location.href = "/main.do";
+	        }
         } 
     	// 파일 업로드
 	    , upload : function(){
@@ -231,6 +313,7 @@ const VueEditor = Vue2Editor.VueEditor;
             var self = this;
             self.fnGetInfo();
             self.fnGetImgList();
+            self.fnGetReplyInfo();
         }
     });
     </script>

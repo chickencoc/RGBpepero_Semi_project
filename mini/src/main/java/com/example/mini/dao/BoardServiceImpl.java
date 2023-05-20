@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.example.mini.mapper.BoardMapper;
 import com.example.mini.model.Board;
 import com.example.mini.model.BrdImg;
+import com.example.mini.model.BrdReply;
 @Service
 public class BoardServiceImpl implements BoardService{
 
@@ -26,10 +27,10 @@ public class BoardServiceImpl implements BoardService{
 
 	@Override
 	public Board searchBoard(HashMap<String, Object> map) throws Exception {
-		Board board = boardMapper.readBoard(map);
+		Board board = boardMapper.selectBoard(map);
 		if(board != null) {
 			boardMapper.updateViewCnt(map);
-			board = boardMapper.readBoard(map);
+			board = boardMapper.selectBoard(map);
 		}
 		return board;
 	}
@@ -61,10 +62,36 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public HashMap<String, Object> searchBrdImgList(HashMap<String, Object> map) throws Exception {
 		HashMap<String, Object> resultMap = new HashMap<String, Object>();
-		List<BrdImg> brdImg = boardMapper.readBoardImg(map);
+		List<BrdImg> brdImg = boardMapper.selectBoardImg(map);
 		resultMap.put("result", "success");
 		resultMap.put("brdImg", brdImg);
 		return resultMap;
+	}
+
+	@Override
+	public BrdReply searchBrdReply(HashMap<String, Object> map) throws Exception {
+		BrdReply brdReply = boardMapper.selectBrdReply(map);
+		return brdReply;
+	}
+
+	@Override
+	public void addBrdReply(HashMap<String, Object> map) throws Exception {
+		boardMapper.insertBrdReply(map);
+		boardMapper.updateBrdWhenReply(map);
+		
+	}
+
+	@Override
+	public void editBrdReply(HashMap<String, Object> map) throws Exception {
+		boardMapper.updateBrdReply(map);
+		
+	}
+
+	@Override
+	public void delBrdReply(HashMap<String, Object> map) throws Exception {
+		boardMapper.deleteBrdReply(map);
+		boardMapper.updateBrdWhenDelReply(map);
+		
 	}
 
 

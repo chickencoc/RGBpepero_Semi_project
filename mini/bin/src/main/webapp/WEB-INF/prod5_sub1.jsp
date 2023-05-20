@@ -94,6 +94,7 @@
     </style>
 </head>
 <body>
+<div id="app">
     <div id="wrapper">
         <div class="container">
             <h1>식장정보 관리</h1>
@@ -102,33 +103,39 @@
                     <img src="../image/plus.png" id="plus">
                 </div>
                 <div class="wedding_Information">
-                    <div><label>웨딩홀 이름 <input type="text" class="wedding_Hall_Name"></label></div>
-                    <div><label>웨딩홀 주소 <input type="text" class="wedding_Hall_Address"></label></div>
-                    <div><label>웨딩홀 URL <input type="text" class="wedding_Hall_URL"></label></div>
+                    <div><label>웨딩홀 이름 <input type="text" class="wedding_Hall_Name" v-model="wName"></label></div>
+                    <div><label>웨딩홀 주소 <input type="text" class="wedding_Hall_Address" v-model="wAddr"></label></div>
+                    <div><label>웨딩홀 URL <input type="text" class="wedding_Hall_URL" v-model="wUrl"></label></div>  
                     <div class="wedding_Hall_Location">
                         웨딩홀 지역 
-                        <select class="wedding_Hall_Location_List"> 
-                            <option>지역선택</option>
-                            <option>서울</option>
-                            <option>경기</option>
-                            <option>강원</option>
-                            <option>경북</option>
-                            <option>경남</option>
-                            <option>충북</option>
-                            <option>충남</option>
-                            <option>전남</option>
-                            <option>전북</option>
-                        </select> 
+                        <select class="location" v-model="wLocation">
+		                    <option value="">::전체::</option>
+		                    <option value="서울특별시">서울</option>
+		                    <option value="경기도">경기도</option>
+		                    <option value="강원도">강원도</option>
+		                    <option value="경상도">경상도</option>
+		                    <option value="전라도">전라도</option>
+		                    <option value="충청도">충청도</option>
+		                    <option value="인천광역시">인천</option>
+		                    <option value="광주광역시">광주</option>
+		                    <option value="대전광역시">대전</option>
+		                     <option value="대구광역시">대구</option>
+		                    <option value="울산광역시">울산</option>
+		                    <option value="부산광역시">부산</option>
+		                    <option value="제주도">제주도</option>  
+		                </select>
                     </div>
+                    <div><label><input type="file" id="file1" name="file1" accept="image/*" v-model="wFile"></label></div>
                 </div>
            </fieldset>
            <div class="buttons">
                 <button id="del_Btn">삭제</button>
                 <button id="back_Btn">돌아가기</button>
-                <button id="sub_Btn">등록하기</button>
+                <button id="sub_Btn" @click="fnAdd">등록하기</button>
             </div>
         </div>
     </div>
+  </div> 
 </body>
 </html>
 <jsp:include page="/layout/footer.jsp"></jsp:include>
@@ -136,14 +143,73 @@
 var app = new Vue({ 
     el: '#app',
     data: {
-
+    	wName : '',
+    	wAddr : '',
+    	wUrl : '',
+    	wLocation : '',
+    	wFile :''
     }   
     , methods: {
+    	fnAdd : function(){
+            var self = this;
+            var nparmap = {wName: self.wName,
+            		wAddr : self.wAddr,
+            		wUrl : self.wUrl,
+            		wLocation : self.wLocation};
+            if(self.wName==''){
+            	alert("예식장 이름을 입력하세요.")
+            } else if(self.wAddr==''){
+            	alert("예식장 주소를 입력하세요.")
+            } else if(self.wUrl==''){
+            	alert("예식장 URL을 입력하세요.")
+            } else if(self.wLocation==''){
+            	alert("예식장 지역을 선택하세요.")
+            } else if(self.wFile==''){
+            	alert("예식장 사진을 첨부하세요.")
+            }
+            else{ $.ajax({
+	                url:"addWedding.dox",
+	                dataType:"json",	
+	                type : "POST", 
+	                data : nparmap,
+	                success : function(data) {
+	                	var form = new FormData();
+	                	console.log(data);
+		       	        form.append( "file1",  $("#file1")[0].files[0] );
+		       	     	form.append( "weddingNo",  data.weddingNo); // pk
+		       	     	console.log($("#file1")[0].files[0]);
+		       	     	console.log(form[0]);
+		           		self.upload(form);
+		       	     	alert("저장되었습니다.");
+		       	     	/* location.href="prod5sub0.do" */
+	                	} , error: function (e) { 
+	                		// 전송 후 에러 발생 시 실행 코드
+	                		console.log("ERROR : ", e); 
+	                	}
+	            });  
+            }
+        }
+    	, upload : function(form){
+    		var self= this; 
+        	 $.ajax({
+	             url : "weddingImgupload.dox"
+	           , type : "POST"
+	           , processData : false
+	           , contentType : false
+	           , data : form
+	           , success:function(response) { 
+	        	   
+           		}, error: function (e) { 
+           			// 전송 후 에러 발생 시 실행 코드
+           			console.log("ERROR : ", e); 
+           		}
+           
+       		});
+		}
 
     }   
     , created: function () {
     	var self = this;
-
 	}
 });
 </script>

@@ -3,8 +3,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script src="js/jquery.js"></script>
-<script src="js/vue.js"></script>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<jsp:include page="/layout/header.jsp"></jsp:include>
@@ -17,13 +15,13 @@
     <div id="app">
     <div id="wrapper">
         <div class="container" id="app">
-            <div class="return_gift_list_menu">
-                <a href="">회원정보</a>
-                <a href="">나의 레지스트리</a>
-                <a href="">받은 선물 목록</a>
-                <a href=""><strong>보낸답례품</strong></a>
-                <a href="">캘린더</a>
-            </div>
+			<div class="myinfo_category_list">
+				<a href="information.do">회원정보</a>
+				<a href="myRegistry.do">나의 레지스트리</a>
+				<a href="mygift.do">받은 선물 목록</a>
+				<a href="returngoods.do"><strong>보낸답례품</strong></a>
+				<a href="main.do">캘린더</a>
+			</div>  	
             <div class="returnSearchBox">
                 <input type="text" placeholder="이름" class="returnSearchBar search">
                 <button class="returnSearchBtn searchM">검색</button>
@@ -39,11 +37,11 @@
                         <th>보낸 날짜</th>
                         <th>금액</th>
                     </tr>
-                    <tr>
+                    <tr v-for="(item,index) in returnList">
                         <td rowspan="2" class="returnProdImgBox">
-                            <img src="/image/prod1.jpg" class="returnProdImg">
+                            <img :src="item.imgSrc" class="returnProdImg">
                         </td>
-                        <td class="returnProdNameBox">p_name</td>
+                        <td class="returnProdNameBox">{{pName}}</td>
                         <td class="returnGuestNameBox" rowspan="2">
                             <div class="returnGuestNameBox2">
                                 
@@ -53,16 +51,7 @@
                                 </div>
                                 <p>g_name</p>
                                 <div v-if="!guestFlg">
-                                    <p>g_name</p>
-                                    <p>g_name</p>
-                                    <p>g_name</p>
-                                    <p>g_name</p>
-                                    <p>g_name</p>
-                                    <p>g_name</p>
-                                    <p>g_name</p>
-                                    <p>g_name</p>
-                                    <p>g_name</p>
-                                    <p>g_name</p>
+                                    <p>{{gName}}</p>
                                 </div>
                             </div>
                         </td>
@@ -100,8 +89,16 @@ var app = new Vue({
         guestFlg : true,
         selectPage: 1,
         pageCount: 1,
-        cnt : 0
+<<<<<<< HEAD
+        cnt : 0,
+        returnList : [],
+		returnGuestList : []
+		
     }   
+=======
+        cnt : 0
+    }
+>>>>>>> branch 'main' of https://github.com/chickencoc/RGBpepero_Semi_project.git
     , methods: {
         fnShowGuest : function(){
             var self = this;
@@ -109,7 +106,25 @@ var app = new Vue({
         }
         ,fnSearch : function(){
 
-        }
+        },
+        fnGetProductList : function(){
+            var self = this;
+            var startNum = ((self.selectPage-1) * 6);
+    		var lastNum = (self.selectPage * 6);
+            var nparmap = {pKind : self.pKind ,startNum : startNum, lastNum : lastNum, keywordType : self.selectItem, keyword : self.keyword};
+            $.ajax({
+                url:"/productList.dox",
+                dataType:"json",	
+                type : "POST", 
+                data : nparmap,
+                success : function(data) { 
+                	self.list = data.product;
+                    self.cnt = data.cnt;
+                    self.pageCount = Math.ceil(self.cnt / 6);
+                    
+                	}
+           		}); 
+        	}
     }   
     , created: function () {
         var self = this;

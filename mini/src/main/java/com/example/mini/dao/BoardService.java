@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import com.example.mini.model.Board;
 import com.example.mini.model.BrdImg;
+import com.example.mini.model.BrdReply;
 
 public interface BoardService {
 	
@@ -27,4 +28,21 @@ public interface BoardService {
 	
 //	게시글 이미지 조회
 	HashMap<String, Object> searchBrdImgList(HashMap<String, Object> map) throws Exception;
+
+//	댓글 불러오기
+	BrdReply searchBrdReply(HashMap<String, Object> map) throws Exception;
+	
+//	댓글 추가
+	void addBrdReply(HashMap<String, Object> map) throws Exception;
+
+//	댓글 수정
+	void editBrdReply(HashMap<String, Object> map) throws Exception;
+
+//	댓글 삭제
+	void delBrdReply(HashMap<String, Object> map) throws Exception;
+	
+	
+	
+	
+
 }

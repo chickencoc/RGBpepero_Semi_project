@@ -19,7 +19,7 @@
             <span id="faq" class="boardmenu" @click="fnFaq">자주하는 질문</span>
             <div class="line"></div>
         </div>
-        <div class="boardbox">
+         <div class="boardbox">
             <div id="boardname">문의하기</div>
         </div>
         <div class="table_list">
@@ -35,20 +35,28 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="(item, index) in list" >
+                    <tr  v-for="(item, index) in list"  @click="fnView(item.boardNo)">
                         <td>{{index + 1}}</td>
-                        <td>아이콘</td>
+                        <template>
+	                        <td v-if="item.replyYn == 'Y'"><span><img src="/image/qa_icon2.gif"></span></td>
+	                        <td v-else><span><img src="/image/qa_icon1.gif"></span></td>
+                        </template>
                         <td>{{item.title}}</td>
                         <td>{{item.name}}</td>
-                        <td>{{item.cnt}}</td>
+                        <td>{{item.viewCnt}}</td>
                         <td>{{item.cdatetime}}</td>
                     </tr>
                 </tbody>
             </table>
+            <div id="btn_box">
+				<button @click="fnAdd()" class="btn" style="float:right;" v-if=" userId != '' && AccountStatus != 'S'">문의하기</button>
+			</div>
+        </div>
         </div>
         <div class="pagecontroll">
             < 1 2 3 >
         </div>
+        
     </div>
     <!-- wrap END -->
 </div>
@@ -58,36 +66,75 @@
     var app = new Vue({ 
         el: '#app',
         data: {
-            list : [],
+        	list : [],
             checkList : []
+    		, boardKind : "2"
+    		, userId : "${sessionId}"
+    		, AccountStatus : "${sessionStatus}"
         }   
         , methods: {
-            fnGetList : function(){
-                var self = this;
-                var nparmap = {};
-                $.ajax({
-                    url:"/bbs/list.dox",
-                    dataType:"json",	
-                    type : "POST", 
-                    data : nparmap,
-                    success : function(data) { 
-
-                    	self.list = data.list;
-                        console.log(data);
-                    }
-                }); 
-            }, 
         	fnFaq : function(){
         		location.href = "/board30.do";
         	},
         	fnAnounce : function(){
         		location.href = "/notice.do";
-        	} 
+        	}
+        	,
+            fnGetList : function(){
+                var self = this;
+                var nparmap = {boardKind : self.boardKind, userId : self.userId, AccountStatus : self.AccountStatus};
+                $.ajax({
+                    url:"/board/list.dox",
+                    dataType:"json",	
+                    type : "POST", 
+                    data : nparmap,
+                    success : function(data) { 
+                    	self.list = data.board;
+                        console.log(data);
+                    }
+                }); 
+            }
+        	, pageChange : function(url, param) {
+	    		var target = "_self";
+	    		if(param == undefined){
+	    		//	this.linkCall(url);
+	    			return;
+	    		}
+	    		var form = document.createElement("form"); 
+	    		form.name = "dataform";
+	    		form.action = url;
+	    		form.method = "post";
+	    		form.target = target;
+	    		for(var name in param){
+					var item = name;
+					var val = "";
+					if(param[name] instanceof Object){
+						val = JSON.stringify(param[name]);
+					} else {
+						val = param[name];
+					}
+					var input = document.createElement("input");
+		    		input.type = "hidden";
+		    		input.name = item;
+		    		input.value = val;
+		    		form.insertBefore(input, null);
+				}
+	    		document.body.appendChild(form);
+	    		form.submit();
+	    		document.body.removeChild(form);
+	    	}
+        	, fnView : function(boardNo){
+	    		var self = this;
+	    		self.pageChange("./readBoard.do", {boardNo : boardNo});
+	    	}
+        	, fnAdd : function(boardKind){
+	    		var self = this;
+	    		self.pageChange("./board3.do", {boardKind : self.boardKind});
+	    	} 
         }   
         , created: function () {
             var self = this;
-     
-    
+            self.fnGetList();
         }
     });
     </script>

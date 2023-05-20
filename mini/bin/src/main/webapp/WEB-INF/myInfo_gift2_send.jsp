@@ -16,57 +16,48 @@
 
 <body>
     <div id="app">
-			<div class="loginbox">
-            <ul>
-                <li><a href="#">{{name}}님 축하합니다</a></li>
-                <li><a href="#">마이페이지</a></li>
-                <li><a href="#">로그아웃</a></li>
-                <li><a href="#">고객센터</a></li>
-            </ul>
-        </div>
-        <div class="logobox">
-            <div id="logo"><img src="/image/logo_Marrimo.png"></div>
-        </div>
-    <!-- header END -->
+
     <!-- wrap START -->
     <div id="wrapper">
         <div class="container"> <!-- 전체 묶음 -->       
-            <div class="list">
-                <a href="">회원정보</a>
-                <a href="">나의 레지스트리</a>
-                <a href="">받은 선물 목록</a>
-                <a href="">보낸답례품</a>
-                <a href="">캘린더</a>
+            <div class="thxCard_title">답례품</div>
+            <div class="grid_Area1">
+                <div class="imgGrid">
+                   <img :src="info.imgsrc" id="main_Img">
+                  <!--  <div class="thumb_Nails"> 
+                        <img src="../image/card2.PNG" id="thumb1" onmouseover="changeImage(this.src)" onmouseout="restoreImage()">
+                        <img src="../image/card3.PNG" id="thumb2" onmouseover="changeImage(this.src)" onmouseout="restoreImage()">
+                        <img src="../image/card4.PNG" id="thumb3" onmouseover="changeImage(this.src)" onmouseout="restoreImage()">
+                   </div> -->
+                </div>  
+                <div class="field_Area">
+                    <fieldset class="product_Explane">
+                        <div>{{info.pName}}</div>
+                        <div>{{info.pPrice}}원 X {{checkedBox.length}} 명 = {{(info.pPrice*checkedBox.length).toLocaleString()}}원</div>
+                    </fieldset>
+                        <fieldset class="customer_Explane" >
+                            <div>받는사람</div>
+                            <div class="customer_Box">
+                            	<div v-for="(item, index) in checkedBox">{{item.gName}} {{item.gPhone}}</div>
+                            </div>
+                        </fieldset>  
+                </div>  
             </div>
-            <div class="returnGift">답례품</div>
-            <div class="productList"> 
-                    <div class="orderList_img">
-                        <img class="productMain" src="/img/defuser.jpg" alt="디퓨저 메인">
-                        <div class="productThumbnail">
-                            <img class="product1" src="/img/defuser1.jpg" alt="디퓨저 메인">
-                            <img class="product2" src="/img/defuser2.jpg" alt="디퓨저 메인">
-                            <img class="product3" src="/img/defuser3.jpg" alt="디퓨저 메인">
-                        </div>
-                    </div>              
-                    <div class="orderList_detail">
-                        <div class="orderList1">상품이름 : </div>
-                        <div class="orderList1">상품가격 : </div>
-                        <div class="orderList1">주문수량 :
-                            <select name="order" id="order">
-                                <option value="number">수량</option> 
-                            </select>
-                        </div>
-                    </div>  
-                <div class="personList">
-                    <div class="person">받는 사람</div>
-                    <div class="person1"></div>
+            <div class="hr_Line"><hr></div>
+            <div class="grid_Area2">
+                <h1 class="card_Spoil_Title">상세 설명</h1>
+                <div class="option_Box">                    
                 </div>
-                    <div class="productList1">
-                        <hr class="line">                      
-                        <div class="text">제품 상세 설명</div>
-                        <hr class="line1">
+                <div class="grid_Area3">
+                    <div class="thx_Card_Write">
+                    	<div class="writedCard" >{{info.pContent}}</div>
+                    <!-- 	<div>{{info.pDetail}}</div> -->
                     </div>
-                    <button class="btn">선물하기</button>   
+                    
+                </div>
+            </div>
+            <div class="send_Btn">
+                <button id="send_Card" @click="fnAddGift()">선물 보내기</button>
             </div>
         </div>
     </div>
@@ -80,14 +71,82 @@
 var app = new Vue({ 
     el: '#app',
     data: {
-
-    }   
+    	info:{},
+    	product : [],
+    	userId : "${sessionId}",
+    	checkedBox : [],
+		gPhoneO : {},
+    }
+    , computed: {   
+    	totalPrice: function(){
+    		var self = this;
+        	return self.checkedBox.length*info.price;
+        }
+    }
     , methods: {
-
+    	fnGetInfo : function() {
+			var self = this;
+			console.log(self.product)
+			var nparmap = {productNo : self.product.productNo};
+			for(var i=0; i<self.checkedBox.length; i++){
+				var item=self.checkedBox[i];
+				var gPhone = item.gPhone;
+				self.gPhoneO[i]=gPhone;
+				console.log(self.gPhoneO);
+			}
+			
+			$.ajax({
+				url : "/myInfoGift2Send.dox",
+				dataType : "json",
+				type : "POST",
+				data : nparmap,
+				success : function(data) {
+					console.log(data)
+					self.info = data.info;
+					console.log(self.info);
+					console.log(self.checkedBox);
+				}
+			});
+		}
+	    , pageChange : function(url, param) {
+			var target = "_self";
+			if(param == undefined){
+			//	this.linkCall(url);
+				return;
+			}
+			var form = document.createElement("form"); 
+			form.name = "dataform";
+			form.action = url;
+			form.method = "post";
+			form.target = target;
+			for(var name in param){
+				var item = name;
+				var val = "";
+				if(param[name] instanceof Object){
+					val = JSON.stringify(param[name]);
+				} else {
+					val = param[name];
+				}
+				var input = document.createElement("input");
+	    		input.type = "hidden";
+	    		input.name = item;
+	    		input.value = val;
+	    		form.insertBefore(input, null);
+			}
+			document.body.appendChild(form);
+			form.submit();
+			document.body.removeChild(form);
+		}
+    	,fnAddGift : function(){
+    		var self = this;
+	    	self.pageChange("/myInfoGift8.do", {checkedBox: self.checkedBox, product : self.product})
+    	}
     }   
     , created: function () {
     	var self = this;
-
+    	self.checkedBox = JSON.parse('${map.checkedBox}');
+    	self.product = JSON.parse('${map.product}');
+    	self.fnGetInfo();
 	}
 });
 </script>

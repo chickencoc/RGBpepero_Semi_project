@@ -9,31 +9,28 @@
 	<script src="js/vue.js"></script>
 	<link rel="stylesheet" href="css/Base_rgbPepero.css">
 	<title></title>
-	<style>
-		.loginbox > a:hover {cursor: pointer;} 
-	</style>
 </head>
 
 <body>
 	<div id="appHeader">
 	    <div id="header">
-	        <div class="loginbox" v-if="session == ''">
+	        <div class="loginbox" v-if="sessionId == ''">
 	            <ul>
-	                <li><a herf="#" @click="toLogin()">로그인</a></li>
-	                <li><a href="#">회원가입</a></li>
-	                <li><a href="#">고객센터</a></li>
+	                <li><a href="#" @click="toLogin()">로그인</a></li>
+	                <li><a href="#" @click="toSignup()">회원가입</a></li>
+	                <li><a href="#" @click="toBoard()">고객센터</a></li>
 	            </ul>
 	        </div>
 	        <div class="loginbox" v-else>
 	            <ul>
-	                <li><a href="#"><span style="font-weight: 400;">{{name}}</span>님 축하합니다</a></li>
-	                <li><a href="#">마이페이지</a></li>
-	                <li><a href="#">로그아웃</a></li>
-	                <li><a href="#">고객센터</a></li>
+	                <li><span style="font-weight: 400;">{{sessionName}}</span>님 축하합니다</li>
+	                <li><a href="#" @click="toMyinfo()">마이페이지</a></li>
+	                <li><a href="#" @click="toLogout()">로그아웃</a></li>
+	                <li><a href="#" @click="toBoard()">고객센터</a></li>
 	            </ul>
 	        </div>
 	        <div class="logobox">
-	            <div id="logo" @click="toMain()"><img src="/image/logo_Marrimo.png"></div>
+	            <div id="logo"><img  @click="toMain()" src="/image/icon/logo_Marrimo.png"></div>
 	        </div>
 	    </div>
     </div>
@@ -43,17 +40,31 @@
 var appHeader = new Vue({ 
     el: '#appHeader',
     data: {
-		session : '',
-		name : '빨간빼빼로'
+		sessionId : "${sessionId}",
+		sessionName : "${sessionName}",
+		sessionStatus : "${sessionStatus}"
 
     }   
     , methods: {
     	toLogin : function() {
-        	location.href="login.do";
+        	location.href="userLogin.do";
+    	},
+    	toLogout : function() {
+        	location.href="logout.do";
+    	},
+    	toSignup : function() {
+        	location.href="userSignup.do";
+    	},
+    	toMyinfo : function() {
+        	location.href="information.do";
+    	},
+    	toBoard : function() {
+        	location.href="boardMain.do";
     	},
     	toMain : function() {
         	location.href="main.do";
     	}
+    	
 
     }   
     , created: function () {

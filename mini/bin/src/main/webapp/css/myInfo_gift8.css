@@ -168,3 +168,6 @@
     justify-content: center;
     flex-direction: column;
 }
+.cntText{
+	width:45px;
+}

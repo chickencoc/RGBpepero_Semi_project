@@ -28,39 +28,47 @@
             </div>
             <div class="boardbox">
                 <div id="boardname">자주하는 질문</div>
-                <select>
-                    <option>상품관련</option>
-                    <option>계정관련</option>
-                    <option>배송관련</option>
+                <select v-model="selectItem">
+                    <option value="">:: 전체 ::</option>
+                    <option value="P">상품관련</option>
+                    <option value="A">계정관련</option>
+                    <option value="D">배송관련</option>
                 </select>
             </div>
             <div class="table_list">
-                <table class="board_list">
-                    <thead>
-                        <tr>
-                            <th scope="col">번호</th>
-                            <th scope="col"></th>
-                            <th scope="col">글 제목</th>
-                            <th scope="col">작성자</th>
-                            <th scope="col">조회</th>
-                            <th scope="col">시간</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr v-for="(item, index) in list" >
-                            <td>{{index + 1}}</td>
-                            <td>아이콘</td>
-                            <td>{{item.title}}</td>
-                            <td>{{item.name}}</td>
-                            <td>{{item.cnt}}</td>
-                            <td>{{item.cdatetime}}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="pagecontroll">
-                < 1 2 3 >
-            </div>
+            <table class="board_list">
+                <thead>
+                    <tr>
+                        <th scope="col">번호</th>
+                        <th scope="col"></th>
+                        <th scope="col">글 제목</th>
+                        <th scope="col">작성자</th>
+                        <th scope="col">조회</th>
+                        <th scope="col">시간</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr  v-for="(item, index) in list"  @click="fnView(item.boardNo)">
+                        <td>{{index + 1}}</td>
+                        <template>
+	                        <td v-if="item.replyYn == 'Y'"><span><img src="/image/qa_icon2.gif"></span></td>
+	                        <td v-else><span><img src="/image/qa_icon1.gif"></span></td>
+                        </template>
+                        <td>{{item.title}}</td>
+                        <td>{{item.name}}</td>
+                        <td>{{item.viewCnt}}</td>
+                        <td>{{item.cdatetime}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div id="btn_box">
+				<button @click="fnAdd()" class="btn" style="float:right;" v-if="AccountStatus == 'S'">새 글 작성</button>
+			</div>
+        </div>
+        </div>
+        <div class="pagecontroll">
+            < 1 2 3 >
+        </div>
         </div>
         <!-- wrap END -->
     </div>
@@ -72,19 +80,30 @@
         data: {
             list : [],
             checkList : []
+    		, boardKind : "3"
+    		, selectItem : ""
+        	, userId : "${sessionId}"
+            , AccountStatus : "${sessionStatus}"
     	
-        }   
+        }
+    	, watch : {
+    		selectItem :function(){
+    			var self = this;
+    			self.fnGetList();
+    		}
+    	}
         , methods: {
             fnGetList : function(){
                 var self = this;
-                var nparmap = {};
+                var nparmap = {boardKind : self.boardKind ,keywordType : self.selectItem};
                 $.ajax({
                     url:"/board/list.dox",
                     dataType:"json",	
                     type : "POST", 
                     data : nparmap,
                     success : function(data) { 
-                    	self.list = data.list;
+                    	self.list = data.board;
+                    	
                         console.log(data);
                     }
                 }); 
@@ -94,11 +113,48 @@
         	},
         	fnAnounce : function(){
         		location.href = "/notice.do";
-        	} 
+        	}
+        	, pageChange : function(url, param) {
+	    		var target = "_self";
+	    		if(param == undefined){
+	    		//	this.linkCall(url);
+	    			return;
+	    		}
+	    		var form = document.createElement("form"); 
+	    		form.name = "dataform";
+	    		form.action = url;
+	    		form.method = "post";
+	    		form.target = target;
+	    		for(var name in param){
+					var item = name;
+					var val = "";
+					if(param[name] instanceof Object){
+						val = JSON.stringify(param[name]);
+					} else {
+						val = param[name];
+					}
+					var input = document.createElement("input");
+		    		input.type = "hidden";
+		    		input.name = item;
+		    		input.value = val;
+		    		form.insertBefore(input, null);
+				}
+	    		document.body.appendChild(form);
+	    		form.submit();
+	    		document.body.removeChild(form);
+	    	}
+			, fnView : function(boardNo){
+	    		var self = this;
+	    		self.pageChange("./readBoard.do", {boardNo : boardNo});
+	    	}
+        	, fnAdd : function(boardKind){
+	    		var self = this;
+	    		self.pageChange("./board3.do", {boardKind : self.boardKind});
+	    	}
         }   
         , created: function () {
             var self = this;
-     
+            self.fnGetList();
     
         }
     });

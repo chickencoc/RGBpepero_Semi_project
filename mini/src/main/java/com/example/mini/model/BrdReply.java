@@ -9,6 +9,7 @@ public class BrdReply {
 	private String title;
 	private String content;
 	private String delYn;
+	private String name;
 	public String getReplyNo() {
 		return replyNo;
 	}
@@ -56,5 +57,11 @@ public class BrdReply {
 	}
 	public void setDelYn(String delYn) {
 		this.delYn = delYn;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
 	}
 	}

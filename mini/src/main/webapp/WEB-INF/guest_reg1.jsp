@@ -68,10 +68,10 @@ var app = new Vue({
         postcode : '',
         address : '',
         addrDetail :'',
-        gname: '',
-	    phone1 :'',
-	    phone2 :'',
-	    phone3 :'',
+        gname: '오리킹',
+	    phone1 :'010',
+	    phone2 :'5555',
+	    phone3 :'7777',
 	    mode : '${item.fundYn}'
     }
     , computed: { //?
@@ -172,7 +172,7 @@ var app = new Vue({
 								type : "POST",
 								data : nparmap,
 								success : function(data) {
-									if(self.mode != 'F')
+									if(self.mode != 'Y')
 										location.href="guestNormal.do";
 									else 
 										location.href="guestFunding.do";

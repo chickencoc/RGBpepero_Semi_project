@@ -252,6 +252,7 @@ var app = new Vue({
     }
 	,	fnSendItem : function() {
 	       var self = this;
+	       self.item.totalprice = self.item.rCnt * self.item.pPrice;
 			self.pageChange("/guest.do", self.item);
 		}
 	,	dimClose: function(){

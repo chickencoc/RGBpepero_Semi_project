@@ -4,7 +4,7 @@
 
 <mapper namespace="com.example.mini.mapper.MyInfoMapper">	
 	<select id="selectMyInfoGiftList" parameterType="hashmap" resultType="com.example.mini.model.Order">
-		SELECT O.ORDERNO,
+		SELECT DISTINCT O.ORDERNO,
 			G.G_PHONE,
 			G.G_NAME,
 			G.G_ADDRNO,

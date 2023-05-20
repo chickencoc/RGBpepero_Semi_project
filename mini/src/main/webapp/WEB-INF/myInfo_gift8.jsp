@@ -158,7 +158,7 @@ IMP.init("imp55171728");
 			}
 			,requestPay: function () { //결제창
 				var self = this;
-				orderno = self.fnOrderNo;
+				var orderno = self.fnOrderNo;
 				console.log(orderno);
 				IMP.request_pay({ // param
 		          pg : "kcp.{test}",
@@ -172,7 +172,7 @@ IMP.init("imp55171728");
 		          buyer_postcode : "01181"
 		        }, rsp => { // callback
 	                if (rsp.success) {
-	                	self.fnOrder(merchant_uid);
+	                	self.fnOrder(orderno);
 	                } else {
 	                    console.log(rsp);
 	                }

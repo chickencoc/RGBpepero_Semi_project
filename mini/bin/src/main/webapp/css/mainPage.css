@@ -1,10 +1,11 @@
 .banner { min-width: 1240px; width: 100%; height: 750px; background-color: #555; background-repeat: no-repeat; display: flex; justify-content: center; align-items: center;}
-.banner { background-image: url(/image/banner1.jpg); transition: all 0.6s;}
+.banner { background-image: url(/image/userimgB/banner1.jpg); transition: all 0.6s;}
 .banner .textbox { width: 1050px; text-align: center; line-height: 1.7; position: relative; top: -53px; }
 .banner .textbox > * { text-shadow: 0px 0px 4px white; }
 .banner .textbox .bannertxt_main { font-family: 'Raleway', sans-serif; font-weight: 400; font-size: 50px; color: black; letter-spacing: 0.03em; }
 .banner .textbox .bannertxt_main > span { font-weight: 600; font-size: 50px; color: black;}
 .banner .textbox .bannertxt_sub { font-family: 'Hahmlet', serif;  font-weight: 500; font-size: 25px; color: black; letter-spacing: 0.03em; }
+.banner .textbox .bannerLine {width: 70%; height: 2px; display:block; background-color: black; margin: 0 auto;}
 
 /* banner "let's go" button */
 .banner .textbox .banner_btnbox { margin-top: 70px; cursor: pointer;}
@@ -28,6 +29,7 @@
 .pageList > .pageList_ul > li:hover::before { left: -7px;}
 
 .pageList > .pageList_qna { position: absolute; bottom: 70px;}
+.pageList > .pageList_qna > li:last-child { text-align: right; margin-top: 7px;}
 @media (max-height: 800px) { .pageList { top: 20px; } }
 
 /* 페이지 소개 contents */

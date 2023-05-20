@@ -96,6 +96,7 @@
     </style>
 </head>
 <body>
+ <div id="app">	
     <div id="wrapper">
         <div class="container">
             <div class="review_Modify_Title">리뷰수정</div>

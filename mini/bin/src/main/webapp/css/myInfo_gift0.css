@@ -1,231 +1,45 @@
-.container{
-    margin: auto;
-    width: 1150px;
-    height: 1150px;
-    text-align: center;
-}
 
-.box1{
-    margin-left: 20px;
-}
-.scroll{
-    margin: 10px;
-}
+/* 검색창 */
+.itemSearchBox { display: flex; align-items: center ; justify-content: center; margin-top: 50px; margin-left: 270px; }
+.itemSearchBox > .itemSearchBar { height: 40px; margin: 0; }
+.itemSearchBox > input.search { width: 300px; padding: 0 20px; }
+.itemSearchBox > .listStyleBtns > .listStyleImg { width: 35px; height: 35px; background-color: #555;}
+.itemSearchBox > .listStyleBtns { margin-left: 9px; width: 75px; display: flex; justify-content: space-around;}
 
-.btn{
-    margin: 10px;
-}
-.profileImg_List{
-    display: grid;
-    grid-template-columns: 100px;
-    position: relative;
-    top: 150px;
-    left: 30px;
-}
-.profileImg_List1{
-    display: grid;
-    grid-template-columns: 100px;
-    position: relative;
-    top: 250px;
-    left: 30px;
-}
+/* content */
+.giftContentBox { display: flex;}
+.giftContentBox > .profileBox { width: 180px; text-align: center; padding-top: 120px; }
+.giftContentBox > .profileBox > img { width: 100px; height: 100px; }
 
-.profileImg1{
-    position: absolute;
-}
+/* grid */
+.giftContentBox > .giftListBox { width: 1020px; padding: 50px 20px;}
+.giftContentBox > .giftListBox > .giftDetailBox1 { display: grid; grid-template-columns: repeat(3, 255px); gap: 40px; justify-content: center; }
+.giftContentBox > .giftListBox > .giftDetailBox1 > .giftDetail { width: 235px; margin: 0 auto; padding: 20px 0; border: 1px solid #0005; border-radius: 10px; text-align: center; transition: all 0.3s;}
+.giftContentBox > .giftListBox > .giftDetailBox1 > .giftDetail img { width: 150px; height: 150px; }
+.giftContentBox > .giftListBox > .giftDetailBox1 > .giftDetail .giftList > label { margin-top: 10px}
+.giftContentBox > .giftListBox > .giftDetailBox1 > .giftDetail .giftList > input { appearance: none;}
 
-.productList_Img{
-    display: grid;
-    grid-template-columns: 300px 300px 300px;
-    align-items: center;
-    justify-items: center;
-    row-gap: 100px;
-    position: relative;
-    top: 100px;
-    left: 170px;
-}
-.productList_Img1{
-    /* display: none; */
-    display: grid;
-    grid-template-columns: 800px;
-    align-items: center;
-    justify-items: center;
-}
-.product1{
-    position: relative;
-    top: 35px;
-    right: 70px;
-}
-.giftList{
-    line-height: 30px;
-}
-.giftList1{  
-    line-height: 30px;
-    position: relative;
-    bottom: 90px;
-    left: 400px;
-}
+    .divBackgroundChange { background-color: #ebebeb; box-shadow: 0px 0px 5px #999;}
 
-.list{
-    position: relative;
-    bottom: 100px;
-}
-.list1{
-    position: relative;
-    top: 10px;
-    left: 5px;
-    width: 30px;
-    height: 30px;
-}
-.arrow{
-    position: relative;
-    top: 5px;
-    left: 10px;
-}
-.arrow1{
-    width: 20px;
-    height: 20px;
-}
-.arrow2{
+/* list */
+.giftContentBox > .giftListBox > .giftDetailBox2 { width: 100%; border-collapse: collapse }
+.giftContentBox > .giftListBox > .giftDetailBox2 .giftDetailHead { height: 50px;}
+.giftContentBox > .giftListBox > .giftDetailBox2 :is(.giftDetailHead, .giftDetailList:last-child ) { border-bottom: 2px solid black; }
 
-    width: 20px;
-    height: 20px;
-}
-.number{
-    position: relative;
-    bottom: 5px;
-}
-.btn2{
-margin: 20px;
-}
-#scroll1{
-    margin: 10px;
-}
-.gift{
-    box-shadow: 1px 1px 10px;
-}
-.gift1{
-    position: relative;
-    top: 20px;
-    left: 70px;
-}
-.id{
-    position: relative;
-    left: 25px;
-}
-.id1{
-    position: relative;
-    left: 25px;
-}
-.text{
-    margin-top: 15px;
-    margin-right: 100px;
-}
-.fundingImg{
-    position: relative;
-    top: 2px;
-    width: 30px;
-    height: 30px;
-}
-.fundingImg1{
-    position: relative;
-    left: 20px;
-    width: 30px;
-    height: 30px;
-}
-.gname{
-    position: relative;
-    right: 110px;
-    bottom: 20px;
-}
-.gname1{
-    
-    position: relative;
-    bottom: 20px;
-}
+.giftContentBox > .giftListBox > .giftDetailBox2 .giftDetailList { height: 180px; }
+.giftContentBox > .giftListBox > .giftDetailBox2 .giftDetailList:not(:last-child) { border-bottom: 1px solid #0007; }
+.giftContentBox > .giftListBox > .giftDetailBox2 .giftDetailList img { width: 120px; height: 120px; }
 
-.text2{
-    position: relative;
-    left: 150px;
-}
-.content{
-    position: relative;
-    right: 140px;
-    top: 20px;
-}
-.check{
-    position: relative;
-    right: 150px;
-}
-.check1{
-    position: relative;
-    left: 480px;
+.giftContentBox > .giftListBox > .giftDetailBox2 .giftDetailList td:not(:nth-child(3)) { text-align: center;}
+.giftContentBox > .giftListBox > .giftDetailBox2 .giftDetailList .giftDetailList_check { width: 45px; }
+.giftContentBox > .giftListBox > .giftDetailBox2 .giftDetailList .giftDetailList_text > .giftContent { margin-top: 13px;}
 
-}
-.check2{
-    position: relative;
-    left: 550px;
+/* pagenation */
+.giftContentBox > .giftListBox > .pagenation { margin-top: 60px; text-align: center;}
+.giftContentBox > .giftListBox > .pagenation .arrowBox { display: flex; justify-content: center; }
+.giftContentBox > .giftListBox > .pagenation .pageNumber { padding: 0 10px; }
+.giftContentBox > .giftListBox > .pagenation img { width: 24px; height: 24px;}
 
-}
-.check3{
-    position: relative;
-    left: 650px;
-
-}
-.check4{
-    position: relative;
-    left: 750px;
-
-}
-.check5{
-    position: relative;
-    left: 115px;
-}
-.check6{
-    position: relative;
-    left: 205px;
-}
-.check7{
-    position: relative;
-    left: 270px;
-}
-.checkbox{
-    position: relative;
-    bottom: 35px;
-    right: 110px;
-}
-.line{
-    position: relative;
-    left: 400px;
-    width: 1300px;
-    
-}
-.line1{
-    position: relative;
-    left: 400px;
-    width: 1300px;
-}
-img{
-width: 150px;
-height: 150px;
-background-color: gray;
-}
-.page{
-    display: grid;
-    grid-template-columns: 500px;
-    position: relative;
-    top: 200px;
-    left: 350px;
-    row-gap: 20px;
-}
-.page1{
-    display: grid;
-    grid-template-columns: 500px;
-    position: relative;
-    top: 150px;
-    left: 350px;
-    row-gap: 20px;
-}
-.listStyle2{
-    display: none;
-}
+/* returnGift btn */
+.giftContentBox > .giftListBox > .pagenation > .returnGiftBtnBox { margin: 30px 0; }
+.giftContentBox > .giftListBox > .pagenation > .returnGiftBtnBox > button { width: 150px; height: 34px; margin: 0 10px; }

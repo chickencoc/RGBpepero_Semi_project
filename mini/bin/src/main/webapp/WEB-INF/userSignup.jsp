@@ -4,23 +4,18 @@
 <html>
 <head>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="js/jquery.js"></script>
-<script src="js/vue.js"></script>
-<link rel="stylesheet" href="/css/Base_rgbPepero.css">
-<link rel="stylesheet" href="/css/Registry.css">
-<title>회원가입 페이지</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<jsp:include page="/layout/header.jsp"></jsp:include>
+	<link rel="stylesheet" href="/css/Base_rgbPepero.css">
+	<link rel="stylesheet" href="/css/Registry.css">
+	<title>회원가입 페이지</title>
 </head>
 
 <body>
 	<div id="app">
 		<div id="wrapper">
 			<div class="container">
-				<div class="registryLogo">
-					<a href="http://localhost:8080/main.do"><img src="/image/logo_Marrimo.png">
-				</div>
-				</a>
 				<fieldset class="registryBox">
 					<legend class="registTitle">회원가입</legend>
 					<div class="registryQ">
@@ -61,7 +56,7 @@
 						<div class="registryAList">
 							<input type="text" class="registryName text1" v-model="name">
 							배우자 이름 <input type="text" class="registryName2 text1"
-								v-model="name2">
+								v-model="partner">
 						</div>
 						<div class="registryAList">
 							<label class="registryGender"> <input type="radio"
@@ -71,19 +66,18 @@
 							</label>
 						</div>
 						<div class="registryAList">
-							<input type="text" class="registryPhone text1" v-model="phone1">
-							- <input type="text" class="registryPhone text1" v-model="phone2">
-							- <input type="text" class="registryPhone text1" v-model="phone3">
+							<input type="text" class="registryPhone text1" v-model="phone1" maxlength='3'>
+							- <input type="text" class="registryPhone text1" v-model="phone2" maxlength='4'>
+							- <input type="text" class="registryPhone text1" v-model="phone3" maxlength='4'>
 						</div>
 						<div class="registryAList">
-							<input type="text" class="registryAddr text1" disabled
+							<input type="text" class="registryAddr text1" readonly
 								id="postcode" placeholder="우편번호" v-model="postcode">
 							<button class="checkBtn btn1" @click="fnAddr">우편번호 검색</button>
 						</div>
 						<div class="registryAList">
 							<input type="text" class="registryAddrDetail text1"
-								placeholder="주소" disabled id="address" v-model="addr">
-
+								placeholder="주소" id="address" v-model="addr" readonly>
 						</div>
 						<div class="registryAList">
 							<input type="text" class="registryAddrDetail text1"
@@ -133,14 +127,11 @@
 						</div>
 						<div class="registryAList">
 							<select v-model="bank">
-								<option value="">::선택::</option>
-								<option value="1">신한은행</option>
-								<option value="2">기업은행</option>
-								<option value="3">국민은행</option>
-								<option value="4">농협은행</option>
-								<option value="5">카카오뱅크</option>
-								<option value="6">우리은행</option>
-							</select> <input type="text" class="registryAccount text1"
+								<option value="A">국민은행</option>
+								<option value="B">신한은행</option>
+								<option value="C">우리은행</option>
+								<option value="D">농협은행</option>
+								<option value="E">기업은행</option>							</select> <input type="text" class="registryAccount text1"
 								placeholder=" - 없이 입력" v-model="bankaccount">
 						</div>
 						<div class="btnBox">
@@ -163,7 +154,7 @@
 	    	pwd : '',
 	    	pwdCheck: '',
 	    	name: '',
-	    	name2 : '',
+	    	partner : '',
 	    	phone1 :'',
 	    	phone2 :'',
 	    	phone3 :'',
@@ -234,19 +225,16 @@
 	            return weddingDays
 	        },
 	        phoneNumber: function() {
-	            return this.phone1 + this.phone2 + this.phone3;
-	        },
-	        address: function() {
-	            return this.addr + this.addrDetail;
+	            return this.phone1+this.phone2+this.phone3;
 	        },
 	        emailAddr: function(){
-	        	return this.email + this.email2;
+	        	return this.email+'@'+this.email2;
 	        },
 	        birthday: function(){
-	        	return this.birthYear + this.birthMonth + this.birthDay;
+	        	return this.birthYear+'-'+this.birthMonth+'-'+this.birthDay;
 	        },
 	        weddingday : function(){
-	        	return this.weddingYear + this.weddingMonth + this.weddingDay;
+	        	return this.weddingYear+'-'+this.weddingMonth+'-'+this.weddingDay;
 	        }
 
 	  },
@@ -262,7 +250,9 @@
 	    },
 	    weddingYear(){
 	        this.weddingDay=''
-	    }
+	    },
+	    
+	   
 	  }   
 	, methods: { 	
 	    	fnRegist : function(){
@@ -271,7 +261,7 @@
 	            let getPwdCheck = /^(?=.*[!@#$%^&*])(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]).{8,20}$/;
 	            
 	    		var self = this;
-	    		if(!registFlg){
+	    		if(!self.registFlg){
 	    			alert("아이디 중복체크를 완료해주세요")
 	    		} else if(self.id == ''){
 	                alert("아이디를 입력해주세요.")
@@ -281,9 +271,9 @@
 	                alert("이름을 입력해주세요.")
 	            } else if(self.phone1==''||self.phone2==''||self.phone3==''){
 	                alert("연락처를 입력해주세요.")
-	            } else if(self.addr==''||self.addrDetail){
+	            } else if(self.addr==''||self.addrDetail==''){
 	                alert("주소를 입력해주세요.")
-	            } else if(self.email==''||self.email2){
+	            } else if(self.email==''||self.email2==''){
 	                alert("이메일을 입력해주세요.")
 	            } else if(self.birthYear==''||self.birthMonth==''||self.birthDay==''){
 	                alert("생일을 입력해주세요.")
@@ -316,7 +306,9 @@
 						partner : self.partner,
 						phoneNumber : self.phoneNumber,
 						gender : self.gender,
-						address : self.address,
+						addrNo : self.postcode,
+						addr1 : self.addr,
+						addr2 : self.addrDetail,
 						emailAddr : self.emailAddr,
 						birthday : self.birthday,
 						weddingday : self.weddingday,
@@ -413,7 +405,7 @@
 	                    }
 	                    // 우편번호와 주소 정보를 해당 필드에 넣는다.
 	                    self.postcode = data.zonecode; // Vue 인스턴스의 데이터 변경
-	                    self.address = address; // Vue 인스턴스의 데이터 변경
+	                    self.addr = address; // Vue 인스턴스의 데이터 변경
 	                    self.addrDetail = ''; 
 	                    // 커서를 상세주소 필드로 이동한다.
 	                    document.getElementById("detailAddress").focus();

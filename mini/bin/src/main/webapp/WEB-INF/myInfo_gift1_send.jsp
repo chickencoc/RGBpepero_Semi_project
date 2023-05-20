@@ -6,6 +6,8 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<jsp:include page="/layout/header.jsp"></jsp:include>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.3/vue.min.js"></script>
+	<script src="https://unpkg.com/vue2-editor@2.3.11/dist/index.js"></script>
 	<link rel="stylesheet" href="/css/Base_rgbPepero.css">
 	<title>카드 주문 페이지</title>
     <style>
@@ -90,10 +92,16 @@
             grid-template-columns: 500px 600px;
             grid-gap : 30px;
         }
-        .thx_Card_Write #thx_Card{
+        .thx_Card_Write{
             width: 500px;
-            height: 250px;
+            height: 286px;
+            text-align:center;
+            vertical-align:middle;
+            position: relative;
+           
+            
         }
+        
         .write_Txt .txt_To_Card{
             width: 620px;
             height: 250px;
@@ -111,121 +119,201 @@
 
         }
         .ck-editor__editable { height: 210px; }
+        .writedCard{
+        width:450px;
+        height:230px;
+        z-index:1;
+        position: absolute;
+        top:12%;
+        }
+        .cardSampleImg{
+        width:500px;
+        height:286px;
+        position:absolute;
+        left:0%}
       
     </style>
 </head>
 <body>
+<div id="app">
     <div id="wrapper">
         <div class="container">
             <div class="thxCard_title">감사카드</div>
             <div class="grid_Area1">
                 <div class="imgGrid">
-                   <img src="../image/card1.PNG" id="main_Img">
-                   <div class="thumb_Nails"> 
+                   <img :src="info.imgsrc" id="main_Img">
+                  <!--  <div class="thumb_Nails"> 
                         <img src="../image/card2.PNG" id="thumb1" onmouseover="changeImage(this.src)" onmouseout="restoreImage()">
                         <img src="../image/card3.PNG" id="thumb2" onmouseover="changeImage(this.src)" onmouseout="restoreImage()">
                         <img src="../image/card4.PNG" id="thumb3" onmouseover="changeImage(this.src)" onmouseout="restoreImage()">
-                   </div>
+                   </div> -->
                 </div>  
                 <div class="field_Area">
                     <fieldset class="product_Explane">
-                        <div>상품이름</div>
-                        <div>재질</div>
-                        <div>사이즈</div>
-                        <div>가격</div>
+                        <div>{{info.pName}}</div>
+                        <div>{{info.pPrice}}원 X {{checkedBox.length}} 명 = {{(info.pPrice*checkedBox.length).toLocaleString()}}원</div>
                     </fieldset>
-                        <fieldset class="customer_Explane">
+                        <fieldset class="customer_Explane" >
                             <div>받는사람</div>
-                            <div class="customer_Box"></div>
+                            <div class="customer_Box">
+                            	<div v-for="(item, index) in checkedBox">{{item.gName}} {{item.gPhone}}</div>
+                            </div>
                         </fieldset>  
                 </div>  
             </div>
             <div class="hr_Line"><hr></div>
             <div class="grid_Area2">
                 <h1 class="card_Spoil_Title">카드 미리보기</h1>
-                <div class="option_Box">
-                    <select class="font_Size_Box">
-                        <option>글씨크기</option>
-                        <option>11</option>
-                        <option>13</option>
-                        <option>15</option>
-                        <option>17</option>
-                        <option>19</option>
-                        <option>21</option>
-                    </select>
-                    <select class="font_Kind_Box">
-                        <option>글꼴</option>
-                        <option>나눔고딕</option>
-                        <option>맑은고딕</option>
-                        <option>궁서체</option>
-                    </select>
-                    <select class="font_Effect_Box">
-                        <option>글씨효과</option>
-                        <option>기울임</option>
-                        <option>굵게</option>
-                    </select>
+                <div class="option_Box">                    
                 </div>
                 <div class="grid_Area3">
                     <div class="thx_Card_Write">
-                        <img src="../image/writeCard.PNG" id="thx_Card">
+                    	<img :src="card.imgsrc" class="cardSampleImg">
+                    	<div class="writedCard" v-html="cardContent">{{cardContent}}</div>
                     </div>
                     <div class="write_Txt">
-                        <textarea name="text" id="editor"></textarea>
+                        <vue-editor v-model="cardContent"></vue-editor>
                     </div>
                 </div>
             </div>
             <div class="send_Btn">
-                <button id="send_Card" onclick="test()">카드 보내기</button>
+                <button id="send_Card" @click="fnAddCard">카드 보내기</button>
             </div>
         </div>
     </div>
+</div> 
 </body>
 </html>
 <jsp:include page="/layout/footer.jsp"></jsp:include>
 <script type="text/javascript">
-<script>
 function changeImage(imageUrl) {
-		var mainImage = document.getElementById("main_Img");
-		mainImage.src = imageUrl;
-		mainImage.style.transform = "scale(1)";
-	}
-    function restoreImage() {
-		document.getElementById("main_Img").style.transform = "scale(1)";
-	}
-
-</script>
-<script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/ckeditor.js"></script>
-<script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/translations/ko.js"></script>
-<script>
-ClassicEditor.create( document.querySelector( '#editor' ),{
-removePlugins: [ 'Heading' ],
-removePlugins: [ 'Table' ],
-language: "ko"
-} )
-.then( newEditor => {
- editor = newEditor;
-console.log( 'Editor was initialized', editor );
-} )
-.catch( error => {
-console.error( error );
-} )
-;
-function test(){
-var test1 = editor.getData();
-console.log(test1);
-alert(test1);
+	var mainImage = document.getElementById("main_Img");
+	mainImage.src = imageUrl;
+	mainImage.style.transform = "scale(1)";
 }
-</script>
+function restoreImage() {
+	document.getElementById("main_Img").style.transform = "scale(1)";
+}
+Vue.use(Vue2Editor);
+const VueEditor = Vue2Editor.VueEditor;
 var app = new Vue({ 
     el: '#app',
     data: {
-
-    }   
+		info:{},
+		product : [],
+		cardContent : '',
+		userId : "${sessionId}",
+		checkedBox : [],
+		gPhoneO : {},
+		card:{}
+    }
+	, components: {VueEditor}
     , methods: {
-
-    }   
+    	fnGetInfo : function() {
+			var self = this;
+			var nparmap = {productNo : self.product.productNo};
+			for(var i=0; i<self.checkedBox.length; i++){
+				var item=self.checkedBox[i];
+				var gPhone = item.gPhone;
+				self.gPhoneO[i]=gPhone;
+				console.log(self.gPhoneO);
+			}
+			
+			$.ajax({
+				url : "/myInfoGift1Send.dox",
+				dataType : "json",
+				type : "POST",
+				data : nparmap,
+				success : function(data) {
+					console.log(data)
+					self.info = data.info;
+					console.log(self.info);
+					console.log(self.checkedBox);
+					console.log(self.checkedBox.length)
+				}
+			});
+		}
+	    , pageChange : function(url, param) {
+			var target = "_self";
+			if(param == undefined){
+			//	this.linkCall(url);
+				return;
+			}
+			var form = document.createElement("form"); 
+			form.name = "dataform";
+			form.action = url;
+			form.method = "post";
+			form.target = target;
+			for(var name in param){
+				var item = name;
+				var val = "";
+				if(param[name] instanceof Object){
+					val = JSON.stringify(param[name]);
+				} else {
+					val = param[name];
+				}
+				var input = document.createElement("input");
+	    		input.type = "hidden";
+	    		input.name = item;
+	    		input.value = val;
+	    		form.insertBefore(input, null);
+			}
+			document.body.appendChild(form);
+			form.submit();
+			document.body.removeChild(form);
+		}
+    	,fn: function() {
+    	    var self = this;
+    	    if (confirm("작성을 완료하시겠습니까?")) {
+    	    	var nparmap = {};
+    	        for(var i=0; i<self.checkedBox.length; i++){
+	    	        nparmap = {
+	    	            gPhone: self.gPhoneO[i],
+	    	            userId: self.userId,
+	    	            cardcontent: self.cardContent,
+	    	            productNo: self.product.productNo,
+	    	        };
+	    	         $.ajax({
+	    	            url: "/addCardContent.dox",
+	    	            dataType: "json",
+	    	            type: "POST",
+	    	            data: nparmap,
+	    	            success: function(data) {
+	    	                console.log(data);
+	    	            }
+	    	        }); 
+    	        }
+                alert("주문 페이지로 이동합니다.");
+                
+    	    }
+    	}
+    	,fnCardInfo : function() {
+			var self = this;
+			var nparmap = {productNo : self.product.productNo};			
+			$.ajax({
+				url : "/myInfoGift1SendBackground.dox",
+				dataType : "json",
+				type : "POST",
+				data : nparmap,
+				success : function(data) {
+					console.log(data)
+					self.card = data.card;
+					console.log(self.card);
+				}
+			});
+		}
+    	,fnAddCard : function(){
+    		var self = this;
+	    	self.pageChange("/myInfoGift8.do", {checkedBox: self.checkedBox, product : self.product})
+    	}
+    }
+   
     , created: function () {
     	var self = this;
+    	self.checkedBox = JSON.parse('${map.checkedBox}');
+    	self.product = JSON.parse('${map.product}');
+    	self.fnGetInfo();
+    	self.fnCardInfo();
 
 	}
 });

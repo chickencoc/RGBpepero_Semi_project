@@ -179,7 +179,7 @@ const VueEditor = Vue2Editor.VueEditor;
                 success : function(data) {
                	 alert("저장되었습니다.");
                	 self.editFlg = !self.editFlg;
-               	 self.pageChange("./readBoard.do", {boardNo : boardNo});
+               	 self.fnGoList();
                }
            });  
        }

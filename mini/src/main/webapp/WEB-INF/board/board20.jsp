@@ -8,6 +8,8 @@
 	<jsp:include page="/layout/header.jsp"></jsp:include>
 	<link rel="stylesheet" href="/css/Base_rgbPepero.css">
 	<link rel="stylesheet" href="/css/board/board20.css">
+	<script src="https://unpkg.com/vuejs-paginate@latest"></script>
+	<script src="https://unpkg.com/vuejs-paginate@0.9.0"></script>
 	<title>문의 게시판</title>
 </head>
 <body>    
@@ -54,18 +56,32 @@
         </div>
         </div>
         <div class="pagecontroll">
-            < 1 2 3 >
-        </div>
-        
+	        <template>
+					<paginate
+					   	:page-count="pageCount"
+					    :page-range="3"
+					    :margin-pages="2"
+					    :click-handler="fnSearch"
+					    :prev-text="'<'"
+					    :next-text="'>'"
+					    :container-class="'pagination'"
+					    :page-class="'page-item'">
+					</paginate>
+				</template>
+		</div>    
     </div>
     <!-- wrap END -->
 </div>
 </body>
 <jsp:include page="/layout/footer.jsp"></jsp:include>
 <script type="text/javascript">
+Vue.component('paginate', VuejsPaginate)
     var app = new Vue({ 
         el: '#app',
         data: {
+        	selectPage: 1,
+            pageCount: 1,
+            cnt : 0,
         	list : [],
             checkList : []
     		, boardKind : "2"
@@ -82,7 +98,9 @@
         	,
             fnGetList : function(){
                 var self = this;
-                var nparmap = {boardKind : self.boardKind, userId : self.userId, AccountStatus : self.AccountStatus};
+                var startNum = ((self.selectPage-1) * 10);
+        		var lastNum = (self.selectPage * 10);
+                var nparmap = {startNum : startNum, lastNum : lastNum ,boardKind : self.boardKind, userId : self.userId, AccountStatus : self.AccountStatus};
                 $.ajax({
                     url:"/board/list.dox",
                     dataType:"json",	
@@ -90,7 +108,8 @@
                     data : nparmap,
                     success : function(data) { 
                     	self.list = data.board;
-                        console.log(data);
+                        self.cnt = data.cnt;
+                        self.pageCount = Math.ceil(self.cnt / 10);
                     }
                 }); 
             }
@@ -130,7 +149,24 @@
         	, fnAdd : function(boardKind){
 	    		var self = this;
 	    		self.pageChange("./board3.do", {boardKind : self.boardKind});
-	    	} 
+	    	},fnSearch : function(pageNum){
+    			var self = this;
+    			self.selectPage = pageNum;
+    			var startNum = ((pageNum-1) * 10);
+    			var lastNum = (pageNum * 10)-1;
+    			var nparmap = {startNum : startNum, lastNum : lastNum ,boardKind : self.boardKind, userId : self.userId, AccountStatus : self.AccountStatus};
+    			$.ajax({
+    				url : "/board/list.dox",
+    				dataType : "json",
+    				type : "POST",
+    				data : nparmap,
+    				success : function(data) {
+    					self.list = data.board;
+    					self.cnt = data.cnt;
+    					self.pageCount = Math.ceil(self.cnt / 10);
+    					}
+    				});
+    			} 
         }   
         , created: function () {
             var self = this;

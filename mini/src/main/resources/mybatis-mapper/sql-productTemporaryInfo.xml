@@ -19,7 +19,7 @@
 		FROM mini_db2.T1_PRODUCT P
 		INNER JOIN mini_db2.T1_PDMANAGE PD ON PD.PRODUCTNO = P.PRODUCTNO
 		LEFT OUTER JOIN mini_db2.T1_PDIMAGE PI ON P.PRODUCTNO = PI.PRODUCTNO
-		WHERE P.PRODUCTNO = #{productNo};
+		WHERE P.PRODUCTNO = #{productNo}
 	</select>
 	
 	
@@ -34,6 +34,23 @@
 		FROM mini_db2.T1_PDIMAGE
 		WHERE PRODUCTNO = #{productNo};
 	</select>
+	<update id="updateProduct" parameterType="hashmap">
+		UPDATE mini_db2.T1_PRODUCT P INNER JOIN mini_db2.T1_PDMANAGE PM
+		ON P.PRODUCTNO = PM.PRODUCTNO
+		SET
+			P.P_PRICE = #{pPrice},
+			P.P_NAME = #{pName},
+			P.P_CONTENT = #{pContent},
+			PM.P_STOCK = #{pStock},
+			P.P_UDATETIME = NOW(),
+			P.P_KIND = #{pKind}
+		WHERE P.PRODUCTNO = #{productNo}
+	</update>
+	<insert id="insertProduct" parameterType="hashmap">
+	INSERT INTO mini_db2.T1_PRODUCT
+	VALUE (NULL, #{pPrice}, NOW(),NULL ,#{pName}, #{pContent} ,#{pKind} , 0)
+	</insert>
+	
 	
 	
 

@@ -27,25 +27,31 @@ public class ReturnController {
 	@Autowired
 	HttpSession session;
 
-	
-//	상품 상세 페이지 정보 넘겨주기
+
 	@RequestMapping(value = "/returnList.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 	@ResponseBody
-	public String searchProductList(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+	public String searchReturnList(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
 		HashMap<String, Object> resultMap = new HashMap<String, Object>();
-		int startNum = Integer.parseInt(String.valueOf(map.get("startNum")));
-		int lastNum = Integer.parseInt(String.valueOf(map.get("lastNum")));
-		map.put("startNum", startNum);
-		map.put("lastNum", lastNum);
+//		int startNum = Integer.parseInt(String.valueOf(map.get("startNum")));
+//		int lastNum = Integer.parseInt(String.valueOf(map.get("lastNum")));
+//		map.put("startNum", startNum);
+//		map.put("lastNum", lastNum);
 		resultMap = returnService.searchReturnList(map);
 		return new Gson().toJson(resultMap);
 	}
-//	상품 상세 페이지 정보 넘겨주기
+	
 	@RequestMapping(value = "/returnGuestList.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 	@ResponseBody
-	public String searchCategoryList(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+	public String searchReturnGuestList(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
 		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+//		int startNum = Integer.parseInt(String.valueOf(map.get("startNum")));
+//		int lastNum = Integer.parseInt(String.valueOf(map.get("lastNum")));
+//		map.put("startNum", startNum);
+//		map.put("lastNum", lastNum);
 		resultMap = returnService.searchReturnGuestList(map);
 		return new Gson().toJson(resultMap);
 	}
+	
+	
+
 }

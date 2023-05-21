@@ -16,23 +16,22 @@ public class ReturnServiceImpl implements ReturnService{
 
 	@Autowired
 	private ReturnMapper returnMapper;
-	
+
 	@Override
-	public HashMap<String, Object> searchReturnList(HashMap<String, Object> map) throws Exception {
+	public HashMap<String, Object> searchReturnList(HashMap<String, Object> map) {
 		HashMap<String, Object> resultMap = new HashMap<String, Object>();
 		List<Return> returnList = returnMapper.selectReturnList(map);
-//		int cnt = returnMapper.selectReturnCnt(map);
 		resultMap.put("result", "success");
 		resultMap.put("returnList", returnList);
-//		resultMap.put("cnt", cnt);
 		return resultMap;
 	}
+
 	@Override
-	public HashMap<String, Object> searchReturnGuestList(HashMap<String, Object> map)throws Exception {
+	public HashMap<String, Object> searchReturnGuestList(HashMap<String, Object> map) {
 		HashMap<String, Object> resultMap = new HashMap<String, Object>();
 		List<Return> returnGuestList = returnMapper.selectReturnGuestList(map);
 		resultMap.put("result", "success");
-		resultMap.put("returnGuestList", returnGuestList);
+		resultMap.put("returnList", returnGuestList);
 		return resultMap;
 	}
 

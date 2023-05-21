@@ -14,4 +14,8 @@ public interface ProductTemporaryService {
 	
 	List<PdImage> selectProductImage(HashMap<String, Object> map); //프로덕트 이미지들 출력
 
+	
+	void editProduct(HashMap<String, Object> map);
+	
+	void addProduct(HashMap<String, Object> map);
 }

@@ -7,6 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <jsp:include page="/layout/header.jsp"></jsp:include>
 <link rel="stylesheet" href="/css/Base_rgbPepero.css">
+<link rel="stylesheet" href="/css/prod0.css">
 <!-- 페이징 추가 1-->
 <script src="https://unpkg.com/vuejs-paginate@latest"></script>
 <script src="https://unpkg.com/vuejs-paginate@0.9.0"></script>
@@ -14,7 +15,6 @@
 <style>
 .container {
 	margin: auto;
-	height: 1300px;
 	width: 1200px;
 	text-align: center;
 }
@@ -45,7 +45,7 @@
 }
 
 .container #tripText {
-	font-size: 30px;
+	font-size: 35px;
 }
 
 .container #travelBanner2 {
@@ -55,7 +55,7 @@
 }
 
 .grid_Box1 {
-	background-color: #D9D9D9;
+	box-shadow: 0 0px 2px rgba(0, 0, 0, 0.3);
 	width: 1200px;
 	place-items: center;
 	display: grid;
@@ -65,6 +65,7 @@
 	grid-gap: 0;
 	margin-top: 10px;
 	margin-bottom: 20px;
+	
 }
 
 #search_Box {
@@ -98,6 +99,7 @@
 }
 
 .travel_Box {
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 	background-color: white;
 	width: 325px;
 	height: 325px;
@@ -117,11 +119,13 @@
 }
 
 #radioAndSelect #out_Travel {
-	margin-right: 20px;
+	font-size: 18px;
+	margin: 0px 20px;
 }
 
 #radioAndSelect #in_Travel {
-	margin-right: 20px;
+	font-size: 18px;
+	margin: 0px 20px;
 }
 
 #radioAndSelect select {
@@ -155,7 +159,7 @@
 }
 
 .pagination li.active {
-	background-color: #E7AA8D;
+	background-color: rgb(222,199,172);
 	color: #fff;
 }
 
@@ -164,7 +168,8 @@
 }
 
 .tripR {
-	text-align: left;
+	text-align: center;
+	margin: 30px 0px; 
 }
 
 .tripName {
@@ -218,11 +223,46 @@
 							<template v-else>{{item.name}}</template></li>
 					</ul>
 				</div>
-				<div class="travelBanner">
-					<img src="/image/tripO/travelBanner.jpg" id="travelBanner2">
+				<div class="banner_container">                   
+					<div class="slidebox">
+						<input type="radio" name="slide" id="slide1" checked>
+						<input type="radio" name="slide" id="slide2">
+						<input type="radio" name="slide" id="slide3">
+						<input type="radio" name="slide" id="slide4">
+						<ul class="slidelist">							
+							<li class="slideitem">
+								<div>
+									<label for="slide4" class="left"></label>
+									<label for="slide2" class="right"></label>
+									<img src="../image/banner/trip_banner.jpg">
+								</div>
+							</li>
+							<li class="slideitem">
+								<div>
+									<label for="slide1" class="left"></label>
+									<label for="slide3" class="right"></label>
+									<img src="../image/banner/trip_banner2.jpg">
+								</div>
+							</li>
+							<li class="slideitem">
+								<div>
+									<label for="slide2" class="left"></label>
+									<label for="slide4" class="right"></label>
+									<img src="../image/banner/trip_banner3.jpg">
+								</div>
+							</li>
+							<li class="slideitem">
+								<div>
+									<label for="slide3" class="left"></label>
+									<label for="slide1" class="right"></label>
+									<img src="../image/banner/trip_banner4.jpg">
+								</div>
+							</li>
+						</ul>
+					</div>
 				</div>
 				<div class="tripR">
-					<div id="tripText">여행지 추천</div>
+					<div id="tripText">추천 여행지</div>
 					<div id="radioAndSelect">
 						<label id="out_Travel"><input type="radio" name="tripKind"
 							v-model="tKind" value="O"> 해외 </label> <label id="in_Travel"><input
@@ -238,7 +278,7 @@
 							v-model="tName" @keyup.enter="fnTripSearch">
 						<div id="readingGlass">
 							<a href="javascript:;" @click="fnTripSearch"> <img
-								src="/image/tripsearch.png" id="img1">
+								src="../image/icon/tripsearch.png" id="img1">
 							</a>
 						</div>
 					</div>

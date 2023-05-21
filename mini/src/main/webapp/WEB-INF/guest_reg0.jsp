@@ -39,7 +39,7 @@
                     </select>
                 </div>             
                 
-                <div class="myinfo_registry" >
+                <div class="myinfo_registry boxshadowline" >
 
                     <div v-for="(item, index) in registry">                              
                         <div class="regi_items" v-if="item.orderNo == null">
@@ -55,10 +55,15 @@
                                 <progress id="regi_progress" :value="item.progVal" max="100"></progress>
                                 <span style="margin-left: 10px;">{{item.progVal}}%</span>                        
                             </div>
-                            <div class="regi_items_options_taken">
-                                <span id="regi_stock_text">수량</span>
-                                <label id="regi_stock_number">{{item.rCnt}}</label>
+                            <div class="regi_items_options_taken" v-if="item.fundYn === 'N' || item.fundYn === null || item.fundYn === ''">
+                                <span id="regi_stock_text2">수량</span>
+                                <label id="regi_stock_number2">{{item.rCnt}}</label>
                                 <button id="regi_giveBtn" class="btn1" @click="fnGiftBtn(item)">선물하기</button>
+                            </div>
+                            <div class="regi_items_options_taken" v-if="item.fundYn === 'Y'">
+                                <span id="regi_stock_text2_fund">수량</span>
+                                <label id="regi_stock_number2_fund">{{item.rCnt}}</label>
+                                <button id="regi_giveBtn_fund" class="btn1" @click="fnGiftBtn(item)">선물하기</button>
                             </div>
                         </div>                
                         <!--받은선물인 경우-->

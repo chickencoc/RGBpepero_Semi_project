@@ -25,13 +25,44 @@
             	<li class="prodCategoryList_li" v-for="(item, index) in catList" @click="fnChange(item.code)"><template v-if="item.code == pKind"><b>{{item.name}}</b></template><template v-else>{{item.name}}</template></li>
             </ul>
             </div>
-            <div class="prod0Banner">
-                <img src="/image/categoryV/UtilityRoomBanner.jpg" id="bannerImg">
-                <div class="bannerText">
-                    <p>다용도실</p>
-                    <p>부부의 생활이 담겨있는 공간</p>
-                </div>
-            </div>
+            <div class="banner_container">                   
+					<div class="slidebox">
+						<input type="radio" name="slide" id="slide1" checked>
+						<input type="radio" name="slide" id="slide2">
+						<input type="radio" name="slide" id="slide3">
+						<input type="radio" name="slide" id="slide4">
+						<ul class="slidelist">							
+							<li class="slideitem">
+								<div>
+									<label for="slide4" class="left"></label>
+									<label for="slide2" class="right"></label>
+									<img src="../image/banner/bedroom_banner.jpg">
+								</div>
+							</li>
+							<li class="slideitem">
+								<div>
+									<label for="slide1" class="left"></label>
+									<label for="slide3" class="right"></label>
+									<img src="../image/categoryR/returnBanner2.jpg">
+								</div>
+							</li>
+							<li class="slideitem">
+								<div>
+									<label for="slide2" class="left"></label>
+									<label for="slide4" class="right"></label>
+									<img src="../image/categoryR/returnBanner3.jpg">
+								</div>
+							</li>
+							<li class="slideitem">
+								<div>
+									<label for="slide3" class="left"></label>
+									<label for="slide1" class="right"></label>
+									<img src="../image/categoryR/returnBanner4.jpg">
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
             <div class="searchBox">
                
                 <input type="text" placeholder="상품명을 입력해주세요" class="searchBar search" v-model="keyword" @change="fnSearchProd">

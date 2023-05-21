@@ -7,207 +7,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <jsp:include page="/layout/header.jsp"></jsp:include>
 <link rel="stylesheet" href="/css/Base_rgbPepero.css">
+<link rel="stylesheet" href="../css/prod5_sub0.css">
 <!-- 페이징 추가 1-->
 <script src="https://unpkg.com/vuejs-paginate@latest"></script>
 <script src="https://unpkg.com/vuejs-paginate@0.9.0"></script>
 <title>식장 페이지</title>
-<style>
-.container {
-	margin: auto;
-	height: 1400px;
-	width: 1200px;
-	text-align: center;
-}
-
-.product_category_list>a:not(:last-child):after {
-	content: '';
-	display: inline-block;
-	width: 2px;
-	height: 15px;
-	background: #999;
-	position: relative;
-	top: 2px;
-	margin-left: 13px;
-}
-
-.product_category_list>a {
-	margin: 0 5px;
-}
-
-.product_category_list {
-	text-align: center;
-	margin-top: 10px;
-	margin-bottom: 10px;
-}
-
-.weddingMain #mainWeddingImg {
-	height: 400px;
-	width: 97.5%;
-}
-
-.weddingMain {
-	text-align: center;
-}
-
-.explaneBox1 .weddingRec {
-	border: 1px solid black;
-	background-color: black;
-	width: 120px;
-	height: 30px;
-	margin-top: 10px;
-	color: white;
-	text-align: center;
-	margin-left: 15px;
-}
-
-.imgBox1 {
-	border: 1px solid #D9D9D9;
-	width: 270px;
-	height: 220px;
-	margin: 15px;
-	text-align: center;
-	box-shadow: 0 2px 5px rgba(0, 0, 0, .1);
-}
-
-.imgBox1 #weddingImg1 {
-	width: 190px;
-	height: 150px;
-	margin-top: 15px;
-}
-
-.options .produce {
-	float: right;
-}
-
-.grid_Area2 {
-	display: grid;
-	grid-template-columns: 300px 300px 300px 300px;
-}
-
-.grid_Area2 .imgBox2 {
-	border: 1px solid #D9D9D9;
-	width: 270px;
-	height: 270px;
-	margin: 15px;
-	text-align: center;
-	box-shadow: 0 2px 5px rgba(0, 0, 0, .1);
-}
-
-.imgBox2 #weddingImg5 {
-	width: 200px;
-	height: 170px;
-	margin-top: 15px;
-}
-
-.options {
-	text-align: left;
-}
-
-.options .location {
-	margin-left: 15px;
-}
-
-.options .produce {
-	margin-right: 15px;
-}
-
-.container .page {
-	text-align: center;
-}
-
-.modifyButton {
-	text-align: right;
-}
-
-.modifyButton .modify {
-	background-color: black;
-	color: white;
-	width: 100px;
-	height: 40px;
-}
-
-.imgBox1 img {
-	margin-bottom: 10px;
-	filter: drop-shadow(3px 3px 3px #000);
-}
-
-.imgBox2 img {
-	margin-bottom: 10px;
-	filter: drop-shadow(3px 3px 3px #000);
-}
-
-.grid_Area1 {
-	display: grid;
-	align-items: center;
-	justify-items: center;
-	grid-template-columns: repeat(4, 1fr);
-	grid-gap: 0;
-}
-
-.pagination {
-	display: inline-flex;
-}
-
-ul {
-	text-align: center;
-}
-
-.pagination li {
-	min-width: 32px;
-	padding: 2px 6px;
-	text-align: center;
-	margin: 0 3px;
-	border-radius: 6px;
-	border: 1px solid #eee;
-	color: #666;
-	display: inline;
-}
-
-.pagination li:hover {
-	background: #E4DBD6;
-}
-
-.page-item a {
-	color: #666;
-	text-decoration: none;
-}
-
-.pagination li.active {
-	background-color: #E7AA8D;
-	color: #fff;
-}
-
-.pagination li.active a {
-	color: #fff;
-}
-
-.prodCategoryList {
-	height: 45px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-
-.prodCategoryList li {
-	display: inline-block;
-	margin: 0 5px;
-}
-
-.prodCategoryList li:not(:last-child):after {
-	content: '';
-	display: inline-block;
-	width: 2px;
-	height: 15px;
-	background: #999;
-	position: relative;
-	top: 2px;
-	margin-left: 13px;
-}
-
-.prodCategoryList>li {
-	margin: 0 5px;
-}
-</style>
 </head>
 <body>
 	<div id="app">
@@ -223,12 +27,47 @@ ul {
 							<template v-else>{{item.name}}</template></li>
 					</ul>
 				</div>
-				<div class="weddingMain">
-					<img src="/image/categoryW/mainWedding.jpg" id="mainWeddingImg">
+				<div class="banner_container">                   
+					<div class="slidebox">
+						<input type="radio" name="slide" id="slide1" checked>
+						<input type="radio" name="slide" id="slide2">
+						<input type="radio" name="slide" id="slide3">
+						<input type="radio" name="slide" id="slide4">
+						<ul class="slidelist">							
+							<li class="slideitem">
+								<div>
+									<label for="slide4" class="left"></label>
+									<label for="slide2" class="right"></label>
+									<img src="../image/banner/wedding_banner1.jpg">
+								</div>
+							</li>
+							<li class="slideitem">
+								<div>
+									<label for="slide1" class="left"></label>
+									<label for="slide3" class="right"></label>
+									<img src="../image/banner/wedding_banner2.jpg">
+								</div>
+							</li>
+							<li class="slideitem">
+								<div>
+									<label for="slide2" class="left"></label>
+									<label for="slide4" class="right"></label>
+									<img src="../image/banner/wedding_banner3.jpg">
+								</div>
+							</li>
+							<li class="slideitem">
+								<div>
+									<label for="slide3" class="left"></label>
+									<label for="slide1" class="right"></label>
+									<img src="../image/banner/wedding_banner4.jpg">
+								</div>
+							</li>
+						</ul>
+					</div>
 				</div>
-				<div class="explaneBox1">
-					<div class="weddingRec">웨딩홀 추천</div>
-				</div>
+				
+				<div class="weddingTitle">추천 웨딩홀</div>
+				
 				<div class="grid_Area1">
 					<div class="imgBox1" id="grid_Area1_ImgBox1"
 						v-for="(item, index) in getRandomItems(rList, 4)">
@@ -236,12 +75,12 @@ ul {
 							<div>
 								<img :src="item.imgsrc" id="weddingImg1">
 							</div>
-							<div>{{item.wName}}</div>
+							<div id="grid_Area1_Name">{{item.wName}}</div>
 						</a>
 					</div>
 				</div>
 				<div class="options">
-					<select class="location" v-model="wLocation">
+					<select v-model="wLocation">
 						<option value="">::전체::</option>
 						<option value="서울특별시">서울</option>
 						<option value="경기도">경기도</option>
@@ -267,7 +106,7 @@ ul {
 						</div>
 						<a href="javascript:;" @click="fnMoveUrl(item.wUrl)">
 							<div>
-								<img :src="item.imgsrc" id="weddingImg5">
+								<img :src="item.imgsrc">
 							</div>
 							<div class="hall_Location">{{item.wLocation}}</div>
 							<div class="hall_Name">{{item.wName}}</div>

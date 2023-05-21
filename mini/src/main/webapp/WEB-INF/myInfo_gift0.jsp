@@ -15,7 +15,6 @@
 
 <body>
     <div id="app">
-
         <div id="wrapper">
    			<div class="myinfo_category_list">
 				<a href="information.do">회원정보</a>
@@ -40,10 +39,7 @@
                     	</span>
             </div>
             <div class="giftContentBox">
-                <div class="profileBox">
-                    <img src="../image/userimgA/profile.png"> <!-- 프로필 이미지 -->
-                    <div class="profileUid">ID : {{userId}}</div>
-                </div>
+                
                 <!-- 그리드 스타일 -->
                 <div class="giftListBox listStyle1" v-if="showFlg"> <!-- 리스트스타일1 전체 -->
                     <div class="giftDetailBox1">

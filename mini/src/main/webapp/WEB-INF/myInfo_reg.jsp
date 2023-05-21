@@ -39,8 +39,10 @@
 	                    <h6 style="text-align: center;">당신의 레지스트리 주소</h6>
 	                    <span id="regi_url">
 	                    	{{myUrl}}
-	                        <a href="#" @click="fnUrlCopy()"><img src="/image/icon/fi-ss-upload.png" id="regi_icon"></a>
-	                        <span style="font-size: 9px;">주소복사</span>
+	                    	<label @click="fnUrlCopy()" style="cursor: pointer;">
+							<img src="/image/icon/fi-ss-upload.png" id="regi_icon">
+							<span style="font-size: 9px;" for="regi_icon">주소복사</span>
+							</label>
 	                    </span>
 	                </div>
 	            </div>           
@@ -51,7 +53,7 @@
 	                </div>
 					<div class="regi_back_image_box" v-if="imgUrl1 === ''">
 						<button id="regi_back_image_button" @click="fnBackImageAlter(item)">배경사진 수정</button>
-						<div class="regi_back_image" style="background-color: lightpink;"> </div>                            
+						<div class="regi_back_image"> </div>                            
 					</div>    
 	                <img :src="imgUrl2" id="regi_profile" @click="fnProfileAlter(item)" v-if="imgUrl2 != ''">                       
 	                <div id="regi_profile" @click="fnProfileAlter(item)" v-if="imgUrl2 === ''" style="background-color: lightcoral; text-align: center; display: flex;
@@ -84,26 +86,32 @@
 	                            <p class="regi_pro_name">{{item.pName}}</p>
 	                            <p class="regi_pro_price">{{item.pPrice}} 원</p>
 	                        <!--펀딩퍼센트-->
-	                        <div class="regi_percentage" v-if="item.fundYn == 'Y'">
+	                        <div class="regi_percentage" v-if="item.fundYn === 'Y'">
 	                            <progress id="regi_progress" :value="item.progVal" max="100"></progress>
 	                            <span style="margin-left: 10px;">{{item.progVal}}%</span>                        
 	                        </div>
-	                        <div class="regi_items_options">
+	                        <div class="regi_items_options" v-if="item.fundYn === 'N' || item.fundYn === null || item.fundYn === ''">
 	                            <span id="regi_stock_text">수량</span>
 	                            <label id="regi_stock_number">{{item.rCnt}}</label>
 	                            <button id="regi_optionBtn" class="btn1" @click="fnOptionBtn(item)">옵션설정</button>
 	                            <a id="regi_delete" @click="fnDeleteItem(item)">삭제하기</a>
 	                        </div>
+	                        <div class="regi_items_options_fund" v-if="item.fundYn === 'Y'">
+	                            <span id="regi_stock_text_fund">수량</span>
+	                            <label id="regi_stock_number_fund">{{item.rCnt}}</label>
+	                            <button id="regi_optionBtn_fund" class="btn1" @click="fnOptionBtn(item)">옵션설정</button>
+	                            <a id="regi_delete_fund" @click="fnDeleteItem(item)">삭제하기</a>
+	                        </div>
 	                    </div>                
 	                    <!--받은선물인 경우-->
 	                    <div class="regi_items" v-if="item.orderNo != null">
-	                        <img :src="item.imgSrc" class="regi_items_image" v-if="item.tripNo == null">
-	                        <img :src="item.imgSrc" class="regi_items_image" v-if="item.productNo == null">                  
+	                        <img :src="item.imgSrc" class="regi_items_image">
+	                                         
 	                        <p class="regi_pro_name">{{item.pName}}</p>
 	                        <p class="regi_pro_price">{{item.pPrice}} 원</p>
 	                        <div class="regi_items_options">
-	                            <button id="regi_orderInfoBtn" @click="fnOrderInfo(item)">주문상세보기</button>
-	                            <button id="regi_reviewBtn" @click="fnReview(item)">리뷰작성</button>
+	                            <button id="regi_orderInfoBtn" class="btn1" @click="fnOrderInfo(item)">주문상세보기</button>
+	                            <button id="regi_reviewBtn" class="btn1" @click="fnReview(item)">리뷰작성</button>
 	                        </div>
 	                    </div>                              
 	                </div>   
@@ -237,6 +245,7 @@
 				copyTextarea.select();
 				document.execCommand('copy');
 				document.body.removeChild(copyTextarea);
+				alert("복사되었습니다.");
 	    }
 	    ,	fnBackImageAlter : function(item){
 	            let popUrl = "/registryBackImg.do";

@@ -16,7 +16,7 @@
 	<title>답례품 목록 페이지</title>
 </head>
 <style>
-	<!-- 페이징 추가 2-->
+	/* <!-- 페이징 추가 2--> */
 	.pagination {
 
         display: inline-flex;
@@ -65,23 +65,47 @@
             <div class="return_gift_container">
                 <div id="return_gift_menu_txt">답례품</div>  
                 <div class="return_gift_banner_container">                    
-                <div class="return_gift_banner">
-                    <div class="return_gift_banner_img"><img src="../image/categoryR/gift_boxes.jpg"></div>
-                    <div class="return_gift_banner_img"><img src="../image/categoryR/cardBackground.jpg"></div>
-                    <div class="return_gift_banner_img"><img src="../image/categoryR/card2.jpg"></div>
-                    <span class="return_gift_banner_txt">#답례품</span>
-                </div>
-                </div>
-                <div>
-                <button @click="bannerBtn1" class="banner_btn">1페이지</button>
-                <button @click="bannerBtn2" class="banner_btn">2페이지</button>
-                <button @click="bannerBtn3" class="banner_btn">3페이지</button>
-                </div>
-                <br>
+					<div class="slidebox">
+						<input type="radio" name="slide" id="slide1" checked>
+						<input type="radio" name="slide" id="slide2">
+						<input type="radio" name="slide" id="slide3">
+						<input type="radio" name="slide" id="slide4">
+						<ul class="slidelist">
+							<li class="slideitem">
+								<div>
+									<label for="slide4" class="left"></label>
+									<label for="slide2" class="right"></label>
+									<img src="../image/categoryR/returnBanner.jpg">
+								</div>
+							</li>
+							<li class="slideitem">
+								<div>
+									<label for="slide1" class="left"></label>
+									<label for="slide3" class="right"></label>
+									<img src="../image/categoryR/returnBanner2.jpg">
+								</div>
+							</li>
+							<li class="slideitem">
+								<div>
+									<label for="slide2" class="left"></label>
+									<label for="slide4" class="right"></label>
+									<img src="../image/categoryR/returnBanner3.jpg">
+								</div>
+							</li>
+							<li class="slideitem">
+								<div>
+									<label for="slide3" class="left"></label>
+									<label for="slide1" class="right"></label>
+									<img src="../image/categoryR/returnBanner4.jpg">
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
                 <div class="return_gift_search">
-                    <input type="text" id="return_gift_input_txt search" v-model="keyword" placeholer="상품명 입력" @keyup.enter="fnSearchList">
-                    <button id="return_gift_searchBtn btn1 searchM" @click="fnSearchList">검색</button>
-                    <button id="return_gift_resetBtn btn searchR">초기화</button>
+                    <input type="text" class="text1" id="return_gift_input_txt search" v-model="keyword" placeholer="상품명 입력" @keyup.enter="fnSearchList">
+                    <button class="btn1" id="return_gift_searchBtn btn1 searchM" @click="fnSearchList">검색</button>
+                    <button class="btn1" id="return_gift_resetBtn btn searchR">초기화</button>
                 </div>
                 <div class="return_gift_select">
                     <select class="return_gift_select_bar" v-model="arrayOrder">

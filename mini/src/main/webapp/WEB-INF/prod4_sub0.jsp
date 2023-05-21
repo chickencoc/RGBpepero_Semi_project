@@ -211,7 +211,7 @@
             },
             fnMoveModifyProduct : function(){
         		var self = this;
-        		location.href="/productmodifytemporary.do";
+        		self.pageChange("./productmodifytemporary.do", {productNo : self.productNo});
         	},
         	pageChange : function(url, param) {
 				var target = "_self";

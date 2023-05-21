@@ -29,4 +29,16 @@ public class ProductTemporaryServiceImpl implements ProductTemporaryService {
 		return productTemporaryMapper.productImages(map);
 	}
 
+	@Override
+	public void editProduct(HashMap<String, Object> map) {
+		productTemporaryMapper.updateProduct(map);
+		
+	}
+
+	@Override
+	public void addProduct(HashMap<String, Object> map) {
+		productTemporaryMapper.insertProduct(map);
+		
+	}
+
 }

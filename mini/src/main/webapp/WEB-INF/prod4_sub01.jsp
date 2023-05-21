@@ -7,6 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <jsp:include page="/layout/header.jsp"></jsp:include>
 <link rel="stylesheet" href="/css/Base_rgbPepero.css">
+<script src="https://unpkg.com/vue2-editor@2.3.11/dist/index.js"></script>
 <title>상품정보 수정 및 등록 페이지</title>
 <style>
 .container {
@@ -142,7 +143,10 @@
 				<div class="grid_Area">
 					<div class="imgs">
 						<div class="main_Img">
-							<img src="../image/plus.png" id="main_Plus">
+						<template>
+							<img v-if="productNo == null" src="../image/plus.png" id="main_Plus">
+						</template>
+							<img v-if="productNo != null" :src="imgSrc" id="main_Plus">
 						</div>
 					</div>
 					<div class="inputs">
@@ -153,19 +157,26 @@
 							개수<input type="number" class="input_Elememt" id="product_Cnt"v-model="pStock">개
 						</div>
 						<div>
-							가격<input type="text" class="input_Elememt" id="product_Price" v-model="price">원
+							가격<input type="text" class="input_Elememt" id="product_Price" v-model="pPrice">원
 						</div>
 						<div>
-							상품종류<select>
-									<option></option>
+							상품종류<select v-model="pKind">
+									<option value="" hidden>옵션을 선택하세요.</option>
+									<option value="B">침실</option>
+									<option value="L">거실</option>
+									<option value="D">드레스룸</option>
+									<option value="K">주방</option>
+									<option value="V">다용도실</option>
+									<option value="T">욕실</option>
+									<option value="H">취미</option>
 								 </select>
 						</div>
 					</div>
 				</div>
 				<h1 class="product_Explane_Title">상품상세 설명</h1>
-				<textarea class="product_Explane" placeholder="상품설명을 입력해주세요."></textarea>
-				<button class="modify_Btn">수정완료</button>
-				<button class="submit_Btn">등록완료</button>
+				<vue-editor class="product_Explane" id="editor" v-model="pContent" placeholder="상품설명을 입력해주세요."></vue-editor>
+				<button class="modify_Btn" v-if="productNo != null" @click="fnLoad">수정완료</button>
+				<button class="submit_Btn" v-if="productNo == null" @click="fnLoad">등록완료</button>
 			</div>
 		</div>
 	</div>
@@ -173,21 +184,131 @@
 </html>
 <jsp:include page="/layout/footer.jsp"></jsp:include>
 <script type="text/javascript">
+Vue.use(Vue2Editor);
+const VueEditor = Vue2Editor.VueEditor;
 	var app = new Vue({
 		el : '#app',
 		data : {
 			productNo : "${map.productNo}"
 			, list :[]
 			, pName : ""
-			, 
-			
-
-		},
-		methods : {
-
+			, pPrice : ""
+			, pKind : ""
+			, pStock : ""
+			, pContent : ""
+			, imgSrc : ""
+		}
+		, components: {VueEditor}
+		,methods : {
+			fnProductInformation : function(){
+                var self = this;
+                var nparmap = {productNo : self.productNo};
+                $.ajax({
+                    url:"/producttemporaryinfo.dox",
+                    dataType:"json",	
+                    type : "POST", 
+                    data : nparmap,
+                    success : function(data) { 
+                        self.list = data.list;
+                        self.pName = self.list.pName;
+                        self.pPrice = self.list.pPrice;
+                        self.pStock = self.list.pStock;
+                        self.pContent = self.list.pContent;
+                        self.pKind = self.list.pKind;
+                        self.imgSrc = self.list.imgSrc;
+                    }
+                }); 
+            },fnProductUpdate : function(){
+                var self = this;
+                var nparmap = {productNo : self.productNo, pName : self.pName, pStock : self.pStock, pPrice : self.pPrice, pContent : self.pContent, pKind : self.pKind};
+                $.ajax({
+                    url:"/productUpdate.dox",
+                    dataType:"json",	
+                    type : "POST", 
+                    data : nparmap,
+                    success : function(data) {
+                    	alert("수정되었습니다.");
+                    	location.href="./main.do";
+                    }
+                }); 
+            },
+            fnProductAdd : function(){
+                var self = this;
+                self.fnLoad();
+                var nparmap = {productNo : self.productNo, pName : self.pName, pStock : self.pStock, pPrice : self.pPrice, pContent : self.pContent, pKind : self.pKind};
+                $.ajax({
+                    url:"productAdd.dox",
+                    dataType:"json",	
+                    type : "POST", 
+                    data : nparmap,
+                    success : function(data) {
+                        console.log(data)
+		                self.info = data.info;
+	                	console.log(self.info);
+	                	location.href="./main.do";
+                    }
+                }); 
+            }
+            , pageChange : function(url, param) {
+	    		var target = "_self";
+	    		if(param == undefined){
+	    		//	this.linkCall(url);
+	    			return;
+	    		}
+	    		var form = document.createElement("form"); 
+	    		form.name = "dataform";
+	    		form.action = url;
+	    		form.method = "post";
+	    		form.target = target;
+	    		for(var name in param){
+					var item = name;
+					var val = "";
+					if(param[name] instanceof Object){
+						val = JSON.stringify(param[name]);
+					} else {
+						val = param[name];
+					}
+					var input = document.createElement("input");
+		    		input.type = "hidden";
+		    		input.name = item;
+		    		input.value = val;
+		    		form.insertBefore(input, null);
+				}
+	    		document.body.appendChild(form);
+	    		form.submit();
+	    		document.body.removeChild(form);
+	    	},
+            fnLoad : function(){
+                var self=this;
+                if(self.pName == ""){
+                	alert("제품의 이름을 적어주세요.");
+                	return;
+                }else if(self.pStock == ""){
+                	alert("제품의 재고수를 정해주세요.");
+                	return;
+                }else if(self.pKind == ""){
+                	alert("제품의 종류를 정해주세요.");
+                	return;
+                }else if(self.pPrice == ""){
+                	alert("제품의 가격을 적어주세요.");
+                	return;
+                }else if(self.pContent == ""){
+                	alert("제품의 설명을 적어주세요.");
+                	return;
+                }else if(self.productNo == ""){
+                	self.fnProductAdd();
+                }else if(self.procutNo != ""){
+                	self.fnProductUpdate();
+                }else{
+                	alert("error!");
+                	return;
+                }
+                
+            }
 		},
 		created : function() {
 			var self = this;
+			self.fnProductInformation();
 
 		}
 	});

@@ -52,10 +52,29 @@ public class ProductTemporaryController {
 	}
 	
 	//상품수정 페이지
-		@RequestMapping("/productmodifytemporary.do")
-		public String productModify(Model model) throws Exception {
-			return "/prod4_sub01";
-		}
+	@RequestMapping("/productmodifytemporary.do")
+	public String productModify(HttpServletRequest request,Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+		request.setAttribute("map", map);
+		return "/prod4_sub01";
+	}
+
+	@RequestMapping(value = "productAdd.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String insertProduct(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		productTemporaryService.addProduct(map);
+		resultMap.put("result", "success");
+		return new Gson().toJson(resultMap);
+	}
+	@RequestMapping(value = "productUpdate.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String updateProduct(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		productTemporaryService.editProduct(map);
+		resultMap.put("result", "success");
+		return new Gson().toJson(resultMap);
+	}
+		
 				
 
 }

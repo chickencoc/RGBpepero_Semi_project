@@ -8,6 +8,8 @@
 	<jsp:include page="/layout/header.jsp"></jsp:include>
 	<link rel="stylesheet" href="/css/Base_rgbPepero.css">
     <link rel="stylesheet" href="/css/myInfo_gift2.css">
+	<script src="https://unpkg.com/vuejs-paginate@latest"></script>
+	<script src="https://unpkg.com/vuejs-paginate@0.9.0"></script>
 	<title>보낸 답례품</title>
 </head>
 
@@ -41,7 +43,7 @@
                         <td rowspan="2" class="returnProdImgBox">
                             <img :src="item.imgSrc" class="returnProdImg">
                         </td>
-                        <td class="returnProdNameBox">{{pName}}</td>
+                        <td class="returnProdNameBox">{{item.pName}}</td>
                         <td class="returnGuestNameBox" rowspan="2">
                             <div class="returnGuestNameBox2">
                                 
@@ -49,15 +51,14 @@
                                     <a href="" v-if="guestFlg">더 보기▼</a>
                                     <a href="" v-if="!guestFlg">접기▲</a>
                                 </div>
-                                <p>g_name</p>
-                                <div v-if="!guestFlg">
-                                    <p>{{gName}}</p>
+                                <div v-if="!guestFlg" v-for="(item,index) in returnGuestList">
+                                    <p>{{item.gName}}</p>
                                 </div>
                             </div>
                         </td>
-                        <td  rowspan="2" class="returnProdCntBox">1개</td>
-                        <td  rowspan="2" class="returnProdDateBox">cdatetime</td>
-                        <td  rowspan="2" class="returnProdPriceBox">price</td>
+                        <td  rowspan="2" class="returnProdCntBox">{{item.pStock}}</td>
+                        <td  rowspan="2" class="returnProdDateBox">{{item.cDatetime}}</td>
+                        <td  rowspan="2" class="returnProdPriceBox">{{item.pPrice}}</td>
                     </tr>
                     
                 </table>
@@ -89,16 +90,12 @@ var app = new Vue({
         guestFlg : true,
         selectPage: 1,
         pageCount: 1,
-<<<<<<< HEAD
         cnt : 0,
         returnList : [],
-		returnGuestList : []
+		returnGuestList : [],
+		userId : "${sessionId}"
 		
-    }   
-=======
-        cnt : 0
     }
->>>>>>> branch 'main' of https://github.com/chickencoc/RGBpepero_Semi_project.git
     , methods: {
         fnShowGuest : function(){
             var self = this;
@@ -107,20 +104,35 @@ var app = new Vue({
         ,fnSearch : function(){
 
         },
-        fnGetProductList : function(){
+        fnGetReturnList : function(){
             var self = this;
             var startNum = ((self.selectPage-1) * 6);
     		var lastNum = (self.selectPage * 6);
-            var nparmap = {pKind : self.pKind ,startNum : startNum, lastNum : lastNum, keywordType : self.selectItem, keyword : self.keyword};
+            var nparmap = {userId : self.userId};
             $.ajax({
-                url:"/productList.dox",
+                url:"/returnList.dox",
+                dataType:"json",	
+                type : "POST", 
+                data : nparmap,
+                success : function(data) { 
+                	self.returnList = data.returnList;
+                	for(var i=0;i< self.returnList.length; i++){
+                		self.fnGetReturnGuestList(self.returnList[i].productNo);
+                		}
+                	}
+           		}); 
+        	}
+        ,fnGetReturnGuestList : function(productNo){
+            var self = this;
+            var nparmap = {userId : self.userId ,productNo : productNo};
+            $.ajax({
+                url:"/returnGuestList.dox",
                 dataType:"json",	
                 type : "POST", 
                 data : nparmap,
                 success : function(data) { 
                 	self.list = data.product;
                     self.cnt = data.cnt;
-                    self.pageCount = Math.ceil(self.cnt / 6);
                     
                 	}
            		}); 
@@ -128,6 +140,7 @@ var app = new Vue({
     }   
     , created: function () {
         var self = this;
+        self.fnGetReturnList();
     }
 });
 </script>

@@ -24,7 +24,7 @@
 				<a href="main.do">캘린더</a>
 			</div>
             <div class="itemSearchBox">
-                <input class="itemSearchBar search" type="text" value="검색" v-model="pName" @keyup.enter="fnSearchGift"></input>
+                <input class="itemSearchBar search" type="text" value="검색" v-model="pName" placeholder="상품명을 검색하세요." @keyup.enter="fnSearchGift"></input>
                         <button class="itemSearchBar searchM" @click=fnSearchGift>검색</button>
                         <button class="itemSearchBar searchR" @click=fnSearchReset>초기화</button>
                     <select name="" class="itemSearchBar slt1" v-model="arrayOrder">

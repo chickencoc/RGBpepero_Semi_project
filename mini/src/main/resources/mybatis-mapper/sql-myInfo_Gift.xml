@@ -4,7 +4,8 @@
 
 <mapper namespace="com.example.mini.mapper.MyInfoMapper">	
 	<select id="selectMyInfoGiftList" parameterType="hashmap" resultType="com.example.mini.model.Order">
-		SELECT DISTINCT O.ORDERNO,
+		SELECT DISTINCT
+			O.ORDERNO,
 			G.G_PHONE,
 			G.G_NAME,
 			G.G_ADDRNO,
@@ -41,13 +42,16 @@
 			AND (O.USERID IS NULL OR U.USERID IS NOT NULL)
 		    AND G.USERID = #{userId}
 		    <if test="pName != '' and pName != null">
-			AND P_NAME LIKE CONCAT('%', #{pName}, '%')
-			</if> 
+				AND P_NAME LIKE CONCAT('%', #{pName}, '%')
+			</if>
+			<if test="arrayOrder == 'funding'">
+				AND O.O_ADDR1 IS NULL
+			</if>
 		    <if test="arrayOrder == 'PRICE'">
-	        ORDER BY PRICE
+	        	ORDER BY PRICE
 	    	</if>
 	    	<if test="arrayOrder == 'O_CDATETIME'">
-	        ORDER BY O_CDATETIME DESC
+	        	ORDER BY O_CDATETIME DESC
     		</if>	
     		LIMIT #{startNum}, 6
 	<!-- 	    AND O.ORDERNO = #{orderNo} -->

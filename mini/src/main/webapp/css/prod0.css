@@ -5,6 +5,8 @@
 .searchBar { width:50%; height:80%; } 
 .prodBtn { width:10%; height:80%; } 
 
+.addP {float:right; }
+
 .prodSelectBox { text-align: right; margin:2%; } 
 .prodListBox { height: 720px;
     /* display: grid; grid-template-columns: repeat(3, 1fr); grid-gap: 10px; height: 500px; */}
@@ -12,8 +14,8 @@
 .prod0Img { width: 325px; height: 220px; background-image: url("/image/icon/error.png"); background-repeat: no-repeat; background-size: cover; background-position: center;} 
 .prodName { font-size:1.2em; margin-top:5%; } 
 .prodPrice { margin-top:5%; } 
-.prodLike { margin-top:5%; position: relative; right: 15px;} 
-.prodLikeImg { position: relative; left: 40px; bottom: 33px;  width:30px; height: 30px; margin-left: 10px;} 
+.prodLike {margin-top:5%; position: relative; right: 15px; margin-left: 20px;} 
+.prodLikeImg {width:20px; height: 20px; margin-left: 10px;} 
 .pageList { text-align: center; position:relative; position: relative; top: 120px;}
 .pageListNum { position: relative; width:5%; margin-top:5%; margin-right:2%; } 
 .prodList { display: grid; grid-template-columns: repeat(3, 1fr); grid-gap: 10px; height: 500px; }

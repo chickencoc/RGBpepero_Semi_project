@@ -84,8 +84,7 @@
 	                        </template>
                             <div class="prodName">{{item.pName}}</div>
                             <div class="prodPrice">{{item.pPrice}}원</div>
-                            <div class="prodLike">좋아요 : {{item.iLike}}</div>
-							<img src="../image/icon/good.png" class="prodLikeImg">
+                            <div class="prodLike">좋아요 : {{item.iLike}} <img src="../image/icon/good.png" class="prodLikeImg"></div>
                         </div>
                 </div>
             </div>
@@ -100,7 +99,10 @@
 				    :container-class="'pagination'"
 				    :page-class="'page-item'">
 				</paginate>
-			</template>     
+			</template>
+			<div>
+				<button class="prodBtn searchM addP" v-if="sessStatus == 'S'" @click="fnAddProduct">상품 추가</button>     
+        	</div>
         </div>
     </div>
     </div>
@@ -120,13 +122,17 @@ var app = new Vue({
         pdImgList : [],
         pKind : "B",
         keyword : "${map.keyword}",
-        selectItem : ""
+        selectItem : "",
+        sessStatus: "${sessionStatus}"
     } 
 	, watch : {
 		selectItem : "fnSearchProd"
 		, keyword : "fnSearchProd"
 		}
     , methods: {
+    	fnAddProduct : function(){
+    		location.href="productmodifytemporary.do";
+    	},
     	fnChange : function(code){
     		var self = this;
     		

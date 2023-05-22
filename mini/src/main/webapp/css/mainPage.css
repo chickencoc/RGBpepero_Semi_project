@@ -2,15 +2,15 @@
 .banner { background-image: url(../image/banner/main_banner2.jpg); background-position: center; transition: all 0.6s;}
 .banner .textbox { width: 1050px; text-align: center; line-height: 1.7; position: relative; top: -53px; }
 .banner .textbox > * { text-shadow: 0px 0px 4px white; }
-.banner .textbox .bannertxt_main { font-family: 'Raleway', sans-serif; font-weight: 400; font-size: 50px; color: black; letter-spacing: 0.03em; }
+.banner .textbox .bannertxt_main { font-family: 'Gowun Batang', serif; font-weight: 400; font-size: 50px; color: black; letter-spacing: 0.03em; }
 .banner .textbox .bannertxt_main > span { font-weight: 600; font-size: 50px; color: black;}
-.banner .textbox .bannertxt_sub { font-family: 'Hahmlet', serif;  font-weight: 500; font-size: 25px; color: black; letter-spacing: 0.03em; }
+.banner .textbox .bannertxt_sub { font-family: 'Gowun Batang', serif;  font-weight: 500; font-size: 25px; color: black; letter-spacing: 0.03em; }
 .banner .textbox .bannerLine {width: 70%; height: 2px; display:block; background-color: black; margin: 0 auto;}
 
 /* banner "let's go" button */
 .banner .textbox .banner_btnbox { margin-top: 70px; cursor: pointer;}
 .custom_btn { width: 140px; height: 40px; padding: 4px 25px;  font-weight: 500; background: transparent; transition: all 0.3s ease; position: relative; display: inline-block; border-radius: 4px; } 
-.banner .textbox .banner_btn { background: rgb(222,199,172);; color: #F6F6F6; z-index: 1; } 
+.banner .textbox .banner_btn { background: rgb(222,199,172); color: #F6F6F6; z-index: 1; font-weight: 700;} 
 .banner .textbox .banner_btn:after { position: absolute; content: ""; width: 0; height: 100%; top: 0; right: 0; z-index: -1; background: #F6F6F6; transition: all 0.3s ease; border-radius: 3px; } 
 .banner .textbox .banner_btn:hover { color: #AAAAAA; } 
 .banner .textbox .banner_btn:hover:after { left: 0; width: 100%; } 

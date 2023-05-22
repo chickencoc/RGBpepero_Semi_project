@@ -110,13 +110,8 @@ public class GuestRegController {
 		map.put("gpostcode", sessGuest.getAttribute("postcode"));
 		map.put("gaddress", sessGuest.getAttribute("address"));
 		map.put("gaddrDetail", sessGuest.getAttribute("addrDetail"));
-<<<<<<< HEAD
 		System.out.println(map);
 		guestRegService.writeGuestFunding(map);
-=======
-		
-		guestRegService.writeGuestOrder(map);
->>>>>>> branch 'main' of https://github.com/chickencoc/RGBpepero_Semi_project.git
 		resultMap.put("result", "success");
 		return new Gson().toJson(resultMap);
 	}

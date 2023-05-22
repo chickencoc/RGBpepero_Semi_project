@@ -23,8 +23,8 @@
                 <div class="regi_back_image_box" v-if="imgUrl1 != ''">
                 	<img :src="imgUrl1" class="regi_back_image" >                               
                 </div>    
-                <div class="regi_back_image_box" v-if="imgUrl1 === ''" style="background-color: lightpink;">
-                	<div class="regi_back_image" style="background-color: lightpink;"> </div>                            
+                <div class="regi_back_image_box" v-if="imgUrl1 === ''">
+                	<div class="regi_back_image" style="background-color: white;"> </div>                            
                 </div>    
                     <img :src="imgUrl2" id="regi_profile" v-if="imgUrl2 != ''">
                     <div id="regi_profile" v-if="imgUrl2 === ''" style="background-color: lightcoral;"></div>                      
@@ -41,7 +41,7 @@
                 
                 <div class="myinfo_registry boxshadowline" >
 
-                    <div v-for="(item, index) in registry">                              
+                    <div v-for="(item, index) in insertRegistry">                              
                         <div class="regi_items" v-if="item.orderNo == null">
                             <!--매우원함-->
 	                        <div id="regi_wanted_badge" v-if="item.rOption == 'A'">
@@ -102,7 +102,7 @@
 							
 		                    <div id="reg_options_popup_name">상품 명 : {{item.pName}}</div>
 		                    <div class="reg_options_popup_price">상품 가격 : {{item.pPrice}}원</div>
-		                    <div>상품 수량 : <input type="number"  id="reg_options_popup_stock_number" size="1" v-model="item.rCnt" @keydown="fnCntCheck($event)"></div>
+		                    <div>상품 수량 : <input type="number"  id="reg_options_popup_stock_number" size="1" v-model="item.rCnt" @keydown="fnCntCheck($event)" min="1" :max="item.rCnt"></div>
 		                    <div class="reg_options_popup_price">합계 : {{item.pPrice * item.rCnt}}원</div>
 		                </div>
 		                <ul class="reg_options_popup_checkbox">
@@ -138,11 +138,12 @@ var app = new Vue({
 	, 	imgUrl1: ''
     ,   imgUrl2: ''
     ,   userName: ""
-	, sortOp: 'R.R_CDATETIME DESC'
+	,   sortOp: 'R.R_CDATETIME DESC'
+    ,   insertRegistry: []
     // ,   progressValue : (item.fPutprice / item.fSetprice) * 100
     
     //dim popup
-    , item: {}
+    ,   item: {}
     
     }   
     , methods: {
@@ -171,7 +172,14 @@ var app = new Vue({
                     		data.registry[i].progVal = 0;
                     }
 	                self.registry = data.registry;
-                    self.userName= self.registry[0].uName;
+                    self.userName= self.registry[0].uName;						
+						
+						for ( i in self.registry) {
+						 	if (self.registry[i].orderNo == null) {
+						 		self.insertRegistry.push(self.registry[i]); // insertRegistry에 데이터 추가
+						 	}
+						}
+						console.log(self.insertRegistry); // insertRegistry 출력
                 }
      		}); 
             
@@ -245,20 +253,27 @@ var app = new Vue({
     	// dim popup script START
 		//method
 	 ,   fnselectOption: function(){
-	         var self = this;
-	         const userItemList = localStorage.getItem('userItemList');    
-	         var item = JSON.parse(userItemList);                 
-	         self.item = item;
-	         console.log(item);
-	       
+	        var self = this;
+	        const userItemList = localStorage.getItem('userItemList');    
+	        var item = JSON.parse(userItemList);                 
+	        self.item = item;
+	        console.log(item);
+	         
 	    }
-    ,	fnCntCheck : function(item) {
-    	console.log(item);
+    ,	fnCntCheck : function(check) {  
+        var self = this;     
+        console.log(check);
+        // console.log(self.item.rCnt); 
+        // if(check > self.item.rCnt) {
+        //     alert("수량을 다시 확인해주세요");
+        // } else {
+        //     return;
+        // }
     }
 	,	fnSendItem : function() {
 	       var self = this;
-	       self.item.totalprice = self.item.rCnt * self.item.pPrice;
-			self.pageChange("/guest.do", self.item);
+	        self.item.totalprice = self.item.rCnt * self.item.pPrice;
+		    self.pageChange("/guest.do", self.item);
 		}
 	,	dimClose: function(){
 			var self= this;

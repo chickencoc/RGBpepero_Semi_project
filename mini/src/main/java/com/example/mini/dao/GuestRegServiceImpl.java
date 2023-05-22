@@ -37,6 +37,7 @@ public class GuestRegServiceImpl implements GuestRegService{
 		// TODO Auto-generated method stub
 		guestRegMapper.insertGuestOrderF(map);
 		guestRegMapper.insertGuestFunding(map);
+		guestRegMapper.insertGuest(map);
 	}
 	
 

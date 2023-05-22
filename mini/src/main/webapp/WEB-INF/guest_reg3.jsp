@@ -151,13 +151,7 @@
 			percent: '${item.progVal}',
 			addPercent: 10,
 			sendContent: '',
-<<<<<<< HEAD
 			purchase: 'C'
-=======
-			REGISTRYNO: '',
-			FUNDINGNO: ''
->>>>>>> branch 'main' of https://github.com/chickencoc/RGBpepero_Semi_project.git
-
 		}
 		, computed: {
 			fnOrderNo : function() { //주문번호 생성 ( O + 2자리년도 + 월 + 일 + 시간 + 분 + 초 + 랜덤 3자리수 )
@@ -257,25 +251,15 @@
 		      },
 			fnOrder : function(orderno) {
 				var self = this;
-<<<<<<< HEAD
 				var nparmap = {userId : self.info.userId
 								, givePrice : self.givePrice
-=======
-				var nparmap = {userId : self.userId
-								, totalPrice : self.givePrice
->>>>>>> branch 'main' of https://github.com/chickencoc/RGBpepero_Semi_project.git
 								, sendContent : self.sendContent
 								, purchase : self.purchase
 								, orderNo : orderno
-<<<<<<< HEAD
 								, fundingNo : self.info.fundingNo
 								, registryNo : self.info.registryNo
 								, pPrice : self.info.pPrice
 								, purchase : self.purchase
-								
-=======
-								//, fundingNo : orderno.replaceAll("O","F")
->>>>>>> branch 'main' of https://github.com/chickencoc/RGBpepero_Semi_project.git
 								};
 	        	$.ajax({
 	    			url : "/guest/order.dox",

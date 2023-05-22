@@ -289,12 +289,12 @@ var app = new Vue({
                	}
           	}); 
        	}
-	   ,fnAddWedding : function(weddingNo){
+	   ,fnAddWedding : function(){
 		   location.href="prod5Sub1.do"
 	   }
-	   ,fnEditWedding : function(){
+	   ,fnEditWedding : function(weddingNo){
 		   var self = this;
-			self.pageChange("/weddingModify.do", {weddingNo : weddingNo});
+			self.pageChange("prod5Sub2.do", {weddingNo : weddingNo});
 	   }
 	   ,fnRemoveWedding : function(item){
 		   var self = this;

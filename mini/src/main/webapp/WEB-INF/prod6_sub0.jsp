@@ -291,7 +291,7 @@
 							<div class="tripName">{{item.tName}}</div>
 						</a>
 						<div v-if="status=='S'" class="adminBtn">
-		            		<button class="btn1" @click="fnEdit(item)">수정</button>
+		            		<button class="btn1" @click="fnEdit(item.tripNo)">수정</button>
 		            		<button class="btn1" @click="fnRemove(item)">삭제</button>
 		            	</div>
 					</div>
@@ -457,8 +457,9 @@ var app = new Vue({
                         }
                        }); 
             }
-		 ,fnEdit : function(){
-	        	
+		 ,fnEdit : function(tripNo){
+				var self = this;
+		    	self.pageChange("/prod6Sub2.do", {tripNo : tripNo});
 	        }
 		 ,fnRemove : function(){
 			var self = this;
@@ -478,9 +479,9 @@ var app = new Vue({
 				});
 	        }
 		 ,fnAdd: function(){
-			 location.href=""
+			 location.href="prod6Sub2.do"
 		 }
-	    }   
+	}   
     , created: function () {
     	var self = this;
     	self.fnGetList();

@@ -189,8 +189,8 @@ public class WeddingRecommendController {
 	}
 	
 	@RequestMapping("/prod6Sub1.do") 
-    public String tripDetailPage(Model model) throws Exception{
-		
+    public String tripDetailPage(HttpServletRequest request, Model model, @RequestParam HashMap<String, Object> map) throws Exception{
+		request.setAttribute("map", map);
         return "/prod6_sub1";
     }
 	
@@ -220,6 +220,115 @@ public class WeddingRecommendController {
 		prodSubService.addTrip(map);
 		resultMap.put("result", "success");
 		resultMap.put("tirpNo", map.get("id"));
+		return new Gson().toJson(resultMap);
+	}
+	@RequestMapping("/tripImgupload.dox")
+    public String TripImg(@RequestParam("file1") MultipartFile multi, @RequestParam("tripNo") String tripNo, HttpServletRequest request,HttpServletResponse response, Model model)
+    {
+        String url = null;
+        String path="c:\\img";
+        try {
+            //String uploadpath = request.getServletContext().getRealPath(path);
+            String uploadpath = path;
+            String orgName = multi.getOriginalFilename();
+            String imgType = orgName.substring(orgName.lastIndexOf("."),orgName.length());
+            long size = multi.getSize();
+            String saveFileName = genSaveFileName(imgType);           
+            System.out.println("uploadpath : " + uploadpath);
+            System.out.println("orgName : " + orgName);
+            System.out.println("extensionName : " + imgType);
+            System.out.println("size : " + size);
+            System.out.println("saveFileName : " + saveFileName);
+            String path2 = System.getProperty("user.dir");
+            System.out.println("Working Directory = " + path2 + "\\src\\main\\webapp\\image\\tripO");
+            if(!multi.isEmpty())
+            {
+                File file = new File(path2 + "\\src\\main\\webapp\\image\\tripO", saveFileName);
+                multi.transferTo(file);
+                
+                HashMap<String, Object> map = new HashMap<String, Object>();
+                map.put("img", "\\img\\tripO" + saveFileName);
+                map.put("tripNo", tripNo);
+//                map.put("replyNo", replyNo);
+                map.put("imgSrc", "/image/tripO"+saveFileName);
+                map.put("imgName", saveFileName);
+                map.put("orgName", orgName);
+                map.put("imgType", imgType);
+                
+                // insert 쿼리 실행
+                prodSubService.addTripImg(map); 
+                
+                model.addAttribute("filename", multi.getOriginalFilename());
+                model.addAttribute("uploadPath", file.getAbsolutePath());
+                
+                return "filelist";
+            }
+        }catch(Exception e) {
+            System.out.println(e);
+        }
+        return "redirect:main.do";
+    }
+	
+	@RequestMapping("/tripImguploadList.dox")
+    public String TripImgList(@RequestParam("file1") MultipartFile multi, @RequestParam("tripNo") String tripNo, HttpServletRequest request,HttpServletResponse response, Model model)
+    {
+        String url = null;
+        String path="c:\\img";
+        try {
+            //String uploadpath = request.getServletContext().getRealPath(path);
+            String uploadpath = path;
+            String orgName = multi.getOriginalFilename();
+            String imgType = orgName.substring(orgName.lastIndexOf("."),orgName.length());
+            long size = multi.getSize();
+            String saveFileName = genSaveFileName(imgType);           
+            System.out.println("uploadpath : " + uploadpath);
+            System.out.println("orgName : " + orgName);
+            System.out.println("extensionName : " + imgType);
+            System.out.println("size : " + size);
+            System.out.println("saveFileName : " + saveFileName);
+            String path2 = System.getProperty("user.dir");
+            System.out.println("Working Directory = " + path2 + "\\src\\main\\webapp\\image\\tripO");
+            if(!multi.isEmpty())
+            {
+                File file = new File(path2 + "\\src\\main\\webapp\\image\\tripO", saveFileName);
+                multi.transferTo(file);
+                
+                HashMap<String, Object> map = new HashMap<String, Object>();
+                map.put("img", "\\img\\tripO" + saveFileName);
+                map.put("tripNo", tripNo);
+//                map.put("replyNo", replyNo);
+                map.put("imgSrc", "/image/tripO"+saveFileName);
+                map.put("imgName", saveFileName);
+                map.put("orgName", orgName);
+                map.put("imgType", imgType);
+                
+                // insert 쿼리 실행
+                prodSubService.addTripImgList(map); 
+                
+                model.addAttribute("filename", multi.getOriginalFilename());
+                model.addAttribute("uploadPath", file.getAbsolutePath());
+                
+                return "filelist";
+            }
+        }catch(Exception e) {
+            System.out.println(e);
+        }
+        return "redirect:main.do";
+    }
+	
+	@RequestMapping("/prod6Sub2.do") 
+    public String tripEditPage(HttpServletRequest request, Model model, @RequestParam HashMap<String, Object> map) throws Exception{
+		request.setAttribute("map", map);
+        return "/prod6_sub2";
+    }
+	
+	
+	@RequestMapping(value = "tripEdit.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String tripEdit(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		prodSubService.editTrip(map);
+		resultMap.put("result", "success");
 		return new Gson().toJson(resultMap);
 	}
 	

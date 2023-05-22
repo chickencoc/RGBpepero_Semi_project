@@ -32,9 +32,15 @@ public interface ProdSubMapper {
 	
 	void insertTrip(HashMap<String, Object> map);
 	
+	void insertTripImg(HashMap<String, Object> map);
+	
+	void insertTripImgList(HashMap<String, Object> map);
+	
 	void deleteTrip(HashMap<String, Object> map);
 	
 	void deleteWedding(HashMap<String, Object> map);
 	
 	void updateWedding(HashMap<String, Object> map);
+	
+	void updateTrip(HashMap<String, Object> map);
 }

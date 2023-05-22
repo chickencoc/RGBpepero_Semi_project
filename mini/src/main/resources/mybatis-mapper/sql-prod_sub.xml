@@ -112,11 +112,19 @@
 		VALUES 
 			(NULL, #{wName}, #{wLocation}, #{wAddr}, #{wUrl}, NOW())
 	</insert>
-		<insert id="insertTrip" parameterType="hashmap"  useGeneratedKeys="true" keyProperty="id" keyColumn="tripNo">
+	<insert id="insertTrip" parameterType="hashmap"  useGeneratedKeys="true" keyProperty="id" keyColumn="tripNo">
 		INSERT INTO T1_TRIP
 			(TRIPNO, T_KIND, T_ADDR, T_CDATETIME, T_NAME, T_CONTENT)
 		VALUES 
 			(NULL, #{tKind}, #{tAddr}, NOW(), #{tName}, #{tContent})
+	</insert>
+	<insert id="insertTripImg">
+		INSERT INTO T1_TRIPIMAGE
+		VALUES (NULL, #{tripNo}, #{imgSrc}, #{imgName}, #{orgName}, #{imgType}, 'Y')
+	</insert>
+	<insert id="insertTripImgList">
+		INSERT INTO T1_TRIPIMAGE
+		VALUES (NULL, #{tripNo}, #{imgSrc}, #{imgName}, #{orgName}, #{imgType}, 'N')
 	</insert>
 	<insert id="insertWeddingImg">
 		INSERT INTO T1_WEDDINGIMAGE
@@ -141,6 +149,18 @@
 			W_UDATETIME = NOW()
 		WHERE 
 			WEDDINGNO = #{weddingNo}
+	</update>
+	
+	<update id="updateTrip" parameterType="hashmap" >
+		UPDATE mini_db2.T1_TRIP
+		SET 
+			T_NAME = #{tName},
+			T_ADDR = #{tAddr},
+			T_KIND = #{tKind},
+			T_CONTENT = #{tContent},
+			T_UDATETIME = NOW()
+		WHERE 
+			TRIPNO = #{tripNo}
 	</update>
 	
 	<select id="selectWeddingInfo" parameterType="hashmap" resultType="com.example.mini.model.Wedding">

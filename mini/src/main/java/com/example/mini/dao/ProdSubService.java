@@ -25,11 +25,17 @@ public interface ProdSubService {
 	
 	void addTrip(HashMap<String, Object> map);
 	
+	void addTripImg(HashMap<String, Object> map);
+	
+	void addTripImgList(HashMap<String, Object> map);
+	
 	void removeWeddding(HashMap<String, Object> map);
 	
 	void removeTrip(HashMap<String, Object> map);	
 	
 	void editWedding(HashMap<String, Object> map);
+	
+	void editTrip(HashMap<String, Object> map);
 	//
 //	
 //	

@@ -109,5 +109,20 @@ public class ProdSubServiceImpl implements ProdSubService{
 		prodSubMapper.insertTrip(map);
 		
 	}
+	@Override
+	public void addTripImg(HashMap<String, Object> map) {
+		// TODO Auto-generated method stub
+		prodSubMapper.insertTripImg(map);
+	}
+	@Override
+	public void editTrip(HashMap<String, Object> map) {
+		// TODO Auto-generated method stub
+		prodSubMapper.updateTrip(map);
+	}
+	@Override
+	public void addTripImgList(HashMap<String, Object> map) {
+		// TODO Auto-generated method stub
+		prodSubMapper.insertTripImgList(map);
+	}
 	
 }

@@ -34,7 +34,7 @@ select.slt1 {border: 0.5px solid #AAAAAA; font-weight: 500;  font-size: 15px; }
 fieldset {border: none;}
 input::-webkit-outer-spin-button, input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
 
-.boxshadowline {box-shadow: 0 0px 2px rgba(0, 0, 0, 0.3); border-radius: 10px;}
+.boxshadowline {box-shadow: 0 0px 2px rgba(0, 0, 0, 0.3); border-radius: 10px; background-color: white;}
 
 ol, ul ,li {list-style:none;}
 h1, h2, h3, h4, h5, h6 {font-size: medium;}

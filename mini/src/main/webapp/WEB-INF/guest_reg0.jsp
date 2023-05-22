@@ -102,7 +102,7 @@
 							
 		                    <div id="reg_options_popup_name">상품 명 : {{item.pName}}</div>
 		                    <div class="reg_options_popup_price">상품 가격 : {{item.pPrice}}원</div>
-		                    <div>상품 수량 : <input type="number"  id="reg_options_popup_stock_number" size="1" v-model="item.rCnt" @keydown="fnCntCheck($event)" min="1" :max="item.rCnt"></div>
+		                    <div>상품 수량 : <input type="number"  id="reg_options_popup_stock_number" size="1" v-model="item.rCnt" @keyup="fnCntCheck($event)"></div>
 		                    <div class="reg_options_popup_price">합계 : {{item.pPrice * item.rCnt}}원</div>
 		                </div>
 		                <ul class="reg_options_popup_checkbox">
@@ -174,6 +174,7 @@ var app = new Vue({
 	                self.registry = data.registry;
                     self.userName= self.registry[0].uName;						
 						
+                   		self.insertRegistry = [];
 						for ( i in self.registry) {
 						 	if (self.registry[i].orderNo == null) {
 						 		self.insertRegistry.push(self.registry[i]); // insertRegistry에 데이터 추가
@@ -257,18 +258,22 @@ var app = new Vue({
 	        const userItemList = localStorage.getItem('userItemList');    
 	        var item = JSON.parse(userItemList);                 
 	        self.item = item;
+	        self.item.limit = item.rCnt;
 	        console.log(item);
 	         
 	    }
     ,	fnCntCheck : function(check) {  
-        var self = this;     
-        console.log(check);
-        // console.log(self.item.rCnt); 
-        // if(check > self.item.rCnt) {
-        //     alert("수량을 다시 확인해주세요");
-        // } else {
-        //     return;
-        // }
+        var self = this;
+        var e = check.target;
+        
+        if(parseInt(e.value) > parseInt(self.item.limit)) {
+        	e.value = self.item.limit;
+        	self.item.rCnt = self.item.limit;
+        } else if(parseInt(e.value) < 1) {
+        	e.value = 1;
+        	self.item.rCnt = 1;
+        };
+        
     }
 	,	fnSendItem : function() {
 	       var self = this;

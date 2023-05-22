@@ -141,7 +141,8 @@
 							
 		                    <div id="reg_options_popup_name">상품 명 : {{item.pName}}</div>
 		                    <div class="reg_options_popup_price">상품 가격 : {{item.pPrice}}원</div>
-		                    <div>상품 수량 : <input type="number" size="1" v-model="item.rCnt" id="reg_options_popup_stock_number" min="1" max="10"></div>
+		                    <div v-if="item.fundYn == 'Y'">상품 수량 : <label>{{item.rCnt}}</label></div>
+		                    <div v-else>상품 수량 : <input type="number" size="1" v-model="item.rCnt" @keyup="fnCntCheck($event)"></div>
 		                    <div class="reg_options_popup_price">합계 : {{item.pPrice * item.rCnt}}원</div>
 		                </div>
 		                <ul class="reg_options_popup_checkbox">
@@ -214,6 +215,7 @@
 	                    }
 						self.registry = data.registry;						
 						
+						self.insertRegistry = [];
 						for ( i in self.registry) {
 						 	if (self.registry[i].orderNo == null) {
 						 		self.insertRegistry.push(self.registry[i]); // insertRegistry에 데이터 추가
@@ -283,7 +285,20 @@
 					localStorage.removeItem('userImgInfo');
 	                location.reload();
 	            };
-	    	}
+	    }
+	    ,	fnCntCheck : function(check) {  
+	        var self = this;
+	        var e = check.target;
+	        
+	        if(parseInt(e.value) > 5) {
+	        	e.value = 5;
+	        	self.item.rCnt = 5;
+	        } else if(parseInt(e.value) < 1) {
+	        	e.value = 1;
+	        	self.item.rCnt = 1;
+	        };
+	        
+	    }	
 	    ,	fnOptionBtn: function(item){
 	    		var self = this;
 	            localStorage.setItem('userItemList', JSON.stringify(item));

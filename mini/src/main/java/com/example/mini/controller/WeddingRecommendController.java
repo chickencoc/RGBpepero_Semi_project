@@ -154,7 +154,7 @@ public class WeddingRecommendController {
         
         return fileName;
     }
-    
+    //
     @RequestMapping(value = "/removeWedding.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String removeWedding(Model model, @RequestParam HashMap<String, Object> map) throws Exception {

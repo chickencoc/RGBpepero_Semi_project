@@ -126,7 +126,7 @@
             <div class="fundingBtn">
                 <button class="btn1" @click="fnFunding(tripNo)">펀딩레지스트리 등록</button>
             </div>
-            
+            <!--  -->
             </div>
         </div>
     </div>

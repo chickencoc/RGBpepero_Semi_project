@@ -156,7 +156,7 @@
 		WHERE W.WEDDINGNO = #{weddingNo}
 	</select>
 </mapper>
-<!-- 	<select id="selectUserCnt" parameterType="hashmap" resultType="int">
+<!-- 	ㅇㄹ<select id="selectUserCnt" parameterType="hashmap" resultType="int">
 		SELECT COUNT(*) AS CNT
 		FROM mini_db2.T1_USER
 		WHERE USERID = #{userId}

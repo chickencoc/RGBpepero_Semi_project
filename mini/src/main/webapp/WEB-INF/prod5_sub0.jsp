@@ -123,7 +123,7 @@
 				<div class="modifyButton">
 					<button class="modify" v-if="status=='S'" @click="fnAddWedding">추가하기</button>
 
-
+<!--  -->
 				</div>
 			</div>
 		</div>

@@ -23,7 +23,7 @@ public interface ProdSubMapper {
 	Trip selectTripInfo(HashMap<String, Object> map);
 	
 	List<Trip> selectTripImgList(HashMap<String, Object> map);
-	
+	//
 	int selectTripCnt(HashMap<String, Object> map);
 	
 	void insertWedding(HashMap<String, Object> map);

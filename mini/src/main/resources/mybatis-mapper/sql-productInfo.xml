@@ -61,4 +61,5 @@
 		FROM	mini_db2.T1_CODE
 		WHERE	KIND = 'CATEGORY' AND CODE != 'R'
 	</select>
+	<!--  -->
 </mapper>

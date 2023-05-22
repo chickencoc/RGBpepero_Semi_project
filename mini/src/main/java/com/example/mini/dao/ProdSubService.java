@@ -30,7 +30,7 @@ public interface ProdSubService {
 	void removeTrip(HashMap<String, Object> map);	
 	
 	void editWedding(HashMap<String, Object> map);
-	
+	//
 //	
 //	
 //	HashMap<String, Object> selectFindId(HashMap<String, Object> map); //아이디 찾기

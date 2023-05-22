@@ -10,6 +10,7 @@ public class Return {
 	private String uPhone;
 	private String productNo;
 	private String oCdatetime;
+	private String cDatetime;
 	private String oCnt;
 	private String oAddrno;
 	private String oAddr1;
@@ -29,7 +30,7 @@ public class Return {
 	private String pContent;
 	private String pName;
 	private String srcimgNo;
-	private String imgsrc;
+	private String imgSrc;
 	private String imgname;
 	private String orgname;
 	private String imgtype;
@@ -37,6 +38,7 @@ public class Return {
 	private String code;
 	private String name;
 	private String total;
+	private String retCnt;
 	
 	public String getOrderNo() {
 		return orderNo;
@@ -162,11 +164,11 @@ public class Return {
 	public void setSrcimgNo(String srcimgNo) {
 		this.srcimgNo = srcimgNo;
 	}
-	public String getImgsrc() {
-		return imgsrc;
+	public String getImgSrc() {
+		return imgSrc;
 	}
-	public void setImgsrc(String imgsrc) {
-		this.imgsrc = imgsrc;
+	public void setImgsrc(String imgSrc) {
+		this.imgSrc = imgSrc;
 	}
 	public String getImgname() {
 		return imgname;
@@ -221,5 +223,47 @@ public class Return {
 	}
 	public void setgPhone(String gPhone) {
 		this.gPhone = gPhone;
+	}
+	public String getProductNo() {
+		return productNo;
+	}
+	public void setProductNo(String productNo) {
+		this.productNo = productNo;
+	}
+	public String getoCdatetime() {
+		return oCdatetime;
+	}
+	public void setoCdatetime(String oCdatetime) {
+		this.oCdatetime = oCdatetime;
+	}
+	public String getcDatetime() {
+		return cDatetime;
+	}
+	public void setcDatetime(String cDatetime) {
+		this.cDatetime = cDatetime;
+	}
+	public String getoCnt() {
+		return oCnt;
+	}
+	public void setoCnt(String oCnt) {
+		this.oCnt = oCnt;
+	}
+	public String getoAddrno() {
+		return oAddrno;
+	}
+	public void setoAddrno(String oAddrno) {
+		this.oAddrno = oAddrno;
+	}
+	public String getoAddr1() {
+		return oAddr1;
+	}
+	public void setoAddr1(String oAddr1) {
+		this.oAddr1 = oAddr1;
+	}
+	public String getRetCnt() {
+		return retCnt;
+	}
+	public void setRetCnt(String retCnt) {
+		this.retCnt = retCnt;
 	}
 }

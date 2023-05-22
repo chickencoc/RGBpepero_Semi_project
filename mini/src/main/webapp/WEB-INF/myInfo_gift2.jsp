@@ -51,30 +51,35 @@
                                     <a href="" v-if="guestFlg">더 보기▼</a>
                                     <a href="" v-if="!guestFlg">접기▲</a>
                                 </div>
-                                <div v-if="!guestFlg" v-for="(item,index) in returnGuestList">
-                                    <p>{{item.gName}}</p>
+                                <div v-if="guestFlg" v-for="(items,index) in returnGuestList">
+                                    <p v-if="index == 0">{{items.gName}}</p>
+                                </div>
+                                <div v-if="!guestFlg" v-for="(items,index) in returnGuestList">
+                                    <p>{{items.gName}}</p>
                                 </div>
                             </div>
                         </td>
-                        <td  rowspan="2" class="returnProdCntBox">{{item.pStock}}</td>
+                        <td  rowspan="2" class="returnProdCntBox">{{item.retCnt}}</td>
                         <td  rowspan="2" class="returnProdDateBox">{{item.cDatetime}}</td>
                         <td  rowspan="2" class="returnProdPriceBox">{{item.pPrice}}</td>
                     </tr>
                     
                 </table>
             </fieldset>
-            <template>
-                <paginate
-                  :page-count="pageCount"
-                  :page-range="3"
-                  :margin-pages="2"
-                  :click-handler="fnSearch"
-                  :prev-text="'<'"
-                  :next-text="'>'"
-                  :container-class="'pagination'"
-                  :page-class="'page-item'">
-                </paginate>
-              </template>
+            <div class="page">
+		            <template class="page">
+		                <paginate
+		                  :page-count="pageCount"
+		                  :page-range="3"
+		                  :margin-pages="2"
+		                  :click-handler="fnSearch"
+		                  :prev-text="'<'"
+		                  :next-text="'>'"
+		                  :container-class="'pagination'"
+		                  :page-class="'page-item'">
+		                </paginate>
+	              </template>
+			</div>
         </div>
     </div>
 
@@ -116,6 +121,7 @@ var app = new Vue({
                 data : nparmap,
                 success : function(data) { 
                 	self.returnList = data.returnList;
+                	console.log(self.returnList);
                 	for(var i=0;i< self.returnList.length; i++){
                 		self.fnGetReturnGuestList(self.returnList[i].productNo);
                 		}
@@ -131,9 +137,10 @@ var app = new Vue({
                 type : "POST", 
                 data : nparmap,
                 success : function(data) { 
-                	self.list = data.product;
+                	console.log(data);
+                	self.returnGuestList = data.returnList;
                     self.cnt = data.cnt;
-                    
+                    console.log(self.returnGuestList);
                 	}
            		}); 
         	}

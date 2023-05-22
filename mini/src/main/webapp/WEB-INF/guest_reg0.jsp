@@ -153,7 +153,7 @@ var app = new Vue({
             var urlParameter = window.location.search;           
             var urlStr = originalUrl;           
             var url = new URL(urlStr);
-            var urlParams = url.searchParams;         
+            var urlParams = url.searchParams;
             self.userId = urlParams.get('id');
         }
     ,   fnselectUser: function(){

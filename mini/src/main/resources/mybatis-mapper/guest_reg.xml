@@ -45,7 +45,7 @@
 	<insert id="insertGuestFunding" parameterType="hashmap">
 		INSERT INTO mini_db2.T1_FUNDING
 		SELECT
-			#{registryNo}, #{fundingNo}, #{userId}, NULL, NULL, #{pdPrice}, #{gphone}, O_CDATETIME, #{givePrice}, 'N'
+			#{registryNo}, #{fundingNo}, #{userId}, NULL, NULL, #{pPrice}, #{gphone}, O_CDATETIME, #{givePrice}, 'N'
 		FROM mini_db2.T1_ORDER
 		WHERE PRODUCTNO = #{fundingNo} AND G_PHONE = #{gphone} AND O_MESSAGE = #{sendContent}
 	</insert>

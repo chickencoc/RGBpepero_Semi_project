@@ -11,13 +11,13 @@
 <title>상품정보 수정 및 등록 페이지</title>
 <style>
 
-.container {width: 1200px;height: 800px; } 
+.container {width: 1200px; margin: 0 auto; padding-top: 50px; }
 
-.container .grid_Area {width: 900px;height: 300px;border: solid black 1px;display: grid;grid-template-columns: 1fr 1.5fr;grid-gap: 20px;margin: auto;margin-top: 100px;margin-bottom: 10px; } 
+.container .grid_Area {width: 900px;height: 400px; display: grid;grid-template-columns: 1fr 1.5fr;grid-gap: 20px; margin: 0 auto; margin-bottom: 30px;  } 
 
-.grid_Area .imgs {display: grid;grid-template-rows: 1fr 0.5fr; } 
+.grid_Area .imgs {display: grid;grid-template-rows: 1fr; } 
 
-.grid_Area .main_Img {border: 1px solid black;width: 340px;height: 180px;background-color: gray;margin: 20px 30px 0px 30px;text-align: center; } 
+.grid_Area .main_Img {border: 1px solid black; width: 340px; height: 340px; background-color: gray; margin: 20px 30px 0px 30px; text-align: center; border-radius: 5px; } 
 
 .thumb_Nails .thumb_Nail {border: 1px solid black;width: 100px;height: 70px;background-color: gray; } 
 
@@ -25,7 +25,9 @@
 
 .thumb_Nails .thumb_Nail {margin: 10px;text-align: center; } 
 
-.inputs .input_Elememt {width: 300px;margin-bottom: 10px;margin-top: 10px;text-align: center; } 
+.grid_Area .inputs {display: flex; flex-direction: column; justify-content: space-evenly; }
+.inputs .input_Elememt_Name {width: 300px;margin-bottom: 10px;margin-top: 10px;text-align: center; } 
+.inputs .input_Elememt {width: 160px;margin-bottom: 10px;margin-top: 10px;text-align: center; } 
 
 .inputs #product_Kind {margin-left: 15px;margin-right: 10px; } 
 
@@ -37,17 +39,20 @@
 
 .inputs #product_Name {margin-left: 30px; } 
 
-.main_Img #main_Plus {margin-top: 60px; } 
+.main_Img #main_Plus {width: 100%;}
 
 .thumb_Nail #thumb_Plus {width: 30px;height: 30px;margin-top: 20px; } 
 
-.product_Explane {margin-left: 150px;width: 900px;height: 300px;padding: 20px;margin-top: 10px; } 
 
-.product_Explane_Title {margin-left: 150px; } 
+.container .product_Explane_Box {width: 950px; margin: 0 auto; padding: 0 27px;}
+.product_Explane { width: 900px; height: 300px;  margin: 0 auto; } 
 
-.modify_Btn {color: white;background-color: black;position: relative;top: 30px;right: 105px;width: 100px;height: 40px; } 
+.product_Explane_Title { margin-bottom: 20px;} 
 
-.submit_Btn {color: white;background-color: black;position: relative;top: -10px;left: 830px;width: 100px;height: 40px; } 
+.container .btnBox {margin: 0 auto; margin-top: 75px; text-align: right; width: 950px; padding: 0 20px;}
+.container .btnBox .btn1 {width: 100px; height: 40px;}
+.modify_Btn {width: 100px;height: 40px; } 
+.submit_Btn { width: 100px;height: 40px; } 
 
 </style>
 </head>
@@ -56,18 +61,16 @@
 	<div id="app">
 		<div id="wrapper">
 			<div class="container">
-				<div class="grid_Area">
+				<div class="grid_Area boxshadowline">
 					<div class="imgs">
 						<div class="main_Img">
-						<template>
 							<img v-if="productNo == null" src="../image/plus.png" id="main_Plus">
-						</template>
 							<img v-if="productNo != null" :src="imgSrc" id="main_Plus">
 						</div>
 					</div>
 					<div class="inputs">
 						<div>
-							상품명<input type="text" class="input_Elememt" id="product_Name" v-model="pName">
+							상품명<input type="text" class="input_Elememt_Name" id="product_Name" v-model="pName">
 						</div>
 						<div>
 							개수<input type="number" class="input_Elememt" id="product_Cnt"v-model="pStock">개
@@ -89,10 +92,14 @@
 						</div>
 					</div>
 				</div>
-				<h1 class="product_Explane_Title">상품상세 설명</h1>
-				<vue-editor class="product_Explane" id="editor" v-model="pContent" placeholder="상품설명을 입력해주세요."></vue-editor>
-				<button class="modify_Btn" v-if="productNo != null" @click="fnLoad">수정완료</button>
-				<button class="submit_Btn" v-if="productNo == null" @click="fnLoad">등록완료</button>
+				<div class="product_Explane_Box">
+					<h1 class="product_Explane_Title">상품상세 설명</h1>	
+					<vue-editor class="product_Explane" id="editor" v-model="pContent" placeholder="상품설명을 입력해주세요."></vue-editor>
+				</div>
+				<div class="btnBox">
+					<button class="submit_Btn btn1" @click="fnLoad" v-if="productNo == null || productNo == ''">등록완료</button>
+					<button class="modify_Btn btn1" @click="fnLoad" v-else>수정완료</button>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -125,13 +132,17 @@ const VueEditor = Vue2Editor.VueEditor;
                     type : "POST", 
                     data : nparmap,
                     success : function(data) { 
-                        self.list = data.list;
-                        self.pName = self.list.pName;
-                        self.pPrice = self.list.pPrice;
-                        self.pStock = self.list.pStock;
-                        self.pContent = self.list.pContent;
-                        self.pKind = self.list.pKind;
-                        self.imgSrc = self.list.imgSrc;
+                    	if(typeof data.list == "undefined" || data.list == "" || data.list == null) {
+                    		console.log("로딩 실패");
+                    	} else {
+                    			self.list = data.list;
+                    		            self.pName = self.list.pName;
+                    		            self.pPrice = self.list.pPrice;
+                    		            self.pStock = self.list.pStock;
+                    		                        self.pContent = self.list.pContent;
+                    		                        self.pKind = self.list.pKind;
+                    		                        self.imgSrc = self.list.imgSrc;
+                    		}
                     }
                 }); 
             },fnProductUpdate : function(){
@@ -225,6 +236,7 @@ const VueEditor = Vue2Editor.VueEditor;
 		created : function() {
 			var self = this;
 			self.fnProductInformation();
+			console.log(self.productNo);
 
 		}
 	});

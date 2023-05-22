@@ -289,10 +289,14 @@
 							</div>
 							<div class="tripName">{{item.tName}}</div>
 						</a>
+						<div v-if="status=='S'" class="adminBtn">
+		            		<button class="btn1" @click="fnEdit(item)">수정</button>
+		            		<button class="btn1" @click="fnRemove(item)">삭제</button>
+		            	</div>
 					</div>
 				</div>
 				<div class="btnBox">
-					<button class="btn1" v-if="status=='S'">추가</button>
+					<button class="btn1" v-if="status=='S'" @click="fnAdd()">추가</button>
 				</div>
 				<template class="pageList">
 					<paginate :page-count="pageCount" :page-range="3" :margin-pages="2"
@@ -358,7 +362,11 @@ var app = new Vue({
 			self.selectPage = pageNum;
 			var startNum = ((pageNum-1) * 5);
 			var lastNum = (pageNum * 5)+1;
-			var nparmap = {startNum : startNum, lastNum : lastNum};
+			var nparmap = {startNum : startNum, 
+				lastNum : lastNum,
+				tKind : self.tKind,
+				tName : self.tName,
+				pKind : self.pKind};
 			$.ajax({
 				url : "/tripRecommend.dox",
 				dataType : "json",
@@ -447,7 +455,31 @@ var app = new Vue({
                         self.catList = data.code;
                         }
                        }); 
-            }}
+            }
+		 ,fnEdit : function(){
+	        	
+	        }
+		 ,fnRemove : function(){
+			var self = this;
+			var nparmap = item; //key 값을 보내야 한다.
+			if(!confirm("정말 삭제하시겠습니까?")){
+					return;
+				}
+				$.ajax({
+					url : "/removeTrip.dox",
+					dataType : "json",
+					type : "POST",
+					data : nparmap,
+					success : function(data) {
+						alert("삭제되었습니다.");
+						self.fnGetList();
+					}
+				});
+	        }
+		 ,fnAdd: function(){
+			 location.href=""
+		 }
+	    }   
     , created: function () {
     	var self = this;
     	self.fnGetList();

@@ -102,7 +102,7 @@
 					<div class="imgBox2" v-for="(item, index) in list">
 						<div v-if="status=='S'">
 							<button class="modify" @click="fnRemoveWedding(item)">삭제하기</button>
-							<button class="modify" @click="fnEditWedding">수정하기</button>
+							<button class="modify" @click="fnEditWedding(item.weddingNo)">수정하기</button>
 						</div>
 						<a href="javascript:;" @click="fnMoveUrl(item.wUrl)">
 							<div>
@@ -289,12 +289,12 @@ var app = new Vue({
                	}
           	}); 
        	}
-	   ,fnAddWedding : function(){
+	   ,fnAddWedding : function(weddingNo){
 		   location.href="prod5Sub1.do"
 	   }
 	   ,fnEditWedding : function(){
 		   var self = this;
-			self.pageChange("/weddingModify.do", {weddingNo : self.weddingNo});
+			self.pageChange("/weddingModify.do", {weddingNo : weddingNo});
 	   }
 	   ,fnRemoveWedding : function(item){
 		   var self = this;

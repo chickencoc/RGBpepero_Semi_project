@@ -15,11 +15,19 @@ public interface ProdSubService {
 	
 	HashMap<String, Object> searchWeddingInfo(HashMap<String, Object> map);
 	
+	HashMap<String, Object> searchTripInfo(HashMap<String, Object> map);
+	
+	HashMap<String, Object> searchTripImgList(HashMap<String, Object> map);
+	
 	void addWedding(HashMap<String, Object> map);
 	
 	void addImg(HashMap<String, Object> map);
 	
+	void addTrip(HashMap<String, Object> map);
+	
 	void removeWeddding(HashMap<String, Object> map);
+	
+	void removeTrip(HashMap<String, Object> map);	
 	
 	void editWedding(HashMap<String, Object> map);
 	

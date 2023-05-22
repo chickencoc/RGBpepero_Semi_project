@@ -194,4 +194,33 @@ public class WeddingRecommendController {
         return "/prod6_sub1";
     }
 	
+	@RequestMapping(value = "/tripView.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String tirpView(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		resultMap = prodSubService.searchTripInfo(map);
+		resultMap.put("message", "성공");
+		return new Gson().toJson(resultMap);
+	}
+	
+	@RequestMapping(value = "/tripImg.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String tripImg(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		
+		resultMap = prodSubService.searchTripImgList(map);
+		resultMap.put("message", "성공");
+		return new Gson().toJson(resultMap);
+	}
+	
+	@RequestMapping(value = "/addTrip.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String addTrip(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		prodSubService.addTrip(map);
+		resultMap.put("result", "success");
+		resultMap.put("tirpNo", map.get("id"));
+		return new Gson().toJson(resultMap);
+	}
+	
 }

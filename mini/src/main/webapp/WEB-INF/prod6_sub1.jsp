@@ -91,30 +91,31 @@
 </head>
 <body>
 <div id="app">
-    <div id="wrapper">
+       <div id="wrapper">
         <div class="container">
-            <div class="product_category_list">
-                <a href="">침실</a>
-                <a href="">거실</a> 
-                <a href="">드레스룸</a> 
-                <a href="">주방</a>
-                <a href="">다용도실</a>
-                <a href="">욕실</a> 
-                <a href="">식장</a>
-                <a href=""><strong>여행</strong></a>
-            </div>
-            <div class="travelBanner"><img src="/image/sunsetSea.jpg" id="travelBanner2"></div>
+
+		<div class="prodCategoryList">
+			<ul>
+				<li class="prodCategoryList_li" v-for="(item, index) in catList"
+					@click="fnChange(item.code)"><template
+						v-if="item.code == pKind">
+						<b>{{item.name}}</b>
+					</template>
+					<template v-else>{{item.name}}</template></li>
+			</ul>
+		</div>
+            <div class="travelBanner"><img :src="info.imgsrc" id="travelBanner2"></div>
             <div id="explane">
-                <h1>보라카이</h1>
+                <h1>{{info.tName}}</h1>
             </div>
             <div id="miniExplane">
-                <h1>필리핀 마닐라의 섬</h1>
-                <h1>야자수가 늘어선 해변에 새하얀 모래,</h1>
-                <h1>에메랄드빛 투명한 바다로 유명한 휴양지다.</h1>
+                <h1>{{info.tContent}}</h1>
             </div>
-            <div id="picture1">
-                <img src="/image/beach2.jpg" id="boracay">
-            </div>
+            <template v-for="(item, index) in list">
+	            <div class="picture1">
+	                <img :src="item.imgsrc" id="boracay">
+	            </div>
+            </template>
             <hr>
             <div id="api">
                 <div id="apiExplane">보라카이 API</div>
@@ -123,9 +124,9 @@
                 </div>
             <hr>  
             <div class="fundingBtn">
-                <button>펀딩레지스트리 등록</button>
+                <button class="btn1" @click="fnFunding(tripNo)">펀딩레지스트리 등록</button>
             </div>
-               
+            
             </div>
         </div>
     </div>
@@ -137,13 +138,94 @@
 var app = new Vue({ 
     el: '#app',
     data: {
-
+    	catList : [],
+        pKind : "A",
+        tripNo : "${map.tripNo}",
+        info:{},
+        list:{},
+    	status: "${sessionStatus}",
     }   
     , methods: {
-
+    	fnChange : function(code){
+	        var self = this;
+	
+	        self.keyword = "";
+	        if(code == "W"){
+	            location.href="/prod5Sub0.do";
+	        }else if(code == "A"){
+	            location.href="/triprecommend.do";
+	        }else if(code == "B"){
+	            location.href="/bedroom.do";
+	        }else if(code == "L"){
+	            location.href="/livingroom.do";
+	        }else if(code == "D"){
+	            location.href="/dressroom.do";
+	        }else if(code == "K"){
+	            location.href="/kitchen.do";
+	        }else if(code == "V"){
+	            location.href="/utilityroom.do";
+	        }else if(code == "T"){
+	            location.href="/toilet.do";
+	        }else if(code == "H"){
+	            location.href="/hobby.do";
+	        }else{
+	            location.href="/main.do";
+	        }
+    	}
+    	,fnGetCategoryList : function(){
+            var self = this;
+            var nparmap = {};
+            $.ajax({
+                url:"/categoryList.dox",
+                dataType:"json",
+                type : "POST", 
+                data : nparmap,
+                success : function(data) { 
+                    self.catList = data.code;
+                    }
+             }); 
+        }
+    	,fnGetInfo : function(){
+            var self = this;     
+            var nparmap = {tripNo : self.tripNo,};
+            $.ajax({
+                url: "/tripView.dox",
+                dataType:"json",	
+                type : "POST", 
+                data : nparmap,
+                success : function(data) { 
+                	console.log(data)
+                	self.info = data.info;
+                   
+                }
+            }); 
+        }
+        ,fnGetImg : function(){
+            var self = this;     
+            var nparmap = {tripNo : self.tripNo};
+            $.ajax({
+                url: "/tripImg.dox",
+                dataType:"json",	
+                type : "POST", 
+                data : nparmap,
+                success : function(data) { 
+                	console.log(data)
+                	self.list = data.list;
+                   
+                }
+            }); 
+        }
+        ,fnFunding :function(tripNo){
+	    	var self = this;
+	    	self.pageChange("", {tripNo : tripNo});
+	    }
+       
     }   
     , created: function () {
     	var self = this;
+    	self.fnGetCategoryList();
+    	self.fnGetInfo();
+    	self.fnGetImg();
 
 	}
 });

@@ -78,4 +78,36 @@ public class ProdSubServiceImpl implements ProdSubService{
 		return resultMap;
 	}
 	
+	@Override
+	public HashMap<String, Object> searchTripInfo(HashMap<String, Object> map) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		Trip tripInfo = prodSubMapper.selectTripInfo(map);
+		resultMap.put("info", tripInfo);
+		return resultMap;
+	}
+	@Override
+	public HashMap<String, Object> searchTripImgList(HashMap<String, Object> map) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		List<Trip> tripImg = prodSubMapper.selectTripImgList(map);
+
+		resultMap.put("result", "success");
+		resultMap.put("list", tripImg);
+		return resultMap;
+	}
+	@Override
+	public void removeTrip(HashMap<String, Object> map) {
+		
+		prodSubMapper.deleteTrip(map);
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void addTrip(HashMap<String, Object> map) {
+		// TODO Auto-generated method stub
+		prodSubMapper.insertTrip(map);
+		
+	}
+	
 }

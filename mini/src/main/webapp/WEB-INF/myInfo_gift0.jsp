@@ -45,7 +45,7 @@
                     <div class="giftDetailBox1">
                         <!-- 사진 전체 묶음 -->
                         <div class="giftDetail" v-for="(item, index) in list">
-                            <label><input @click="fnDivSelect($event)" class="none" name="gifts" type="checkbox" v-model="checkedBox" value="1">상품선물</label>
+                            <label><input @click="fnDivSelect($event)" class="none" name="gifts" type="checkbox" v-model="checkedBox" value="1">답례품 명단에 추가</label>
 							<img class="product" :src="item.imgsrc"> <!-- 받은 상품 이미지-->
                             <div class="giftList">
                                 <div id="giftListName">{{item.pName}}</div>
@@ -173,7 +173,8 @@ var app = new Vue({
     	},
         fnDivSelect : function(item) {
             var self = this;
-            item.target.parentNode.parentNode.parentNode.classList.toggle("divBackgroundChange");
+            item.target.parentNode.parentNode.classList.toggle("divBackgroundChange");
+            item.target.parentNode.classList.toggle("lablefontbold");
         },
         // 리스트 스타일 체크박스 전체 선택 on/off
     	fnCheckAll : function(){
@@ -181,11 +182,11 @@ var app = new Vue({
             $("input[name=gifts]:gt(0)").each(function(index, gifts) {
                 gifts.checked = $("input[name=gifts]:eq(0)").prop("checked");
             });
-    	},
-        fnCheckBoxChk : function(){
+    	}
+        , fnCheckBoxChk : function(){
             $("input[name=gifts]:eq(0)").prop("checked", false);
-    	},
-        fnSendCard : function() {
+    	}
+    	, fnSendCard : function() {
             // location.href
         }
         ,fnGetList : function() {
@@ -212,7 +213,7 @@ var app = new Vue({
 				}
 			});
 		}
-		 , fnSearch : function(pageNum){
+		, fnSearch : function(pageNum){
 				var self = this;
 				self.selectPage = pageNum;
 				var startNum = ((pageNum-1) * 6);

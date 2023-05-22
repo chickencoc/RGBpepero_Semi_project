@@ -17,15 +17,18 @@
 .giftContentBox > .giftListBox { width: 1020px; padding: 50px 20px;}
 .giftContentBox > .giftListBox > .giftDetailBox1 { display: grid; grid-template-columns: repeat(3, 1fr); place-items: center; grid-gap: 25px;}
 .giftContentBox > .giftListBox > .giftDetailBox1 > .giftDetail { width: 300px; height: 400px; box-shadow: 0 2px 5px rgba(0, 0, 0, .1); border-radius: 5px; margin: 10px; overflow: hidden; justify-content: center;
-                                                                display: flex; align-items: center; flex-direction: column;}
+                                                                display: flex; align-items: center; flex-direction: column; transition: all 0.3s;}
+.giftContentBox > .giftListBox > .giftDetailBox1 > .giftDetail label { margin-bottom: 15px; cursor: pointer; }
+.giftContentBox > .giftListBox > .giftDetailBox1 > .giftDetail label:hover { font-weight: bold; }
 .giftContentBox > .giftListBox > .giftDetailBox1 > .giftDetail .giftList div {margin: 20px 0px; }
-.giftContentBox > .giftListBox > .giftDetailBox1 > .giftDetail img { width: 300px; height: 200px; }
+.giftContentBox > .giftListBox > .giftDetailBox1 > .giftDetail img { width: 260px; height: 180px; }
 .giftContentBox > .giftListBox > .giftDetailBox1 > .giftDetail .giftList > label { margin-top: 10px}
 .giftContentBox > .giftListBox > .giftDetailBox1 > .giftDetail .giftList > input { appearance: none;}
 
 #giftListName{ font-size: 20px; font-weight: 500;}
 #giftListGuest{ font-size: 18px;}
 
+.lablefontbold { font-weight: bold; }
 .divBackgroundChange { background-color: #ebebeb; box-shadow: 0px 0px 5px #999;}
 
 /* list */

@@ -62,7 +62,7 @@ h1, h2, h3, h4, h5, h6 {font-size: medium;}
 
 /* wrapper */
 #mainWrapper {max-width: none; min-width: 1240px; padding: 0 15px; min-height:calc(100vh - 420px); margin:0 auto;}
-#wrapper {min-height:calc(100vh - 420px); margin:0 auto; padding:0 20px; background-color: #F6F6F6;}
+#wrapper {width: 1200px; min-height:calc(100vh - 420px); margin:0 auto; padding:0 20px; background-color: #F6F6F6;}
 
 
 /* #header {position: fixed; z-index: 99; top: 0;}

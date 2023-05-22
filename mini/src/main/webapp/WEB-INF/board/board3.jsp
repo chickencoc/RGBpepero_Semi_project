@@ -18,10 +18,10 @@
         <div id="wrapper">
             <div id="boardhead">
                 <div id="boName">{{boardName}}</div>
-                <div>{{boardName}} :: 새 글 작성하기</div>
+                <div id="boNameText">{{boardName}} :: 새 글 작성하기</div>
             </div>
             <div id="newtextbox">
-	            <table class="board_detail"style="margin:auto;">
+	            <table class="board_detail" style="margin:auto;">
 					<colgroup>
 						<col width="10%"/>
 						<col width="*"/>

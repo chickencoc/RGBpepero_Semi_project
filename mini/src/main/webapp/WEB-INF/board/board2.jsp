@@ -19,8 +19,8 @@
                 <div id="boName">{{boardName}}</div>
             </div>
             <div id="newboardbox">
-            <div id="board_title">{{info.title}}</div>
-            <div id="board_info_line"><span id="board_info_cat">{{boardName}}</span><span>{{info.name}}</span><span>조회수 : {{info.viewCnt}}</span></div>
+            <div id="board_title">제목: {{info.title}}</div>
+            <div id="board_info_line"><span id="board_info_cat">{{boardName}}</span><span>글쓴이: {{info.name}}</span><span>조회수: {{info.viewCnt}}</span></div>
             <div id="board_info_line2"><span>{{info.cdatetime}} 작성됨</span><span v-if="info.udatetime!=null">{{info.udatetime}} 수정됨</span></div>
             <div id="board_img_list">
        			<div v-for="(item, index) in list" id="brdImgBox">
@@ -31,7 +31,7 @@
             </div>
             <div></div>
             <template>
-            <div id="newreplybox" v-if="info.boardKind != '2' && AccountStatus == 'S' ">
+            <div id="newreplybox2" v-if="info.boardKind != '2' && AccountStatus == 'S' ">
             <button class="board_btn" id="btn_del" @click="fnBoardDel">삭제</button><button class="board_btn" id="btn_edit" @click="fnBoardEdit">수정</button><button  class="board_btn" @click="fnGoList()">목록으로</button>
             </div>
             <div id="newreplybox" v-if="info.replyYn == 'Y'&& info.boardKind == '2' && !editFlg">

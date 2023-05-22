@@ -34,7 +34,7 @@
                         <th scope="col"></th>
                         <th scope="col">글 제목</th>
                         <th scope="col">작성자</th>
-                        <th scope="col">조회</th>
+                        <th scope="col">조회수</th>
                         <th scope="col">시간</th>
                     </tr>
                 </thead>
@@ -42,8 +42,8 @@
                     <tr  v-for="(item, index) in list"  @click="fnView(item.boardNo)">
                         <td>{{index + 1}}</td>
                         <template>
-	                        <td v-if="item.replyYn == 'Y'"><span><img src="/image/qa_icon2.gif"></span></td>
-	                        <td v-else><span><img src="/image/qa_icon1.gif"></span></td>
+	                        <td v-if="item.replyYn == 'Y'"><span><img src="../image/qa_icon2.gif"></span></td>
+	                        <td v-else><span><img src="/mini/src/main/webapp/image/icon/qa_icon1.gif"></span></td>
                         </template>
                         <td>{{item.title}}</td>
                         <td>{{item.name}}</td>
@@ -56,8 +56,8 @@
 				<button @click="fnAdd()" class="btn" style="float:right;" v-if="AccountStatus == 'S'">새 글 작성</button>
 			</div>
         </div>
-        </div>
-        <div class="pagecontroll">
+		<br>
+		<div class="pagecontroll">
 	        <template>
 					<paginate
 					   	:page-count="pageCount"
@@ -70,7 +70,9 @@
 					    :page-class="'page-item'">
 					</paginate>
 				</template>
-		</div>    
+		</div> 
+        </div>
+           
     </div>
     <!-- wrap END -->
 </div>

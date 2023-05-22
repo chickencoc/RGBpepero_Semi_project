@@ -17,7 +17,7 @@
         <div class="bannerbox">
             <div class="banner">
                 <div class="textbox">
-                    <p class="txt">Frequently Asked Questions</p>
+                    <img src="mini\src\main\webapp\image\banner\board_banner.jpg">
                 </div>
             </div>
         </div>

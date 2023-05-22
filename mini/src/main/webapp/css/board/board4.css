@@ -3,6 +3,7 @@
         #newtextbox{ margin-top: 50px;}   
         #newtextbox #btn_add{margin-top: 20px;float: right;}  
 
-        #newtextbox #title{width: 1000px;margin-right: 20px;margin-bottom: 20px;}
+        #newtextbox #title{width: 800px;margin-right: 20px; margin-top: 15px; margin-bottom: 20px;}
          
         .ck-editor__editable { height: 600px; }
+        #btn_box{float: right; margin-right: 37px; margin-top: 10px;}

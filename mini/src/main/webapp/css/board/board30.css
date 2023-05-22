@@ -1,35 +1,38 @@
-		.banner{height: 400px;background-color: #555;background-repeat: no-repeat;}
+        .banner{height: 400px;background-color: #555;background-repeat: no-repeat;}
         .banner .btn button{margin-top: 300px;margin-left: 580px ;}
-        .textbox .txt{position: absolute;text-align: center;font-size: 2em; margin-top: 150px;margin-left: 375px; }
-        .boardbox{width: 1200px;}
+        .textbox .txt{position: absolute;text-align: center;font-size: 2em;margin-top: 150px;margin-left: 375px;}
+        .boardbox{text-align: center;}
         .boardbox .txt1{margin-top: 50px;font-size: 2em;}
-        .boardcat{display: grid;grid-template-columns: 1fr 1fr 1fr; grid-column-gap: 60px;}
-        .line{margin-top: 20px; margin-bottom: 20px;border-bottom: 1px solid black;}
+        .boardcat{display: grid;grid-template-columns: 1fr 1fr 1fr;grid-column-gap: 60px;}
+        .line{margin-top: 20px;margin-bottom: 20px;border-bottom: 1px solid #AAAAAA;}
         #boardname{font-size: 3em;margin-bottom: 50px;}
-        .boardmenu{width: 300px;margin: 41px;padding-left: 180px;padding-right: 180px;padding-top:20px;padding-bottom:20px;}
-        #menu{width:1200px; margin-top: 20px;font-size: 2em;}
-        .board_list {width:100%; border-top:2px solid #252525; border-bottom:1px solid #ccc; margin:15px 0; border-collapse: collapse;}
+        .boardmenu{width: 300px; display: inline-flex; align-items: center; justify-content: center; margin-left: 180px;}
+        #menu{margin-top: 20px;font-size: 2em;}
+        .board_list {width:100%; border-top:2px solid #AAAAAA; border-bottom:1px solid #AAAAAA; margin:15px 0; border-collapse: collapse;}
+        .board_list tbody tr{border-top:1px solid #AAAAAA; border-bottom:1px solid #AAAAAA;}
         .board_list thead th:first-child {background-image:none;}
         .board_list thead th:nth-child(3) {width: 800px; text-align: left;}
-        .board_list thead th {border-bottom:1px solid #ccc; padding:13px 0; color:#3b3a3a; text-align: center; vertical-align:middle;}
-        .board_list tbody td {border-top:1px solid #ccc; padding:15px 0; text-align:center; vertical-align:middle;}
+        .board_list thead th { padding:13px 0; color:#AAAAAA; text-align: center; vertical-align:middle;}
+        .board_list tbody td { padding:15px 0; text-align:center; vertical-align:middle;}
         .board_list tbody tr:first-child td {border:none;}
         .board_list tbody td {width: 66px;}
-        .board_list tbody td:nth-child(3) {width: 800px;font-size:1.3em; text-align: left; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .board_list tbody td:nth-child(3) {width: 800px;font-size:1.3em; text-align: left; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; display: inline-block;}
         .board_list tbody td:nth-child(4) {width: 100px;}
         .board_list tbody td:nth-child(5) {width: 100px;}
         .board_list tbody td:last-child {width: 150px;}
-        .board_list tbody tr:nth-child(odd) td {background: #999;}
-        .board_list tbody tr:nth-child(odd):hover td {background: lightgreen;}
-        .board_list tbody tr:hover{background:lightgreen;}
+        .board_list tbody tr:nth-child(odd) td {background: #f6f6f6;}
+        .board_list tbody tr:nth-child(odd):hover td {background: #F8F0DF}
+        .board_list tbody tr:hover{background:#F8F0DF;}
         .board_list tbody td.title {text-align:left; padding-left:20px;}
         .board_list tbody td a {display:inline-block}
+
+        .boardSelect{display: inline-flex; position: relative; left: 480px; bottom: 10px;}
         .pagecontroll {text-align: center;} 
         
-        .pagination { margin:24px; display: inline-flex; position: relative; top: 20px; margin-top: 100px;} 
+        .pagination { margin:24px; } 
 			ul { text-align: center; } 
-			.pagination li { min-width:32px; padding:2px 6px; text-align:center; margin:0 3px; border-radius: 6px; border:1px solid #eee; color:#666; display : inline; } 
+			.pagination li { min-width:32px; padding:2px 6px; text-align:center; margin:0 3px; border-radius: 6px; border:1px solid #eee; color:#AAAAAA; display : inline; } 
 			.pagination li:hover { background: #E4DBD6; } 
-			.page-item a { color:#666; text-decoration: none; } 
-			.pagination li.active { background-color : #E7AA8D; color:#fff; } 
-			.pagination li.active a { color:#fff; } 
+			.page-item a { color:#AAAAAA; text-decoration: none; } 
+			.pagination li.active { background-color : #d7b994; color: #f6f6f6;; } 
+			.pagination li.active a { color:#f6f6f6; }

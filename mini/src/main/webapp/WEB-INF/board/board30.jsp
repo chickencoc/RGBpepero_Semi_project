@@ -16,13 +16,6 @@
     <div id="app">
         <!-- wrap START -->
         <div id="wrapper">
-            <div class="bannerbox">
-                <div class="banner">
-                    <div class="textbox">
-                        <p class="txt">Frequently Asked Questions</p>
-                    </div>
-                </div>
-            </div>
             <div id="menu">
                 <span id="announce" class="boardmenu" @click="fnAnounce">공지사항</span>
                 <span id="inquery" class="boardmenu" @click="fnInquery">문의하기</span>
@@ -30,7 +23,7 @@
             </div>
             <div class="boardbox">
                 <div id="boardname">자주하는 질문</div>
-                <select v-model="selectItem">
+                <select v-model="selectItem" class="boardSelect">
                     <option value="">:: 전체 ::</option>
                     <option value="P">상품관련</option>
                     <option value="A">계정관련</option>
@@ -66,23 +59,24 @@
             <div id="btn_box">
 				<button @click="fnAdd()" class="btn" style="float:right;" v-if="AccountStatus == 'S'">새 글 작성</button>
 			</div>
+        	</div>
+			<div class="pagecontroll">
+				<template>
+						<paginate
+							   :page-count="pageCount"
+							:page-range="3"
+							:margin-pages="2"
+							:click-handler="fnSearch"
+							:prev-text="'<'"
+							:next-text="'>'"
+							:container-class="'pagination'"
+							:page-class="'page-item'">
+						</paginate>
+					</template>
+			</div>
         </div>
-        </div>
-        <div class="pagecontroll">
-	        <template>
-					<paginate
-					   	:page-count="pageCount"
-					    :page-range="3"
-					    :margin-pages="2"
-					    :click-handler="fnSearch"
-					    :prev-text="'<'"
-					    :next-text="'>'"
-					    :container-class="'pagination'"
-					    :page-class="'page-item'">
-					</paginate>
-				</template>
-        <!-- wrap END -->
-    </div>
+				<!-- wrap END -->
+    
 </body>
 <jsp:include page="/layout/footer.jsp"></jsp:include>
 <script type="text/javascript">

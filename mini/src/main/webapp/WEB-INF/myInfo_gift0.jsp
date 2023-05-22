@@ -49,8 +49,9 @@
 							<img class="product" :src="item.imgsrc"> <!-- 받은 상품 이미지-->
                             <div class="giftList">
                                 <div id="giftListName">{{item.pName}}</div>
-                                <div id="giftListGuest">보낸사람 : {{item.gName}}</div>
-                                <div id="giftListDate">받은날짜 : {{item.oCdatetime}}</div>    
+                                <div id="giftListGuest">보낸 사람 : {{item.gName}}</div>
+                                <div id="giftListDate">받은 날짜 : {{item.oCdatetime}}</div>
+                                <div id="giftListDate">받은 금액 : {{item.price}}원</div>
                             </div>
                         </div>
                     </div>

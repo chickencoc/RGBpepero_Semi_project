@@ -20,7 +20,7 @@
                                                                 display: flex; align-items: center; flex-direction: column; transition: all 0.3s;}
 .giftContentBox > .giftListBox > .giftDetailBox1 > .giftDetail label { margin-bottom: 15px; cursor: pointer; }
 .giftContentBox > .giftListBox > .giftDetailBox1 > .giftDetail label:hover { font-weight: bold; }
-.giftContentBox > .giftListBox > .giftDetailBox1 > .giftDetail .giftList div {margin: 20px 0px; }
+.giftContentBox > .giftListBox > .giftDetailBox1 > .giftDetail .giftList div {margin: 6px 0px; }
 .giftContentBox > .giftListBox > .giftDetailBox1 > .giftDetail img { width: 260px; height: 180px; }
 .giftContentBox > .giftListBox > .giftDetailBox1 > .giftDetail .giftList > label { margin-top: 10px}
 .giftContentBox > .giftListBox > .giftDetailBox1 > .giftDetail .giftList > input { appearance: none;}

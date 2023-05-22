@@ -160,7 +160,7 @@ IMP.init("imp55171728");
 				var self = this;
 				var orderno = self.fnOrderNo;
 				console.log(orderno);
-				IMP.request_pay({ // param
+				/* IMP.request_pay({ // param
 		          pg : "kcp.{test}",
 		          merchant_uid : orderno,
 		          name : self.product.pName,
@@ -176,7 +176,9 @@ IMP.init("imp55171728");
 	                } else {
 	                    console.log(rsp);
 	                }
-		        });
+	             
+		        }); */
+		        self.fnOrder(orderno);
 		      }
 			,fnOrder : function(orderno) {
 				var self = this;

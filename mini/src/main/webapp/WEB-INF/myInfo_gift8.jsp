@@ -185,7 +185,6 @@ IMP.init("imp55171728");
 					nparmap = {
 						gPhone: self.gPhoneO[i]
 						, userId : self.userId
-						, gPhone : self.checkedBox.gPhone
 						, productNo : self.product.productNo 
 						, orderNo : orderno
 						};
@@ -196,8 +195,8 @@ IMP.init("imp55171728");
 	    			data : nparmap,
 	    			success : function(data) {
 	    				if(data.result == "success"){
-	    					alert(data.result);
-	    					// location.href="/main.do"
+	    					alert("성공적으로 발송되었습니다.");
+	    					 location.href="/main.do"
 	    					}
 	    				}
 	    			});

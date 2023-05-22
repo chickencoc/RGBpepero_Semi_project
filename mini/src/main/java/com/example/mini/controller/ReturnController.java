@@ -32,10 +32,11 @@ public class ReturnController {
 	@ResponseBody
 	public String searchReturnList(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
 		HashMap<String, Object> resultMap = new HashMap<String, Object>();
-//		int startNum = Integer.parseInt(String.valueOf(map.get("startNum")));
-//		int lastNum = Integer.parseInt(String.valueOf(map.get("lastNum")));
-//		map.put("startNum", startNum);
-//		map.put("lastNum", lastNum);
+		int startNum = Integer.parseInt(String.valueOf(map.get("startNum")));
+		int lastNum = Integer.parseInt(String.valueOf(map.get("lastNum")));
+		map.put("startNum", startNum);
+		map.put("lastNum", lastNum);
+
 		resultMap = returnService.searchReturnList(map);
 		return new Gson().toJson(resultMap);
 	}
@@ -48,7 +49,9 @@ public class ReturnController {
 //		int lastNum = Integer.parseInt(String.valueOf(map.get("lastNum")));
 //		map.put("startNum", startNum);
 //		map.put("lastNum", lastNum);
+	
 		resultMap = returnService.searchReturnGuestList(map);
+		
 		return new Gson().toJson(resultMap);
 	}
 	

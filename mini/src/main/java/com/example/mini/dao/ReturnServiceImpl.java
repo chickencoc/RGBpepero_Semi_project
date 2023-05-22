@@ -26,13 +26,30 @@ public class ReturnServiceImpl implements ReturnService{
 		return resultMap;
 	}
 
+//	@Override
+//	public HashMap<String, Object> searchReturnGuestList(HashMap<String, Object> map) {
+//		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+//		List<Return> returnGuestList = returnMapper.selectReturnGuestList(map);
+//		
+//		resultMap.put("result", "success");
+//		resultMap.put("returnList", returnGuestList);
+//		
+//		return resultMap;
+//	}
 	@Override
 	public HashMap<String, Object> searchReturnGuestList(HashMap<String, Object> map) {
-		HashMap<String, Object> resultMap = new HashMap<String, Object>();
-		List<Return> returnGuestList = returnMapper.selectReturnGuestList(map);
-		resultMap.put("result", "success");
-		resultMap.put("returnList", returnGuestList);
-		return resultMap;
+	    HashMap<String, Object> resultMap = new HashMap<String, Object>();
+	    List<Return> returnGuestList = returnMapper.selectReturnGuestList(map);
+	    boolean guestFlg = true;
+	    int cnt = returnMapper.cntReturnList(map);
+	    for (Return returnItem : returnGuestList) {
+	        returnItem.setGuestFlg(guestFlg); // 각 Return 항목에 대해 guestFlg 값을 설정합니다.
+	    }
+	    
+	    resultMap.put("result", "success");
+	    resultMap.put("returnList", returnGuestList);
+	    resultMap.put("cnt", cnt);
+	    return resultMap;
 	}
 
 	

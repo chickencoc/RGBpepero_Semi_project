@@ -25,7 +25,7 @@
 				<a href="main.do">캘린더</a>
 			</div>  	
             <div class="returnSearchBox">
-                <input type="text" placeholder="이름" class="returnSearchBar search">
+                <input type="text" placeholder="받은 사람 이름" class="returnSearchBar search" v-model="keyword" @click="fnKeyword()" @keyup.enter="fnKeyword">
                 <button class="returnSearchBtn searchM">검색</button>
                 <button class="returnSearchBtn searchR">초기화</button>
             </div>
@@ -40,30 +40,28 @@
                         <th>금액</th>
                     </tr>
                     <tr v-for="(item,index) in returnList">
-                        <td rowspan="2" class="returnProdImgBox">
+                        <td rowspan="1" class="returnProdImgBox">
                             <img :src="item.imgSrc" class="returnProdImg">
                         </td>
                         <td class="returnProdNameBox">{{item.pName}}</td>
-                        <td class="returnGuestNameBox" rowspan="2">
+                        <td class="returnGuestNameBox" rowspan="1">
                             <div class="returnGuestNameBox2">
-                                
-                                <div @click.prevent="fnShowGuest()">
-                                    <a href="" v-if="guestFlg">더 보기▼</a>
-                                    <a href="" v-if="!guestFlg">접기▲</a>
+                                <div @click.prevent="fnShowGuest(item)">
+                                    <a href="" v-if="!item.guestFlg">더 보기▼</a>
+                                    <a href="" v-if="item.guestFlg">접기▲</a>
                                 </div>
-                                <div v-if="guestFlg" v-for="(items,index) in returnGuestList">
+                                <div v-if="!item.guestFlg" v-for="(items,index) in returnGuestList">
                                     <p v-if="index == 0">{{items.gName}}</p>
                                 </div>
-                                <div v-if="!guestFlg" v-for="(items,index) in returnGuestList">
+                                <div v-if="item.guestFlg" v-for="(items,index) in returnGuestList">
                                     <p>{{items.gName}}</p>
                                 </div>
                             </div>
                         </td>
-                        <td  rowspan="2" class="returnProdCntBox">{{item.retCnt}}</td>
-                        <td  rowspan="2" class="returnProdDateBox">{{item.cDatetime}}</td>
-                        <td  rowspan="2" class="returnProdPriceBox">{{item.pPrice}}</td>
-                    </tr>
-                    
+                        <td  rowspan="1" class="returnProdCntBox">{{item.retCnt}}</td>
+                        <td  rowspan="1" class="returnProdDateBox">{{item.cDatetime}}</td>
+                        <td  rowspan="1" class="returnProdPriceBox">{{(item.pPrice).toLocaleString()}} 원</td>
+                    </tr> 
                 </table>
             </fieldset>
             <div class="page">
@@ -92,39 +90,44 @@ Vue.component('paginate', VuejsPaginate)
 var app = new Vue({ 
     el: '#app',
     data: {
-        guestFlg : true,
         selectPage: 1,
         pageCount: 1,
         cnt : 0,
         returnList : [],
 		returnGuestList : [],
-		userId : "${sessionId}"
-		
+		userId : "${sessionId}",
+		keyword: ''
+
     }
     , methods: {
-        fnShowGuest : function(){
-            var self = this;
-            self.guestFlg=!self.guestFlg
+        fnShowGuest : function(item){
+           var self = this;
+           item.guestFlg = !item.guestFlg;
+           
         }
-        ,fnSearch : function(){
-
+        ,fnKeywrod : function(){
+        	var self = this;
+        	self.fnGetReturnList();
         },
         fnGetReturnList : function(){
             var self = this;
             var startNum = ((self.selectPage-1) * 6);
     		var lastNum = (self.selectPage * 6);
-            var nparmap = {userId : self.userId};
+            var nparmap = {userId : self.userId, keywrod: self.keyword, startNum : startNum, lastNum : lastNum};
             $.ajax({
                 url:"/returnList.dox",
                 dataType:"json",	
                 type : "POST", 
                 data : nparmap,
                 success : function(data) { 
+                	console.log("data", data);
                 	self.returnList = data.returnList;
-                	console.log(self.returnList);
+                	console.log("returnList", self.returnList);
                 	for(var i=0;i< self.returnList.length; i++){
                 		self.fnGetReturnGuestList(self.returnList[i].productNo);
                 		}
+                	self.cnt = data.cnt
+                	 self.pageCount = Math.ceil(self.cnt / 6);
                 	}
            		}); 
         	}
@@ -136,14 +139,62 @@ var app = new Vue({
                 dataType:"json",	
                 type : "POST", 
                 data : nparmap,
-                success : function(data) { 
-                	console.log(data);
-                	self.returnGuestList = data.returnList;
+                success : function(data) {
+               
+                	self.returnGuestList = data.returnList;    	
                     self.cnt = data.cnt;
                     console.log(self.returnGuestList);
                 	}
            		}); 
         	}
+        ,
+    	fnSearch : function(pageNum){
+			var self = this;
+			self.selectPage = pageNum;
+			var startNum = ((pageNum-1) * 6);
+			var lastNum = (pageNum * 6)-1;
+			var nparmap = {startNum : startNum, lastNum : lastNum , keyword : self.keywrod};
+			$.ajax({
+				url : "/returnList.dox",
+				dataType : "json",
+				type : "POST",
+				data : nparmap,
+				success : function(data) {
+					self.list = data.product;
+					self.cnt = data.cnt;
+					self.pageCount = Math.ceil(self.cnt / 6);
+					}
+				});
+			}
+        , pageChange : function(url, param) {
+			var target = "_self";
+			if(param == undefined){
+			//	this.linkCall(url);
+				return;
+			}
+			var form = document.createElement("form"); 
+			form.name = "dataform";
+			form.action = url;
+			form.method = "post";
+			form.target = target;
+			for(var name in param){
+				var item = name;
+				var val = "";
+				if(param[name] instanceof Object){
+					val = JSON.stringify(param[name]);
+				} else {
+					val = param[name];
+				}
+				var input = document.createElement("input");
+	    		input.type = "hidden";
+	    		input.name = item;
+	    		input.value = val;
+	    		form.insertBefore(input, null);
+			}
+			document.body.appendChild(form);
+			form.submit();
+			document.body.removeChild(form);
+		}
     }   
     , created: function () {
         var self = this;

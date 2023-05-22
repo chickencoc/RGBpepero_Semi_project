@@ -26,7 +26,7 @@ public class Return {
 	private String dStatus;
 	private String dDate;
 	private String dArrived;
-	private String pPrice;
+	private int pPrice;
 	private String pContent;
 	private String pName;
 	private String srcimgNo;
@@ -39,6 +39,7 @@ public class Return {
 	private String name;
 	private String total;
 	private String retCnt;
+	private boolean guestFlg;
 	
 	public String getOrderNo() {
 		return orderNo;
@@ -140,10 +141,10 @@ public class Return {
 	public void setdArrived(String dArrived) {
 		this.dArrived = dArrived;
 	}
-	public String getpPrice() {
+	public int getpPrice() {
 		return pPrice;
 	}
-	public void setpPrice(String pPrice) {
+	public void setpPrice(int pPrice) {
 		this.pPrice = pPrice;
 	}
 	public String getpContent() {
@@ -265,5 +266,14 @@ public class Return {
 	}
 	public void setRetCnt(String retCnt) {
 		this.retCnt = retCnt;
+	}
+	public boolean isGuestFlg() {
+		return guestFlg;
+	}
+	public void setGuestFlg(boolean guestFlg) {
+		this.guestFlg = guestFlg;
+	}
+	public void setImgSrc(String imgSrc) {
+		this.imgSrc = imgSrc;
 	}
 }

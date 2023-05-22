@@ -34,6 +34,7 @@
 		FROM mini_db2.T1_PDIMAGE
 		WHERE PRODUCTNO = #{productNo};
 	</select>
+	
 	<update id="updateProduct" parameterType="hashmap">
 		UPDATE mini_db2.T1_PRODUCT P INNER JOIN mini_db2.T1_PDMANAGE PM
 		ON P.PRODUCTNO = PM.PRODUCTNO
@@ -46,11 +47,20 @@
 			P.P_KIND = #{pKind}
 		WHERE P.PRODUCTNO = #{productNo}
 	</update>
+	
 	<insert id="insertProduct" parameterType="hashmap">
-	INSERT INTO mini_db2.T1_PRODUCT
-	VALUE (NULL, #{pPrice}, NOW(),NULL ,#{pName}, #{pContent} ,#{pKind} , 0)
+		INSERT INTO mini_db2.T1_PRODUCT
+		VALUE (NULL, #{pPrice}, NOW(),NULL ,#{pName}, #{pContent} ,#{pKind} , 0)
 	</insert>
 	
+	<insert id="insertPdmanage" parameterType="hashmap">
+		INSERT INTO mini_db2.T1_PDMANAGE
+		SELECT
+			PRODUCTNO, #{pStock}, 0, 'Y'
+		FROM mini_db2.T1_PRODUCT
+		ORDER BY PRODUCTNO DESC
+		LIMIT 1
+	</insert>
 	
 	
 

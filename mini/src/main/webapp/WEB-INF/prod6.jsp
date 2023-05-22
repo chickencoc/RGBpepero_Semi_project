@@ -65,7 +65,7 @@
 				</div>
             <div class="searchBox">
                
-                <input type="text" placeholder="상품명을 입력해주세요" class="searchBar search" v-model="keyword" @change="fnSearchProd">
+                <input type="text" placeholder="상품명을 입력해주세요" class="searchBar search" v-model="keyword" @keyup.enter="fnSearchProd">
                 <button class="prodBtn searchM" @click="fnSearchProd">검색</button><button class="prodBtn cancelBtn searchR" @click="fnResetSearchProd">초기화</button>
             </div>
             <div class="prodSelectBox">
@@ -83,7 +83,7 @@
 	                        	<img :src="item.imgSrc" class="prod0Img">
 	                        </template>
                             <div class="prodName">{{item.pName}}</div>
-                            <div class="prodPrice">{{item.pPrice}}원</div>
+                            <div class="prodPrice">{{(item.pPrice).toLocaleString()}}원</div>
                             <div class="prodLike">좋아요 : {{item.iLike}} <img src="../image/icon/good.png" class="prodLikeImg"></div>
                         </div>
                 </div>
@@ -121,13 +121,12 @@ var app = new Vue({
         catList : [],
         pdImgList : [],
         pKind : "T",
-        keyword : "${map.keyword}",
+        keyword : "",
         selectItem : "",
         sessStatus: "${sessionStatus}"
     } 
 	, watch : {
 		selectItem : "fnGetProductList"
-		, keyword : "fnSearchProd"
 		}
     , methods: {
     	fnAddProduct : function(){

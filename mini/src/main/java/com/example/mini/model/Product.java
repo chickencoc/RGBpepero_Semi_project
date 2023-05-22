@@ -2,7 +2,7 @@ package com.example.mini.model;
 
 public class Product {
 	private String productNo;
-	private String pPrice;
+	private int pPrice;
 	private String pCdatetime;
 	private String pUdatetime;
 	private String pName;
@@ -21,10 +21,10 @@ public class Product {
 	public void setProductNo(String productNo) {
 		this.productNo = productNo;
 	}
-	public String getpPrice() {
+	public int getpPrice() {
 		return pPrice;
 	}
-	public void setpPrice(String pPrice) {
+	public void setpPrice(int pPrice) {
 		this.pPrice = pPrice;
 	}
 	public String getpCdatetime() {

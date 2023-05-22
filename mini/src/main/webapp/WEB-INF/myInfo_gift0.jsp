@@ -45,7 +45,7 @@
                     <div class="giftDetailBox1">
                         <!-- 사진 전체 묶음 -->
                         <div class="giftDetail" v-for="(item, index) in list">
-                            <label><input @click="fnDivSelect($event)" class="none" name="gifts" type="checkbox" v-model="checkedBox" value="1">답례품 명단에 추가</label>
+                            <label><input @click="fnDivSelect($event)" class="none" name="gifts" type="checkbox" v-model="checkedBox" value="1"  v-bind:value="item">답례품 명단에 추가</label>
 							<img class="product" :src="item.imgsrc"> <!-- 받은 상품 이미지-->
                             <div class="giftList">
                                 <div id="giftListName">{{item.pName}}</div>

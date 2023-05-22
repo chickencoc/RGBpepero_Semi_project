@@ -23,9 +23,14 @@
 		INNER JOIN (SELECT COUNT(*) AS RETCNT, PRODUCTNO, USERID
 					FROM mini_db2.T1_RETURN
 		            GROUP BY PRODUCTNO) RC ON RC.PRODUCTNO = R.PRODUCTNO
+		            
 		WHERE G.USERID = #{userId} AND IMGSRC NOT LIKE '%BackGround%'
+						AND MAINYN = 'Y'
+		<if test="keyword != null and keyword != ''">
+			AND P.P_NAME LIKE CONCAT('%', #{keyword}, '%')
+		</if>
 		GROUP BY PRODUCTNO
-		<!-- LIMIT #{startNum}, 6 -->
+		LIMIT #{startNum}, 6
 		
 	</select>
 	<select id="selectReturnGuestList" parameterType="hashmap" resultType="com.example.mini.model.Return">
@@ -36,5 +41,24 @@
 		LEFT JOIN mini_db2.T1_GUEST G ON G.USERID = R.USERID AND G.G_PHONE = R.G_PHONE
 		WHERE R.USERID = #{userId} AND PRODUCTNO = #{productNo}
 		<!-- GROUP BY PRODUCTNO -->
+	</select>
+	
+	<select id="cntReturnList" parameterType="hashmap" resultType="int">
+		SELECT COUNT(*) AS CNT
+		FROM  mini_db2.T1_RETURN R
+		LEFT JOIN mini_db2.T1_GUEST G ON G.USERID = R.USERID AND G.G_PHONE = R.G_PHONE
+		LEFT JOIN mini_db2.T1_PRODUCT P ON P.PRODUCTNO = R.PRODUCTNO
+		INNER JOIN mini_db2.T1_PDIMAGE PI ON R.PRODUCTNO = PI.PRODUCTNO
+		INNER JOIN (SELECT COUNT(*) AS RETCNT, R.PRODUCTNO, R.USERID
+					FROM mini_db2.T1_RETURN R
+		            GROUP BY R.PRODUCTNO) RC ON RC.PRODUCTNO = R.PRODUCTNO
+		            
+		WHERE G.USERID = #{userId} AND IMGSRC NOT LIKE '%BackGround%'
+						AND MAINYN = 'Y'
+		<if test="keyword != null and keyword != ''">
+			AND P.P_NAME LIKE CONCAT('%', #{keyword}, '%')
+		</if>
+		<!-- LIMIT #{startNum}, 6 -->
+		
 	</select>
 </mapper>

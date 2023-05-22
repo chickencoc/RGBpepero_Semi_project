@@ -10,129 +10,45 @@
 <script src="https://unpkg.com/vue2-editor@2.3.11/dist/index.js"></script>
 <title>상품정보 수정 및 등록 페이지</title>
 <style>
-.container {
-	width: 1200px;
-	height: 800px;
-}
 
-.container .grid_Area {
-	width: 900px;
-	height: 300px;
-	border: solid black 1px;
-	display: grid;
-	grid-template-columns: 1fr 1.5fr;
-	grid-gap: 20px;
-	margin: auto;
-	margin-top: 100px;
-	margin-bottom: 10px;
-}
+.container {width: 1200px;height: 800px; } 
 
-.grid_Area .imgs {
-	display: grid;
-	grid-template-rows: 1fr 0.5fr;
-}
+.container .grid_Area {width: 900px;height: 300px;border: solid black 1px;display: grid;grid-template-columns: 1fr 1.5fr;grid-gap: 20px;margin: auto;margin-top: 100px;margin-bottom: 10px; } 
 
-.grid_Area .main_Img {
-	border: 1px solid black;
-	width: 340px;
-	height: 180px;
-	background-color: gray;
-	margin: 20px 30px 0px 30px;
-	text-align: center;
-}
+.grid_Area .imgs {display: grid;grid-template-rows: 1fr 0.5fr; } 
 
-.thumb_Nails .thumb_Nail {
-	border: 1px solid black;
-	width: 100px;
-	height: 70px;
-	background-color: gray;
-}
+.grid_Area .main_Img {border: 1px solid black;width: 340px;height: 180px;background-color: gray;margin: 20px 30px 0px 30px;text-align: center; } 
 
-.thumb_Nails {
-	display: flex;
-	justify-content: center;
-	align-content: center;
-	flex-direction: row;
-}
+.thumb_Nails .thumb_Nail {border: 1px solid black;width: 100px;height: 70px;background-color: gray; } 
 
-.thumb_Nails .thumb_Nail {
-	margin: 10px;
-	text-align: center;
-}
+.thumb_Nails {display: flex;justify-content: center;align-content: center;flex-direction: row; } 
 
-.inputs .input_Elememt {
-	width: 300px;
-	margin-bottom: 10px;
-	margin-top: 10px;
-	text-align: center;
-}
+.thumb_Nails .thumb_Nail {margin: 10px;text-align: center; } 
 
-.inputs #product_Kind {
-	margin-left: 15px;
-	margin-right: 10px;
-}
+.inputs .input_Elememt {width: 300px;margin-bottom: 10px;margin-top: 10px;text-align: center; } 
 
-.inputs #product_No {
-	margin-top: 30px;
-	margin-left: 15px;
-	margin-right: 10px;
-}
+.inputs #product_Kind {margin-left: 15px;margin-right: 10px; } 
 
-.inputs #product_Cnt {
-	margin-left: 45px;
-	margin-right: 10px;
-}
+.inputs #product_No {margin-top: 30px;margin-left: 15px;margin-right: 10px; } 
 
-.inputs #product_Price {
-	margin-left: 45px;
-	margin-right: 10px;
-}
+.inputs #product_Cnt {margin-left: 45px;margin-right: 10px; } 
 
-.inputs #product_Name {
-	margin-left: 30px;
-}
+.inputs #product_Price {margin-left: 45px;margin-right: 10px; } 
 
-.main_Img #main_Plus {
-	margin-top: 60px;
-}
+.inputs #product_Name {margin-left: 30px; } 
 
-.thumb_Nail #thumb_Plus {
-	width: 30px;
-	height: 30px;
-	margin-top: 20px;
-}
+.main_Img #main_Plus {margin-top: 60px; } 
 
-.product_Explane {
-	margin-left: 150px;
-	width: 900px;
-	height: 300px;
-	padding: 20px;
-	margin-top: 10px;
-}
+.thumb_Nail #thumb_Plus {width: 30px;height: 30px;margin-top: 20px; } 
 
-.product_Explane_Title {
-	margin-left: 150px;
-}
+.product_Explane {margin-left: 150px;width: 900px;height: 300px;padding: 20px;margin-top: 10px; } 
 
-.modify_Btn {
-	color: white;
-	background-color: black;
-	position: relative;
-	top: 30px;
-	right: 105px;
-	width: 100px;
-	height: 40px;
-}
+.product_Explane_Title {margin-left: 150px; } 
 
-.submit_Btn {
-	color: white;
-	background-color: black;
-	position: relative;
-	top: -10px;
-	left: 830px;
-	width: 100px;
-	height: 40px;
-}
+.modify_Btn {color: white;background-color: black;position: relative;top: 30px;right: 105px;width: 100px;height: 40px; } 
+
+.submit_Btn {color: white;background-color: black;position: relative;top: -10px;left: 830px;width: 100px;height: 40px; } 
+
 </style>
 </head>
 
@@ -235,7 +151,7 @@ const VueEditor = Vue2Editor.VueEditor;
             fnProductAdd : function(){
                 var self = this;
                 self.fnLoad();
-                var nparmap = {productNo : self.productNo, pName : self.pName, pStock : self.pStock, pPrice : self.pPrice, pContent : self.pContent, pKind : self.pKind};
+                var nparmap = { pName : self.pName, pStock : self.pStock, pPrice : self.pPrice, pContent : self.pContent, pKind : self.pKind};
                 $.ajax({
                     url:"productAdd.dox",
                     dataType:"json",	

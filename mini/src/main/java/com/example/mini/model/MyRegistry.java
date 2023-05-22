@@ -23,5 +23,6 @@ public class MyRegistry {
 	private String uName;
 	private String fsetprice;
 	private String fputprice;
+	private String fundingNo;
 
 }

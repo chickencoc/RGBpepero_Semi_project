@@ -21,6 +21,7 @@ public interface ProductTemporaryMapper {
 
 	void updateProduct(HashMap<String, Object> map);
 	void insertProduct(HashMap<String, Object> map);
+	void insertPdmanage(HashMap<String, Object> map);
 	
 	
 }

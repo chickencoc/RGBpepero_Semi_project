@@ -18,4 +18,5 @@ public interface ProductTemporaryService {
 	void editProduct(HashMap<String, Object> map);
 	
 	void addProduct(HashMap<String, Object> map);
+	
 }

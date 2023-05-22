@@ -38,6 +38,7 @@ public class ProductTemporaryServiceImpl implements ProductTemporaryService {
 	@Override
 	public void addProduct(HashMap<String, Object> map) {
 		productTemporaryMapper.insertProduct(map);
+		productTemporaryMapper.insertPdmanage(map);
 		
 	}
 

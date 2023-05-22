@@ -161,7 +161,6 @@ const VueEditor = Vue2Editor.VueEditor;
             },
             fnProductAdd : function(){
                 var self = this;
-                self.fnLoad();
                 var nparmap = { pName : self.pName, pStock : self.pStock, pPrice : self.pPrice, pContent : self.pContent, pKind : self.pKind};
                 $.ajax({
                     url:"productAdd.dox",

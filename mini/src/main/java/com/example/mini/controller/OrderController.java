@@ -45,6 +45,7 @@ public class OrderController {
 		return new Gson().toJson(resultMap);
 	}
 	
+	
 	@RequestMapping("/myInfoGift1.do") 
     public String myInfoGift1(HttpServletRequest request, HttpServletResponse response, Model model,
     		@RequestParam HashMap<String, Object> map) throws Exception{

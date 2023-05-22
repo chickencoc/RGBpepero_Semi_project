@@ -248,11 +248,13 @@
 		        }, rsp => { // callback
 	                if (rsp.success) {
 	                	self.fnOrder(orderno);
+	                	location.href="/myInfoGift7.do"
 	                } else {
 	                    console.log(rsp);
 	                }
 		        }); */
 				self.fnOrder(orderno);
+				location.href="/myInfoGift7.do"
 		    },
 			fnOrder : function(orderno) {
 				var self = this;

@@ -97,15 +97,15 @@
 						</div>
 						<div class="registryAList">
 							<select id="birthdayYear" v-model="birthYear">
-								<option value="">::선택::</option>
+								<option value="" hidden>::선택::</option>
 								<option v-for="birthYear in birthYears" :key="birthYear"
 									:value="birthYear">{{birthYear}}</option>
 							</select> 년 <select id="birthdayMonth" v-model="birthMonth">
-								<option value="">::선택::</option>
+								<option value="" hidden>::선택::</option>
 								<option v-for="birthMonth in birthMonths" :key="birthMonth"
 									:value="birthMonth">{{birthMonth}}</option>
 							</select> 월 <select id="birthdayDay" v-model="birthDay">
-								<option value="">::선택::</option>
+								<option value="" hidden>::선택::</option>
 								<option v-for="birthDay in birthDays" :key="birthDay"
 									:value="birthDay">{{birthDay}}</option>
 							</select> 일
@@ -234,7 +234,12 @@
 	        	return this.birthYear+'-'+this.birthMonth+'-'+this.birthDay;
 	        },
 	        weddingday : function(){
-	        	return this.weddingYear+'-'+this.weddingMonth+'-'+this.weddingDay;
+	        	var self = this;
+	        	var wedding = null;
+	        	if(self.weddingYear!=''&&self.weddingMonth!=''&&self.weddingDay!=''){
+	        		var wedding = this.weddingYear+'-'+this.weddingMonth+'-'+this.weddingDay;
+	        	} 
+	        	return wedding;
 	        }
 
 	  },

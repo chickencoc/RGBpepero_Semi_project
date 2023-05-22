@@ -11,10 +11,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.mini.dao.GuestRegService;
+import com.example.mini.model.Order;
 import com.example.mini.model.User;
 import com.google.gson.Gson;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -115,5 +117,11 @@ public class GuestRegController {
 		resultMap.put("result", "success");
 		return new Gson().toJson(resultMap);
 	}
+	@RequestMapping("/myInfoGift7.do") 
+    public String myInfoGift7(HttpServletRequest request, Model model) throws Exception{
+
+        return "/myInfo_gift7";
+    }
+
 	
 }

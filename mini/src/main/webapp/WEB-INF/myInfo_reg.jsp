@@ -41,7 +41,7 @@
 	                    	{{myUrl}}
 	                    	<label @click="fnUrlCopy()" style="cursor: pointer;">
 							<img src="/image/icon/fi-ss-upload.png" id="regi_icon">
-							<span style="font-size: 9px;" for="regi_icon">주소복사</span>
+							<span style="font-size: 14px;" for="regi_icon">주소복사</span>
 							</label>
 	                    </span>
 	                </div>
@@ -53,7 +53,7 @@
 	                </div>
 					<div class="regi_back_image_box" v-if="imgUrl1 === ''">
 						<button id="regi_back_image_button" @click="fnBackImageAlter(item)">배경사진 수정</button>
-						<div class="regi_back_image"> </div>                            
+						<div class="regi_back_image"></div>                            
 					</div>    
 	                <img :src="imgUrl2" id="regi_profile" @click="fnProfileAlter(item)" v-if="imgUrl2 != ''">                       
 	                <div id="regi_profile" @click="fnProfileAlter(item)" v-if="imgUrl2 === ''" style="background-color: lightcoral; text-align: center; display: flex;
@@ -76,7 +76,7 @@
 	                
 	                <div class="myinfo_registry boxshadowline" >
 	
-	                <div v-for="(item, index) in registry">                              
+	                <div v-for="(item, index) in insertRegistry">                              
 	                    <div class="regi_items" v-if="item.orderNo == null">
 	                        <!--매우원함-->
 	                        <div id="regi_wanted_badge" v-if="item.rOption == 'A'">
@@ -103,17 +103,17 @@
 	                            <a id="regi_delete_fund" @click="fnDeleteItem(item)">삭제하기</a>
 	                        </div>
 	                    </div>                
-	                    <!--받은선물인 경우-->
-	                    <div class="regi_items" v-if="item.orderNo != null">
+	                    <!--받은선물인 경우 받은 선물 목록으로 넘길듯-->
+	                    <!-- <div class="regi_items" v-if="item.orderNo != null">
 	                        <img :src="item.imgSrc" class="regi_items_image">
-	                                         
 	                        <p class="regi_pro_name">{{item.pName}}</p>
 	                        <p class="regi_pro_price">{{item.pPrice}} 원</p>
 	                        <div class="regi_items_options">
-	                            <button id="regi_orderInfoBtn" class="btn1" @click="fnOrderInfo(item)">주문상세보기</button>
+	                        	<button id="regi_orderInfoBtn" class="btn1" @click="fnOrderInfo(item)">주문상세보기</button>
 	                            <button id="regi_reviewBtn" class="btn1" @click="fnReview(item)">리뷰작성</button>
+								<button class="btn1" id="checkGiftBtn" @click="fnPageGift()">받은 선물 목록에서 확인</button>
 	                        </div>
-	                    </div>                              
+	                    </div> -->                               
 	                </div>   
 	                
 	                </div> 
@@ -141,15 +141,20 @@
 							
 		                    <div id="reg_options_popup_name">상품 명 : {{item.pName}}</div>
 		                    <div class="reg_options_popup_price">상품 가격 : {{item.pPrice}}원</div>
-		                    <div>상품 수량 : <input type="text" size="1" v-model="item.rCnt" id="reg_options_popup_stock_number"></div>
+		                    <div>상품 수량 : <input type="number" size="1" v-model="item.rCnt" id="reg_options_popup_stock_number" min="1" max="10"></div>
 		                    <div class="reg_options_popup_price">합계 : {{item.pPrice * item.rCnt}}원</div>
 		                </div>
 		                <ul class="reg_options_popup_checkbox">
 		                    <li id="reg_options_popup_checkbox_title">상품 표시 옵션</li>
 		                    <li id="reg_options_popup_checkbox"><input type="checkbox" name="choice" v-bind:checked="inputWanted" v-on:change="updateWanted"> "정말 필요한 물건" 표시</li>                 
-		                    <li id="reg_options_popup_checkbox" v-if="item.fundYn != 'Y'">
+		                    <li id="reg_options_popup_checkbox" v-if="item.fundYn === 'N' || item.fundYn === null || item.fundYn === '' ">
 		                    	<input type="checkbox" name="choice" v-bind:checked="inputGroup" v-on:change="updateGroup"> "그룹선물(펀딩)"로 변경하기
 		                    	<span style="font-size: 12px; color: orangered;">[설정시 일반으로 변경 불가, 삭제만 가능]</span>
+		                    </li>
+		                    <li id="reg_options_popup_checkbox" v-if="item.fundYn === 'Y'">
+		                    	<input type="checkbox" name="choice" v-bind:checked="inputGroup" v-on:change="updateGroup" checked disabled> "그룹선물(펀딩)"로 변경하기
+		                    	<input type="hidden" name="choice" v-bind:checked="inputGroup" v-on:change="updateGroup">
+								<span style="font-size: 12px; color: orangered;">[설정시 일반으로 변경 불가, 삭제만 가능]</span>
 		                    </li>
 		                </ul>    
 		                <div class="reg_options_popup_memo">
@@ -181,7 +186,7 @@
 		    , imgUrl2: ''
 		    , myUrl: 'http://localhost:8080/guestRegistry.do?id=${sessionId}'
 		    , sortOp: 'R.R_CDATETIME DESC'
-		    
+			, insertRegistry: []
 		    //dim popup
 		    , item: {}
 		    , inputWanted: false
@@ -207,9 +212,18 @@
 	                    	if(isNaN(data.registry[i].progVal))
 	                    		data.registry[i].progVal = 0;
 	                    }
-		                self.registry = data.registry;
-	                }
+						self.registry = data.registry;						
+						
+						for ( i in self.registry) {
+						 	if (self.registry[i].orderNo == null) {
+						 		self.insertRegistry.push(self.registry[i]); // insertRegistry에 데이터 추가
+						 	}
+						}
+						console.log(self.insertRegistry); // insertRegistry 출력
+						
+					}
 	     		}); 
+				
 	    	}	
 	    ,	fnselectImage : function(){
 	                var self = this;
@@ -229,7 +243,7 @@
 	                            else if(self.image[i].imgUsetype == 2){
 	                                self.imgUrl2 = self.image[i].imgSrc;
 	                            }
-	                            // Add more conditions for other image types if necessary
+	                            
 	                        }
 	                    },
 	                    error: function(xhr, textStatus, errorThrown) {
@@ -309,11 +323,13 @@
 	    ,	fnProductPage: function(){
 	    		window.location.href = "/bedroom.do";
 	    	}
-	    ,
+	    // ,	fnPageGift: function(){
+		// 		window.location.href = "/registryGift.do";
+		// }
 	    
 	    // dim popup script START
 		//method
-		     fnselectOption: function(){
+		,     fnselectOption: function(){
 	              var self = this;
 	              const userItemList = localStorage.getItem('userItemList');    
 	              var item = JSON.parse(userItemList);                 

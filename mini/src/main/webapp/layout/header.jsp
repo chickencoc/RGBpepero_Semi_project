@@ -23,7 +23,7 @@
 	        </div>
 	        <div class="loginbox" v-else>
 	            <ul>
-	                <li><span style="font-weight: 400;">{{sessionName}}</span>님 축하합니다</li>
+	                <li><span style="font-weight: 700;">{{sessionName}}</span>님 축하합니다</li>
 	                <li><a href="#" @click="toMyinfo()">마이페이지</a></li>
 	                <li><a href="#" @click="toLogout()">로그아웃</a></li>
 	                <li><a href="#" @click="toBoard()">고객센터</a></li>

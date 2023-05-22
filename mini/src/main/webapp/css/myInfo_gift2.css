@@ -9,7 +9,7 @@
 .returnProdTable th { height:70px; } 
 .returnProdTable tr { border-bottom: 1px solid #ccc; } 
 .returnProdImgBox { height:170px; width: 170px; } 
-.returnGuestNameBox { vertical-align: top; } 
+.returnGuestNameBox { vertical-align: middle; } 
 .returnProdNameBox { font-size:1.4em; } 
 .pagination { margin:24px; display: inline-flex; } 
 ul { text-align: center; } 

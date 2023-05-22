@@ -46,15 +46,18 @@
                         <td class="returnProdNameBox">{{item.pName}}</td>
                         <td class="returnGuestNameBox" rowspan="1">
                             <div class="returnGuestNameBox2">
-                                <div @click.prevent="fnShowGuest(item)">
-                                    <a href="" v-if="!item.guestFlg">더 보기▼</a>
-                                    <a href="" v-if="item.guestFlg">접기▲</a>
+                                <div @click.prevent="fnShowGuest(item)" v-if="!item.guestFlg">
+                                    <div v-for="(items,index) in returnGuestList">
+                                    	<p v-if="index == 0">{{items.gName}}</p>
+                                	</div>
+                                	<a href="">더 보기▼</a>
                                 </div>
-                                <div v-if="!item.guestFlg" v-for="(items,index) in returnGuestList">
-                                    <p v-if="index == 0">{{items.gName}}</p>
-                                </div>
-                                <div v-if="item.guestFlg" v-for="(items,index) in returnGuestList">
-                                    <p>{{items.gName}}</p>
+                                
+                                <div @click.prevent="fnShowGuest(item)" v-else>
+                                    <a href="">접기▲</a>
+                                    <div v-for="(items,index) in returnGuestList">
+                                    	<p>{{items.gName}}</p>
+                               		</div>
                                 </div>
                             </div>
                         </td>

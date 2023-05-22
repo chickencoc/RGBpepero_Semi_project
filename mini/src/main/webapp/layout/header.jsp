@@ -8,7 +8,6 @@
 	<script src="js/jquery.js"></script>
 	<script src="js/vue.js"></script>
 	<link rel="stylesheet" href="css/Base_rgbPepero.css">
-	<title></title>
 </head>
 
 <body>

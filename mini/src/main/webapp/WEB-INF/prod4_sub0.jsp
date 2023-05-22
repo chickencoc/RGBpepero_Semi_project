@@ -11,15 +11,15 @@
 	<link rel="stylesheet" href="/css/reg_options_popup.css">
 	<title>상품 정보</title>
 </head>
-<body> 
+<body>
     <!-- wrap START -->
  <div id="app"> 
     <div id="wrapper">
         <div class="prodCategoryList">
             <ul>
-            	<li class="prodCategoryList_li" v-for="(item, index) in catList" @click="fnChange(item.code, $event)"><template v-if="item.code == pKind"><b>{{item.name}}</b></template><template v-else>{{item.name}}</template></li>
+            	<li class="prodCategoryList_li" v-for="(item, index) in catList" @click="fnChange(item.code)"><template v-if="item.code == pKind"><b>{{item.name}}</b></template><template v-else>{{item.name}}</template></li>
             </ul>
-            </div>
+        </div>
         <div id="contentbox">
             <div id="prodboxtop" class="boxshadowline">
                 <div id="imgbox">   
@@ -43,11 +43,11 @@
 	                {{list.pContent}}
 	            </div>
 	            <hr class="div_line"></hr>
-	            <h3>후기</h3>
+	            <!-- <h3>후기</h3>
 	            <div id="reviewbox">
 	                <div id="re_tb">
 	                    <table id="review_table">
-	                        <!-- <template> -->
+	                        <template>
 	                        <tr>
 	                            <td></td>
 	                            <td></td>
@@ -56,7 +56,6 @@
 	                            <td><button>후기 수정</button></td>
 	                        </tr>
 	                        <tr>
-	                            <!-- 사진 -->
 	                            <td><img src=""></td>
 	                            <td><img src=""></td>
 	                            <td><img src=""></td>
@@ -64,7 +63,6 @@
 	                            <td><img src=""></td>
 	                        </tr>
 	                        <tr>
-	                            <!-- 내용 -->
 	                            <td colspan="5"><div class="review_detail">
 	                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 	                            </div></td>
@@ -72,8 +70,8 @@
 	                        <tr>
 	                            <td colspan="5"><hr class="div_line"></hr></td>
 	                        </tr>
-	                        <!-- </template> -->
-	                    </table>
+	                        </template>
+	                    </table>  -->
 	            	</div>
 	        	</div>
         </div> <!-- 1e -->
@@ -165,21 +163,31 @@
 			}
 		}
         , methods: {
-        	fnChange : function(code, event){
+        	fnChange : function(code){
         		var self = this;
         		
         		self.keyword = "";
-        		console.log(self.selectPage);
         		if(code == "W"){
-        			location.href="/weddingrecommend.do";
+        			location.href="/prod5Sub0.do";
         		}else if(code == "A"){
         			location.href="/triprecommend.do";
+        		}else if(code == "B"){
+        			location.href="/bedroom.do";
+        		}else if(code == "L"){
+        			location.href="/livingroom.do";
+        		}else if(code == "D"){
+        			location.href="/dressroom.do";
+        		}else if(code == "K"){
+        			location.href="/kitchen.do";
+        		}else if(code == "V"){
+        			location.href="/utilityroom.do";
+        		}else if(code == "T"){
+        			location.href="/toilet.do";
+        		}else if(code == "H"){
+        			location.href="/hobby.do";
         		}else{
-            		self.pKind = code;
-            		self.pageChange("./product.do", {pKind : self.pKind});
-            		
+        			location.href="/main.do";
         		}
-        		console.log(self.selectPage);
         	},
         	fnGetCategoryList : function(){
 	            var self = this;

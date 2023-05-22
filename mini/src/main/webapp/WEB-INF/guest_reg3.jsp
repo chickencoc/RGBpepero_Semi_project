@@ -102,7 +102,7 @@
 					<div class="pay_info_box">
 						<h4 class="pay_info_box_name_h">결제 수단</h4>
 						<div class="pay_info_box_btns">
-							<label for="pay_info_box_radio_a"><input id="pay_info_box_radio_a" type="radio" name="pay" checked>카드 결제</label>
+							<label for="pay_info_box_radio_a"><input id="pay_info_box_radio_a" type="radio" name="pay" v-model="purchase" value="C">카드 결제</label>
 							<!-- <label for="pay_info_box_radio_b"><input id="pay_info_box_radio_b" type="radio" name="pay"> 무통장 입금</label>
 							<label for="pay_info_box_radio_c"><input id="pay_info_box_radio_c" type="radio" name="pay"> 빼빼로 페이</label>  -->
 						</div>
@@ -151,7 +151,8 @@
 			remain: 0,
 			percent: '${item.progVal}',
 			addPercent: 10,
-			sendContent: ''
+			sendContent: '',
+			purchase: 'C'
 
 		}
 		, computed: {
@@ -255,7 +256,7 @@
 		    },
 			fnOrder : function(orderno) {
 				var self = this;
-				var nparmap = {userId : self.userId
+				var nparmap = {userId : self.info.userId
 								, givePrice : self.givePrice
 								, sendContent : self.sendContent
 								, purchase : self.purchase
@@ -263,6 +264,7 @@
 								, fundingNo : self.info.fundingNo
 								, registryNo : self.info.registryNo
 								, pPrice : self.info.pPrice
+								, purchase : self.purchase
 								
 								};
 	        	$.ajax({

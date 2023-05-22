@@ -110,7 +110,7 @@ public class GuestRegController {
 		map.put("gpostcode", sessGuest.getAttribute("postcode"));
 		map.put("gaddress", sessGuest.getAttribute("address"));
 		map.put("gaddrDetail", sessGuest.getAttribute("addrDetail"));
-		System.out.println(map.get("fundingNo"));
+		System.out.println(map);
 		guestRegService.writeGuestFunding(map);
 		resultMap.put("result", "success");
 		return new Gson().toJson(resultMap);

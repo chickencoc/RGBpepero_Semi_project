@@ -120,7 +120,8 @@
 							</div>  -->
 						</div>
 						<h4 class="pay_total_price_box_name_h">결제 금액</h4>
-						<h4 class="pay_total_price_box_name_h">{{givePrice}}원</h4>
+						<h4 class="pay_total_price_box_name_h" v-if="givePrice == 0">0 원</h4>
+						<h4 class="pay_total_price_box_name_h" v-else>{{givePrice}}원</h4>
 					</div>
 				</fieldset>
 				<div class="pay_btn_box">
@@ -143,15 +144,16 @@
 			gname: "${gname}",
 			gphone: "${phone}",
 			gaddress: "${address}",
-			info: '${item}',
+			info: [],
 			productNo: '${item.productNo}',
-			pdPrice: 100000,
+			pdPrice: 0,
 			givePrice: '',
-			remain: 90000,
+			remain: 0,
 			percent: '${item.progVal}',
 			addPercent: 10,
 			sendContent: '',
 			purchase: 'C'
+
 		}
 		, computed: {
 			fnOrderNo : function() { //주문번호 생성 ( O + 2자리년도 + 월 + 일 + 시간 + 분 + 초 + 랜덤 3자리수 )
@@ -173,6 +175,7 @@
 
 		        return 'O' + num1 + num2;
 			}
+		}
 		, methods : {
 			fnGuest : function() {
 				var self = this;
@@ -222,7 +225,8 @@
 			},
 			fnGauge : function() {
 				var self = this;
-				self.addPercent = self.percent + (self.givePrice / self.pdPrice) * 100;
+				self.addPercent = (parseInt(self.percent) + (self.givePrice / self.info.pPrice) * 100).toFixed(2);
+				console.log(self.addPercent);
 			},
 			fnPhoneThree : function() {
 				var self = this;
@@ -231,7 +235,7 @@
 			requestPay: function () { //결제창
 				var self = this;
 				var orderno = self.fnOrderNo;
-				IMP.request_pay({ // param
+				/* IMP.request_pay({ // param
 		          pg : "kcp.{test}",
 		          merchant_uid : orderno,
 		          name : self.list.pName,
@@ -247,8 +251,9 @@
 	                } else {
 	                    console.log(rsp);
 	                }
-		        });
-		      },
+		        }); */
+				self.fnOrder(orderno);
+		    },
 			fnOrder : function(orderno) {
 				var self = this;
 				var nparmap = {userId : self.info.userId
@@ -260,9 +265,10 @@
 								, registryNo : self.info.registryNo
 								, pPrice : self.info.pPrice
 								, purchase : self.purchase
+								
 								};
 	        	$.ajax({
-	    			url : "/guest/order.dox",
+	    			url : "/guest/orderF.dox",
 	    			dataType : "json",
 	    			type : "POST",
 	    			data : nparmap,
@@ -273,11 +279,34 @@
 	    					}
 	    				}
 	    			});
+			},
+			fnGetItem : function() {
+				var self = this;
+				var nparmap = {};
+	        	$.ajax({
+	    			url : "/guest/getItem.dox",
+	    			dataType : "json",
+	    			type : "POST",
+	    			data : nparmap,
+	    			success : function(data) {
+	    				self.info = data.item;
+	    				console.log(self.info);
+	    				
+	    				self.remain = data.item.fsetprice - data.item.fputprice;
+/* 	    				self.totalPrice = data.item.totalprice;
+	    				self.totalCnt = data.item.rCnt; */
+	    				
+/* 	    				self.fnUserInfo();
+	    				self.fnPhoneThree(); */
+	    				self.fnGauge();
+	    			}
+    			});
 			}
 		},
 		created : function() {
 			var self = this;
 			self.fnPhoneThree();
+			self.fnGetItem();
 		}
 	});
 </script>

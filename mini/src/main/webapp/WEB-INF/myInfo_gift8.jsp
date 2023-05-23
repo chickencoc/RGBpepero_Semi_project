@@ -121,7 +121,9 @@ IMP.init("imp55171728");
 	    	checkedBox : [],
 	    	purchase : 'C',
 	    	oCnt : 1,
-			gPhoneO : {}
+			gPhoneO : {},
+			cardmap:[],
+			cContent : {}
 		}
 	, computed: {
 		fnOrderNo : function() { //주문번호 생성 ( O + 2자리년도 + 월 + 일 + 시간 + 분 + 초 + 랜덤 3자리수 )
@@ -147,13 +149,20 @@ IMP.init("imp55171728");
 	, methods : {
 			fnGetInfo:function(){
 				var self = this;
-				console.log(self.checkedBox)
-				console.log(self.product)
+				console.log("checkedBox",self.checkedBox)
+				console.log("product",self.product)
+				console.log("cardmap", self.cardmap)
+				console.log(self.cardmap.cardcontent)
 				for(var i=0; i<self.checkedBox.length; i++){
 					var item=self.checkedBox[i];
 					var gPhone = item.gPhone;
 					self.gPhoneO[i]=gPhone;
 					console.log(self.gPhoneO);
+				}
+				for(var i=0; i<self.cardmap.length; i++){
+					var item = self.cardmap[i];
+					var cardcontent = item.cardcontent;
+					self.cContent[i] = cardcontent;
 				}
 			}
 			,requestPay: function () { //결제창
@@ -188,21 +197,32 @@ IMP.init("imp55171728");
 						gPhone: self.gPhoneO[i]
 						, userId : self.userId
 						, productNo : self.product.productNo 
-						, orderNo : orderno
+						, orderNo : orderno,
+						cardcontent : self.cContent[i]
 						};
+				if(self.cardmap!=''){
+	    		        $.ajax({
+	    		    		url : "/addCardContent.dox",
+	    		    		dataType : "json",
+	    		    		type : "POST",
+	    		    		data : nparmap,
+	    		    		success : function(data) {
+	    		    				}
+	    		    		});
+	    	        	}
 	        	$.ajax({
 	    			url : "/addGiftOrder.dox",
 	    			dataType : "json",
 	    			type : "POST",
 	    			data : nparmap,
 	    			success : function(data) {
-	    				if(data.result == "success"){
-	    					alert("성공적으로 발송되었습니다.");
-	    					 location.href="/main.do"
-	    					}
+	    				
 	    				}
 	    			});
+
 				}
+				alert("성공적으로 발송되었습니다.");
+				/*  location.href="/main.do" */
 			}
 			
 		},
@@ -210,6 +230,10 @@ IMP.init("imp55171728");
 			var self = this;
 			self.checkedBox = JSON.parse('${map.checkedBox}');
 			self.product = JSON.parse('${map.product}');
+			 if ('${map.cardmap}' != '') {
+			        self.cardmap = JSON.parse('${map.cardmap}');
+			        self.fnGetInfo();
+			    }
 			self.fnGetInfo();
 
 		}

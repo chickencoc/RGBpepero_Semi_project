@@ -33,7 +33,7 @@
 				U_NAME = #{uName},
 				PARTNER = #{partner},
 				GENDER = #{gender},
-				U_ADDRNO = #{uAddrno},
+				U_ADDRNO = #{uAddrNo},
 				U_ADDR1 = #{uAddr1},
 				U_ADDR2 = #{uAddr2},
 				U_PHONE = #{uPhone},

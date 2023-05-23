@@ -9,7 +9,7 @@ public class User {
 	private String uName;
 	private String partner;
 	private String gender;
-	private String uAddrno;
+	private String uAddrNo;
 	private String uAddr1;
 	private String uAddr2;
 	private String uPhone;
@@ -106,11 +106,11 @@ public class User {
 	public void setBankaccount(String bankaccount) {
 		this.bankaccount = bankaccount;
 	}
-	public String getuAddrno() {
-		return uAddrno;
+	public String getuAddrNo() {
+		return uAddrNo;
 	}
-	public void setuAddrno(String uAddrno) {
-		this.uAddrno = uAddrno;
+	public void setuAddrNo(String uAddrNo) {
+		this.uAddrNo = uAddrNo;
 	}
 	public String getuAddr1() {
 		return uAddr1;

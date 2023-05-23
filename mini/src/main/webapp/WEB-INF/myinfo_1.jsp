@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="js/jquery.js"></script>
@@ -52,20 +53,55 @@
 					
 						<span>전화번호</span> 
 						<input type="tel" id="phone" v-model="uPhone" maxlength="11">
-					
+						<span>성별</span>
+						<label>
+							<input type="radio" name="gender" v-model="gender" value="M"> 남자
+						</label> 
+						<label>
+							<input type="radio" name="gender" v-model="gender" value="F"> 여자
+						</label>
+						<span>우편번호</span>
+						<input type="text" class="registryAddr text1" readonly
+								id="postcode" placeholder="우편번호" v-model="uAddrNo">
+								<button class="checkBtn btn1" @click="fnAddr">우편번호 검색</button>
 						<span>주소</span>
-						<input type="text" id="address1" v-model="uAddr1">
+						<input type="text" id="address1" v-model="uAddr1" readonly id="address">
 						<span>상세주소</span>
-						<input type="text" id="address2" v-model="uAddr2">
+						<input type="text" id="address2" v-model="uAddr2" id="detailAddress">
 					
 						<span>이메일</span>
 						<input type="email" id="email1" v-model="uEmail">
 					
 						<span>생년월일</span>
-						<input type="text" id="birthDay" v-model="birth">
+
+						<select id="birthdayYear" v-model="birthYear">
+								<option value="" hidden>::선택::</option>
+								<option v-for="birthYear in birthYears" :key="birthYear"
+									:value="birthYear">{{birthYear}}</option>
+							</select> 년 <select id="birthdayMonth" v-model="birthMonth">
+								<option value="" hidden>::선택::</option>
+								<option v-for="birthMonth in birthMonths" :key="birthMonth"
+									:value="birthMonth">{{birthMonth}}</option>
+							</select> 월  
+							<select id="birthdayDay" v-model="birthDay">
+								<option value="" hidden>::선택::</option>
+								<option v-for="birthDay in birthDays" :key="birthDay" :value="birthDay">{{birthDay}}</option>
+							</select> 일
 					
 						<span>결혼예정일</span> 
-						<input type="text" id="weddingDay" v-model="weddingday">
+						<select id="weddingYear" v-model="weddingYear">
+								<option value="">::미정::</option>
+								<option v-for="weddingYear in weddingYears" :key="weddingYear"
+									:value="weddingYear">{{weddingYear}}</option>
+							</select> 년 <select id="weddingMonth" v-model="weddingMonth">
+								<option value="">::미정::</option>
+								<option v-for="weddingMonth in weddingMonths"
+									:key="weddingMonth" :value="weddingMonth">{{weddingMonth}}</option>
+							</select> 월 <select id="weddingDay" v-model="weddingDay">
+								<option value="">::미정::</option>
+								<option v-for="weddingDay in weddingDays" :key="weddingDay"
+									:value="weddingDay">{{weddingDay}}</option>
+							</select> 일
 						
 						<span>계좌정보</span> 
 						<select id="bank" v-model="bank">
@@ -97,19 +133,119 @@
 			partner : "",
 			gender : "",
 			uPhone : "",
+			uAddrNo: '',
 			uAddr1 : "",
 			uAddr2 : "",
 			uEmail : "",
 			birth : "",
 			bank : "",
 			bankaccount : "",
-			weddingday : "",
+			weddingdays : "",
 			password2 : "",
 			list : [],
 			image: [],
-			imgUrl2: ""
+			imgUrl2: "",
+			birthYear : '',
+			birthMonth : '',
+			birthDay : '',
+			weddingYear: '',
+		    weddingMonth: '',
+		    weddingDay: '',
+		    flg : false,
+		    flg2 : false,
+		    flg3: false,
+		    flg4: false
 
 		},
+		computed:{
+			 birthYears(){
+		            const birthYears = []
+		            for (var i = 1900; i<=new Date().getFullYear(); i++){
+		                birthYears.push(i)
+		            }
+		            return birthYears;
+		        },
+		        birthMonths(){
+		            const birthMonths =[]
+		            for(var i = 1; i<=12; i++){
+		                birthMonths.push(i)
+		            }
+		            return birthMonths
+		        },
+		        birthDays(){
+		            const birthDays = []
+		            const lastDayOfMonth = new Date(this.birthYear, this.birthMonth, 0).getDate()
+		            for(var i=1; i<=lastDayOfMonth; i++){
+		                birthDays.push(i)
+		            }
+		            return birthDays
+		        }
+		        ,
+		        weddingYears(){
+		            const weddingYears = []
+		            for (var i = new Date().getFullYear(); i<=2050; i++){
+		                weddingYears.push(i)
+		            }
+		            return weddingYears;
+		        },
+		        weddingMonths(){
+		            const weddingMonths =[]
+		            for(var i = 1; i<=12; i++){
+		                weddingMonths.push(i)
+		            }
+		            return weddingMonths
+		        },
+		        weddingDays(){
+		            const weddingDays = []
+		            const lastDayOfMonth = new Date(this.weddingYear, this.weddingMonth, 0).getDate()
+		            for(var i=1; i<=lastDayOfMonth; i++){
+		                weddingDays.push(i)
+		            }
+		            return weddingDays
+		        },
+		        weddingday : function(){
+		        	var self = this;
+		        	var weddingday = null;
+		        	if(self.weddingYear!=''&&self.weddingMonth!=''&&self.weddingDay!=''){
+		        	 weddingday = self.weddingYear+'-'+self.weddingMonth+'-'+self.weddingDay;
+		        	} 
+		        	return weddingday;
+		        }
+
+		}
+		, watch:{
+			birthYear(){
+		    	if(this.flg2){
+		    		this.birthDay = ''
+		    	} else {
+		    		this.flg2 = !this.flg2;
+		    	}
+		    },
+		    birthMonth() {
+		    	if(!this.flg){
+		    		this.birthDay = ''
+		    	} else {
+		    		this.flg = !this.flg;
+		    	}
+		        
+		    },
+		    weddingMonth(){
+		    	if(this.flg3){
+		    		this.weddingDay = ''
+		    	} else {
+		    		this.flg3 = !this.flg3;
+		    	}
+		    },
+		    weddingYear(){
+		    	if(this.flg4){
+		    		this.weddingDay = ''
+		    	} else {
+		    		this.flg4 = !this.flg4;
+		    	}
+		    }
+		    
+		   
+		},   
 		methods : {
 			fnMoveMain : function() {
 				alert("성공적으로 수정되었습니다!");
@@ -128,6 +264,7 @@
 					data : nparmap,
 					success : function(data) {
 						console.log(data);
+						self.flg = true;
 						self.list = data.list;
 						console.log(self.list);
 						self.uName = self.list.uName;
@@ -135,13 +272,31 @@
 						self.password = self.list.password;
 						self.gender = self.list.gender;
 						self.uPhone = self.list.uPhone;
+						self.uAddrNo = self.list.uAddrNo
 						self.uAddr1 = self.list.uAddr1;
 						self.uAddr2 = self.list.uAddr2;
 						self.uEmail = self.list.uEmail;
 						self.bank = self.list.bank;
 						self.birth = self.list.birth;
-						self.weddingday = self.list.weddingday;
+						self.weddingdays = self.list.weddingday;
 						self.bankaccount = self.list.bankaccount;
+						
+						var initiaDate = new Date(self.birth);
+						self.birthYear = initiaDate.getFullYear();
+						self.birthMonth = initiaDate.getMonth()+1;
+						self.birthDay = initiaDate.getDate();
+						console.log("weddingday", self.weddingdays)
+
+						
+						if(self.weddingdays != null){
+							var initiaDate2 = new Date(self.weddingdays);
+							self.weddingYear = initiaDate2.getFullYear();
+							self.weddingMonth = initiaDate2.getMonth()+1;
+							self.weddingDay = initiaDate2.getDate();
+							
+							console.log(initiaDate2, self.weddingYear, self.weddingMonth, self.weddingDay)
+						}
+						
 					}
 				})
 			},
@@ -161,7 +316,7 @@
 		                alert("주소를 입력해주세요.")
 		            } else if(self.uEmail==''){
 		                alert("이메일을 입력해주세요.")
-		            } else if(self.birth==''){
+		            } else if(self.birthYear==''||self.birthMonth==''||self.birthDay==''){
 		                alert("생일을 입력해주세요.")
 		            } else if(self.bankaccount==''||self.bank==''){
 		                alert("계좌번호를 입력해주세요.")
@@ -190,6 +345,7 @@
 						partner : self.partner,
 						gender : self.gender,
 						uPhone : self.uPhone,
+						uAddrNo : self.uAddrNo,
 						uAddr1 : self.uAddr1,
 						uAddr2 : self.uAddr2,
 						uEmail : self.uEmail,
@@ -249,6 +405,32 @@
 	                location.reload();
 	            };
 	    }
+	            ,fnAddr : function(){
+		            var self = this;
+		            new daum.Postcode({
+		                oncomplete: function(data) {
+		                    // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+		                    // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+		                    // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+		                    var address = ''; // 주소 변수
+		                    
+
+		                    //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+		                    if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+		                        address = data.roadAddress;
+		                    } else { // 사용자가 지번 주소를 선택했을 경우(J)
+		                        address = data.jibunAddress;
+		                    }
+		                    // 우편번호와 주소 정보를 해당 필드에 넣는다.
+		                    self.uAddrNo = data.zonecode; // Vue 인스턴스의 데이터 변경
+		                    self.uAddr1 = address; // Vue 인스턴스의 데이터 변경
+		                    self.uAddr2 = ''; 
+		                    // 커서를 상세주소 필드로 이동한다.
+		                    /* document.getElementById("detailAddress").focus(); */
+		                }
+		            }).open();
+		        }
 
 		},
 		created : function() {

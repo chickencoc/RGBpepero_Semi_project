@@ -205,7 +205,8 @@ var app = new Vue({
 		userId : "${sessionId}",
 		checkedBox : [],
 		gPhoneO : {},
-		card:{}
+		card:{},
+		cardmap : []
     }
 	, components: {VueEditor}
     , methods: {
@@ -265,24 +266,17 @@ var app = new Vue({
     	,fn: function() {
     	    var self = this;
     	    if (confirm("작성을 완료하시겠습니까?")) {
-    	    	var nparmap = {};
+    	    	var map
     	        for(var i=0; i<self.checkedBox.length; i++){
-	    	        nparmap = {
+	    	        map = {
 	    	            gPhone: self.gPhoneO[i],
 	    	            userId: self.userId,
 	    	            cardcontent: self.cardContent,
 	    	            productNo: self.product.productNo,
-	    	        };
-	    	         $.ajax({
-	    	            url: "/addCardContent.dox",
-	    	            dataType: "json",
-	    	            type: "POST",
-	    	            data: nparmap,
-	    	            success: function(data) {
-	    	                console.log(data);
-	    	            }
-	    	        }); 
+	    	        } 
+	    	    self.cardmap.push(map);     
     	        }
+    	    	console.log("cardmap", self.cardmap)
                 alert("주문 페이지로 이동합니다.");
                 
     	    }
@@ -304,7 +298,21 @@ var app = new Vue({
 		}
     	,fnAddCard : function(){
     		var self = this;
-	    	self.pageChange("/myInfoGift8.do", {checkedBox: self.checkedBox, product : self.product})
+    		if (confirm("작성을 완료하시겠습니까?")) {
+    	    	var map
+    	        for(var i=0; i<self.checkedBox.length; i++){
+	    	        map = {
+	    	            gPhone: self.gPhoneO[i],
+	    	            userId: self.userId,
+	    	            cardcontent: self.cardContent,
+	    	            productNo: self.product.productNo,
+	    	        } 
+	    	    self.cardmap.push(map);     
+    	        }
+    	    	console.log("cardmap", self.cardmap)
+                alert("주문 페이지로 이동합니다.");
+	    	 self.pageChange("/myInfoGift8.do", {checkedBox: self.checkedBox, product : self.product, cardmap : self.cardmap}) 
+    		}
     	}
     }
    

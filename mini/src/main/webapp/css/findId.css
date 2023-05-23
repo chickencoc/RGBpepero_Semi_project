@@ -1,14 +1,15 @@
 .container {width:900px;margin:auto; min-height: calc(100vh - 101px - 130px - 150px); padding-top: 70px;}
 .findIdBox {margin: auto;width:800px; padding:20px;height:500px;position:relative}
-.findIdBox .findIdMent {font-size: 1.3em; margin: 10px auto; font-weight: 600; background-color: white; transform: translatey(-30px); }
+.findIdBox .findIdMent {text-align: center; font-size: 1.3em; margin: 20px 0px; font-weight: 600; transform: translatey(-30px); }
 .findIdTextBox {width:60%;margin:10px; }
 .findIdBtn {width:23%;height:35px; }
 .findIdNotice {text-align:center;color:red;position: absolute;bottom:25%;left:35%}
 .findIdCheck {text-align:center; }
 .findIdCheckBtn {width:20%;margin-top:30px;position: absolute;left:40%;bottom:10%; }
 
-.findIdListQ {text-align: right;position:absolute;left:10%;width:9%;border-right:1px solid #ccc;padding-right:10px; }
-.findIdListA {position: absolute;right: 1%;width:79%; }
-.findIdList {font-size: 1.0em;height:100px;line-height: 70px; }
+.findIdListQ {text-align: right;position:absolute;left:10%;width:10%;border-right:1px solid #AAAAAA;padding-right:10px; }
+.findIdListA {position: absolute;right: 1%;width:78%; }
+.findIdList {font-size: 1.0em;height:90px;line-height: 70px; }
 .findIdEmailBox {width:20%;margin:10px; }
 .findIdEmailSelect {margin:3px; }
+.findIdContent{padding: 20px 0px;}

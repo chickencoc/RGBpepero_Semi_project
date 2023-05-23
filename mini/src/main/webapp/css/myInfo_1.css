@@ -24,7 +24,15 @@ fieldset {
 
 span{grid-column-start: 1;}
 #selectuserId{grid-column-start: 2;}
+#genderType{grid-column-start: 2;}
+#findPost{grid-column-start: 2;}
+#birthSpan{grid-row-start: 13;}
+#birth{grid-column-start: 2; }
+#birthdayYear, #birthdayMonth, #birthdayDay{width: 70px;}
+#weddingDate{grid-column-start: 2;}
+#weddingYear, #weddingMonth, #weddingDay{width: 70px;}
 #bank {grid-column-start: 2; grid-row-start: 12; width: 60px; height: 35px; margin-right: 10px;}
+#bankSpan{grid-row-start: 12;}
 #bankNumber {grid-row-start: 12; width: 230px; position: relative; left: 70px;}
 input {border: 1px solid #AAAAAA; grid-column-start: 2; height: 35px;}
 fieldset select {border: 1px solid #AAAAAA;}

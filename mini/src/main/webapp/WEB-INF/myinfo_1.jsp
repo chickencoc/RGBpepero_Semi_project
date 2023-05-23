@@ -54,16 +54,19 @@
 						<span>전화번호</span> 
 						<input type="tel" id="phone" v-model="uPhone" maxlength="11">
 						<span>성별</span>
-						<label>
-							<input type="radio" name="gender" v-model="gender" value="M"> 남자
-						</label> 
-						<label>
-							<input type="radio" name="gender" v-model="gender" value="F"> 여자
-						</label>
+						<div id="genderType">
+							<label>
+								<input type="radio" name="gender" v-model="gender" value="M"> 남자
+							</label> 
+							<label>
+								<input type="radio" name="gender" v-model="gender" value="F"> 여자
+							</label>
+						</div>
 						<span>우편번호</span>
-						<input type="text" class="registryAddr text1" readonly
-								id="postcode" placeholder="우편번호" v-model="uAddrNo">
-								<button class="checkBtn btn1" @click="fnAddr">우편번호 검색</button>
+						<div id="findPost">
+							<input type="text" class="registryAddr text1" readonly id="postcode" placeholder="우편번호" v-model="uAddrNo">
+							<button class="checkBtn btn1" @click="fnAddr">우편번호 검색</button>
+						</div>
 						<span>주소</span>
 						<input type="text" id="address1" v-model="uAddr1" readonly id="address">
 						<span>상세주소</span>
@@ -72,8 +75,8 @@
 						<span>이메일</span>
 						<input type="email" id="email1" v-model="uEmail">
 					
-						<span>생년월일</span>
-
+						<span id="birthSpan">생년월일</span>
+						<div id="birth">
 						<select id="birthdayYear" v-model="birthYear">
 								<option value="" hidden>::선택::</option>
 								<option v-for="birthYear in birthYears" :key="birthYear"
@@ -87,23 +90,24 @@
 								<option value="" hidden>::선택::</option>
 								<option v-for="birthDay in birthDays" :key="birthDay" :value="birthDay">{{birthDay}}</option>
 							</select> 일
-					
+						</div>
 						<span>결혼예정일</span> 
-						<select id="weddingYear" v-model="weddingYear">
-								<option value="">::미정::</option>
-								<option v-for="weddingYear in weddingYears" :key="weddingYear"
-									:value="weddingYear">{{weddingYear}}</option>
-							</select> 년 <select id="weddingMonth" v-model="weddingMonth">
-								<option value="">::미정::</option>
-								<option v-for="weddingMonth in weddingMonths"
-									:key="weddingMonth" :value="weddingMonth">{{weddingMonth}}</option>
-							</select> 월 <select id="weddingDay" v-model="weddingDay">
-								<option value="">::미정::</option>
-								<option v-for="weddingDay in weddingDays" :key="weddingDay"
-									:value="weddingDay">{{weddingDay}}</option>
-							</select> 일
-						
-						<span>계좌정보</span> 
+							<div id="weddingDate">
+							<select id="weddingYear" v-model="weddingYear">
+									<option value="">::미정::</option>
+									<option v-for="weddingYear in weddingYears" :key="weddingYear"
+										:value="weddingYear">{{weddingYear}}</option>
+								</select> 년 <select id="weddingMonth" v-model="weddingMonth">
+									<option value="">::미정::</option>
+									<option v-for="weddingMonth in weddingMonths"
+										:key="weddingMonth" :value="weddingMonth">{{weddingMonth}}</option>
+								</select> 월 <select id="weddingDay" v-model="weddingDay">
+									<option value="">::미정::</option>
+									<option v-for="weddingDay in weddingDays" :key="weddingDay"
+										:value="weddingDay">{{weddingDay}}</option>
+								</select> 일
+							</div>
+						<span id="bankSpan">계좌정보</span> 
 						<select id="bank" v-model="bank">
 							<option value="A">국민</option>
 							<option value="B">신한</option>

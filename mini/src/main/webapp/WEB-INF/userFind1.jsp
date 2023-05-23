@@ -14,7 +14,8 @@
 <body>
    <div id="app">
         <div class="container">
-           <fieldset class="findIdBox boxshadowline">
+            <fieldset class="findIdBox boxshadowline">
+            <div class="findIdContent">
                <legend class="findIdMent">아이디 찾기</legend>
                <div class="findIdListQ">
                    <div class="findIdList">이름</div>
@@ -43,7 +44,8 @@
                </div>
                <div class="findIdNotice" v-if="noticeFlg">이메일로 보내드린 인증번호를 확인해주세요.</div>
                <div class="findIdCheck"><button class="findIdCheckBtn findIdBtn btn1" @click="fnFindId">아이디 찾기</button></div>		
-           	</fieldset>
+            </div>
+            </fieldset>
         </div>
 	</div>
 </body>

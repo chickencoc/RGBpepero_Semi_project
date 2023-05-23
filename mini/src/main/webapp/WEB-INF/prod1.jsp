@@ -17,7 +17,7 @@
 </head>
 
 <body>
-    <div id="app">
+<div id="app">
 <div id="wrapper">
         <div class="container">
             <div class="prodCategoryList">

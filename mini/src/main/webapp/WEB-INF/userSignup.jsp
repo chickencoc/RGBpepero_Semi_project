@@ -17,126 +17,128 @@
 		<div id="wrapper">
 			<div class="container">
 				<fieldset class="registryBox">
-					<legend class="registTitle">회원가입</legend>
-					<div class="registryQ">
-						<p class="registryQList">아이디*</p>
-						<p class="registryQList">비밀번호*</p>
-						<p class="registryQList">비밀번호 확인*</p>
-						<p class="registryQList">이름*</p>
-						<p class="registryQList">성별*</p>
-						<p class="registryQList">연락처*</p>
-						<p class="registryQList">주소*</p>
-						<p class="registryQList"></p>
-						<p class="registryQList"></p>
-						<p class="registryQList">이메일*</p>
-						<p class="registryQList">생년월일*</p>
-						<p class="registryQList">결혼예정일</p>
-						<p class="registryQList">계좌번호*</p>
-					</div>
-					<div class="registryA">
-						<div class="registryAList">
-							<input type="text" class="registryId text1" v-model="id"
-								@keyup="fnShow" id="idBox">
-							<button class="checkBtn btn1" @click="fnIdCheck">중복검사</button>
-							<div class="registryNote idCheck" id="idNotice">영어와 숫자 포함
-								8~20 글자</div>
+					<div class="infoContent">
+						<div class="registTitle">회원가입</div>
+						<div class="registryQ">
+							<p class="registryQList">아이디*</p>
+							<p class="registryQList">비밀번호*</p>
+							<p class="registryQList">비밀번호 확인*</p>
+							<p class="registryQList">이름*</p>
+							<p class="registryQList">성별*</p>
+							<p class="registryQList">연락처*</p>
+							<p class="registryQList">주소*</p>
+							<p class="registryQList"></p>
+							<p class="registryQList"></p>
+							<p class="registryQList">이메일*</p>
+							<p class="registryQList">생년월일*</p>
+							<p class="registryQList">결혼예정일</p>
+							<p class="registryQList">계좌번호*</p>
 						</div>
-						<div class="registryAList">
-							<input type="password" class="registryPwd text1" v-model="pwd"
-								@keyup="fnShow">
-							<div class="registryNote pwdCheck" id="pwdNotice">8~20글자,
-								영어 대소문자, 특수문자(!@#$%^&*)가 모두 포함되어야 합니다.</div>
-						</div>
-						<div class="registryAList">
-							<input type="password" class="registryPwd text1"
-								v-model="pwdCheck" @keyup="fnShow">
-							<div class="registryNote pwd2Check" id="pwdNoticeCheck">
-								비밀번호가 일치하지 않습니다.</div>
-						</div>
-						<div class="registryAList">
-							<input type="text" class="registryName text1" v-model="name">
-							배우자 이름 <input type="text" class="registryName2 text1"
-								v-model="partner">
-						</div>
-						<div class="registryAList">
-							<label class="registryGender"> <input type="radio"
-								name="gender" checked v-model="gender" value="M"> 남자
-							</label> <label class="registryGender"> <input type="radio"
-								name="gender" v-model="gender" value="F"> 여자
-							</label>
-						</div>
-						<div class="registryAList">
-							<input type="text" class="registryPhone text1" v-model="phone1" maxlength='3'>
-							- <input type="text" class="registryPhone text1" v-model="phone2" maxlength='4'>
-							- <input type="text" class="registryPhone text1" v-model="phone3" maxlength='4'>
-						</div>
-						<div class="registryAList">
-							<input type="text" class="registryAddr text1" readonly
-								id="postcode" placeholder="우편번호" v-model="postcode">
-							<button class="checkBtn btn1" @click="fnAddr">우편번호 검색</button>
-						</div>
-						<div class="registryAList">
-							<input type="text" class="registryAddrDetail text1"
-								placeholder="주소" id="address" v-model="addr" readonly>
-						</div>
-						<div class="registryAList">
-							<input type="text" class="registryAddrDetail text1"
-								placeholder="상세 주소 입력" v-model="addrDetail" id="detailAddress">
-						</div>
-						<div class="registryAList">
-							<input type="email" class="registryEmail text1" v-model="email">
-							@ <input type="text" class="registryEmailAddr text1"
-								id="emailAddr" v-model="email2" :disabled="!isEmailAddrEditable">
-							<select class="registryEmailSelect text1" id="emailSelect"
-								v-model="selectedEmailDomain" v-on:change="fnEmailSelectChanged">
-								<option value="">직접 입력</option>
-								<option value="naver.com">naver.com</option>
-								<option value="daum.net">daum.net</option>
-								<option value="gmail.com">gmail.com</option>
-							</select>
-						</div>
-						<div class="registryAList">
-							<select id="birthdayYear" v-model="birthYear">
-								<option value="" hidden>::선택::</option>
-								<option v-for="birthYear in birthYears" :key="birthYear"
-									:value="birthYear">{{birthYear}}</option>
-							</select> 년 <select id="birthdayMonth" v-model="birthMonth">
-								<option value="" hidden>::선택::</option>
-								<option v-for="birthMonth in birthMonths" :key="birthMonth"
-									:value="birthMonth">{{birthMonth}}</option>
-							</select> 월 <select id="birthdayDay" v-model="birthDay">
-								<option value="" hidden>::선택::</option>
-								<option v-for="birthDay in birthDays" :key="birthDay"
-									:value="birthDay">{{birthDay}}</option>
-							</select> 일
-						</div>
-						<div class="registryAList">
-							<select id="weddingYear" v-model="weddingYear">
-								<option value="">::미정::</option>
-								<option v-for="weddingYear in weddingYears" :key="weddingYear"
-									:value="weddingYear">{{weddingYear}}</option>
-							</select> 년 <select id="weddingMonth" v-model="weddingMonth">
-								<option value="">::미정::</option>
-								<option v-for="weddingMonth in weddingMonths"
-									:key="weddingMonth" :value="weddingMonth">{{weddingMonth}}</option>
-							</select> 월 <select id="weddingDay" v-model="weddingDay">
-								<option value="">::미정::</option>
-								<option v-for="weddingDay in weddingDays" :key="weddingDay"
-									:value="weddingDay">{{weddingDay}}</option>
-							</select> 일
-						</div>
-						<div class="registryAList">
-							<select v-model="bank">
-								<option value="A">국민은행</option>
-								<option value="B">신한은행</option>
-								<option value="C">우리은행</option>
-								<option value="D">농협은행</option>
-								<option value="E">기업은행</option>							</select> <input type="text" class="registryAccount text1"
-								placeholder=" - 없이 입력" v-model="bankaccount">
-						</div>
-						<div class="btnBox">
-							<button class="registryBtn btn1" @click="fnRegist">확인</button>
-							<a href="#" @click="fnMain"><button class="registryBtn btn1">취소</button></a>
+						<div class="registryA">
+							<div class="registryAList">
+								<input type="text" class="registryId text1" v-model="id"
+									@keyup="fnShow" id="idBox">
+								<button class="checkBtn btn1" @click="fnIdCheck">중복검사</button>
+								<div class="registryNote idCheck" id="idNotice">영어와 숫자 포함
+									8~20 글자</div>
+							</div>
+							<div class="registryAList">
+								<input type="password" class="registryPwd text1" v-model="pwd"
+									@keyup="fnShow">
+								<div class="registryNote pwdCheck" id="pwdNotice">8~20글자,
+									영어 대소문자, 특수문자(!@#$%^&*)가 모두 포함되어야 합니다.</div>
+							</div>
+							<div class="registryAList">
+								<input type="password" class="registryPwd text1"
+									v-model="pwdCheck" @keyup="fnShow">
+								<div class="registryNote pwd2Check" id="pwdNoticeCheck">
+									비밀번호가 일치하지 않습니다.</div>
+							</div>
+							<div class="registryAList">
+								<input type="text" class="registryName text1" v-model="name">
+								배우자 이름 <input type="text" class="registryName2 text1"
+									v-model="partner">
+							</div>
+							<div class="registryAList">
+								<label class="registryGender"> <input type="radio"
+									name="gender" checked v-model="gender" value="M"> 남자
+								</label> <label class="registryGender"> <input type="radio"
+									name="gender" v-model="gender" value="F"> 여자
+								</label>
+							</div>
+							<div class="registryAList">
+								<input type="text" class="registryPhone text1" v-model="phone1" maxlength='3'>
+								- <input type="text" class="registryPhone text1" v-model="phone2" maxlength='4'>
+								- <input type="text" class="registryPhone text1" v-model="phone3" maxlength='4'>
+							</div>
+							<div class="registryAList">
+								<input type="text" class="registryAddr text1" readonly
+									id="postcode" placeholder="우편번호" v-model="postcode">
+								<button class="checkBtn btn1" @click="fnAddr">우편번호 검색</button>
+							</div>
+							<div class="registryAList">
+								<input type="text" class="registryAddrDetail text1"
+									placeholder="주소" id="address" v-model="addr" readonly>
+							</div>
+							<div class="registryAList">
+								<input type="text" class="registryAddrDetail text1"
+									placeholder="상세 주소 입력" v-model="addrDetail" id="detailAddress">
+							</div>
+							<div class="registryAList">
+								<input type="email" class="registryEmail text1" v-model="email">
+								@ <input type="text" class="registryEmailAddr text1"
+									id="emailAddr" v-model="email2" :disabled="!isEmailAddrEditable">
+								<select class="registryEmailSelect text1" id="emailSelect"
+									v-model="selectedEmailDomain" v-on:change="fnEmailSelectChanged">
+									<option value="">직접 입력</option>
+									<option value="naver.com">naver.com</option>
+									<option value="daum.net">daum.net</option>
+									<option value="gmail.com">gmail.com</option>
+								</select>
+							</div>
+							<div class="registryAList">
+								<select id="birthdayYear" v-model="birthYear">
+									<option value="" hidden>::선택::</option>
+									<option v-for="birthYear in birthYears" :key="birthYear"
+										:value="birthYear">{{birthYear}}</option>
+								</select> 년 <select id="birthdayMonth" v-model="birthMonth">
+									<option value="" hidden>::선택::</option>
+									<option v-for="birthMonth in birthMonths" :key="birthMonth"
+										:value="birthMonth">{{birthMonth}}</option>
+								</select> 월 <select id="birthdayDay" v-model="birthDay">
+									<option value="" hidden>::선택::</option>
+									<option v-for="birthDay in birthDays" :key="birthDay"
+										:value="birthDay">{{birthDay}}</option>
+								</select> 일
+							</div>
+							<div class="registryAList">
+								<select id="weddingYear" v-model="weddingYear">
+									<option value="">::미정::</option>
+									<option v-for="weddingYear in weddingYears" :key="weddingYear"
+										:value="weddingYear">{{weddingYear}}</option>
+								</select> 년 <select id="weddingMonth" v-model="weddingMonth">
+									<option value="">::미정::</option>
+									<option v-for="weddingMonth in weddingMonths"
+										:key="weddingMonth" :value="weddingMonth">{{weddingMonth}}</option>
+								</select> 월 <select id="weddingDay" v-model="weddingDay">
+									<option value="">::미정::</option>
+									<option v-for="weddingDay in weddingDays" :key="weddingDay"
+										:value="weddingDay">{{weddingDay}}</option>
+								</select> 일
+							</div>
+							<div class="registryAList">
+								<select v-model="bank">
+									<option value="A">국민은행</option>
+									<option value="B">신한은행</option>
+									<option value="C">우리은행</option>
+									<option value="D">농협은행</option>
+									<option value="E">기업은행</option>							</select> <input type="text" class="registryAccount text1"
+									placeholder=" - 없이 입력" v-model="bankaccount">
+							</div>
+							<div class="btnBox">
+								<button class="registryBtn btn1" @click="fnRegist">확인</button>
+								<a href="#" @click="fnMain"><button class="registryBtn btn1">취소</button></a>
+							</div>
 						</div>
 					</div>
 				</fieldset>

@@ -9,23 +9,25 @@
 .findPwdBox{
 	margin: auto;
 	width:800px;
-	box-shadow: 0px 0px 5px 0px #555;
+	box-shadow: 0px 0px 5px 0px #AAAAAA;
 	border-radius:10px;
 	padding:20px;
 	height:500px;
 	position:relative;
+	background-color: white;
 }
 .findPwdMent{
-	font-size:2.0em;
-	margin:10px;
+	font-size:1.5em;
+	margin:20px 0px;
 	font-weight:bold;
-	background-color: white;
+	text-align: center;
+	left: 200px;
 }
 .findPwdBox .findPwdList .findPwdQ{
 	width:30%;
 	display:inline-block;
-	margin:2.5%;
-	font-size:0.8em;
+	margin:30px;
+	font-size:1em;
 }
 .findPwdTextBox{
 	width:60%;
@@ -66,15 +68,15 @@
 .findPwd1{
 	position:absolute;
 	left:10%;
-	width:9%;
-	border-right:1px solid #ccc;
+	width:10%;
+	border-right:1px solid #AAAAAA;
 	text-align: right;
 	padding-right:10px;
 }
 .findPwd2{
 	position: absolute;
 	right:1%;
-	width:79%;
+	width:78%;
 }
 .findPwdList{
 	height:70px;
@@ -90,7 +92,7 @@
 .findPwdBox2{
 	margin: auto;
 	width:800px;
-	box-shadow: 0px 0px 5px 0px #555;
+	box-shadow: 0px 0px 5px 0px #AAAAAA;
 	border-radius:10px;
 	padding:20px;
 	height:400px;

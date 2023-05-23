@@ -16,6 +16,9 @@ public interface ProductTemporaryMapper {
 	//상품상세 
 	Product selectProductTemporaryInfo(HashMap<String, Object> map);
 	
+	// 상품 상세 설명 이미지
+	Product selectProductImgInfo(HashMap<String, Object> map);
+	
 	//제품이미지들
 	List <PdImage> productImages(HashMap<String, Object> map);
 

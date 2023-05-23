@@ -425,7 +425,33 @@
 	        }
 	    // dim popup script END
 	    
-	    } 
+	    }
+	    fnselectImage : function(){
+            var self = this;
+            var nparmap = {userId: self.userId};
+
+            $.ajax({
+                url: "/registryImg.dox",
+                dataType: "json",
+                type: "POST",
+                data: nparmap,
+                success: function(data) {
+                    self.image = data.image;  // Assuming 'images' is an array of image objects
+                    for(var i = 0; i < self.image.length; i++) {
+                        if(self.image[i].imgUsetype == 'Y') {
+                            self.imgUrl1 = self.image[i].imgSrc;                
+                        }
+                        else if(self.image[i].imgUsetype == 'D'){
+                            self.imgUrl2 = self.image[i].imgSrc;
+                        }
+                        
+                    }
+                },
+                error: function(xhr, textStatus, errorThrown) {
+                    console.error(textStatus);
+                }
+            });
+        }
 	    , created : function () {
 	    	var self = this;
 	        self.fnselectUser();

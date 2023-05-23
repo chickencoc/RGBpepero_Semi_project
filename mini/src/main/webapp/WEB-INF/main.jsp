@@ -81,7 +81,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="menu_cat_items" id="calender" name="calender">
+                <!-- <div class="menu_cat_items" id="calender" name="calender">
                     <div class="pageDetail_imgbox">
                         <img src="/image/categoryV/calender.jpg">
                     </div>
@@ -91,7 +91,7 @@
                             <a class="pageDetail_link" href="calender.do">CALENDER >></a>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
             <div class="pageListBox">
                 <div class="pageList">
@@ -101,7 +101,7 @@
                         <li><a href="#card">Card</a></li>
                         <li><a href="#venue">Venue</a></li>
                         <li><a href="#represent">Return Present</a></li>
-                        <li><a href="#calender">Calender</a></li>
+                        
                     </ul>
                     <ul class="pageList_qna">
                         <li><h5>도움이 필요 하신가요??</h5></li>

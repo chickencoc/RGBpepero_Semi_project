@@ -21,7 +21,7 @@
 				<h6 class="pay_title">답례품 주문</h6>
 				<fieldset class="info_box goods_info receive_box">
 					<legend class="info_box_name_legend">
-						<h4 class="info_box_name_h">상품 정보</h4>
+						<h3 class="info_box_name_h">상품 정보</h3>
 					</legend>
 					<table class="info_box_goods_table">
 						<tr>
@@ -34,9 +34,9 @@
 								<td class="info_box_goods_table_img tableContent" rowspan="2">
 									<img class="info_box_goods_img" :src="product.imgsrc">
 								</td>
-								<td class="info_box_goods_table_text">{{product.pName}}</td>
+								<td class="info_box_goods_table_name">{{product.pName}}</td>
 								<td class="info_box_goods_table_cnt_price tableContent" rowspan="2">
-									<input type="number" v-model="oCnt" min="1" class="text1 cntText">개</td>
+									<input type="number" v-model="oCnt" min="1" class="text1 cntText"> 개</td>
 								<td rowspan="2" class="tableContent">{{product.pPrice}} 원</td>
 							</tr>
 							<tr>
@@ -50,10 +50,10 @@
 						<h4 class="info_box_name_h">배송지 정보</h4>
 					</legend>
 					<fieldset class="destinationInfoBox" v-for="(item, index) in checkedBox">
-						<legend class="info_box_name_legend_destination">
+						<div class="info_box_name_legend_destination">
 							<!--background-color를 주변 색깔에 맞춰 변경해야함-->
 							<p class="destinationRecipient">수령인 {{index+1}}: {{item.gName}}</p>
-						</legend>
+						</div>
 						<table class="destinationTable">
 							<tr>
 								<td class="destinationInfo">연락처</td>
@@ -70,7 +70,7 @@
 						</table>
 					</fieldset>
 				</fieldset>
-				<div class="wrapper">
+				
 					<fieldset class="pay_box">
 						<div class="pay_info_box">
 							<h4 class="pay_info_box_name_h">결제 수단</h4>
@@ -104,7 +104,7 @@
 					<div class="pay_btn_box">
 						<button class="pay_btn btn1" type="button" @click="requestPay()">결제하기</button>
 					</div>
-				</div>
+				
 			</div>
 		</div>
 	</div>

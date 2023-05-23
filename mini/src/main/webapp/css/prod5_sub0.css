@@ -47,7 +47,8 @@
 	font-size: 20px;
 }
 .options {
-	text-align: left;
+	display: flex;
+	flex-direction: row-reverse;
 }
 
 .options .location {
@@ -63,29 +64,33 @@
 }
 
 .modifyButton {
-	text-align: right;
+	margin: 0px 10px;
 }
-
-.modifyButton .modify {
-	background-color: black;
-	color: white;
-	width: 100px;
-	height: 40px;
-}
-
-
-.grid_Area1, .grid_Area2 {
+.grid_Area1{
 	display: grid;
 	align-items: center;
 	justify-items: center;
 	grid-template-columns: repeat(4, 1fr);
 	gap: 10px;
 	margin: 40px 0px;
+	border-bottom: 0.1px dashed #AAAAAA;
+	padding-bottom: 40px;
+}
+.grid_Area2 {
+	display: grid;
+	align-items: center;
+	justify-items: center;
+	grid-template-columns: repeat(4, 1fr);
+	gap: 10px;
+	margin-top: 20px;
+	margin-bottom: 30px;
+	padding: 10px;
 }
 .imgBox1, .imgBox2 {
 	display: flex;
+	flex-direction:column;
 	width: 300px;
-	height: 300px;
+	height: 350px;
 	text-align: center;
 	justify-content: center;
 	border-radius: 5px;
@@ -100,7 +105,9 @@
 #grid_Area1_Name{
 	font-size: 25px;
 }
-
+.btnBox{
+	justify-items: center;
+}
 .pagination {
 	display: inline-flex;
 }

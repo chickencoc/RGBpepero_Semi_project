@@ -11,7 +11,7 @@
 <!-- 페이징 추가 1-->
 <script src="https://unpkg.com/vuejs-paginate@latest"></script>
 <script src="https://unpkg.com/vuejs-paginate@0.9.0"></script>
-<title>식장 페이지</title>
+<title>예식장 페이지</title>
 </head>
 <body>
 	<div id="app">
@@ -96,14 +96,12 @@
 						<option value="부산광역시">부산</option>
 						<option value="제주도">제주도</option>
 					</select>
-
+					<div class="modifyButton">
+						<button class="btn1" v-if="status=='S'" @click="fnAddWedding">예식장 추가하기</button>
+					</div>
 				</div>
 				<div class="grid_Area2">
 					<div class="imgBox2" v-for="(item, index) in list">
-						<div v-if="status=='S'">
-							<button class="modify" @click="fnRemoveWedding(item)">삭제하기</button>
-							<button class="modify" @click="fnEditWedding(item.weddingNo)">수정하기</button>
-						</div>
 						<a href="javascript:;" @click="fnMoveUrl(item.wUrl)">
 							<div>
 								<img :src="item.imgsrc">
@@ -111,6 +109,10 @@
 							<div class="hall_Location">{{item.wLocation}}</div>
 							<div class="hall_Name">{{item.wName}}</div>
 						</a>
+						<div class="btnBox" v-if="status=='S'">
+							<button class="btn1" @click="fnRemoveWedding(item)">삭제하기</button>
+							<button class="btn1" @click="fnEditWedding(item.weddingNo)">수정하기</button>
+						</div>
 					</div>
 
 				</div>
@@ -120,11 +122,6 @@
 						:container-class="'pagination'" :page-class="'page-item'">
 					</paginate>
 				</template>
-				<div class="modifyButton">
-					<button class="modify" v-if="status=='S'" @click="fnAddWedding">추가하기</button>
-
-<!--  -->
-				</div>
 			</div>
 		</div>
 	</div>

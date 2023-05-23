@@ -22,7 +22,7 @@
 				<a href="myRegistry.do">나의 레지스트리</a>
 				<a href="mygift.do">받은 선물 목록</a>
 				<a href="returngoods.do"><strong>보낸답례품</strong></a>
-				<a href="main.do">캘린더</a>
+				
 			</div>  	
             <div class="returnSearchBox">
                 <input type="text" placeholder="받은 사람 이름" class="returnSearchBar search" v-model="keyword" @click="fnKeyword()" @keyup.enter="fnKeyword">

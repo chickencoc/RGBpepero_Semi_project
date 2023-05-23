@@ -25,7 +25,7 @@
 				<a href="myRegistry.do">나의 레지스트리</a>
 				<a href="mygift.do">받은 선물 목록</a>
 				<a href="returngoods.do">보낸답례품</a>
-				<a href="main.do">캘린더</a>
+				
 			</div>
             <div class="cardBox boxshadowline">
                 <img class="mainCard" src="../image/categoryR/thankyou.jpg" alt="카드 메인 이미지">

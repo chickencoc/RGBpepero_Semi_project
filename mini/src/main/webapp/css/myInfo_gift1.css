@@ -80,7 +80,7 @@
 .return_gift_list_menu{
     display: flex;
     justify-content: center;
-    width:1200px;
+    width: 1200px;
 }
 .return_gift_list_menu > a:not(:last-child):after {
     content: '';
@@ -126,7 +126,7 @@ ul {
     text-decoration: none;
 }
 .pagination li.active {
-    background-color : #E7AA8D;
+    background-color : rgb(222,199,172);
     color:#fff;
 }
 .pagination li.active a {

@@ -15,10 +15,8 @@
     <div id="app">
 		<div id="wrapper">
         <div class="bannerbox">
-            <div class="banner">
-                <div class="textbox">
-                    <img src="mini\src\main\webapp\image\banner\board_banner.jpg">
-                </div>
+            <div class="banner">               
+                <img src="\image\banner\board_banner.jpg">               
             </div>
         </div>
         <div class="boardbox">

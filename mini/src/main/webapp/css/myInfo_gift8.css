@@ -1,29 +1,30 @@
 .container {width: 1000px; margin: 0 auto; margin-top: 30px;}
-
-.pay_title {font-size: 28px; margin: 20px;}
+fieldset{background-color: #F6F6F6;}
+.pay_title {font-size: 28px; margin: 20px; text-align: center;}
 
 .info_box, .pay_box {border-left: none; border-right: none; border-bottom: none; padding-bottom: 15px;}
-.info_box_name_legend {width: 100px; }
-.info_box_name_h {text-align: center; }
+.info_box_name_legend {margin: 10px 0px; }
+.info_box_name_h {text-align: center; font-size: 25px;}
 
 .pay_btn_box {width: 80%; margin: 30px auto; text-align: center;}
 .pay_btn {width: 90%; padding: 9px 0;}
-.pay_info_box {float: left; width: 75%; height: 250px; padding-top: 15px;}
+.pay_info_box {float: left; width: 75%; height: 250px;}
 
-.pay_total_price_box {float: left; width: 25%; height: 250px; border-left: 1px solid black; padding-top: 120px;}
-.pay_total_price_box_detail {border-bottom: 1px solid black; padding-bottom: 10px; margin: 0 10px; margin-bottom: 10px;}
+.pay_total_price_box {float: left; width: 25%; height: 250px; border-left: 0.5px solid #AAAAAA; padding-top: 120px;}
+.pay_total_price_box_detail {border-bottom: 0.5px dashed #AAAAAA; padding-bottom: 10px; margin: 0 10px; margin-bottom: 10px;}
 .pay_total_price_box_detail p {display: inline-block;}
 .pay_total_price_box_detail > div {width: 100%; display: flex; justify-content: space-around; padding: 0 10px;}
 .pay_total_price_box_name_h {margin-left: 15px;}
 .pay_total_price_box h4:nth-child(3) {margin-left: 50px;}
 
-.info_box_goods_table {width: 90%; border-collapse: collapse;}
-.info_box_goods_table th {border-bottom: 0px solid #555; padding: 10px 0;}
+.info_box_goods_table {width: 100%; border-collapse: collapse;}
+.info_box_goods_table th { padding: 10px 0;}
 /* .info_box_goods_table th:last-child, td:last-child {background-color: #999;} */
-.info_box_goods_table td {border-bottom: 0px solid #555; padding: 10px 0;}
+.info_box_goods_table td {border-top: 1px solid #AAAAAA; border-bottom: 1px dashed #AAAAAA; padding: 10px 0;}
 .info_box_goods_table_checkbox {width: 33px;}
-.info_box_goods_table_text {width: 45%; font-size:0.8em}
-.info_box_goods_img {background-color: #c7c7c7; width: 100px; height: 100px; vertical-align: middle;}
+.info_box_goods_table_name {width: 45%; font-size:1em; font-weight: 700; padding-bottom: 0;}
+.info_box_goods_table_text {width: 45%; font-size:0.9em; font-weight: 400; padding-bottom: 0;}
+.info_box_goods_img {background-color: #c7c7c7; width: 140px; height: 100px; vertical-align: middle;}
 .info_box_goods_table_img{width:20%; text-align: center;}
 .info_box_good_table_cnt_price{width:40%;}
 .payer_info_box, .ship_info_box {width: 75%; margin: 20px auto;
@@ -35,7 +36,8 @@
 .ship_info_box_text:last-child input {margin-left: 144px;}
 .ship_info_box_text input {width: 70%;}
 
-.pay_info_box_btns {text-align: center; margin-top: 25px;}
+.pay_info_box_name_h{ width: 95%; border-bottom: 0.5px dashed #AAAAAA; margin-left: 10px; font-size: 25px; padding-bottom: 5px;}
+.pay_info_box_btns { margin-top: 15px; padding-left: 15px;}
 .pay_info_box_btns label {margin: 0 13px;}
 .toCoupleMessage{
     width:80%;
@@ -129,21 +131,22 @@
    border:0.5px dashed #ccc;
 }
 .destinationInfoBox{
-    width:80%;
-    padding:20px;
-    border-top: 0px;
-    border-bottom: 0px;
+    width:100%;
+    padding:40px;
+    /* border-top: 1px solid #AAAAAA; */
+    border-bottom: 1px solid #AAAAAA;
     position: relative;
-    margin:20px auto;
+    margin: 10px auto;
     display: flex; /* 가로 정렬을 위해 flex를 사용합니다 */
     justify-content: center;
 }
 .info_box_name_legend_destination{
-   width:300px;
+   width:200px;
    position:absolute;
-   top:-10%;
-   left:-5%;
-   background-color: white;
+   top: 10px;
+   left: 10px;
+   background-color: rgba(248, 240, 223, 0.5);
+   text-align: center;
     
 }
 .destinationInfo{
@@ -157,9 +160,10 @@
     width:500px;
 }
 .destinationTable{
-    margin: auto;
+    margin-top: 20px;
 }
 .destinationRecipient{
+    
     font-size: 1.2em;
     font-weight: bold;
 }
@@ -170,4 +174,6 @@
 }
 .cntText{
 	width:45px;
+    text-align: center;
+    border: 0.5px solid #AAAAAA;
 }

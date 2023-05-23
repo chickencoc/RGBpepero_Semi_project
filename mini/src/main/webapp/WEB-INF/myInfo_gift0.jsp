@@ -21,7 +21,7 @@
 				<a href="myRegistry.do">나의 레지스트리</a>
 				<a href="mygift.do"><strong>받은 선물 목록</strong></a>
 				<a href="returngoods.do">보낸답례품</a>
-				<a href="main.do">캘린더</a>
+				
 			</div>
             <div class="itemSearchBox">
                 <input class="itemSearchBar search" type="text" value="검색" v-model="pName" placeholder="상품명을 검색하세요." @keyup.enter="fnSearchGift"></input>

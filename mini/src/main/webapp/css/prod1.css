@@ -151,7 +151,7 @@ ul {
     text-decoration: none;
 }
 .pagination li.active {
-    background-color : #E7AA8D;
+    background-color : rgb(222,199,172);
     color:#fff;
 }
 .pagination li.active a {

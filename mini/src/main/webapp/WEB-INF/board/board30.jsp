@@ -23,7 +23,7 @@
             </div>
             <div class="boardbox">
                 <div id="boardname">자주하는 질문</div>
-                <select v-model="selectItem" class="boardSelect">
+                <select v-model="selectItem" class="boardSelect" id="boardSelect">
                     <option value="">:: 전체 ::</option>
                     <option value="P">상품관련</option>
                     <option value="A">계정관련</option>
@@ -46,8 +46,8 @@
                     <tr  v-for="(item, index) in list"  @click="fnView(item.boardNo)">
                         <td>{{index + 1}}</td>
                         <template>
-	                        <td v-if="item.replyYn == 'Y'"><span><img src="/image/qa_icon2.gif"></span></td>
-	                        <td v-else><span><img src="/image/qa_icon1.gif"></span></td>
+	                        <td v-if="item.replyYn == 'Y'"><span><img src="/image/icon/qa_icon2.gif"></span></td>
+	                        <td v-else><span><img src="/image/icon/qa_icon1.gif"></span></td>
                         </template>
                         <td>{{item.title}}</td>
                         <td>{{item.name}}</td>

@@ -93,7 +93,7 @@
 }
 
 #boracay {
-	width: 200px;
+	width: 300px;
 	height: 200px;
 	margin-bottom: 10px;
 }
@@ -105,7 +105,7 @@
 	height: 325px;
 	text-align: center;
 	margin: 30px;
-	padding-top: 40px;
+	padding-top: 10px;
 }
 
 .travel_Box img {
@@ -297,7 +297,7 @@
 					</div>
 				</div>
 				<div class="btnBox">
-					<button class="btn1" v-if="status=='S'" @click="fnAdd()">추가</button>
+					<button class="btn1" v-if="status=='S'" @click="fnAdd()">여행지 추가</button>
 				</div>
 				<template class="pageList">
 					<paginate :page-count="pageCount" :page-range="3" :margin-pages="2"

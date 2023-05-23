@@ -217,7 +217,7 @@ fieldset #fieldTitle{
 						</div>
 
 						<div id="phoneNumber">
-							<label>전화번호 <input type="tel" id="phone" v-model="uPhone"></label>
+							<label>전화번호 <input type="tel" id="phone" v-model="uPhone" maxlength="11"></label>
 						</div>
 						<div id="addresses">
 							<label>주소<input type="text" id="address1"
@@ -276,8 +276,7 @@ fieldset #fieldTitle{
 			password2 : "",
 			list : []
 
-		}
-	,
+		},
 		methods : {
 			fnMoveMain : function() {
 				alert("성공적으로 수정되었습니다!");
@@ -285,6 +284,7 @@ fieldset #fieldTitle{
 			},
 			fnUserInformationBefore : function() {
 				var self = this;
+				
 				var nparmap = {
 					userId : self.userId
 				};
@@ -315,36 +315,72 @@ fieldset #fieldTitle{
 
 			fnUserInformationModify : function() {
 				var self = this;
-				var nparmap = {
-					userId : self.userId,
-					password : self.password,
-					uName : self.uName,
-					partner : self.partner,
-					gender : self.gender,
-					uPhone : self.uPhone,
-					uAddr1 : self.uAddr1,
-					uAddr2 : self.uAddr2,
-					uEmail : self.uEmail,
-					birth : self.birth,
-					bank : self.bank,
-					bankaccount : self.bankaccount,
-					weddingday : self.weddingday
-				};
-				console.log(nparmap);
-				$.ajax({
-					url : "/information/edit.dox",
-					dataType : "json",
-					type : "POST",
-					data : nparmap,
-					success : function(data) {
-						location.href = "/information.do";
-						if(self.password != self.password2){
-							alert("비밀번호와 확인번호가 같지않습니다.");
-							location.href="/informationmodify.do";
-						}else {alert("수정되었습니다!");}
-						
-					}
-				})
+				 let getNumberCheck = /[0-9]/;
+				 let getPwdCheck = /^(?=.*[!@#$%^&*])(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]).{8,20}$/;
+				 let getNameCheck = /^[가-힣|a-z|A-Z]/;
+				 if(self.password == ''||self.password2==''){
+		                alert("비밀번호를 입력해주세요.")
+		            } else if(self.uName==''){
+		                alert("이름을 입력해주세요.")
+		            } else if(self.uPhone1==''){
+		                alert("연락처를 입력해주세요.")
+		            } else if(self.addr==''||self.addrDetail==''){
+		                alert("주소를 입력해주세요.")
+		            } else if(self.uEmail==''){
+		                alert("이메일을 입력해주세요.")
+		            } else if(self.birth==''){
+		                alert("생일을 입력해주세요.")
+		            } else if(self.bankaccount==''||self.bank==''){
+		                alert("계좌번호를 입력해주세요.")
+		            } else if(!getNameCheck.test(self.uName)){
+		                    alert("이름이 정확하지 않습니다.");
+		                    self.name='';
+		            } else if(!getNumberCheck.test(self.uPhone)){
+						alert("전화번호는 숫자만 입력 가능합니다.");
+						self.uPhone='';
+					} else if(!getNumberCheck.test(self.bankaccount)){
+		                alert("계좌번호는 숫자만 입력 가능합니다.");
+		                self.bankaccount = '';
+		            } else if(!getPwdCheck.test(self.password)){
+		                alert("비밀번호의 형식이 올바르지 않습니다. 8~20글자, 영어 대소문자, 특수문자(!@#$%^&*)가 모두 포함되어야 합니다.")
+		                self.pwd='';
+		                self.pwdCheck='';
+		           	} else if(self.password != self.password2){
+		           		alert("비밀번호가 일치하지 않습니다.")
+		           		self.password='';
+		                self.password2='';
+			        } else{
+					var nparmap = {
+						userId : self.userId,
+						password : self.password,
+						uName : self.uName,
+						partner : self.partner,
+						gender : self.gender,
+						uPhone : self.uPhone,
+						uAddr1 : self.uAddr1,
+						uAddr2 : self.uAddr2,
+						uEmail : self.uEmail,
+						birth : self.birth,
+						bank : self.bank,
+						bankaccount : self.bankaccount,
+						weddingday : self.weddingday
+					};
+					console.log(nparmap);
+					$.ajax({
+						url : "/information/edit.dox",
+						dataType : "json",
+						type : "POST",
+						data : nparmap,
+						success : function(data) {
+							location.href = "/information.do";
+							if(self.password != self.password2){
+								alert("비밀번호와 확인번호가 같지않습니다.");
+								location.href="/informationmodify.do";
+							}else {alert("수정되었습니다!");}
+							
+						}
+					})
+				}
 			}
 
 		},

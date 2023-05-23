@@ -235,11 +235,11 @@
 	        },
 	        weddingday : function(){
 	        	var self = this;
-	        	var wedding = null;
+	        	var weddingday = null;
 	        	if(self.weddingYear!=''&&self.weddingMonth!=''&&self.weddingDay!=''){
-	        		var wedding = this.weddingYear+'-'+this.weddingMonth+'-'+this.weddingDay;
+	        	 weddingday = this.weddingYear+'-'+this.weddingMonth+'-'+this.weddingDay;
 	        	} 
-	        	return wedding;
+	        	return weddingday;
 	        }
 
 	  },

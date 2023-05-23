@@ -32,13 +32,21 @@
 	</select>
 	
 	<insert id="insertUser" parameterType="hashmap">
-		INSERT INTO T1_USER
-			(USERID, PASSWORD, U_NAME, PARTNER, GENDER, U_ADDRNO, U_ADDR1, U_ADDR2, U_PHONE, 
-			U_EMAIL, BIRTH, WEDDINGDAY, CDATETIME, UDATETIME, STATUS, BANK, BANKACCOUNT)
-		VALUES <!-- 맵으로 받기 때문에 #{}로 가져온다. jsp에서 정의한 이름으로 가져와야 함. -->
-			(#{userId}, #{pwd}, #{uName}, #{partner}, #{gender}, #{addrNo}, #{addr1}, #{addr2}, #{phoneNumber},
-			#{emailAddr}, #{birthday}, #{weddingday}, NOW(), NULL, 'U', #{bank}, #{bankaccount} )
-	</insert>
+    INSERT INTO T1_USER
+    (USERID, PASSWORD, U_NAME, PARTNER, GENDER, U_ADDRNO, U_ADDR1, U_ADDR2, U_PHONE,
+    U_EMAIL, BIRTH, WEDDINGDAY, CDATETIME, UDATETIME, STATUS, BANK, BANKACCOUNT)
+    VALUES
+    <choose>
+        <when test="weddingday != null and weddingday != ''">
+            (#{userId}, #{pwd}, #{uName}, #{partner}, #{gender}, #{addrNo}, #{addr1}, #{addr2}, #{phoneNumber},
+            #{emailAddr}, #{birthday}, #{weddingday}, NOW(), NULL, 'U', #{bank}, #{bankaccount})
+        </when>
+        <otherwise>
+            (#{userId}, #{pwd}, #{uName}, #{partner}, #{gender}, #{addrNo}, #{addr1}, #{addr2}, #{phoneNumber},
+            #{emailAddr}, #{birthday}, NULL, NOW(), NULL, 'U', #{bank}, #{bankaccount})
+        </otherwise>
+    </choose>
+</insert>
 	<select id="selectFindId" parameterType="hashmap" resultType="com.example.mini.model.User">
 		SELECT 
 		    USERID,

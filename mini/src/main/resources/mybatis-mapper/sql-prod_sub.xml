@@ -51,8 +51,7 @@
 		    MIN(ORGNAME) AS ORGNAME,
 		    MIN(IMGTYPE) AS IMGTYPE
 		FROM mini_db2.T1_TRIP T
-		LEFT JOIN mini_db2.T1_TRIPIMAGE TI ON TI.TRIPNO = T.TRIPNO
-		
+		LEFT JOIN mini_db2.T1_TRIPIMAGE TI ON TI.TRIPNO = T.TRIPNO	
 		WHERE T_KIND = #{tKind}
 		<if test="tName != '' and tName != null">
 			AND T_NAME LIKE CONCAT('%', #{tName}, '%')

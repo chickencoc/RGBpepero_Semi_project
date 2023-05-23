@@ -12,7 +12,7 @@ import com.example.mini.model.PdImage;
 import com.example.mini.model.Product;
 
 @Service
-public class ProductTemporaryServiceImpl implements ProductTemporaryService {
+public class ProductTemporaryServiceImp implements ProductTemporaryService {
 
 	@Autowired
 	private ProductTemporaryMapper productTemporaryMapper;
@@ -40,6 +40,12 @@ public class ProductTemporaryServiceImpl implements ProductTemporaryService {
 		productTemporaryMapper.insertProduct(map);
 		productTemporaryMapper.insertPdmanage(map);
 		
+	}
+
+	@Override
+	public Product selectProductImg(HashMap<String, Object> map) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

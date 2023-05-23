@@ -266,8 +266,8 @@
 					<div id="tripText">추천 여행지</div>
 					<div id="radioAndSelect">
 						<label id="out_Travel"><input type="radio" name="tripKind"
-							v-model="tKind" value="O"> 해외 </label> <label id="in_Travel"><input
-							type="radio" name="tripKind" v-model="tKind" value="I">
+							v-model="tKind" value="O" @change="fnSearch(1)"> 해외 </label> <label id="in_Travel"><input
+							type="radio" name="tripKind" v-model="tKind" value="I" @change="fnSearch(1)">
 							국내 </label>
 
 					</div>
@@ -302,7 +302,7 @@
 				<template class="pageList">
 					<paginate :page-count="pageCount" :page-range="3" :margin-pages="2"
 						:click-handler="fnSearch" :prev-text="'<'" :next-text="'>'"
-						:container-class="'pagination'" :page-class="'page-item'">
+						:container-class="'pagination'" :page-class="'page-item'" :current-page="selectPage">
 					</paginate>
 				</template>
 			</div>
@@ -328,14 +328,14 @@ var app = new Vue({
 	
     },watch: {
    		tKind: function(newVal){
-			console.log(newVal);
-			this.fnGetList()
+			self.fnSearch(1);
  		}
 	}   
     , methods: {
     	fnGetList : function(){
             var self = this;
             <!-- 페이징 추가 6-->
+            self.fnSearch(1);
 			var startNum = ((self.selectPage-1) * 5);
     		var lastNum = (self.selectPage * 5)+1;
             var nparmap = {
@@ -383,7 +383,8 @@ var app = new Vue({
 		}
 	    ,fnTripSearch : function(){
 	    	var self = this;
-	    	self.fnGetList();
+	    	self.fnSearch(1);
+
 	    }
 	    , pageChange : function(url, param) {
 			var target = "_self";

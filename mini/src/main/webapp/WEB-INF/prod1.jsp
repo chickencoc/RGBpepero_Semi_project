@@ -43,21 +43,21 @@
 								<div>
 									<label for="slide1" class="left"></label>
 									<label for="slide3" class="right"></label>
-									<img src="../image/categoryR/returnBanner2.jpg">
+									<img src="../image/banner/bedroom_banner2.jpg">
 								</div>
 							</li>
 							<li class="slideitem">
 								<div>
 									<label for="slide2" class="left"></label>
 									<label for="slide4" class="right"></label>
-									<img src="../image/categoryR/returnBanner3.jpg">
+									<img src="../image/banner/bedroom_banner3.jpg">
 								</div>
 							</li>
 							<li class="slideitem">
 								<div>
 									<label for="slide3" class="left"></label>
 									<label for="slide1" class="right"></label>
-									<img src="../image/categoryR/returnBanner4.jpg">
+									<img src="../image/banner/bedroom_banner4.jpg">
 								</div>
 							</li>
 						</ul>

@@ -20,6 +20,27 @@
 		INNER JOIN mini_db2.T1_PDMANAGE PD ON PD.PRODUCTNO = P.PRODUCTNO
 		LEFT OUTER JOIN mini_db2.T1_PDIMAGE PI ON P.PRODUCTNO = PI.PRODUCTNO
 		WHERE P.PRODUCTNO = #{productNo}
+		 AND MAINYN = 'Y'
+	</select>
+	
+		<select id="selectProductTemporaryInfo1" parameterType="hashmap" resultType="com.example.mini.model.Product">
+		SELECT
+			P.PRODUCTNO, 
+			P_PRICE,
+			P_NAME,
+			P_CONTENT,
+			P_CDATETIME,
+			P_KIND,
+			I_LIKE,
+            P_SALECNT,
+            P_STOCK,
+			P_STOCK - P_SALECNT AS PSALE,
+			PI.IMGSRC
+		FROM mini_db2.T1_PRODUCT P
+		INNER JOIN mini_db2.T1_PDMANAGE PD ON PD.PRODUCTNO = P.PRODUCTNO
+		LEFT OUTER JOIN mini_db2.T1_PDIMAGE PI ON P.PRODUCTNO = PI.PRODUCTNO
+		WHERE P.PRODUCTNO = #{productNo}
+		 AND MAINYN = 'D'
 	</select>
 	
 	

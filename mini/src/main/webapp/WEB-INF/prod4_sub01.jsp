@@ -94,7 +94,6 @@
 				</div>
 				<div class="product_Explane_Box">
 					<h1 class="product_Explane_Title">상품상세 설명</h1>	
-					<vue-editor class="product_Explane" id="editor" v-model="pContent" placeholder="상품설명을 입력해주세요."></vue-editor>
 				</div>
 				<div class="btnBox">
 					<button class="submit_Btn btn1" @click="fnLoad" v-if="productNo == null || productNo == ''">등록완료</button>

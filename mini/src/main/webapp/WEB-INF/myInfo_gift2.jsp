@@ -39,13 +39,18 @@
                         <th>보낸 날짜</th>
                         <th>금액</th>
                     </tr>
-                    <tr v-for="(item,index) in returnList">
+                    <tr v-for="(item, productNo) in returnList">
                         <td rowspan="1" class="returnProdImgBox">
                             <img :src="item.imgSrc" class="returnProdImg">
                         </td>
-                        <td class="returnProdNameBox">{{item.pName}}</td>
+                        <td class="returnProdNameBox">{{item.pName}}{{item.productNo}}</td>
                         <td class="returnGuestNameBox" rowspan="1">
-                            <div class="returnGuestNameBox2">
+                        	<!-- number of gName = 0 -->
+                            <div class="returnGuestNameBox2" v-if="returnGuestList.length == 1">
+                                <p>{{returnGuestList[0].gName}}</p>
+                             </div>
+                             <!-- number of gName > 0 -->
+                             <div class="returnGuestNameBox2" v-else>
                                 <div @click.prevent="fnShowGuest(item)" v-if="!item.guestFlg">
                                     <div v-for="(items,index) in returnGuestList">
                                     	<p v-if="index == 0">{{items.gName}}</p>
@@ -95,10 +100,10 @@ var app = new Vue({
     data: {
         selectPage: 1,
         pageCount: 1,
-        cnt : 0,
         returnList : [],
 		returnGuestList : [],
 		userId : "${sessionId}",
+		cnt : 0, //pagenation
 		keyword: ''
 
     }
@@ -122,31 +127,35 @@ var app = new Vue({
                 dataType:"json",	
                 type : "POST", 
                 data : nparmap,
-                success : function(data) { 
-                	console.log("data", data);
+                success : function(data) {
                 	self.returnList = data.returnList;
                 	console.log("returnList", self.returnList);
-                	for(var i=0;i< self.returnList.length; i++){
-                		self.fnGetReturnGuestList(self.returnList[i].productNo);
-                		}
-                	self.cnt = data.cnt
-                	 self.pageCount = Math.ceil(self.cnt / 6);
+                	
+                	for(var i = 0; i < self.returnList.length; i++) {
+                		self.returnGuestList.push({gName : self.returnList[i].gName});
+                		//self.fnGetReturnGuestList(self.returnList[i].productNo);
+                		console.log(i);
                 	}
-           		}); 
-        	}
-        ,fnGetReturnGuestList : function(productNo){
+                	console.log("returnGuestList",self.returnGuestList);
+                	// pagenation cnt
+                	self.cnt = data.cnt
+                	self.pageCount = Math.ceil(self.cnt / 6);
+                }
+           	}); 
+        }
+        ,fnGetReturnGuestList : function(productNo) {
             var self = this;
-            var nparmap = {userId : self.userId ,productNo : productNo};
+            var nparmap = {userId : self.userId, productNo : productNo};
             $.ajax({
                 url:"/returnGuestList.dox",
-                dataType:"json",	
+                dataType:"json",
                 type : "POST", 
                 data : nparmap,
                 success : function(data) {
                
                 	self.returnGuestList = data.returnList;    	
                     self.cnt = data.cnt;
-                    console.log(self.returnGuestList);
+                    console.log("returnGuestList",self.returnGuestList);
                 	}
            		}); 
         	}

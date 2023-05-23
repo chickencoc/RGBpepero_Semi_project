@@ -3,10 +3,11 @@
 }
 /* 검색창 */
 .itemSearchBox { display: flex; align-items: center ; justify-content: center; margin-top: 50px; }
-.itemSearchBox > .itemSearchBar { height: 40px; margin: 0; }
-.itemSearchBox > input.search { width: 300px; padding: 0 20px; }
-.itemSearchBox > .listStyleBtns > .listStyleImg { width: 35px; height: 35px; background-color: #555;}
-.itemSearchBox > .listStyleBtns { margin-left: 9px; width: 75px; display: flex; justify-content: space-around;}
+.itemSearchBox > .itemSearchBar { width: 100px; height: 35px; margin: 0; }
+.itemSearchBox > input.search { width: 300px; padding: 0 15px; }
+.itemSearchBox > .listStyleBtns a { height: 30px; }
+.itemSearchBox > .listStyleBtns .listStyleImg { width: 30px; height: 30px; background-color: #555;}
+.itemSearchBox > .listStyleBtns { margin-left: 9px; width: 75px; height: 35px; display: flex; justify-content: space-around; align-items: center;}
 
 /* content */
 .giftContentBox { display: grid;}

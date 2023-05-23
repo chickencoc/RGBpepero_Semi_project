@@ -33,7 +33,7 @@
                     <div class="pageDetail_textbox">
                         <div class="pageDetail_text">
                             <h4> 원하는 선물을<p>레지스트리에 담아보세요</p></h4>
-                            <a class="pageDetail_link" href="kitchen.do">PRODUCT >></a>
+                            <a class="pageDetail_link" href="bedroom.do">PRODUCT >></a>
                         </div>
                     </div>
                 </div>

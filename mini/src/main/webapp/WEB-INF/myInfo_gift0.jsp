@@ -51,7 +51,7 @@
                                 <div id="giftListName">{{item.pName}}</div>
                                 <div id="giftListGuest">보낸 사람 : {{item.gName}}</div>
                                 <div id="giftListDate">받은 날짜 : {{item.oCdatetime}}</div>
-                                <div id="giftListDate">받은 금액 : {{item.price}}원</div>
+                                <div id="giftListDate">받은 금액 : {{(item.price).toLocaleString()}}원</div>
                             </div>
                         </div>
                     </div>
@@ -102,12 +102,12 @@
                                     <div class="giftName">받은선물 : {{item.pName}} </div>
                                     <div class="giftSender">보낸사람 : {{item.gName}} </div>
                                 </div>
-                                <div class="giftContent">{{item.pContent}}</div>
+                                <div class="giftContent" v-html="item.pContent" >{{item.pContent}}</div>
                             </td>
                             <td class="giftDetailList_fund">펀딩</td>
                             <td class="giftDetailList_cnt">{{item.oCnt}} 개</td>
                             <td class="giftDetailList_date">{{item.oCdatetime}}</td>
-                            <td class="giftDetailList_price">{{item.price}}원</td>
+                            <td class="giftDetailList_price">{{(item.price).toLocaleString()}}원</td>
                         </tr>
                         
                     </table>
@@ -210,6 +210,7 @@ var app = new Vue({
 					self.list = data.list;
 					self.cnt = data.cnt;
 					console.log(self.list);
+					console.log("cnt", self.cnt);
 					 self.pageCount = Math.ceil(self.cnt / 6);
 				}
 			});
@@ -219,7 +220,11 @@ var app = new Vue({
 				self.selectPage = pageNum;
 				var startNum = ((pageNum-1) * 6);
 				var lastNum = (pageNum * 6)+1;
-				var nparmap = {startNum : startNum, lastNum : lastNum};
+				var nparmap = {userId : self.userId, 
+						arrayOrder : self.arrayOrder,
+						pName : self.pName,
+						startNum : startNum, 
+	    				lastNum : lastNum};
 				$.ajax({
 					url : "/tripRecommend.dox",
 					dataType : "json",
@@ -229,6 +234,7 @@ var app = new Vue({
 						self.list = data.list;
 						self.cnt = data.cnt;
 						self.pageCount = Math.ceil(self.cnt / 6);
+						
 						console.log(data);
 					}
 				});

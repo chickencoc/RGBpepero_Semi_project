@@ -32,7 +32,7 @@
                     <div>상품 가격 : {{list.pPrice}}</div>
                     <hr id="inner_line" class="div_line">
                     <div class="buttonbox">
-                        <button class="btn1" @click="fnOptionBtn()">레지스트리 등록</button>
+                        <button class="btn1" @click="fnOptionBtn()" v-if="sessionId != ''">레지스트리 등록</button>
                         <button @click="fnMoveModifyProduct" v-if="sessStatus == 'S'">상품정보수정</button>
                     </div>
                 </div>
@@ -131,8 +131,8 @@
             , pKind : ""
             , catList : []
             , checkList : []
-		    
-            //dim popup
+            , sessionId : "${sessionId}"
+		     //dim popup
 		    , item: {}
 		    , inputWanted: false
 		    , inputGroup: false

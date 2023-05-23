@@ -22,12 +22,15 @@
             <div id="board_title">제목: {{info.title}}</div>
             <div id="board_info_line"><span id="board_info_cat">{{boardName}}</span><span>글쓴이: {{info.name}}</span><span>조회수: {{info.viewCnt}}</span></div>
             <div id="board_info_line2"><span>{{info.cdatetime}} 작성됨</span><span v-if="info.udatetime!=null">{{info.udatetime}} 수정됨</span></div>
-            <div id="board_img_list">
-       			<div v-for="(item, index) in list" id="brdImgBox">
-       				<img :src="item.imgsrc" class="brdImgLine">
-       			</div>     	
+            
+            <div id="board_info_content">
+                <div id="board_img_list">
+                    <div v-for="(item, index) in list" id="brdImgBox">
+                        <img :src="item.imgsrc" class="brdImgLine">
+                    </div>     	
+                </div>
+                <div v-html="content"></div>
             </div>
-            <div id="board_info_content" v-html="content"></div>
             </div>
             <div></div>
             <template>

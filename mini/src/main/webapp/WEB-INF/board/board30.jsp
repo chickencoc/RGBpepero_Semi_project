@@ -7,7 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<jsp:include page="/layout/header.jsp"></jsp:include>
 	<link rel="stylesheet" href="/css/Base_rgbPepero.css">
-	<link rel="stylesheet" href="/css/board/board30.css">
+	<link rel="stylesheet" href="/css/board/board20.css">
 	<script src="https://unpkg.com/vuejs-paginate@latest"></script>
 	<script src="https://unpkg.com/vuejs-paginate@0.9.0"></script>
 	<title>FAQ</title>

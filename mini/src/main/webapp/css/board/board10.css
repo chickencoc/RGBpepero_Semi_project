@@ -2,12 +2,12 @@
         .banner .btn button{margin-top: 300px;margin-left: 580px ;}
         .textbox .txt{position: absolute;text-align: center;font-size: 2em;margin-top: 150px;margin-left: 375px;}
         .boardbox{ text-align: center;}
-        .boardbox .txt1{margin-top: 50px;font-size: 2em;}
+        .boardbox .txt1{margin-top: 50px;font-size: 1.5em;}
         .boardcat{display: grid;grid-template-columns: 1fr 1fr 1fr;grid-column-gap: 60px;}
         .innerbox{display: grid;height: 10px;grid-template-rows: 1fr 1fr;}
         .innerbox .detailtxt{margin-top: 80px;}
         .line{margin-top: 20px;margin-bottom: 20px;border-bottom: 1px solid #AAAAAA;}
-        #boardname{font-size: 3em;margin-bottom: 50px;}
+        #boardname{font-size: 2em;margin-bottom: 50px;}
         .boardmenu{width: 300px; display: inline-flex; align-items: center; justify-content: center; margin-left: 180px;}
         #menu{margin-top: 20px;font-size: 2em;}
         .board_list {width:100%; border-top:2px solid #AAAAAA; border-bottom:1px solid #AAAAAA; margin:15px 0; border-collapse: collapse;}

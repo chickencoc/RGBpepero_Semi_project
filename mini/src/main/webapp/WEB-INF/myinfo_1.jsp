@@ -9,177 +9,10 @@
 <script src="js/vue.js"></script>
 <jsp:include page="/layout/header.jsp"></jsp:include>
 <link rel="stylesheet" href="/css/Base_rgbPepero.css">
+<link rel="stylesheet" href="/css/myInfo_1.css">
 <title>회원정보 수정</title>
 <style>
 /* style START */
-.container {
-	margin: auto;
-}
-
-.container fieldset {
-	padding-top: 40px;
-}
-
-fieldset #information {
-	margin-left: 130px;
-}
-
-#information input {
-	margin-left: 15px;
-}
-
-fieldset {
-	width: 670px;
-	height: 800px;
-	margin : auto;
-	margin-top: 25px;
-	line-height: 40px;
-	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); 
-	border-radius: 10px;
-	
-}
-
-#post {
-	margin-left: 10px;
-}
-
-#information button {
-	border-radius: 30px;
-	border: 1px solid black;
-	width: 120px;
-	height: 30px;
-	margin-left: 120px;
-	margin-top: 25px;
-	background-color: #363636; 
-	color: white; border-radius: 6px;
-	
-}
-
-#information select {
-	margin-bottom: 10px;
-	width: 50px;
-}
-
-#bank {
-	margin-left: 63px;
-}
-
-fieldset #profile {
-	margin-top: -120px;
-	position: absolute;
-	margin-left: 280px;
-	
-	
-}
-
-fieldset input {
-	border: 1px solid gray;
-}
-
-fieldset select {
-	border: 1px solid black;
-}
-
-#idd {
-	border: 1px;
-}
-
-.product_category_list>a:not(:last-child):after {
-	content: '';
-	display: inline-block;
-	width: 2px;
-	height: 15px;
-	background: #999;
-	position: relative;
-	top: 2px;
-	margin-left: 13px;
-}
-
-.product_category_list>a {
-	margin: 0 5px;
-}
-
-.product_category_list {
-	text-align: center;
-}
-
-.inputid {
-	margin-left: 100px
-}
-
-#idline span {
-	margin-left: 75px;
-	color: gray;
-}
-
-#pwline input {
-	margin-left: 55px;
-	width: 190px;
-}
-
-#pwline2 input {
-	margin-left: 22px;
-	width: 190px;
-}
-
-#nameAndPartner #name {
-	margin-left: 86px;
-	width: 190px;
-}
-#nameAndPartner2 #partner {
-	margin-left: 57px;
-	width: 190px;
-}
-
-#gender #male {
-	margin-left: 90px;
-}
-
-#phoneNumber #phone {
-	margin-left: 56px;
-	width: 190px;
-}
-
-#addresses #address1 {
-	margin-left: 89px;
-	width: 190px;
-}
-
-#addresses #address2 {
-	margin-left: 121px;
-	width: 190px;
-}
-
-#addresses #address3 {
-	margin-left: 121px;
-	width: 190px;
-}
-
-#mail #email1 {
-	margin-left: 72.5px;
-	width: 190px;
-}
-
-#birth #birthDay {
-	margin-left: 57.5px;
-	margin-right: 10px;
-	width: 190px;
-}
-#weddingDate #weddingDay {
-	margin-left: 42px;
-	margin-right: 10px;
-	width: 190px;
-}
-
-#bankInfo select {
-	width: 60px;
-	margin-left: 57.5px;
-}
-fieldset #fieldTitle{
-	font-size : 30px;
-	text-align : center;
-	margin-bottom : 120px;
-}
 
 /* style END */
 </style>
@@ -196,61 +29,59 @@ fieldset #fieldTitle{
 					<a href="main.do">캘린더</a>
 				</div>
 				<fieldset>
-					<h1 id="fieldTitle">내정보 수정하기</h1>
-					<img src="/image/userimgA/profile1.PNG" id="profile">
-					<div id="information">
-						<div id="idline">
-							아이디<span>{{userId}}</span>
-						</div>
-						<div id="pwline">
-							<label>비밀번호 <input type="password" id="pw"
-								v-model="password"></label>
-						</div>
-						<div id="pwline2">
-							<label>비밀번호 확인 <input type="password" id="pw2" v-model="password2"></label>
-						</div>
-						<div id="nameAndPartner">
-							<label>이름 <input type="text" id="name" v-model="uName"></label>
-						</div>					
-						<div id="nameAndPartner2">
-							<label>배우자명 <input type="text" id="partner" v-model="partner"></label>
-						</div>
+					<h3 id="fieldTitle">회원정보 수정하기</h3>
+					<div class="profile" >
+						<img :src="imgUrl2" id="profileImage" @click="fnProfileAlter">
+					</div>
+					<div class="information">
+					
+						<span>아이디</span>
+						<span id="selectuserId">{{userId}}</span>
 
-						<div id="phoneNumber">
-							<label>전화번호 <input type="tel" id="phone" v-model="uPhone" maxlength="11"></label>
-						</div>
-						<div id="addresses">
-							<label>주소<input type="text" id="address1"
-								v-model="uAddr1"></label> <label><input type="text"
-								id="address2" v-model="uAddr2"></label>
-						</div>
-						<div id="mail">
-							<label>이메일 <input type="email" id="email1"
-								v-model="uEmail"></label>
-						</div>
-						<div id="birth">
-							<label>생년월일 <input type="text" id="birthDay"
-								v-model="birth"></label>
-						</div>
-						<div id="weddingDate">
-							<label>결혼예정일 <input type="text" id="weddingDay"
-								v-model="weddingday"></label>
-						</div>
+						<span>비밀번호</span> 
+						<input type="password" id="pw" v-model="password">
 
-						<div id="bankInfo">
-							계좌정보 <select id="bank" v-model="bank">
-								<option value="A">국민</option>
-								<option value="B">신한</option>
-								<option value="C">우리</option>
-								<option value="D">농협</option>
-								<option value="E">기업</option>
-							</select> <input type="text" id="bankNumber" v-model="bankaccount">
-						</div>
-						<button id="btn" @click="fnUserInformationModify">수정완료</button>
+						<span>비밀번호 확인</span> 
+						<input type="password" id="pw2" v-model="password2">
+			
+						<span>이름</span> 
+						<input type="text" id="name" v-model="uName">
+					
+						<span>배우자명</span>
+						<input type="text" id="partner" v-model="partner">
+					
+						<span>전화번호</span> 
+						<input type="tel" id="phone" v-model="uPhone" maxlength="11">
+					
+						<span>주소</span>
+						<input type="text" id="address1" v-model="uAddr1">
+						<span>상세주소</span>
+						<input type="text" id="address2" v-model="uAddr2">
+					
+						<span>이메일</span>
+						<input type="email" id="email1" v-model="uEmail">
+					
+						<span>생년월일</span>
+						<input type="text" id="birthDay" v-model="birth">
+					
+						<span>결혼예정일</span> 
+						<input type="text" id="weddingDay" v-model="weddingday">
+						
+						<span>계좌정보</span> 
+						<select id="bank" v-model="bank">
+							<option value="A">국민</option>
+							<option value="B">신한</option>
+							<option value="C">우리</option>
+							<option value="D">농협</option>
+							<option value="E">기업</option>
+						</select> 
+						<input type="text" id="bankNumber" v-model="bankaccount">
+					</div>
+					<div class="buttonBox">
+						<button  class="btn1" @click="fnUserInformationModify">수정완료</button>
 					</div>
 				</fieldset>
 			</div>
-
 		</div>
 	</div>
 </body>
@@ -274,7 +105,9 @@ fieldset #fieldTitle{
 			bankaccount : "",
 			weddingday : "",
 			password2 : "",
-			list : []
+			list : [],
+			image: [],
+			imgUrl2: ""
 
 		},
 		methods : {
@@ -381,12 +214,47 @@ fieldset #fieldTitle{
 						}
 					})
 				}
-			}
+			},
+			fnselectImage : function(){
+	                var self = this;
+	                var nparmap = {userId: self.userId};
+	
+	                $.ajax({
+	                    url: "/registryImg.dox",
+	                    dataType: "json",
+	                    type: "POST",
+	                    data: nparmap,
+	                    success: function(data) {
+	                        self.image = data.image; 
+							console.log(self.image); // Assuming 'images' is an array of image objects
+	                        for(var i = 0; i < self.image.length; i++) {
+	                            if(self.image[i].imgUsetype == 2){
+	                                self.imgUrl2 = self.image[i].imgSrc;
+	                            }
+	                            
+	                        }
+	                    },
+	                    error: function(xhr, textStatus, errorThrown) {
+	                        console.error(textStatus);
+	                    }
+	                });
+	            },
+			fnProfileAlter : function(image){
+	            let popUrl = "/registryProfileImg.do";
+	            let popOption = "width = 500px, height=500px, top=300px, left=300px, scrollbars=no";
+				localStorage.setItem('userImgInfo', JSON.stringify(image));
+				let popup = window.open(popUrl, "프로필이미지설정", [popOption]);
+	            popup.onbeforeunload = function() {
+					localStorage.removeItem('userImgInfo');
+	                location.reload();
+	            };
+	    }
 
 		},
 		created : function() {
 			var self = this;
 			self.fnUserInformationBefore();
+			self.fnselectImage();
 		}
 
 	});

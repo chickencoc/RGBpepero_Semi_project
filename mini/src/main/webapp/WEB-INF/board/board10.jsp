@@ -7,7 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<jsp:include page="/layout/header.jsp"></jsp:include>
 	<link rel="stylesheet" href="/css/Base_rgbPepero.css">
-	<link rel="stylesheet" href="/css/board/board10.css">
+	<link rel="stylesheet" href="/css/board/board20.css">
 	<script src="https://unpkg.com/vuejs-paginate@latest"></script>
 	<script src="https://unpkg.com/vuejs-paginate@0.9.0"></script>
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
@@ -42,8 +42,8 @@
                     <tr  v-for="(item, index) in list"  @click="fnView(item.boardNo)">
                         <td>{{index + 1}}</td>
                         <template>
-	                        <td v-if="item.replyYn == 'Y'"><span><img src="../image/qa_icon2.gif"></span></td>
-	                        <td v-else><span><img src="/mini/src/main/webapp/image/icon/qa_icon1.gif"></span></td>
+	                        <td v-if="item.replyYn == 'Y'"><span><img src="/image/icon/qa_icon2.gif"></span></td>
+	                        <td v-else><span><img src="/image/icon/qa_icon1.gif"></span></td>
                         </template>
                         <td>{{item.title}}</td>
                         <td>{{item.name}}</td>

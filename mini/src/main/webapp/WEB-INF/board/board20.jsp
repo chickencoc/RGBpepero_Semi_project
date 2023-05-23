@@ -40,8 +40,8 @@
                     <tr  v-for="(item, index) in list"  @click="fnView(item.boardNo)">
                         <td>{{index + 1}}</td>
                         <template>
-	                        <td v-if="item.replyYn == 'Y'"><span><img src="/image/qa_icon2.gif"></span></td>
-	                        <td v-else><span><img src="/image/qa_icon1.gif"></span></td>
+	                        <td v-if="item.replyYn == 'Y'"><span><img src="/image/icon/qa_icon2.gif"></span></td>
+	                        <td v-else><span><img src="/image/icon/qa_icon1.gif"></span></td>
                         </template>
                         <td>{{item.title}}</td>
                         <td>{{item.name}}</td>

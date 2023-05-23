@@ -1,5 +1,5 @@
-		#boName{font-size: 3em; margin-bottom: 20px;}
-        #newboardbox #board_title{ font-size: 2em;width: 1200px;margin-right: 30px;margin-bottom: 20px; border-bottom: 2px solid #AAAAAA; }
+		#boName{font-size: 2em; margin-bottom: 20px;}
+        #newboardbox #board_title{ font-size: 1.5em;width: 1200px;margin-right: 30px;margin-bottom: 20px; border-bottom: 2px solid #AAAAAA; }
         #board_info_line{width:1200px;  height: 40px; border-bottom: 1px solid #AAAAAA;}
         #board_info_cat{ border-right: 1px solid #AAAAAA;}
         #board_info_line span{padding-right: 10px;margin-right: 10px;}
@@ -8,7 +8,7 @@
         #board_info_content{width: 1200px; margin-top: 20px; min-height: 300px; border: 0.5px solid #AAAAAA;}
         #reply_head{width:1200px; margin-top: 20px;padding-bottom: 10px;margin-bottom: 10px;border-bottom: 1px solid #AAAAAA; font-weight: 700;}
         #reply_head .board_btn{font-size: 1em; float: right;margin: 5px;}
-        #board_img_list{display: grid; grid-template-columns : 360px 360px 360px; justify-content : center; grid-row-gap: "20px";}
+        #board_img_list{display: grid; grid-template-columns : 360px 360px 360px; justify-content : center; margin: 30px 0px;}
         #brdImgBox{ margin: 0 auto; width : 360px;}
         .brdImgLine {width : 360px;}
         #title{border: 0.5px solid #AAAAAA;}

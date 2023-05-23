@@ -10,11 +10,10 @@
 <title>회원정보</title>
 <style>
 /* style START */
-
 .container {margin: auto; }
 
 fieldset {width: 670px; margin: 0 auto; margin-top: 25px; line-height: 50px; padding-top: 50px;}
-fieldset .information {margin-left: 200px; width: 600px; margin: 0 auto; margin-left: 70px; }
+fieldset .information {display: grid; place-content: center; margin-left: 200px; width: 600px; margin: 0 auto; margin-left: 70px; }
 fieldset .information input {margin-left: 15px; }
 fieldset .information select {margin-bottom: 10px;width: 50px; }
 fieldset .editBtn { text-align: center; }
@@ -41,6 +40,7 @@ fieldset select {border: 2px solid black; }
 #bankInfo #bank {margin-left: 57.5px;color: gray; } 
 #bankInfo #bankNumber {margin-left: 30px;color: gray; } 
 fieldset #fieldTitle {font-size : 30px;text-align : center;margin-bottom : 30px; } 
+#profileImage{width: 150px; height: 150px; border-radius: 50%; background-color: #E4DBD6;}
 
 /* style END */
 </style>
@@ -59,7 +59,7 @@ fieldset #fieldTitle {font-size : 30px;text-align : center;margin-bottom : 30px;
 				<fieldset class="boxshadowline">
 					<h1 id="fieldTitle">내정보 확인하기</h1>
 					<div class="profile" >
-						<img src="/image/userimgA/profile1.PNG">
+						<img :src="imgUrl2" id="profileImage">
 					</div>
 					<div class="information">
 						<div id="idline">
@@ -107,8 +107,9 @@ var app = new Vue({
     data: {
     	userId : "${sessionId}",
     	bank : "",
-    	list : []
-		
+    	list : [],
+		image: [],
+		imgUrl2: ""
     }
 	
     , methods: {
@@ -142,12 +143,38 @@ var app = new Vue({
              		  }
     				}
     			})
-    		}
+    		},
+			fnselectImage : function(){
+	                var self = this;
+	                var nparmap = {userId: self.userId};
+	
+	                $.ajax({
+	                    url: "/registryImg.dox",
+	                    dataType: "json",
+	                    type: "POST",
+	                    data: nparmap,
+	                    success: function(data) {
+	                        self.image = data.image; 
+							console.log(self.image); // Assuming 'images' is an array of image objects
+	                        for(var i = 0; i < self.image.length; i++) {
+	                            if(self.image[i].imgUsetype == 2){
+	                                self.imgUrl2 = self.image[i].imgSrc;
+	                            }
+	                            
+	                        }
+	                    },
+	                    error: function(xhr, textStatus, errorThrown) {
+	                        console.error(textStatus);
+	                    }
+	                });
+	            }
+		
     	}
-   
+    
     , created: function () {
     	var self = this;
     	self.fnUserInformation();
+		self.fnselectImage();
 	}
 });
 </script>

@@ -33,9 +33,9 @@
 					<h3 id="fieldTitle">회원정보 수정하기</h3>
 					<div class="profile" >
 						<img :src="imgUrl2" id="profileImage" @click="fnProfileAlter">
+						<img src="/image/icon/editcon.png"  id="profileImageEdit" class="boxshadowline" @click="fnProfileAlter">
 					</div>
 					<div class="information">
-					
 						<span>아이디</span>
 						<span id="selectuserId">{{userId}}</span>
 

@@ -20,6 +20,11 @@ fieldset {
     background-color: white;
     padding: 35px 0px;
 }
+
+.container fieldset .profile {position: relative;}
+.container fieldset .profile #profileImageEdit { width: 35px; height: 35px; background-color: white; border-radius: 50%; position: absolute; bottom: 17px; right: 2px; }
+
+
 .information{display: grid; grid-template-columns: 150px 300px; grid-template-rows: repeat(10, 50px);}
 
 span{grid-column-start: 1;}

@@ -11,14 +11,14 @@ public class MyRegistry {
 	private String rUdatetime;
 	private String rOption;
 	private String rContent;
-	private String rCnt;
+	private int rCnt;
 	private String userId;
 	private String fundYn;
 	private String imgSrc;
 	private String pStock;
 	private String pName;
-	private String pPrice;
-	private String totalprice;
+	private int pPrice;
+	private int totalprice;
 	private String orderNo;
 	private String uName;
 	private String fsetprice;

@@ -23,7 +23,7 @@ public class Order {
 	private String oPhone;
 	private String oMessage;
 	private String oPurchase;
-	private String price;
+	private int price;
 	private String oDeposit;
 	private String deliveryNo;
 	private String dPrice;

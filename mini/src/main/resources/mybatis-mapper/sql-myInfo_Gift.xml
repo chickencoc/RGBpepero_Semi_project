@@ -60,8 +60,8 @@
 	</select>
 	
 	<select id="cntMyInfoGift" parameterType="hashmap" resultType="int">
-		SELECT COUNT(*) AS CNT
-		FROM mini_db2.T1_ORDER O
+		SELECT ROUND((COUNT(*)/2),0) AS CNT
+			FROM mini_db2.T1_ORDER O
 			LEFT JOIN mini_db2.T1_GUEST G ON G.G_PHONE = O.G_PHONE
 			LEFT OUTER JOIN mini_db2.T1_DELIVERY D ON D.DELIVERYNO = O.DELIVERYNO
 			LEFT OUTER JOIN mini_db2.T1_USER U ON U.USERID =  G.USERID

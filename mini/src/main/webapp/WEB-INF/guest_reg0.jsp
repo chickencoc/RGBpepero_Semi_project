@@ -49,7 +49,7 @@
 							</div>
 							<img :src="item.imgSrc" class="regi_items_image" v-if="item.rOption != 'A'">
                                 <p class="regi_pro_name">{{item.pName}}</p>
-                                <p class="regi_pro_price">{{item.pPrice}} 원</p>
+                                <p class="regi_pro_price">{{(item.pPrice).toLocaleString()}} 원</p>
                             <!--펀딩퍼센트-->
                             <div class="regi_percentage" v-if="item.fundYn == 'Y'">
                                 <progress id="regi_progress" :value="item.progVal" max="100"></progress>
@@ -71,7 +71,7 @@
                             <img :src="item.imgSrc" class="regi_items_image" v-if="item.tripNo == null">
                             <img :src="item.imgSrc" class="regi_items_image" v-if="item.productNo == null">                  
                             <p class="regi_pro_name">{{item.pName}}</p>
-                            <p class="regi_pro_price">{{item.pPrice}} 원</p>
+                            <p class="regi_pro_price">{{(item.pPrice).toLocaleString()}} 원</p>
                             <div class="regi_items_options_taken">
                                 <button id="regi_taken_gift" disabled>선물완료</button>
                             </div>
@@ -101,9 +101,9 @@
 		                <div class="reg_options_popup_info">
 							
 		                    <div id="reg_options_popup_name">상품 명 : {{item.pName}}</div>
-		                    <div class="reg_options_popup_price">상품 가격 : {{item.pPrice}}원</div>
+		                    <div class="reg_options_popup_price">상품 가격 : {{(item.pPrice || 0).toLocaleString()}}원</div>
 		                    <div>상품 수량 : <input type="number"  id="reg_options_popup_stock_number" size="1" v-model="item.rCnt" @keyup="fnCntCheck($event)"></div>
-		                    <div class="reg_options_popup_price">합계 : {{item.pPrice * item.rCnt}}원</div>
+		                    <div class="reg_options_popup_price">합계 : {{(item.pPrice * item.rCnt || 0).toLocaleString()}}원</div>
 		                </div>
 		                <ul class="reg_options_popup_checkbox">
 		                    <li id="reg_options_popup_checkbox_title">상품 표시 옵션</li>

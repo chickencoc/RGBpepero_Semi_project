@@ -10,7 +10,7 @@
 .itemSearchBox > .listStyleBtns { margin-left: 9px; width: 75px; height: 35px; display: flex; justify-content: space-around; align-items: center;}
 
 /* content */
-.giftContentBox { display: grid;}
+.giftContentBox { display: grid; place-items: center;}
 .giftContentBox > .profileBox { text-align: center; padding-top: 120px; }
 .giftContentBox > .profileBox > img { width: 100px; height: 100px; border-radius: 50%;}
 

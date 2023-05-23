@@ -20,7 +20,7 @@
                 </div>
                 <div class="reg_options_popup_info">
                     <div id="reg_options_popup_name">{{item.pName}}</div>
-                    <div id="reg_options_popup_price">{{item.pPrice}}</div>
+                    <div id="reg_options_popup_price">{{(item.pPrice).toLocaleString()}} 원</div>
                     <div>수량<input type="text" size="1" :value="item.pStock" id="reg_options_popup_stock_number"></div>
                 </div>
                 <div class="reg_options_popup_memo">
@@ -34,7 +34,7 @@
                 </div>
                 <div class="reg_options_popup_info">
                     <div id="reg_options_popup_name">{{item.pName}}</div>
-                    <div id="reg_options_popup_price">{{item.pPrice}}</div>
+                    <div id="reg_options_popup_price">{{(item.pPrice).toLocaleString()}} 원</div>
                     <div class="percentage" style="position: relative; right: 15px; top: 20px;">
                         <progress id="progress" :value="progressValue" max="100"></progress>
                         <span>{{progressValue}} %</span>                        

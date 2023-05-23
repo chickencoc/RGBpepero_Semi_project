@@ -5,16 +5,16 @@
 .returnSearchBar { width:350px; height: 35px; padding-left: 15px; } 
 .returnSearchBtn { width:100px; height:35px; } 
 
-.returnProdImg { width:150px; height:150px; background-color: #999; } 
+.returnProdImg { width:120px; height:76px; background-color: #999; } 
 .returnProdContentBox { width:40%; text-align: left; }
 
 .returnProdTable { width:900px; text-align: center; border-collapse: collapse; margin:auto; margin-bottom:40px; } 
-.returnProdTable th { height:70px; } 
+.returnProdTable th { height:50px; } 
 .returnProdTable tr { border-bottom: 1px solid #ccc; } 
-.returnProdImgBox { height:170px; width: 170px; }
+.returnProdImgBox { width: 170px; height:110px; }
  
 .returnGuestNameBox { vertical-align: middle; } 
-.returnProdNameBox { font-size:1.4em; }
+.returnProdNameBox { font-size:1.15em; }
 
 .returnGuestNameBox2 { margin-top: 20px; margin-bottom: 20px; } 
 .returnProdTableBox { border:0px; box-shadow: 0px 0px 5px 0px #555; margin:auto; } 
@@ -27,4 +27,4 @@ ul { text-align: center; }
 .page-item a { color:#666; text-decoration: none; } 
 .pagination li.active { background-color : #E7AA8D; color:#fff; } 
 .pagination li.active a { color:#fff; } 
-.page {margin:auto;}
+.page {text-align: center;}

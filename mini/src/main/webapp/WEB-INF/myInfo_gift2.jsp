@@ -36,37 +36,20 @@
                         <th colspan="2">제품</th>
                         <th>받은 사람</th>
                         <th>수량</th>
-                        <th>보낸 날짜</th>
-                        <th>금액</th>
+                        <th>보낸 일자</th>
+                        <th>상품 금액</th>
                     </tr>
                     <tr v-for="(item, productNo) in returnList">
                         <td rowspan="1" class="returnProdImgBox">
                             <img :src="item.imgSrc" class="returnProdImg">
                         </td>
-                        <td class="returnProdNameBox">{{item.pName}}{{item.productNo}}</td>
+                        <td class="returnProdNameBox">{{item.pName}}</td>
                         <td class="returnGuestNameBox" rowspan="1">
-                        	<!-- number of gName = 0 -->
-                            <div class="returnGuestNameBox2" v-if="returnGuestList.length == 1">
-                                <p>{{returnGuestList[0].gName}}</p>
-                             </div>
-                             <!-- number of gName > 0 -->
-                             <div class="returnGuestNameBox2" v-else>
-                                <div @click.prevent="fnShowGuest(item)" v-if="!item.guestFlg">
-                                    <div v-for="(items,index) in returnGuestList">
-                                    	<p v-if="index == 0">{{items.gName}}</p>
-                                	</div>
-                                	<a href="">더 보기▼</a>
-                                </div>
-                                
-                                <div @click.prevent="fnShowGuest(item)" v-else>
-                                    <a href="">접기▲</a>
-                                    <div v-for="(items,index) in returnGuestList">
-                                    	<p>{{items.gName}}</p>
-                               		</div>
-                                </div>
+                            <div class="returnGuestNameBox2">
+                            	<p>{{item.gName}}</p>
                             </div>
                         </td>
-                        <td  rowspan="1" class="returnProdCntBox">{{item.retCnt}}</td>
+                        <td  rowspan="1" class="returnProdCntBox">1</td>
                         <td  rowspan="1" class="returnProdDateBox">{{item.cDatetime}}</td>
                         <td  rowspan="1" class="returnProdPriceBox">{{(item.pPrice).toLocaleString()}} 원</td>
                     </tr> 
@@ -133,34 +116,20 @@ var app = new Vue({
                 	
                 	for(var i = 0; i < self.returnList.length; i++) {
                 		self.returnGuestList.push({gName : self.returnList[i].gName});
-                		//self.fnGetReturnGuestList(self.returnList[i].productNo);
                 		console.log(i);
                 	}
                 	console.log("returnGuestList",self.returnGuestList);
+                	
+                	self.fnListSort();
+                	
                 	// pagenation cnt
                 	self.cnt = data.cnt
                 	self.pageCount = Math.ceil(self.cnt / 6);
                 }
            	}); 
         }
-        ,fnGetReturnGuestList : function(productNo) {
-            var self = this;
-            var nparmap = {userId : self.userId, productNo : productNo};
-            $.ajax({
-                url:"/returnGuestList.dox",
-                dataType:"json",
-                type : "POST", 
-                data : nparmap,
-                success : function(data) {
-               
-                	self.returnGuestList = data.returnList;    	
-                    self.cnt = data.cnt;
-                    console.log("returnGuestList",self.returnGuestList);
-                	}
-           		}); 
-        	}
-        ,
-    	fnSearch : function(pageNum){
+        
+        , fnSearch : function(pageNum){
 			var self = this;
 			self.selectPage = pageNum;
 			var startNum = ((pageNum-1) * 6);

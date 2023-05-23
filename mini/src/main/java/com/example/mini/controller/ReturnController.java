@@ -42,7 +42,7 @@ public class ReturnController {
 	}
 	
 	@RequestMapping(value = "/returnGuestList.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
-	@ResponseBody
+	@ResponseBody // 지울 예정
 	public String searchReturnGuestList(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
 		HashMap<String, Object> resultMap = new HashMap<String, Object>();
 //		int startNum = Integer.parseInt(String.valueOf(map.get("startNum")));

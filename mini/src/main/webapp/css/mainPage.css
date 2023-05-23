@@ -1,6 +1,6 @@
 .banner { min-width: 1240px; width: 100%; height: 1000px; background-color: #AAAAAA; background-repeat: no-repeat; display: flex; justify-content: center; align-items: center;}
 .banner { background-image: url(../image/banner/main_banner2.jpg); background-position: center; transition: all 0.6s;}
-.banner .textbox { width: 1050px; text-align: center; line-height: 1.7; position: relative; top: -53px; }
+.banner .textbox { width: 1050px; text-align: center; line-height: 1.7; position: relative; top: -100px; }
 .banner .textbox > * { text-shadow: 0px 0px 4px white; }
 .banner .textbox .bannertxt_main { font-family: 'Gowun Batang', serif; font-weight: 400; font-size: 50px; color: black; letter-spacing: 0.03em; }
 .banner .textbox .bannertxt_main > span { font-weight: 600; font-size: 50px; color: black;}
@@ -44,7 +44,7 @@
 .menu_cat_items .pageDetail_text h4 { color: black; font-size: 35px; font-weight: 300; width: 550px; word-break: keep-all; text-align: right;}
 .menu_cat_items .pageDetail_text a { float: right; color: black; font-size: 21px; margin-top: 100px; letter-spacing: 0.1em; }
 .pageDetail_link { transition: all 0.3s;}
-.pageDetail_link:hover {cursor: pointer; transform: scale(1.1); text-shadow: 0 5px 6px #AAAAAA;} 
+.pageDetail_link:hover {cursor: pointer; transform: scale(1.1); text-shadow: 0 5px 6px #AAAAAA; font-weight: bold;} 
 
 /* .pageDetail #product { background-color: #a2bcb9;}
 .pageDetail #trip { background-color: #b78766;}

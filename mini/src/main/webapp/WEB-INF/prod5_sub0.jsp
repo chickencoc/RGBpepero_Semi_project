@@ -149,13 +149,15 @@ var app = new Vue({
     }
     ,watch: {
     	 wLocation: function(newVal){
+    		 var self = this;
 			console.log(newVal);
-			this.fnGetList()
+			self.fnSearch(1);
     	}
 	}
     , methods: {
     	fnGetList : function(){
             var self = this;
+            self.fnSearch(1);
             <!-- 페이징 추가 6-->
 			var startNum = ((self.selectPage-1) * 8);
     		var lastNum = (self.selectPage * 8)+1;
@@ -197,7 +199,10 @@ var app = new Vue({
 			self.selectPage = pageNum;
 			var startNum = ((pageNum-1) * 8);
 			var lastNum = (pageNum * 8)+1;
-			var nparmap = {startNum : startNum, lastNum : lastNum};
+			var nparmap = {startNum : startNum, 
+    				lastNum : lastNum,
+    				wLocation : self.wLocation,
+    				pKind : self.pKind};
 			$.ajax({
 				url : "/prodSubWedding.dox",
 				dataType : "json",

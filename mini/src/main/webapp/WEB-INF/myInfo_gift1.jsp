@@ -17,62 +17,27 @@
 	<script src="https://unpkg.com/vuejs-paginate@0.9.0"></script>
 	<title>카드페이지</title>
 </head>
-<style>
-	<!-- 페이징 추가 2-->
-	.pagination {
-
-        display: inline-flex;
-        
-    }
-    ul {
-        text-align: center;
-    }
-	.pagination li {
-	    min-width:32px;
-	    padding:2px 6px;
-	    text-align:center;
-	    margin:0 3px;
-	    border-radius: 6px;
-	    border:1px solid #eee;
-	    color:#666;
-	    display : inline;
-	}
-	.pagination li:hover {
-	    background: #E4DBD6;
-	}
-	.page-item a {
-	    color:#666;
-	    text-decoration: none;
-	}
-	.pagination li.active {
-	    background-color : #E7AA8D;
-	    color:#fff;
-	}
-	.pagination li.active a {
-	    color:#fff;
-	}
-</style>
-
 <body>
     <div id="app">
         <div class="container">
-         <div class="return_gift_list_menu">
-            <a href="">회원정보</a>
-            <a href="">나의 레지스트리</a>
-            <a href="">받은 선물 목록</a>
-            <a href="">보낸답례품</a>
-            <a href="">캘린더</a>
-        </div>
-            <div class="cardBox">
-                <img class="mainCard" src="/image/card1.avif" alt="카드 메인 이미지">
+			<div class="myinfo_category_list">
+				<a href="information.do">회원정보</a>
+				<a href="myRegistry.do">나의 레지스트리</a>
+				<a href="mygift.do">받은 선물 목록</a>
+				<a href="returngoods.do">보낸답례품</a>
+				<a href="main.do">캘린더</a>
+			</div>
+            <div class="cardBox boxshadowline">
+                <img class="mainCard" src="../image/categoryR/thankyou.jpg" alt="카드 메인 이미지">
             </div>
-            <div class="card_cat">
+			<div id="cardTitle">감사장</div>
+            
                 <select name="" class="scroll" v-model="arrayOrder">
                     <option value="like">인기순</option>
                     <option value="P_PRICE">가격순</option>
                     <option value="P_CDATETIME">최신순</option>
                 </select>
-            </div>
+            
             <div class="cardImg_list" > <!-- 사진 전체 묶음 -->
                 <div class="cardThumbnail"  v-for="(item, index) in list" :key="index">
                     <a href="javascript:;" @click=fnProdMove(item)>

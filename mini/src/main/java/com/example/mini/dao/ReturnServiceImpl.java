@@ -21,8 +21,10 @@ public class ReturnServiceImpl implements ReturnService{
 	public HashMap<String, Object> searchReturnList(HashMap<String, Object> map) {
 		HashMap<String, Object> resultMap = new HashMap<String, Object>();
 		List<Return> returnList = returnMapper.selectReturnList(map);
+		int cnt = returnMapper.cntReturnList(map);
 		resultMap.put("result", "success");
 		resultMap.put("returnList", returnList);
+		resultMap.put("cnt", cnt);
 		return resultMap;
 	}
 

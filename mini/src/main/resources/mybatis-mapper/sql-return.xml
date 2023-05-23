@@ -4,7 +4,7 @@
 
 <mapper namespace="com.example.mini.mapper.ReturnMapper">	
 	<select id="selectReturnList" parameterType="hashmap" resultType="com.example.mini.model.Return">
-		SELECT
+		SELECT DISTINCT
 		    R.RENO,
 		    R.USERID,
 		    R.G_PHONE,
@@ -24,7 +24,8 @@
 		<if test="keyword != null and keyword != ''">
 			AND G.G_NAME LIKE CONCAT('%', #{keyword}, '%')
 		</if>
-		LIMIT #{startNum}, 6;
+		ORDER BY CDATETIME
+		LIMIT #{startNum}, 10;
 	</select>
 	<select id="selectReturnGuestList" parameterType="hashmap" resultType="com.example.mini.model.Return">
 		SELECT 
@@ -39,20 +40,29 @@
 	
 	<select id="cntReturnList" parameterType="hashmap" resultType="int">
 		SELECT COUNT(*) AS CNT
-		FROM  mini_db2.T1_RETURN R
-		LEFT JOIN mini_db2.T1_GUEST G ON G.USERID = R.USERID AND G.G_PHONE = R.G_PHONE
-		LEFT JOIN mini_db2.T1_PRODUCT P ON P.PRODUCTNO = R.PRODUCTNO
-		INNER JOIN mini_db2.T1_PDIMAGE PI ON R.PRODUCTNO = PI.PRODUCTNO
-		INNER JOIN (SELECT COUNT(*) AS RETCNT, R.PRODUCTNO, R.USERID
-					FROM mini_db2.T1_RETURN R
-		            GROUP BY R.PRODUCTNO) RC ON RC.PRODUCTNO = R.PRODUCTNO
-		            
-		WHERE G.USERID = #{userId} AND IMGSRC NOT LIKE '%BackGround%'
-						AND MAINYN = 'Y'
+		FROM (
+		SELECT DISTINCT
+		    R.RENO,
+		    R.USERID,
+		    R.G_PHONE,
+		    G.G_NAME,
+		    R.CDATETIME,
+		    PD.P_NAME,
+		    PD.P_PRICE,
+		    R.PRODUCTNO,
+			PM.IMGSRC,
+			R.ORDERNO
+		FROM mini_db2.T1_RETURN R
+		INNER JOIN mini_db2.T1_CARD C ON C.G_PHONE = R.G_PHONE AND C.PRODUCTNO = R.PRODUCTNO
+		INNER JOIN mini_db2.T1_PRODUCT PD ON PD.PRODUCTNO = R.PRODUCTNO
+		INNER JOIN mini_db2.T1_PDIMAGE PM ON PM.PRODUCTNO = PD.PRODUCTNO
+		INNER JOIN (SELECT G_NAME, G_PHONE FROM mini_db2.T1_GUEST GROUP BY G_PHONE) G ON G.G_PHONE = R.G_PHONE
+		WHERE R.USERID = #{userId} AND IMGSRC NOT LIKE '%BackGround%'AND MAINYN = 'Y'
 		<if test="keyword != null and keyword != ''">
-			AND P.P_NAME LIKE CONCAT('%', #{keyword}, '%')
+			AND G.P_NAME LIKE CONCAT('%', #{keyword}, '%')
 		</if>
-		<!-- LIMIT #{startNum}, 6 -->
+		ORDER BY CDATETIME
+		) A
 		
 	</select>
 </mapper>

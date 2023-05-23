@@ -43,4 +43,5 @@ public class Order {
 	private String code;
 	private String name;
 	private String total;
+	private String fundYn;
 }

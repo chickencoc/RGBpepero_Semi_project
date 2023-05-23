@@ -102,9 +102,8 @@ var app = new Vue({
         },
         fnGetReturnList : function(){
             var self = this;
-            var startNum = ((self.selectPage-1) * 6);
-    		var lastNum = (self.selectPage * 6);
-            var nparmap = {userId : self.userId, keywrod: self.keyword, startNum : startNum, lastNum : lastNum};
+            var startNum = ((self.selectPage-1) * 10);
+            var nparmap = {userId : self.userId, keyword: self.keyword, startNum : startNum};
             $.ajax({
                 url:"/returnList.dox",
                 dataType:"json",	
@@ -113,40 +112,40 @@ var app = new Vue({
                 success : function(data) {
                 	self.returnList = data.returnList;
                 	console.log("returnList", self.returnList);
+                	console.log("cnt", data.cnt);
                 	
                 	for(var i = 0; i < self.returnList.length; i++) {
                 		self.returnGuestList.push({gName : self.returnList[i].gName});
-                		console.log(i);
                 	}
-                	console.log("returnGuestList",self.returnGuestList);
-                	
-                	self.fnListSort();
-                	
+                	//console.log("returnGuestList",self.returnGuestList);
+                	                	
                 	// pagenation cnt
                 	self.cnt = data.cnt
-                	self.pageCount = Math.ceil(self.cnt / 6);
+                	self.pageCount = Math.ceil(self.cnt / 10);
                 }
            	}); 
         }
-        
         , fnSearch : function(pageNum){
 			var self = this;
 			self.selectPage = pageNum;
-			var startNum = ((pageNum-1) * 6);
-			var lastNum = (pageNum * 6)-1;
-			var nparmap = {startNum : startNum, lastNum : lastNum , keyword : self.keywrod};
+			var startNum = ((pageNum-1) * 10);
+			var nparmap = {startNum : startNum, keyword : self.keywrod};
 			$.ajax({
 				url : "/returnList.dox",
 				dataType : "json",
 				type : "POST",
 				data : nparmap,
 				success : function(data) {
-					self.list = data.product;
+					self.returnList = data.returnList;
 					self.cnt = data.cnt;
-					self.pageCount = Math.ceil(self.cnt / 6);
+					self.pageCount = Math.ceil(self.cnt / 10);
 					}
 				});
 			}
+        , fnKeyword : function() {
+        	var self = this;
+        	self.fnGetReturnList();
+        }
         , pageChange : function(url, param) {
 			var target = "_self";
 			if(param == undefined){

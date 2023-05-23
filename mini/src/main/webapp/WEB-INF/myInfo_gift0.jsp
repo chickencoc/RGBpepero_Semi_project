@@ -48,7 +48,8 @@
                             <label><input @click="fnDivSelect($event)" class="none" name="gifts" type="checkbox" v-model="checkedBox" value="1"  v-bind:value="item">답례품 명단에 추가</label>
 							<img class="product" :src="item.imgsrc"> <!-- 받은 상품 이미지-->
                             <div class="giftList">
-                                <div id="giftListName">{{item.pName}}</div>
+                                <div id="giftListName" v-if="item.fundYn == 'Y'">(펀딩) {{item.pName}}</div>
+                                <div id="giftListName" v-else>{{item.pName}}</div>
                                 <div id="giftListGuest">보낸 사람 : {{item.gName}}</div>
                                 <div id="giftListDate">받은 날짜 : {{item.oCdatetime}}</div>
                                 <div id="giftListDate">받은 금액 : {{(item.price).toLocaleString()}}원</div>
@@ -104,7 +105,8 @@
                                 </div>
                                 <div class="giftContent" v-html="item.pContent" >{{item.pContent}}</div>
                             </td>
-                            <td class="giftDetailList_fund">펀딩</td>
+                            <td class="giftDetailList_fund" v-if="item.fundYn == 'Y'">펀딩</td>
+                            <td class="giftDetailList_fund" v-else></td>
                             <td class="giftDetailList_cnt">{{item.oCnt}} 개</td>
                             <td class="giftDetailList_date">{{item.oCdatetime}}</td>
                             <td class="giftDetailList_price">{{(item.price).toLocaleString()}}원</td>
@@ -190,7 +192,7 @@ var app = new Vue({
     	, fnSendCard : function() {
             // location.href
         }
-        ,fnGetList : function() {
+        , fnGetList : function() {
 			var self = this;
 			var startNum = ((self.selectPage-1) * 6);
     		var lastNum = (self.selectPage * 6)+1;

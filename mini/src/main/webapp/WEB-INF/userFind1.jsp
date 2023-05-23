@@ -20,7 +20,7 @@
                <div class="findIdListQ">
                    <div class="findIdList">이름</div>
                    <div class="findIdList">이메일</div>
-                   <div class="findIdList">인증번호</div>
+                   <!--<div class="findIdList">인증번호</div>-->
                </div>
                <div class="findIdListA">
                    <div class="findIdList">
@@ -35,14 +35,14 @@
                            <option value="daum.net">daum.net</option>
                            <option value="gmail.com">gmail.com</option>
                        </select>
-                       <button class="findIdBtn btn1" @click="fnNameCheck"> 인증번호 받기</button>
+                       <button class="findIdBtn btn1" @click="fnNameCheck"> 이메일 인증 </button>
                    </div>
-                   <div class="findIdList">
+                  <!--<div class="findIdList">
                        <input type="text" class="findIdTextBox text1" placeholder="인증번호 6자리 입력">
                        <button class="findIdBtn btn1" @click=fnCode> 인증번호 확인</button>
-                   </div>
+                   </div>-->
                </div>
-               <div class="findIdNotice" v-if="noticeFlg">이메일로 보내드린 인증번호를 확인해주세요.</div>
+               <div class="findIdNotice" v-if="noticeFlg">이메일 인증을 완료해주세요.</div>
                <div class="findIdCheck"><button class="findIdCheckBtn findIdBtn btn1" @click="fnFindId">아이디 찾기</button></div>		
             </div>
             </fieldset>
@@ -61,7 +61,7 @@ var app = new Vue({
         email2 : '',
         name:'',
         checkFlg : false,
-        sessionId : "${sessionId}"
+        userId : ''
     },
     computed: {
         isEmailAddrEditable() {
@@ -96,9 +96,13 @@ var app = new Vue({
     			type : "POST",
     			data : nparmap,
     			success : function(data) {
-    				console.log(data)
+    				console.log("data", data)
+    				self.userId = data.info.userid
+    				console.log("data.info", data.info)
+    						console.log(self.userId)
     				if(data.result == 'success'){
-    					alert("인증번호가 발송되었습니다.")
+    					alert("인증이 완료되었습니다.")
+    		        	self.checkFlg = true;
     				}else{
     					alert("이름과 이메일이 일치하지 않습니다.")
     					self.name='';
@@ -114,7 +118,7 @@ var app = new Vue({
         	if(!self.checkFlg){
         		alert("인증을 완료해주십시오.")
         	} else{
-        		alert("당신의 아이디는 '"+self.sessionId+"' 입니다.")
+        		alert("당신의 아이디는 '"+self.userId+"' 입니다.")
         		location.href = "userLogin.do"
         	}
         }

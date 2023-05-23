@@ -15,7 +15,7 @@
     <div id="app">
             <div class="container">
                 <fieldset class="loginBox boxshadowline">
-                    <legend class="loginTitle">Login</legend>
+                    <legend class="loginTitle">로그인</legend>
                     <div class="loginTextBox">
                         <div class="loginInfo loginTextId">
                             <img src="/image/icon/Group.png" class="loginImg"><input type="text" class="loginText" placeholder="아이디" v-model="id">

@@ -27,7 +27,7 @@
 						<div class="findPwdList">아이디</div>
 						<div class="findPwdList">이름</div>
 						<div class="findPwdList">이메일</div>
-						<div class="findPwdList">인증번호</div>
+						<!--<div class="findPwdList">인증번호</div>-->
 					</div>
 					<div class="findPwd2">
 						<div class="findPwdList">
@@ -50,16 +50,15 @@
 								<option value="daum.net">daum.net</option>
 								<option value="gmail.com">gmail.com</option>
 							</select>
-							<button class="findPwdBtn btn1" @click="fnNameCheck">인증번호 받기</button>
+							<button class="findPwdBtn btn1" @click="fnNameCheck">이메일 인증</button>
 						</div>
-						<div class="findPwdList findPwdBtnBox">
+						<!--<div class="findPwdList findPwdBtnBox">
 							<input type="text" class="findPwdTextBox text1"
 								placeholder="인증번호 6자리 입력">
 							<button class="findPwdBtn btn1" @click="fnCode">인증번호 확인</button>
-						</div>
+						</div>-->
 					</div>
-					<div class="findPwdNotice" v-if="noticeFlg">이메일로 보내드린 인증번호를
-						확인해주세요.</div>
+					<div class="findPwdNotice" v-if="noticeFlg">인증을 완료해주세요</div>
 					<div class="findPwdCheck">
 						<button class="findPwdCheckBtn findPwdBtn btn1" @click="fnPwd()">비밀번호 재설정</button>
 						<a href="#"><button class="findPwdCheckBtn findPwdBtn btn1" @click="fnFindId">아이디 찾기</button></a>
@@ -169,7 +168,8 @@ var app = new Vue({
     			success : function(data) {
     				console.log(data)
     				if(data.result == 'success'){
-    					alert("인증번호가 발송되었습니다.")
+    					alert("인증이 완료되었습니다.")
+    		        	self.checkFlg = true;
     				}else{
     					alert("입력한 정보가 정확하지 않습니다.")
     					self.id = '';

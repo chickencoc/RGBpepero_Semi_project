@@ -332,4 +332,13 @@ public class WeddingRecommendController {
 		return new Gson().toJson(resultMap);
 	}
 	
+	@RequestMapping(value = "removeTrip.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String tripRemove(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		prodSubService.removeTrip(map);
+		resultMap.put("result", "success");
+		return new Gson().toJson(resultMap);
+	}
+	
 }

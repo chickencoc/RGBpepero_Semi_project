@@ -462,9 +462,10 @@ var app = new Vue({
 				var self = this;
 		    	self.pageChange("/prod6Sub2.do", {tripNo : tripNo});
 	        }
-		 ,fnRemove : function(item){
+		 ,fnRemove : function(data){
 			var self = this;
-			var nparmap = {}; //key 값을 보내야 한다.
+			console.log(data);
+			var nparmap = {tripNo: data.tripNo}; //key 값을 보내야 한다.
 			if(!confirm("정말 삭제하시겠습니까?")){
 					return;
 				};

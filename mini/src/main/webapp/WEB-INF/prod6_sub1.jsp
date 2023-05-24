@@ -140,7 +140,7 @@
                 <h1>{{info.tName}}</h1>
             </div>
             <div id="miniExplane">
-                <h1>{{info.tContent}}</h1>
+                <h1 v-html="info.tContent">{{info.tContent}}</h1>
             </div>
             <template v-for="(item, index) in list">
 	            <div class="picture1">

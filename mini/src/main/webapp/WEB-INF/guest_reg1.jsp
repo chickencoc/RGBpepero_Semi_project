@@ -18,7 +18,7 @@
 			<div class="guestRegistBanner">
 				<img src="/image/return2.jpg" id="guestRegistBannerImg">
 				<div class="guestRegistBannerText">
-					<p>감사의 마음을 담은 답례품을 보내드릴게요</p>
+					<p class="bannerMessage">감사의 마음을 담은 답례품을 보내드릴게요</p>
 					<p>정보를 입력해주세요</p>
 				</div>
 			</div>
@@ -68,10 +68,10 @@ var app = new Vue({
         postcode : '',
         address : '',
         addrDetail :'',
-        gname: '오리킹',
+        gname: '',
 	    phone1 :'010',
-	    phone2 :'5555',
-	    phone3 :'7777',
+	    phone2 :'',
+	    phone3 :'',
 	    mode : '${item.fundYn}'
     }
     , computed: { //?

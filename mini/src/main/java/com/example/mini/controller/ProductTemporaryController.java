@@ -82,7 +82,15 @@ public class ProductTemporaryController {
 		resultMap.put("result", "success");
 		return new Gson().toJson(resultMap);
 	}
-
+	
+	@RequestMapping(value = "/producttemporaryinfoImg.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String selectTemporaryProductImgInfo(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		Product imgInfo = productTemporaryService.selectProductImgInfo(map);
+		resultMap.put("imgInfo", imgInfo);
+		return new Gson().toJson(resultMap);
+	}
 				
 
 }

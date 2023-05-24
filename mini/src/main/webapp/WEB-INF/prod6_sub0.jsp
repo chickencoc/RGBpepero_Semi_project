@@ -291,7 +291,7 @@
 							<div class="tripName">{{item.tName}}</div>
 						</a>
 						<div v-if="status=='S'" class="adminBtn">
-		            		<button class="btn1" @click="fnEdit(item.tripNo)">수정</button>
+		            		<button class="btn1" @click="fnEdit(item)">수정</button>
 		            		<button class="btn1" @click="fnRemove(item)">삭제</button>
 		            	</div>
 					</div>
@@ -462,12 +462,12 @@ var app = new Vue({
 				var self = this;
 		    	self.pageChange("/prod6Sub2.do", {tripNo : tripNo});
 	        }
-		 ,fnRemove : function(){
+		 ,fnRemove : function(item){
 			var self = this;
-			var nparmap = item; //key 값을 보내야 한다.
+			var nparmap = {}; //key 값을 보내야 한다.
 			if(!confirm("정말 삭제하시겠습니까?")){
 					return;
-				}
+				};
 				$.ajax({
 					url : "/removeTrip.dox",
 					dataType : "json",

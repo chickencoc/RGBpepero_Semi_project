@@ -425,7 +425,7 @@
 	        }
 	    // dim popup script END
 	    
-	    }
+	    },
 	    fnselectImage : function(){
             var self = this;
             var nparmap = {userId: self.userId};

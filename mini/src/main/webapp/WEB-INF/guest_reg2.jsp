@@ -102,7 +102,7 @@
                             </div>
                             <div>
                                 <p>상품 금액 : </p>
-                                <p>{{paseFloat(totalPrice).toLocaleString()}} 원</p>
+                                <p>{{(totalPrice).toLocaleString()}} 원</p>
                             </div>
                             <div>
                                 <p>배송비 : </p>
@@ -110,7 +110,7 @@
                             </div>
                         </div>
                         <h4 class="pay_total_price_box_name_h">결제 금액</h4>
-                        <h4 class="pay_total_price_box_name_h">{{paseFloat(totalPrice).toLocaleString()}} 원</h4>
+                        <h4 class="pay_total_price_box_name_h">{{(totalPrice).toLocaleString()}} 원</h4>
                     </div>
                 </fieldset>
                 <div class="pay_btn_box">

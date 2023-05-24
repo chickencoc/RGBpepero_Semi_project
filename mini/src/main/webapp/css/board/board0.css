@@ -1,15 +1,15 @@
-		.bannerbox{margin-top: 40px; width: 1200px; display: grid; place-items: center;}
-        .banner{width: 1000px; height: 400px; background-color: #AAAAAA; background-repeat: no-repeat; }
-        .banner img{width: 100%; height: 400px; object-fit: cover; object-position: center; opacity:0.8;}
+		.bannerbox{margin-top: 40px; width: 1200px; display: flex; justify-content: center;}
+        .banner{width: 1133px; height: 400px; background-color: #e3e5e6; background-repeat: no-repeat; }
+        .banner img{width: 100%; height: 400px; object-fit: contain; object-position: center; opacity:0.8;}
         .banner .btn button{margin-top: 300px; margin-left: 580px ;}
         .textbox .txt{position: absolute;text-align: center;font-size: 2em; margin-top: 150px;margin-left: 375px;}
         .boardbox{width: 1240px;}
         .boardbox .txt1{margin-top: 50px;font-size: 2em; }
-        .boardcat{display: grid; grid-template-columns: repeat(3, 410px); place-items: center;}
-        .board_category_items{ border: 0.5px solid #AAAAAA; background: #F6F6F6; width: 340px;height: 275px; border-radius: 10px; margin: 20px 0px;}
+        .boardcat{display: grid; grid-template-columns: repeat(3, 400px); place-items: center; margin-top: 40px;}
+        .board_category_items{ border: 0.5px solid #AAAAAA; background: #F6F6F6; width: 340px;height: 210px; border-radius: 10px; margin: 20px 0px;}
         .board_category_items div{text-align: center;}
         .innerbox{display: grid;height: 10px;grid-template-rows: 1fr 1fr;}
-        .innerbox .detailtxt{ margin-top: 80px;}
+        .innerbox .detailtxt{ margin-top: 62px;}
         .fakeLink{font-size: 3em;}
 
         [data-tooltip]{position:relative;}

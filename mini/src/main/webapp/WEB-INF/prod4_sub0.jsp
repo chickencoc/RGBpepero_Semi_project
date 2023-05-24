@@ -71,9 +71,9 @@
 	                            <td colspan="5"><hr class="div_line"></hr></td>
 	                        </tr>
 	                        </template>
-	                    </table>  -->
+	                    </table>
 	            	</div>
-	        	</div>
+	        	</div>  -->
         </div> <!-- 1e -->
     </div>
   </div>
@@ -214,6 +214,7 @@
                     success : function(data) { 
                         self.list = data.list;
                         self.pKind = self.list.pKind;
+                        console.log(self.list);
                     }
                 }); 
             },
@@ -251,10 +252,11 @@
 				document.body.removeChild(form);
 			},
 		    // dim popup script START
-		    	fnOptionBtn: function(item){
+		    	fnOptionBtn: function(){
 	    		var self = this;
-
-            	self.inputWanted = false;
+	    		//const userItemList = localStorage.getItem('list');
+	    		//var item = JSON.parse(userItemList);                 
+	            //self.item = item;
             	self.inputGroup = false;
 	           	$('.user-read').fadeIn().addClass('on');
 			    $('.read-inner').fadeIn().addClass('on');
@@ -262,8 +264,10 @@
 
 		        self.fnselectOption();
 				self.fnGetInformation();
+
+			    console.log(self.item);
 	    	}
-			,    fnselectOption: function(){
+			,   fnselectOption: function(){
 		              var self = this;            
 		              self.item = self.list;
 		         }

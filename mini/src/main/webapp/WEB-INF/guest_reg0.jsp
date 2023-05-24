@@ -91,7 +91,7 @@
 		        <!-- dim content -->
 		        <div class="read-inner">
 					
-		            <div class="reg_options_popup">
+		            <div class="reg_options_popup_guest">
 						
 						<img src="../image/icon/fi-sr-cross.png" @click="dimClose" class="dimClose" id="reg_option_popup_close">
 						
@@ -105,17 +105,19 @@
 		                    <div>상품 수량 : <input type="number"  id="reg_options_popup_stock_number" size="1" v-model="item.rCnt" @keyup="fnCntCheck($event)"></div>
 		                    <div class="reg_options_popup_price">합계 : {{(item.pPrice * item.rCnt || 0).toLocaleString()}}원</div>
 		                </div>
-		                <ul class="reg_options_popup_checkbox">
+		                <!-- <ul class="reg_options_popup_checkbox">
 		                    <li id="reg_options_popup_checkbox_title">상품 표시 옵션</li>
 		                    <li id="reg_options_popup_checkbox"><input type="checkbox" name="choice" > "정말 필요한 물건" 표시</li>
 		                    <li id="reg_options_popup_checkbox" v-if="item.fundYn != 'Y'">
 		                    	<input type="checkbox" name="choice" > "그룹선물(펀딩)"로 변경하기
 		                    	<span style="font-size: 12px; color: orangered;">[설정시 일반으로 변경 불가, 삭제만 가능]</span>
 		                    </li>
-		                </ul>    
-		                <div class="reg_options_popup_memo">
+		                </ul>     -->
+		                <div class="reg_options_popup_memo_guest">
 		                    <div><img src="../image/icon/fi-ss-heart.png" style="position: relative; top: 8px; margin-right: 5px;">선물할 친구들이 참고할 정보</div>
-		                    <label id="reg_options_popup_memo_txt" style="margin-top: 30px">{{item.rContent}}</label>
+		                    <div id="reg_options_popup_memo_txt_guest">
+                                <label id="reg_options_popup_memo_txt" style="margin-top: 30px">{{item.rContent}}</label>    
+                            </div>
 		                </div>
 		                <button class="reg_options_popup_btn" @click="fnSendItem">선물하기</button>
 		            </div>

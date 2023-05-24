@@ -48,4 +48,11 @@ public class ProductTemporaryServiceImp implements ProductTemporaryService {
 		return null;
 	}
 
+	@Override
+	public Product selectProductImgInfo(HashMap<String, Object> map) {
+		// TODO Auto-generated method stub
+		
+		return productTemporaryMapper.selectProductTemporaryInfoImg(map);
+	}
+
 }

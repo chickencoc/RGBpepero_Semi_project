@@ -32,7 +32,7 @@
                             <td class="info_box_goods_table_img"><img :src="list.imgSrc" class="info_box_goods_img"></td>
                             <td class="info_box_goods_table_text">{{list.pName}}</td>
                             <td class="info_box_goods_table_cnt_price">{{list.rCnt}} 개</td>
-                            <td class="info_box_goods_table_cnt_price">{{list.totalprice}} 원</td>
+                            <td class="info_box_goods_table_cnt_price">{{parseFloat(list.totalprice).toLocaleString()}} 원</td>
                         </tr>
                     </table>
                 </fieldset>
@@ -102,7 +102,7 @@
                             </div>
                             <div>
                                 <p>상품 금액 : </p>
-                                <p>{{totalPrice}} 원</p>
+                                <p>{{paseFloat(totalPrice).toLocaleString()}} 원</p>
                             </div>
                             <div>
                                 <p>배송비 : </p>
@@ -110,7 +110,7 @@
                             </div>
                         </div>
                         <h4 class="pay_total_price_box_name_h">결제 금액</h4>
-                        <h4 class="pay_total_price_box_name_h">{{totalPrice}} 원</h4>
+                        <h4 class="pay_total_price_box_name_h">{{paseFloat(totalPrice).toLocaleString()}} 원</h4>
                     </div>
                 </fieldset>
                 <div class="pay_btn_box">

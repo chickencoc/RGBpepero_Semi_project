@@ -29,7 +29,7 @@
                     <div>상품명 : <span>{{list.pName}}</span></div>
                     <div>좋아요 : {{list.iLike}}</div>
                     <div>재고 :{{list.pSale}}</div>
-                    <div>상품 가격 : {{list.pPrice}}</div>
+                    <div>상품 가격 : {{parseFloat(list.pPrice).toLocaleString()}}</div>
                     <hr id="inner_line" class="div_line">
                     <div class="buttonbox">
                         <button class="btn1" @click="fnOptionBtn()" v-if="sessionId != ''">레지스트리 등록</button>
@@ -96,7 +96,7 @@
 		                <div class="reg_options_popup_info">
 							
 		                    <div id="reg_options_popup_name">{{item.pName}}</div>
-		                    <div id="reg_options_popup_price">{{item.pPrice}} 원</div>
+		                    <div id="reg_options_popup_price">{{parseFloat(item.pPrice).toLocaleString()}} 원</div>
 		                    <div>수량<input type="text" size="1" v-model="item.rCnt" id="reg_options_popup_stock_number" @keyup="fnCntCheck($event)"></div>
 		                </div>
 		                <ul class="reg_options_popup_checkbox">

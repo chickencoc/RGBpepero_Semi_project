@@ -31,11 +31,11 @@
 						</tr>
 						<tr>
 							<td class="fundLists">상품 가격</td>
-							<td class="fundListA" colspan="2">{{info.pPrice}}원</td>
+							<td class="fundListA" colspan="2">{{parseFloat(info.pPrice).toLocaleString()}}원</td>
 						</tr>
 						<tr>
 							<td class="fundLists">남은 금액</td>
-							<td class="fundListA" colspan="2">{{remain}}원</td>
+							<td class="fundListA" colspan="2">{{parseFloat(remain).toLocaleString()}}원</td>
 						</tr>
 						<tr>
 							<td class="fundLists">원하는 결제 금액</td>
@@ -122,7 +122,7 @@
 						</div>
 						<h4 class="pay_total_price_box_name_h">결제 금액</h4>
 						<h4 class="pay_total_price_box_name_h" v-if="givePrice == 0">0 원</h4>
-						<h4 class="pay_total_price_box_name_h" v-else>{{givePrice}}원</h4>
+						<h4 class="pay_total_price_box_name_h" v-else>{{parseFloat(givePrice).toLoclaeString()}}원</h4>
 					</div>
 				</fieldset>
 				<div class="pay_btn_box">

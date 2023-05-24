@@ -53,6 +53,10 @@
 .container .btnBox .btn1 {width: 100px; height: 40px;}
 .modify_Btn {width: 100px;height: 40px; } 
 .submit_Btn { width: 100px;height: 40px; } 
+.prodContentBox{
+width: 900px;
+height: 300px;
+margin:auto;}
 
 </style>
 </head>
@@ -80,7 +84,7 @@
 						</div>
 						<div>
 							상품종류<select v-model="pKind">
-									<option value="" hidden>옵션을 선택하세요.</option>
+									<option value="" hidden>::선택::</option>
 									<option value="B">침실</option>
 									<option value="L">거실</option>
 									<option value="D">드레스룸</option>
@@ -90,10 +94,12 @@
 									<option value="H">취미</option>
 								 </select>
 						</div>
+						
 					</div>
 				</div>
 				<div class="product_Explane_Box">
-					<h1 class="product_Explane_Title">상품상세 설명</h1>	
+					<h1 class="product_Explane_Title">상품상세 설명</h1>
+					<textarea v-model="pContent" class="prodContentBox"></textarea>	
 				</div>
 				<div class="btnBox">
 					<button class="submit_Btn btn1" @click="fnLoad" v-if="productNo == null || productNo == ''">등록완료</button>

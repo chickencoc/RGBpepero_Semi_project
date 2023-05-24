@@ -181,7 +181,7 @@ var app = new Vue({
 		       	     	console.log(form[0]);
 		           		self.upload(form);
 		       	     	alert("저장되었습니다.");
-		       	     	/* location.href="prod5sub0.do" */
+		       	     	 location.href="prod5sub0.do" 
 	                	} , error: function (e) { 
 	                		// 전송 후 에러 발생 시 실행 코드
 	                		console.log("ERROR : ", e); 

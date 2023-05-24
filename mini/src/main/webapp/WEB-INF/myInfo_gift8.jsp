@@ -222,7 +222,7 @@ IMP.init("imp55171728");
 
 				}
 				alert("성공적으로 발송되었습니다.");
-				/*  location.href="/main.do" */
+				  location.href="/main.do" 
 			}
 			
 		},

@@ -207,6 +207,9 @@
 		            }
 		            return weddingDays
 		        },
+		        birthday: function(){
+		        	return this.birthYear+'-'+this.birthMonth+'-'+this.birthDay;
+		        },
 		        weddingday : function(){
 		        	var self = this;
 		        	var weddingday = null;
@@ -273,7 +276,6 @@
 						console.log(self.list);
 						self.uName = self.list.uName;
 						self.partner = self.list.partner;
-						self.password = self.list.password;
 						self.gender = self.list.gender;
 						self.uPhone = self.list.uPhone;
 						self.uAddrNo = self.list.uAddrNo
@@ -353,7 +355,7 @@
 						uAddr1 : self.uAddr1,
 						uAddr2 : self.uAddr2,
 						uEmail : self.uEmail,
-						birth : self.birth,
+						birth : self.birthday,
 						bank : self.bank,
 						bankaccount : self.bankaccount,
 						weddingday : self.weddingday

@@ -129,7 +129,7 @@ var app = new Vue({
 			var self = this;
 			self.selectPage = pageNum;
 			var startNum = ((pageNum-1) * 10);
-			var nparmap = {startNum : startNum, keyword : self.keywrod};
+			var nparmap = {userId : self.userId, keyword: self.keyword, startNum : startNum};
 			$.ajax({
 				url : "/returnList.dox",
 				dataType : "json",

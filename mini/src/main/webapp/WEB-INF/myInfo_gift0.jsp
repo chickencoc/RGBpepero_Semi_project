@@ -85,7 +85,7 @@
                                 <input type="checkbox" name="gifts" @click="fnCheckAll()">
                             </th>
                             <th colspan="2">받은 선물 내용</th>
-                            <th><img class="fundingImg" src="/image/funding.PNG">펀딩</th>
+                            <th><img class="fundingImg" src="/image/icon/funding.PNG">펀딩</th>
                             <th>수량</th>
                             <th>선물 날짜</th>
                             <th>금액</th>

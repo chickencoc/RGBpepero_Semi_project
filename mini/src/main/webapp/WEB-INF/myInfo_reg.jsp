@@ -83,8 +83,10 @@
 								 <img :src="item.imgSrc" class="regi_items_image">
 							</div>
 							<img :src="item.imgSrc" class="regi_items_image" v-if="item.rOption != 'A'">
-	                            <p class="regi_pro_name">{{item.pName}}</p>
-	                            <p class="regi_pro_price">{{(item.pPrice).toLocaleString()}} 원</p>
+	                            <p class="regi_pro_name" v-if="item.tripNo != null">{{item.tripNo}}</p>
+	                            <p class="regi_pro_name" v-else>{{item.pName}}</p>
+	                            <p class="regi_pro_price" v-if="item.tripNo != null">{{(item.fsetprice).toLocaleString()}} 원</p>
+	                            <p class="regi_pro_price" v-else>{{(item.pPrice).toLocaleString()}} 원</p>
 	                        <!--펀딩퍼센트-->
 	                        <div class="regi_percentage" v-if="item.fundYn === 'Y'">
 	                            <progress id="regi_progress" :value="item.progVal" max="100"></progress>
@@ -139,11 +141,13 @@
 						</div>
 		                <div class="reg_options_popup_info">
 							
-		                    <div id="reg_options_popup_name">상품 명 : {{item.pName}}</div>
-		                    <div class="reg_options_popup_price">상품 가격 : {{ (item.pPrice || 0).toLocaleString() }}원</div>
-		                    <div v-if="item.fundYn == 'Y'">상품 수량 : <label>{{item.rCnt}}</label></div>
-		                    <div v-else>상품 수량 : <input type="number" size="1" v-model="item.rCnt" @keyup="fnCntCheck($event)"></div>
-		                    <div class="reg_options_popup_price">합계 : {{(item.pPrice * item.rCnt || 0).toLocaleString()}}원</div>
+							<div id="reg_options_popup_name" v-if="item.tripNo != null">여행 이름 : {{item.tripNo}}</div>
+		                    <div id="reg_options_popup_name" v-else>상품 명 : {{item.pName}}</div>
+		                    <div class="reg_options_popup_price" v-if="item.tripNo != null">목표 금액 : {{ (item.fsetprice * 1 || 0).toLocaleString() }}원</div>
+		                    <div class="reg_options_popup_price" v-else>상품 가격 : {{ (item.pPrice || 0).toLocaleString() }}원</div>
+		                    <div v-if="item.fundYn == 'Y' && item.tripNo == null" >상품 수량 : <label>{{item.rCnt}}</label></div>
+		                    <div v-else-if="item.tripNo == null">상품 수량 : <input type="number" size="1" v-model="item.rCnt" @keyup="fnCntCheck($event)"></div>
+		                    <div class="reg_options_popup_price" v-if="item.tripNo == null">합계 : {{(item.pPrice * item.rCnt || 0).toLocaleString()}}원</div>
 		                </div>
 		                <ul class="reg_options_popup_checkbox">
 		                    <li id="reg_options_popup_checkbox_title">상품 표시 옵션</li>

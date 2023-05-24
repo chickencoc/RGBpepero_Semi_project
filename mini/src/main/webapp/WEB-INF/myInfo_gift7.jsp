@@ -7,10 +7,10 @@
 <script src="js/vue.js"></script>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<jsp:include page="/layout/header.jsp"></jsp:include>
+	<jsp:include page="/layout/headerLogo.jsp"></jsp:include>
 	<link rel="stylesheet" href="/css/Base_rgbPepero.css">
 	<link rel="stylesheet" href="/css/myInfo_gift7.css">
-	<title>주문 상세 내역 / 배송 조회 페이지</title>
+	<title>결제 완료</title>
 </head>
 
 <body>

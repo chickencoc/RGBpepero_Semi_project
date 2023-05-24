@@ -25,7 +25,7 @@
 		 	(P.P_PRICE * R_CNT) AS TOTALPRICE,
 			PM.P_STOCK,
 			PI.IMGSRC,
-		 	TI.IMGSRC,
+		 	<!-- TI.IMGSRC, -->
 			F.FSETPRICE,
 			F.FPUTPRICE,
 			F.FUNDINGNO,
@@ -35,7 +35,7 @@
 		INNER JOIN mini_db2.T1_PRODUCT AS P ON P.PRODUCTNO = R.PRODUCTNO
 		INNER JOIN mini_db2.T1_PDIMAGE AS  PI ON PI.PRODUCTNO = P.PRODUCTNO
 		INNER JOIN mini_db2.T1_PDMANAGE AS PM ON PM.PRODUCTNO = P.PRODUCTNO AND MAINYN = 'Y'
-		LEFT JOIN mini_db2.T1_TRIPIMAGE AS TI ON TI.TRIPNO = R.TRIPNO
+		<!-- LEFT JOIN mini_db2.T1_TRIPIMAGE AS TI ON TI.TRIPNO = R.TRIPNO -->
 		LEFT JOIN (SELECT FUNDINGNO, REGISTRYNO, FSETPRICE, SUM(FPUTPRICE) AS FPUTPRICE FROM mini_db2.T1_FUNDING GROUP BY FSETPRICE) F ON F.REGISTRYNO = R.REGISTRYNO
 		LEFT JOIN mini_db2.T1_ORDER AS O ON O.PRODUCTNO = R.PRODUCTNO AND O.USERID = R.USERID
 		WHERE R.USERID = #{userId} AND R.FUNDYN != 'D'
@@ -88,7 +88,12 @@
 	<!-- 레지스트리 추가 -->
 	<insert id="registryAdd" parameterType="hashMap">
 		INSERT INTO mini_db2.T1_REGISTRY
-		VALUES (NULL, #{productNo}, NULL, NOW(), NULL, #{rCnt}, NULL, #{rOption}, #{rContent}, #{userId}, #{fundYn})
+		<if test="tripNo != null">
+			VALUES (NULL, #{productNo}, #{tripNo}, NOW(), NULL, #{rCnt}, NULL, #{rOption}, #{rContent}, #{userId}, #{fundYn})
+		</if>
+		<if test="tripNo == null">
+			VALUES (NULL, #{productNo}, NULL, NOW(), NULL, #{rCnt}, NULL, #{rOption}, #{rContent}, #{userId}, #{fundYn})
+		</if>
 	</insert>
 	
 	<!-- 레지스트리 삭제 - 데이터는 남기고 삭제표시만 함 -->

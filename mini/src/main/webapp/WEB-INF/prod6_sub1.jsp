@@ -7,6 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<jsp:include page="/layout/header.jsp"></jsp:include>
 	<link rel="stylesheet" href="/css/Base_rgbPepero.css">
+	<link rel="stylesheet" href="/css/reg_options_popup.css">
 	 <script defer src="./index.js"></script>
   	 <script
     defer
@@ -118,6 +119,7 @@
         .adminBtn{
         	 text-align: right;
         }
+        #reg_options_popup_stock_number {width: 150px;}
 
     </style>
 </head>
@@ -156,9 +158,43 @@
             </div>
             <hr>  
             <div class="fundingBtn">
-                <button class="btn1" @click="fnFunding(tripNo)">펀딩레지스트리 등록</button>
+                <button class="btn1" @click="fnTripFund()">펀딩레지스트리 등록</button>
             </div>
-            <!--  -->
+            <!-- dim popup start -->
+		   <div class="user-read">
+		       <div class="dim-layer">
+		         <div class="read_dim">
+		         </div>
+		       </div>
+		        <!-- dim content -->
+		        <div class="read-inner">
+					
+		            <div class="reg_options_popup_guest">
+						
+						<img src="../image/icon/fi-sr-cross.png" @click="dimClose" class="dimClose" id="reg_option_popup_close">
+						
+		                <div class="reg_options_popup_imageBox">
+							<img :src="item.imgSrc" id="reg_options_popup_image">
+						</div>
+		                <div class="reg_options_popup_info">
+							
+		                    <div id="reg_options_popup_name">펀딩 명 : <input type="text" id="reg_options_popup_stock_number" :value="item.productNo" maxlength="10"></div>
+		                    <div class="reg_options_popup_price">펀딩 설정 가격 : <input type="number" placeholder="1,000,000"  id="reg_options_popup_stock_number" v-model="item.fsetprice" maxlength="8"></div>
+		                    <div class="reg_options_popup_price">표시 가격 : {{(item.fsetprice || 0).toLocaleString()}}원</div>
+		                </div>
+		                <ul class="reg_options_popup_checkbox">
+		                    <li id="reg_options_popup_checkbox_title">상품 표시 옵션</li>
+		                    <li id="reg_options_popup_checkbox"><input type="checkbox" name="choice" v-model="item.rOption"> "정말 필요한 물건" 표시</li>
+		                <div class="reg_options_popup_memo">
+		                    <div><img src="../image/icon/fi-ss-heart.png" style="position: relative; top: 8px; margin-right: 5px;">선물할 친구들이 참고할 정보를 기재해주세요</div>
+		                    <input type="text" id="reg_options_popup_memo_txt" v-model="item.inputText" >
+		                </div>
+		                <button class="reg_options_popup_btn" @click="fnOptionInput">등록 하기</button>
+		            </div>
+				</div>
+		        <!-- dim content -->
+		   </div>
+		   <!-- dim popup end -->
          </div>
      </div>
  </div>
@@ -209,7 +245,31 @@ var app = new Vue({
     	marker : {},
     	markers : [],
     	tAddr:''
-    }   
+    	
+   		//dim popup
+   	    ,   item: {}
+    }
+	, computed: {
+		fnFundingNo : function() { //펀딩번호 생성 ( F + 2자리년도 + 월 + 일 + 시간 + 분 + 초 + 랜덤 3자리수 )
+	        let date = new Date();
+	        let num1 = "";
+	        let arr = [date.getFullYear().toString().substring(2,4)
+	                    , (date.getMonth() + 1).toString()
+	                    , date.getDate().toString()
+	                    , date.getHours().toString()
+	                    , date.getMinutes().toString()
+	                    , date.getSeconds().toString()
+	                ];
+	        for(var i in arr) { //년도부터 초까지 한자리 수이면 앞에 0 붙여줌
+	            if(arr[i].length < 2) arr[i] = 0 + arr[i];
+	            num1 += arr[i];
+	        }
+	        let num2 = Math.random();
+	        num2 = num2.toString().substring(2,5); //랜덤 3자리 수 생성
+	
+	        return 'F' + num1 + num2;
+		}
+	}
     , methods: {
     	fnChange : function(code){
 	        var self = this;
@@ -263,6 +323,8 @@ var app = new Vue({
                 	self.info = data.info;
                 	self.tAddr = data.info.tAddr;
                    initMap();
+
+                   self.item.productNo = self.info.tName + " 여행";
                 }
             }); 
         }
@@ -277,24 +339,79 @@ var app = new Vue({
                 success : function(data) { 
                 	console.log(data)
                 	self.list = data.list;
-                   
                 }
             }); 
         }
-        ,fnFunding :function(tripNo){
-	    	var self = this;
-	    	self.pageChange("", {tripNo : tripNo});
+        ,	fnTripFund: function(){
+    		var self = this;
+            
+           	$('.user-read').fadeIn().addClass('on');
+    	    $('.read-inner').fadeIn().addClass('on');
+    	    $("body").css("overflow", "hidden"); //body 스크롤바 없애기
+
+    	}
+     	// dim popup script START
+		//method
+		 ,   fnselectOption: function(){
+		        var self = this;
+
+		        console.log(item);
 	    }
-       
+	    ,	fnOptionInput : function(){
+	            var self = this;
+	            if(self.item.rOption) {
+	            	var rOption = "A";
+	            } else {
+	            	var rOption = "";
+	            }
+	            var fundingNo = self.fnFundingNo
+ 	    		var nparmap = {
+ 	    				tripNo : self.info.tripNo
+ 	    				, tripNo : self.item.productNo
+ 	    				, productNo : 0
+ 	    				, fsetprice : self.item.fsetprice
+ 	    				, inputText : self.item.inputText
+ 	    				, fundingNo : fundingNo
+ 	    				, userId : "${sessionId}"
+ 	    				, rCnt : 1
+ 	    				, rOption : rOption
+ 	    				, rContent : self.item.inputText
+ 	    				, fundYn : 'Y'
+	           			};
+	             $.ajax({
+                      url: "/tripFundingAdd.dox",
+                      type: "POST",
+                      dataType: "json",
+                      data: nparmap,
+                      success: function(response) {
+                          // 서버 응답을 처리하는 코드 작성
+                          alert("저장되었습니다.");
+                          self.dimClose();
+                      },
+                      error: function(xhr, textStatus, errorThrown) {
+                          // 오류 처리 코드 작성
+                          console.error(textStatus);
+                      }
+	            }); 
+	            console.log(nparmap);
+        }
+		,	dimClose: function(){
+				var self= this;
+				 
+				$('.user-read').fadeOut().removeClass('on');
+				$('.read-inner').fadeOut().removeClass('on');
+				$("body").css("overflow", "visible");
+				localStorage.removeItem('userItemList');
+				
+		}
+		// dim popup script END
        
     }
-   
     , created: function () {
     	var self = this;
     	self.fnGetCategoryList();
     	self.fnGetInfo();
     	self.fnGetImg();
-
 	}
 });
 </script>

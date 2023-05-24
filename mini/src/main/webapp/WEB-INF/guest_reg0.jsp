@@ -48,8 +48,10 @@
 								 <img :src="item.imgSrc" class="regi_items_image">
 							</div>
 							<img :src="item.imgSrc" class="regi_items_image" v-if="item.rOption != 'A'">
-                                <p class="regi_pro_name">{{item.pName}}</p>
-                                <p class="regi_pro_price">{{(item.pPrice).toLocaleString()}} 원</p>
+								<p class="regi_pro_name" v-if="item.tripNo != null">{{item.tripNo}}</p>
+                                <p class="regi_pro_name" v-else>{{item.pName}}</p>
+                                <p class="regi_pro_price" v-if="item.tripNo != null">{{(item.fsetprice).toLocaleString()}} 원</p>
+                                <p class="regi_pro_price" v-else>{{(item.pPrice).toLocaleString()}} 원</p>
                             <!--펀딩퍼센트-->
                             <div class="regi_percentage" v-if="item.fundYn == 'Y'">
                                 <progress id="regi_progress" :value="item.progVal" max="100"></progress>

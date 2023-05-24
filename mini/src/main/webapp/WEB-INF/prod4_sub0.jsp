@@ -97,7 +97,7 @@
 							
 		                    <div id="reg_options_popup_name">{{item.pName}}</div>
 		                    <div id="reg_options_popup_price">{{item.pPrice}} 원</div>
-		                    <div>수량<input type="text" size="1" v-model="item.rCnt" id="reg_options_popup_stock_number"></div>
+		                    <div>수량<input type="text" size="1" v-model="item.rCnt" id="reg_options_popup_stock_number" @keyup="fnCntCheck($event)"></div>
 		                </div>
 		                <ul class="reg_options_popup_checkbox">
 		                    <li id="reg_options_popup_checkbox_title">상품 표시 옵션</li>
@@ -285,7 +285,20 @@
 		            var self = this;
 		            self.inputText = event.target.value;
 		             //텍스트 저장
-		        }    
+		        }
+		    ,	fnCntCheck : function(check) {  
+		        var self = this;
+		        var e = check.target;
+		        
+		        if(parseInt(e.value) > parseInt(self.list.pStock)) {
+		        	e.value = self.list.pStock;
+		        	self.item.rCnt = self.list.pStock;
+		        } else if(parseInt(e.value) < 1) {
+		        	e.value = 1;
+		        	self.item.rCnt = 1;
+		        };
+		        
+		    }
 		    ,	fnOptionInput : function(){
 		            var self = this;
 		    		var nparmap = {

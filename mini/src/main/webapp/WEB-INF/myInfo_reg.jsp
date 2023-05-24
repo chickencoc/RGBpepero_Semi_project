@@ -152,11 +152,11 @@
 		                    	<input type="checkbox" name="choice" v-bind:checked="inputGroup" v-on:change="updateGroup"> "그룹선물(펀딩)"로 변경하기
 		                    	<span style="font-size: 12px; color: orangered;">[설정시 일반으로 변경 불가, 삭제만 가능]</span>
 		                    </li>
-		                    <li id="reg_options_popup_checkbox" v-if="item.fundYn === 'Y'">
+		                    <!-- <li id="reg_options_popup_checkbox" v-if="item.fundYn === 'Y'">
 		                    	<input type="checkbox" name="choice" v-bind:checked="inputGroup" v-on:change="updateGroup" checked disabled> "그룹선물(펀딩)"로 변경하기
 		                    	<input type="hidden" name="choice" v-bind:checked="inputGroup" v-on:change="updateGroup">
 								<span style="font-size: 12px; color: orangered;">[설정시 일반으로 변경 불가, 삭제만 가능]</span>
-		                    </li>
+		                    </li> -->
 		                </ul>    
 		                <div class="reg_options_popup_memo">
 		                    <div><img src="../image/icon/fi-ss-heart.png" style="position: relative; top: 8px; margin-right: 5px;">선물할 친구들이 참고할 정보를 기재해주세요</div>

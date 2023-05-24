@@ -37,6 +37,7 @@ public class GuestRegController {
 	public String getItem(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
 		HashMap<String, Object> resultMap = new HashMap<String, Object>();
 		resultMap.put("item", sessItem.getAttribute("item"));
+		resultMap.put("givePrice", sessItem.getAttribute("givePrice"));
 		return new Gson().toJson(resultMap);
 	}
 	
@@ -113,6 +114,7 @@ public class GuestRegController {
 		map.put("gaddress", sessGuest.getAttribute("address"));
 		map.put("gaddrDetail", sessGuest.getAttribute("addrDetail"));
 		System.out.println(map);
+		sessItem.setAttribute("givePrice", map.get("givePrice"));
 		guestRegService.writeGuestFunding(map);
 		resultMap.put("result", "success");
 		return new Gson().toJson(resultMap);

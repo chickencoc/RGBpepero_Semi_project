@@ -23,7 +23,7 @@
 .info_box_goods_table td { border-bottom: 0px solid #555; padding: 10px 0; } 
 .info_box_goods_table_checkbox { width: 33px; } 
 .info_box_goods_table_text { width: 15%; } 
-.info_box_goods_img { background-color: #c7c7c7; width: 300px; height: 300px; vertical-align: middle; } 
+.info_box_goods_img { background-color: #c7c7c7; width: 300px; height: 250px; vertical-align: middle; object-fit: cover;} 
 .info_box_goods_table_img { width:45%; text-align: center; } 
 .info_box_good_table_cnt_price { width:40%; } 
 .payer_info_box, .ship_info_box { width: 75%; margin: 20px auto; /* border: 1px solid black; */
@@ -37,7 +37,7 @@
 .pay_info_box_btns { text-align: center; margin-top: 25px; } 
 .pay_info_box_btns label { margin: 0 13px; } 
 
-.fundLists { font-size: 1.2em; } 
+.fundLists { font-size: 1.0em; } 
 .fundListA { font-size : 1.1em; } 
 .fundPutMoneyBtn { width:30%; height:30px; margin:5px; } 
 .toCoupleMessage { width:80%; margin-left: 10%; height:70px; padding:1%; } 

@@ -1,10 +1,10 @@
 .container {width: 1000px; margin: 0 auto; margin-top: 30px;}
 
-.pay_title {font-size: 28px; margin: 20px; text-align: center;}
-.pay_title2 {font-size: 18px; margin: 20px; text-align: center; color:red;}
+.pay_title {font-size: 28px; margin: 20px; margin-bottom: 0px; text-align: center;}
+.pay_title2 {font-size: 15px; margin-bottom: 20px; text-align: center; color:red;}
 
 .info_box, .pay_box {border-left: none; border-right: none; border-bottom: none; padding-bottom: 15px;}
-.info_box_name_legend {width: 100px; }
+.info_box_name_legend {width: 100px; margin-left: 15px; }
 .info_box_name_h {text-align: center; }
 
 .pay_btn_box {width: 80%; margin: 30px auto; text-align: center;}
@@ -19,12 +19,12 @@
 .pay_total_price_box h4:nth-child(3) {margin-left: 50px;}
 
 .info_box_goods_table {width: 90%; border-collapse: collapse;}
-.info_box_goods_table th {border-bottom: 0px solid #555; padding: 10px 0;}
+.info_box_goods_table th {border-bottom: 0px solid #555; padding: 15px 0;}
 /* .info_box_goods_table th:last-child, td:last-child {background-color: #999;} */
-.info_box_goods_table td {border-bottom: 0px solid #555; padding: 10px 0;}
+.info_box_goods_table td {border-bottom: 0px solid #555; padding: 10px 0; font-size: 16px;}
 .info_box_goods_table_checkbox {width: 33px;}
 .info_box_goods_table_text {width: 45%; font-size:0.8em}
-.info_box_goods_img {background-color: #c7c7c7; width: 100px; height: 100px; vertical-align: middle;}
+.info_box_goods_img {background-color: #c7c7c7; width: 120px; height: 76px; vertical-align: middle; object-fit: cover; }
 .info_box_goods_table_img{width:20%; text-align: center;}
 .info_box_good_table_cnt_price{width:40%;}
 .payer_info_box, .ship_info_box {width: 75%; margin: 20px auto;

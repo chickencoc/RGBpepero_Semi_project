@@ -20,11 +20,11 @@
 .info_box_goods_table {width: 100%; border-collapse: collapse;}
 .info_box_goods_table th {border-bottom: 2px solid #555; padding: 10px 0;}
 /* .info_box_goods_table th:last-child, td:last-child {background-color: #999;} */
-.info_box_goods_table td {border-bottom: 1px solid #555; padding: 10px 0;}
+.info_box_goods_table td {border-bottom: 1px solid #555; padding: 20px 0;}
 .info_box_goods_table td:not(.info_box_goods_table_text) {text-align: center;}
 .info_box_goods_table_checkbox {width: 33px;}
 .info_box_goods_table_text {width: 50%;}
-.info_box_goods_img {background-color: #c7c7c7; width: 100px; height: 100px; vertical-align: middle;}
+.info_box_goods_img {background-color: #c7c7c7; width: 120px; height: 76px; vertical-align: middle; object-fit: cover; }
 
 .payer_info_box, .ship_info_box {width: 75%; margin: 20px auto;
     /* border: 1px solid black; */

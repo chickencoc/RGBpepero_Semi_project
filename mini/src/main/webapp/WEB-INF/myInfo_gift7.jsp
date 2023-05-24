@@ -19,54 +19,28 @@
             <div class="wrapper">
                 <h6 class="pay_title">결제 상세 내역</h6>
                 <h6 class="pay_title2">결제가 완료되었습니다!</h6>
-                <fieldset class="info_box goods_info receive_box">
+                <fieldset class="info_box goods_info receive_box" style="border-top: 2px dotted black;">
                     <legend class="info_box_name_legend">
                         <h4 class="info_box_name_h">상품 정보</h4>
                     </legend>
                     <table class="info_box_goods_table">     
                         <tr>
-                            <td colspan="3">　</td>
-                            <td class="tableTitle">수량</td>
-                            <td class="tableTitle">금액</td>
-                   
+                            <th colspan="3">　</th>
+                            <th class="tableTitle">수량</th>
+                            <th class="tableTitle">금액</th>
                         </tr>   
                         <tr >
-                            <td class="tableCheckbox"><input type="checkbox"></td>
-                            <td class="info_box_goods_table_img tableContent" ><img :src="info.imgsrc"class="info_box_goods_img"></td>
-                            <td class="info_box_goods_table_text"><p>{{info.pName}}</p><p>{{info.pContent}}</p></td>
+                            <td class="tableCheckbox" style="font-size: 10px; color: #555">●</td>
+                            <td class="info_box_goods_table_img tableContent" ><img :src="info.imgSrc" class="info_box_goods_img"></td>
+                            <td class="info_box_goods_table_text">{{info.pName}}{{info.pContent}}</td>
                             <td class="info_box_goods_table_cnt_price tableContent">{{info.rCnt}}개</td>
-                            <td  class="tableContent">{{info.pPrice}}원</td>
-                            <td  class="tableContent">{{info.dStatus}}</td>
+                            <td class="tableContent" v-if="info.fundYn == 'N'">{{info.pPrice}}원</td>
+                            <td class="tableContent" v-else>{{info.givePrice}}원</td>
                         </tr>
                     </table>
                 </fieldset>
-               
-                <fieldset class="info_box receive_box">
-                    <legend class="info_box_name_legend">
-                        <h4 class="info_box_name_h" v-if="info.fundYn == 'N'">배송지 정보</h4>
-                    </legend>
-                        <div class="deliveryReceiveBox">
-                            <table class="deliveryReceiveTable" v-if="info.fundYn == 'N'">
-                                <tr>
-                                    <td class="deliveryReceiveTitle">수령인</td>
-                                    <td>{{info.uName}}</td>
-                                </tr>
-                                <tr>
-                                    <td class="deliveryReceiveTitle">연락처</td>
-                                    <td>{{userList.uPhone}}</td>
-                                </tr>
-                                <tr>
-                                    <td class="deliveryReceiveTitle">배송지 주소</td>
-                                    <td>{{info.oAddrNo}} {{userList.uAddr1}} {{userList.uAddr2}}</td>
-                                </tr>
-                                <tr>
-                                    <td class="deliveryReceiveTitle">배송 메모</td>
-                                    <td>{{info.rContent}}</td>
-                                </tr>
-                            </table>
-                        </div>
-                </fieldset>
-                <fieldset class="info_box receive_box">
+
+                <fieldset class="info_box receive_box" style="margin-top: 40px; border-top: 2px dotted black;">
                     <legend class="info_box_name_legend">
                         <h4 class="info_box_name_h">주문금액</h4>
                     </legend>
@@ -78,19 +52,21 @@
                             </tr>
                             <tr>
                                 <td class="orderInfoTitle">상품금액</td>
-                                <td>{{info.pPrice}}원</td>
+                                <td v-if="info.fundYn == 'N'">{{info.pPrice}}원</td>
+                                <td v-else>{{info.givePrice}}원</td>
                             </tr>
                       
                             <tr>
                                 <td class="orderInfoTitle">총 금액</td>
-                                <td>{{info.totalprice}}원</td>
+                                <td v-if="info.fundYn == 'N'">{{info.pPrice}}원</td>
+                                <td v-else>{{info.givePrice}}원</td>
                             </tr>
                         </table>
                     </div>
                 </fieldset>
-                <div class="purchaseBtnBox">
-                   <button class="purchaseBtn btn1" @click="fnGoBack">뒤로가기</button>
-                    <button class="purchaseBtn btn1" @click="fnMain">홈으로</button>
+                <div class="purchaseBtnBox" style="margin-top: 0px; border-bottom: 2px dotted black;">
+                   <button class="purchaseBtn btn1" @click="fnGoBack">레지스트리로 이동</button>
+                    <button class="purchaseBtn btn1" @click="fnMain">메인으로 이동</button>
                 </div>
             </div>
         </div>
@@ -102,7 +78,6 @@
 var app = new Vue({ 
     el: '#app',
     data: {
-    	userId : "${sessionId}",
     	info : {},
     	product : [],
     	userList : {}
@@ -114,9 +89,7 @@ var app = new Vue({
     , methods: {
     	fnGetInfo : function() {
 			var self = this;
-			var nparmap = {userId : self.userId,
-					deliveryNo : self.product.deliveryNo,
-					orderNo : self.product.orderNo};
+			var nparmap = {};
 			$.ajax({
 				url : "/guest/getItem.dox",
 				dataType : "json",
@@ -124,6 +97,7 @@ var app = new Vue({
 				data : nparmap,
 				success : function(data) {
 					self.info = data.item;
+					self.info.givePrice = data.givePrice;
 					console.log(self.info);
 					self.fnGetUserInfo();
 				}
@@ -145,7 +119,7 @@ var app = new Vue({
 		},
 		fnGoBack : function(){
 			var self =this;
-			location.href="guestRegistry.do"
+			location.href="guestRegistry.do" + "?id=" + self.info.userId
 		},
 		fnMain : function(){
 			var self = this;

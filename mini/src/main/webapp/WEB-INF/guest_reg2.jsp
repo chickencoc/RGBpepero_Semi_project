@@ -29,7 +29,7 @@
                             <th>판매가격</th>
                         </tr>
                         <tr>
-                            <td class="info_box_goods_table_img"><img class="info_box_goods_img"></td>
+                            <td class="info_box_goods_table_img"><img :src="list.imgSrc" class="info_box_goods_img"></td>
                             <td class="info_box_goods_table_text">{{list.pName}}</td>
                             <td class="info_box_goods_table_cnt_price">{{list.rCnt}} 개</td>
                             <td class="info_box_goods_table_cnt_price">{{list.totalprice}} 원</td>
@@ -192,7 +192,7 @@
 			requestPay: function () { //결제창
 				var self = this;
 				var orderno = self.fnOrderNo;
-				IMP.request_pay({ // param
+				/* IMP.request_pay({ // param
 		          pg : "kcp.{test}",
 		          merchant_uid : orderno,
 		          name : self.list.pName,
@@ -208,10 +208,9 @@
 	                } else {
 	                    console.log(rsp);
 	                }
-		        });
-//				if(confirm("결제??")) {
-//					self.fnOrder(orderno);
-//				}
+		        }); */
+				self.fnOrder(orderno);
+				location.href="/myInfoGift7.do"
 		      },
 			fnOrder : function(orderno) {
 				var self = this;

@@ -23,8 +23,9 @@
 					</legend>
 					<table class="info_box_goods_table">
 						<tr>
-							<td class="info_box_goods_table_img" rowspan="6"><img
-								class="info_box_goods_img"></td>
+							<td class="info_box_goods_table_img" rowspan="6">
+							<img class="info_box_goods_img" :src="info.imgSrc">
+								</td>
 							<td class="info_box_goods_table_text fundLists">상품 이름</td>
 							<td class="info_box_goods_table_cnt_price fundListA" colspan="2">{{info.pName}}</td>
 						</tr>
@@ -295,6 +296,7 @@
 	    				console.log(self.info);
 	    				
 	    				self.remain = data.item.fsetprice - data.item.fputprice;
+	    				if(isNaN(self.remain)) self.remain = data.item.fsetprice;
 /* 	    				self.totalPrice = data.item.totalprice;
 	    				self.totalCnt = data.item.rCnt; */
 	    				

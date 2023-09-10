@@ -1,4 +1,4 @@
-# Semi_project_Marimo_homepage (매리모 홈페이지)
+# Semi_project_Marrimo_homepage (매리모 홈페이지)
 사용자가 받고 싶은 결혼 축하 선물을 쉽게 리스트업 하고 URL을 통해 지인들과 리스트를 공유할 수 있는 웹사이트이다. 공유받은 링크를 통해 선물을 선택하고 결제하면 상대방에게 선물이 배송된다.
 
 # Project Member

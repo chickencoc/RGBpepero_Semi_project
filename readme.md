@@ -3,17 +3,17 @@
 공유링크를 받은 사용자는 목록 내에서 원하는 선물을 선택하고 결제하여 선물을 전달하거나 펀딩을 통해 다수의 사용자들이 선물을 전달할 수 있는 기능을 제공한다.
 
 * Project Member
-> 김성은
-> 김세양
-> 김현재
-> 박호연
-> 이한빈
+> 김성은 <br />
+> 김세양 <br />
+> 김현재 <br />
+> 박호연 <br />
+> 이한빈 <br />
 
-# 시연영상
+* 시연영상
 <div>등록예정</div>
 
-# 개발 환경
-<h3>개발언어</h3>
+## 개발 환경
+* 개발언어
 <img src="https://img.shields.io/badge/Java-007396?style=flat&logo=Conda-Forge&logoColor=white" />
 
 

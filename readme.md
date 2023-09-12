@@ -1,23 +1,23 @@
 # Marrimo (semi_project)
-* Project Introduction
-  > 사용자가 받고 싶은 결혼 축하 선물을 목록으로 관리하고 URL을 통해 지인들과 목록을 공유할 수 있는 웹사이트이다.
-  > 공유링크를 받은 사용자는 목록 내에서 원하는 선물을 선택하고 결제하여 선물을 전달하거나 펀딩을 통해 다수의 사용자들이 선물을 전달할 수 있는 기능을 제공한다.
+### 프로젝트 소개
+사용자가 받고 싶은 결혼 축하 선물을 목록으로 관리하고 URL을 통해 지인들과 목록을 공유할 수 있는 웹사이트이다.
+공유링크를 받은 사용자는 목록 내에서 원하는 선물을 선택하고 결제하여 선물을 전달하거나 펀딩을 통해 다수의 사용자들이 선물을 전달할 수 있는 기능을 제공한다.
 
-### Project Member
-  > 김성은 <br />
-  > 김세양 <br />
-  > 김현재 <br />
-  > 박호연 <br />
-  > 이한빈 <br />
+### 시연 영상
+등록예정
 
-* 시연영상
-  > 등록예정
+## 프로젝트 수행 인원
+* 김성은 (팀장) : https://github.com/chickencoc <br />
+* 김세양 : https://github.com/tpdid2645 <br />
+* 김현재 : https://github.com/dkel4578 <br />
+* 박호연 : https://github.com/TerRanda <br />
+* 이한빈 : https://github.com/Dev21V <br />
 
-## Development Environment
-* 개발언어
+## 개발 환경
+### 개발언어
   * <img src="https://img.shields.io/badge/Java-007396?style=flat&logo=Conda-Forge&logoColor=white" />
   
-* 프레임워크
+### 프레임워크
   * <img src="https://img.shields.io/badge/springboot-6DB33F?style=flat&logo=springboot&logoColor=white"/>
 
 * 개발관리

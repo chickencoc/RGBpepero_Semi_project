@@ -1,10 +1,12 @@
 # Marrimo (semi_project)
+
 ### 프로젝트 소개
 사용자가 받고 싶은 결혼 축하 선물을 목록으로 관리하고 URL을 통해 지인들과 목록을 공유할 수 있는 웹사이트이다.
 공유링크를 받은 사용자는 목록 내에서 원하는 선물을 선택하고 결제하여 선물을 전달하거나 펀딩을 통해 다수의 사용자들이 선물을 전달할 수 있는 기능을 제공한다.
 
-### 시연 영상
-등록예정
+- 배포 주소 : im.21v.in:47520/main.do
+
+- 시연 영상 : 
 
 ## 프로젝트 수행 인원
 * 김성은 (팀장) : https://github.com/chickencoc <br />
@@ -15,33 +17,25 @@
 
 
 ## 개발 환경
-### 개발 언어
-* <img src="https://img.shields.io/badge/Java-007396?style=flat&logo=oracle&logoColor=black" /> <img src="https://img.shields.io/badge/JSP-FF7200?style=flat&logo=eclipseide&logoColor=white"/> <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=JavaScript&logoColor=black" /> <img src="https://img.shields.io/badge/html5-E34F26?style=flat&logo=html5&logoColor=white"/> <img src="https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=CSS3&logoColor=white" />
+- 개발 언어 : <img src="https://img.shields.io/badge/Java-007396?style=flat&logo=oracle&logoColor=black" /> <img src="https://img.shields.io/badge/JSP-FF7200?style=flat&logo=eclipseide&logoColor=white"/> <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=JavaScript&logoColor=black" /> <img src="https://img.shields.io/badge/html5-E34F26?style=flat&logo=html5&logoColor=white"/> <img src="https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=CSS3&logoColor=white" />
   
-### 프레임워크
-* <img src="https://img.shields.io/badge/springboot-6DB33F?style=flat&logo=springboot&logoColor=white"/> <img src="https://img.shields.io/badge/vuedotjs-4FC08D?style=flat&logo=vuedotjs&logoColor=white" />
+- 프레임워크 : <img src="https://img.shields.io/badge/springboot-6DB33F?style=flat&logo=springboot&logoColor=white"/> <img src="https://img.shields.io/badge/vuedotjs-4FC08D?style=flat&logo=vuedotjs&logoColor=white" />
 
-### 빌드 도구
-* <img src="https://img.shields.io/badge/apachemaven-C71A36?style=flat&logo=apachemaven&logoColor=white"/>
+- 빌드 도구 : <img src="https://img.shields.io/badge/apachemaven-C71A36?style=flat&logo=apachemaven&logoColor=white"/>
 
-### 개발 도구
-  * <img src="https://img.shields.io/badge/eclipseide-2C2255?style=flat&logo=eclipseide&logoColor=white"/> <img src="https://img.shields.io/badge/visualstudiocode-007ACC?style=flat&logo=visualstudiocode&logoColor=white"/>
+- 개발 도구 : <img src="https://img.shields.io/badge/eclipseide-2C2255?style=flat&logo=eclipseide&logoColor=white"/> <img src="https://img.shields.io/badge/visualstudiocode-007ACC?style=flat&logo=visualstudiocode&logoColor=white"/>
 
-### 데이터베이스
-  * <img src="https://img.shields.io/badge/mysql-4479A1?style=flat&logo=mysql&logoColor=white" />
+- 데이터베이스 : <img src="https://img.shields.io/badge/mysql-4479A1?style=flat&logo=mysql&logoColor=white" />
 
-### 라이브러리
-<img src="https://img.shields.io/badge/jquery-0769AD?style=flat&logo=jquery&logoColor=white" />
+- 라이브러리 : <img src="https://img.shields.io/badge/jquery-0769AD?style=flat&logo=jquery&logoColor=white" />
 
-### 형상 관리
-<img src="https://img.shields.io/badge/Git-000000?style=flat&logo=git&logoColor=white" />
-<img src="https://img.shields.io/badge/GitHub-000000?style=flat&logo=github&logoColor=white" />
+- 형상관리 : <img src="https://img.shields.io/badge/Git-000000?style=flat&logo=git&logoColor=white" /> <img src="https://img.shields.io/badge/GitHub-000000?style=flat&logo=github&logoColor=white" />
 
-### UI
-<img src="https://img.shields.io/badge/Figma-F05032?style=flat&logo=figma&logoColor=white" />
+- UI : <img src="https://img.shields.io/badge/Figma-F05032?style=flat&logo=figma&logoColor=white" />
 
 
 ## Marrimo 주요 기능
+
 ### 웨딩레지스트리
  - 사용자가 웹사이트에서 선택한 상품을 웨딩레지스트리에 저장하는 기능
  - 조건(날짜, 이름 등)에 따른 상품 정렬 기능

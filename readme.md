@@ -27,7 +27,7 @@
 
 - 데이터베이스 : <img src="https://img.shields.io/badge/mysql-4479A1?style=flat&logo=mysql&logoColor=white" />
 
-- 라이브러리 : <img src="https://img.shields.io/badge/jquery-0769AD?style=flat&logo=jquery&logoColor=white" /> <img src="https://img.shields.io/badge/Git-000000?style=flat&logo=git&logoColor=white" />
+- 라이브러리 : <img src="https://img.shields.io/badge/jquery-0769AD?style=flat&logo=jquery&logoColor=white" />
 
 - 형상관리 : <img src="https://img.shields.io/badge/Git-000000?style=flat&logo=git&logoColor=white" /> <img src="https://img.shields.io/badge/GitHub-000000?style=flat&logo=github&logoColor=white" />
 

@@ -21,11 +21,11 @@
 ## 개발 환경
 - 개발 언어 : <img src="https://img.shields.io/badge/Java-007396?style=flat&logo=oracle&logoColor=white" /> <img src="https://img.shields.io/badge/JSP-FF7200?style=flat&logo=eclipseide&logoColor=white"/> <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=JavaScript&logoColor=black" /> <img src="https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=html5&logoColor=white"/> <img src="https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=CSS3&logoColor=white" />
   
-- 프레임워크 : <img src="https://img.shields.io/badge/SpringBoot-6DB33F?style=flat&logo=springboot&logoColor=white"/> <img src="https://img.shields.io/badge/Vue.js-4FC08D?style=flat&logo=vuedotjs&logoColor=white" /> <img src="https://img.shields.io/badge/MyBatis-000000?style=flat&logo=apache&logoColor=white" />
+- 프레임워크 : <img src="https://img.shields.io/badge/Spring Boot-6DB33F?style=flat&logo=springboot&logoColor=white"/> <img src="https://img.shields.io/badge/Vue.js-4FC08D?style=flat&logo=vuedotjs&logoColor=white" /> <img src="https://img.shields.io/badge/MyBatis-000000?style=flat&logo=apache&logoColor=white" />
 
-- 빌드 도구 : <img src="https://img.shields.io/badge/apachemaven-C71A36?style=flat&logo=apachemaven&logoColor=white"/>
+- 빌드 도구 : <img src="https://img.shields.io/badge/Apache Maven-C71A36?style=flat&logo=apachemaven&logoColor=white"/>
 
-- 개발 도구 : <img src="https://img.shields.io/badge/eclipseide-2C2255?style=flat&logo=eclipseide&logoColor=white"/> <img src="https://img.shields.io/badge/visualstudiocode-007ACC?style=flat&logo=visualstudiocode&logoColor=white"/>
+- 개발 도구 : <img src="https://img.shields.io/badge/Eclipse IDE-2C2255?style=flat&logo=eclipseide&logoColor=white"/> <img src="https://img.shields.io/badge/visualstudiocode-007ACC?style=flat&logo=visualstudiocode&logoColor=white"/>
 
 - 데이터베이스 : <img src="https://img.shields.io/badge/mysql-4479A1?style=flat&logo=mysql&logoColor=white" />
 

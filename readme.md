@@ -4,7 +4,7 @@
 사용자가 받고 싶은 결혼 축하 선물을 목록으로 관리하고 URL을 통해 지인들과 목록을 공유할 수 있는 웹사이트이다.
 공유링크를 받은 사용자는 목록 내에서 원하는 선물을 선택하고 결제하여 선물을 전달하거나 펀딩을 통해 다수의 사용자들이 선물을 전달할 수 있는 기능을 제공한다.
 
-- 배포 주소 : im.21v.in:47520/main.do
+- 배포 주소 : http://im.21v.in:47520/main.do
 
 - 시연 영상 : 
 
@@ -17,7 +17,7 @@
 
 
 ## 개발 환경
-- 개발 언어 : <img src="https://img.shields.io/badge/Java-007396?style=flat&logo=oracle&logoColor=black" /> <img src="https://img.shields.io/badge/JSP-FF7200?style=flat&logo=eclipseide&logoColor=white"/> <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=JavaScript&logoColor=black" /> <img src="https://img.shields.io/badge/html5-E34F26?style=flat&logo=html5&logoColor=white"/> <img src="https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=CSS3&logoColor=white" />
+- 개발 언어 : <img src="https://img.shields.io/badge/Java-007396?style=flat&logo=oracle&logoColor=white" /> <img src="https://img.shields.io/badge/JSP-FF7200?style=flat&logo=eclipseide&logoColor=white"/> <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=JavaScript&logoColor=black" /> <img src="https://img.shields.io/badge/html5-E34F26?style=flat&logo=html5&logoColor=white"/> <img src="https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=CSS3&logoColor=white" />
   
 - 프레임워크 : <img src="https://img.shields.io/badge/springboot-6DB33F?style=flat&logo=springboot&logoColor=white"/> <img src="https://img.shields.io/badge/vuedotjs-4FC08D?style=flat&logo=vuedotjs&logoColor=white" />
 

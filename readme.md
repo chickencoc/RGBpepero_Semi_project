@@ -25,11 +25,11 @@
 
 - 빌드 도구 : <img src="https://img.shields.io/badge/Apache Maven-C71A36?style=flat&logo=apachemaven&logoColor=white"/>
 
-- 개발 도구 : <img src="https://img.shields.io/badge/Eclipse IDE-2C2255?style=flat&logo=eclipseide&logoColor=white"/> <img src="https://img.shields.io/badge/visualstudiocode-007ACC?style=flat&logo=visualstudiocode&logoColor=white"/>
+- 개발 도구 : <img src="https://img.shields.io/badge/Eclipse IDE-2C2255?style=flat&logo=eclipseide&logoColor=white"/> <img src="https://img.shields.io/badge/Visual Studio Code-007ACC?style=flat&logo=visualstudiocode&logoColor=white"/>
 
-- 데이터베이스 : <img src="https://img.shields.io/badge/mysql-4479A1?style=flat&logo=mysql&logoColor=white" />
+- 데이터베이스 : <img src="https://img.shields.io/badge/MySQL-4479A1?style=flat&logo=mysql&logoColor=white" />
 
-- 라이브러리 : <img src="https://img.shields.io/badge/jquery-0769AD?style=flat&logo=jquery&logoColor=white" />
+- 라이브러리 : <img src="https://img.shields.io/badge/jQuery-0769AD?style=flat&logo=jquery&logoColor=white" />
 
 - 형상관리 : <img src="https://img.shields.io/badge/Git-000000?style=flat&logo=git&logoColor=white" /> <img src="https://img.shields.io/badge/GitHub-000000?style=flat&logo=github&logoColor=white" />
 

@@ -8,7 +8,7 @@
 
 - 배포 주소 : http://im.21v.in:47520/main.do
 
-- 시연 영상 :
+- 시연 영상 : <br/>
   일반 사용자 시점
   <br>
   [![Video Label](http://img.youtube.com/vi/1rwYc-_ZuvE/0.jpg)](https://youtu.be/1rwYc-_ZuvE)

@@ -8,7 +8,14 @@
 
 - 배포 주소 : http://im.21v.in:47520/main.do
 
-- 시연 영상 : 
+- 시연 영상 :
+  일반 사용자 시점
+  <br>
+  [![Video Label](http://img.youtube.com/vi/1rwYc-_ZuvE/0.jpg)](https://youtu.be/1rwYc-_ZuvE)
+  <br/>
+  관리자 시점
+  <br/>
+  [![Video Label](http://img.youtube.com/vi/YrCFXXjDZaM/0.jpg)](https://youtu.be/YrCFXXjDZaM)
 
 ## 프로젝트 수행 인원
 * 김성은 (팀장) : https://github.com/chickencoc <br />
